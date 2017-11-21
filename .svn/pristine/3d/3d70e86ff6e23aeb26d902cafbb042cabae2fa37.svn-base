@@ -1,0 +1,858 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/5/2008 11:08:53 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="BIRM01718A"
+  DTS:CreatorName="BETLAN\mikej"
+  DTS:Description="DTS Wizard-generated package"
+  DTS:DTSID="{B3F3137B-1222-4FDD-8816-BE4DC89968A7}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="dimCurrencyRateImport"
+  DTS:VersionBuild="308"
+  DTS:VersionGUID="{26BC4B1B-EBDF-4639-9AA0-B00F5B411A34}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BettcherDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1E4353E1-2B10-4E05-9657-DBA4D749405A}"
+      DTS:ObjectName="BettcherDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birm01886b;Initial Catalog=BettcherDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{024FAD7D-83DD-41B6-918F-2D6F18D038EB}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BSW_Apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1014390B-AB60-419F-B768-4AFA666771D0}"
+      DTS:ObjectName="BSW_Apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=Bsw_apps;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{FE1D7256-FD0F-45F4-B79B-C21E703E78DD}BIRMCSIDBS.Bsw_app;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{69306EA6-6893-4703-8F5E-9B75AD509E73}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B98BCCD9-3853-4632-AD77-1AF061ED0C81}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8DACF8C9-7B57-4FC0-94B0-E2F8D2C02ACA}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LTG_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7CD2D95F-B600-4B05-9C10-DBC296015615}"
+      DTS:ObjectName="LTG_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMSYTEDBS;Initial Catalog=LTG_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{738239AF-0F8B-45D5-965D-61CE0F24CC6F}cjack.bs;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MED_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E7B47AD9-E449-4689-9289-F90A7FC6C639}"
+      DTS:ObjectName="MED_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=MED_App;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{A96D1CEE-38C7-45B9-9AB7-B6C7CAC93591}BIRMCSIDBS.MED_App;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{4D2D95C4-4C58-4177-973A-30D4BE60423C}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{D2701E2C-20DF-461F-A040-514F5C5FA3D9}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBettcherDw&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{7BD959F5-EC89-47AD-B9CA-615D2095C924}"
+      DTS:ObjectName="connBettcherDw" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{14D017D6-CB41-434C-854E-06B7A39B1AF7}"
+      DTS:ObjectName="connCorpDW" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connLtg_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{A65700F8-B4F2-416B-A927-ECCAE41D12F9}"
+      DTS:ObjectName="connLtg_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBsw_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{166B7F05-41F5-47AA-88AC-6D7350F91659}"
+      DTS:ObjectName="connBsw_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{849B4ACF-8634-4ADA-A6DD-DEADCFDF8407}"
+      DTS:ObjectName="connGan_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connMed_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{93859898-7E8A-4326-B310-4AB32F3F4AB5}"
+      DTS:ObjectName="connMed_app" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\get and append BSW currency rates"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DTSID="{279D201C-F2C7-417F-98E3-8ECF3DBE726A}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get and append BSW currency rates">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\get and append BSW currency rates\Destination - Query"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dimCurrencyRates]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append BSW currency rates\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[curr_code]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="curr_code"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[curr_code]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[curr_code]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[eff_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="eff_date"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[eff_date]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[eff_date]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[buy_rate]"
+                      cachedDataType="numeric"
+                      cachedName="buy_rate"
+                      cachedPrecision="12"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[buy_rate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[buy_rate]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[sell_rate]"
+                      cachedDataType="numeric"
+                      cachedName="sell_rate"
+                      cachedPrecision="12"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[sell_rate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[sell_rate]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[user_code]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="user_code"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[user_code]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[user_code]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[dom_curr_code]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="dom_curr_code"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[dom_curr_code]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[dom_curr_code]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[RecordDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RecordDate"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[RecordDate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[RecordDate]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[CreatedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="CreatedBy"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[CreatedBy]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[CreatedBy]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[UpdatedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="UpdatedBy"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[UpdatedBy]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[UpdatedBy]" />
+                    <inputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[CreateDate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[CreateDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[curr_code]"
+                      dataType="wstr"
+                      length="3"
+                      name="curr_code" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[eff_date]"
+                      dataType="dbTimeStamp2"
+                      name="eff_date"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[buy_rate]"
+                      dataType="numeric"
+                      name="buy_rate"
+                      precision="12"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[sell_rate]"
+                      dataType="numeric"
+                      name="sell_rate"
+                      precision="12"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[user_code]"
+                      dataType="wstr"
+                      length="3"
+                      name="user_code" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[dom_curr_code]"
+                      dataType="wstr"
+                      length="3"
+                      name="dom_curr_code" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[RecordDate]"
+                      dataType="dbTimeStamp2"
+                      name="RecordDate"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[CreatedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="CreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[UpdatedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="UpdatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp2"
+                      name="CreateDate"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\get and append BSW currency rates\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW currency rates\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW currency rates\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\get and append BSW currency rates\Source - Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     5 AS SiteKey, from_curr_code as
+curr_code, eff_date, buy_rate, sell_rate, user_code, to_curr_code as dom_curr_code, RecordDate, CreatedBy, UpdatedBy, CreateDate
+FROM         currate_mst as currate</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append BSW currency rates\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[BSW_Apps]"
+                  connectionManagerRefId="Package.ConnectionManagers[BSW_Apps]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[curr_code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[curr_code]"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[curr_code]"
+                      name="curr_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[eff_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[eff_date]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[eff_date]"
+                      name="eff_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[buy_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[buy_rate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[buy_rate]"
+                      name="buy_rate"
+                      precision="12"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[sell_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[sell_rate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[sell_rate]"
+                      name="sell_rate"
+                      precision="12"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[user_code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[user_code]"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[user_code]"
+                      name="user_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[dom_curr_code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[dom_curr_code]"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[dom_curr_code]"
+                      name="dom_curr_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[RecordDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[RecordDate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[RecordDate]"
+                      name="RecordDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[CreatedBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CreatedBy]"
+                      length="30"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[CreatedBy]"
+                      name="CreatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[UpdatedBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[UpdatedBy]"
+                      length="30"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[UpdatedBy]"
+                      name="UpdatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[curr_code]"
+                      dataType="wstr"
+                      length="3"
+                      name="curr_code" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[eff_date]"
+                      dataType="dbTimeStamp"
+                      name="eff_date" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[buy_rate]"
+                      dataType="numeric"
+                      name="buy_rate"
+                      precision="12"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[sell_rate]"
+                      dataType="numeric"
+                      name="sell_rate"
+                      precision="12"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[user_code]"
+                      dataType="wstr"
+                      length="3"
+                      name="user_code" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[dom_curr_code]"
+                      dataType="wstr"
+                      length="3"
+                      name="dom_curr_code" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[RecordDate]"
+                      dataType="dbTimeStamp"
+                      name="RecordDate" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CreatedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="CreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[UpdatedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="UpdatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[curr_code]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[curr_code]"
+                      name="curr_code" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[eff_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[eff_date]"
+                      name="eff_date" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[buy_rate]"
+                      dataType="numeric"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[buy_rate]"
+                      name="buy_rate"
+                      precision="12"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[sell_rate]"
+                      dataType="numeric"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[sell_rate]"
+                      name="sell_rate"
+                      precision="12"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[user_code]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[user_code]"
+                      name="user_code" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[dom_curr_code]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[dom_curr_code]"
+                      name="dom_curr_code" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[RecordDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[RecordDate]"
+                      name="RecordDate" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[CreatedBy]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[CreatedBy]"
+                      name="CreatedBy" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[UpdatedBy]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[UpdatedBy]"
+                      name="UpdatedBy" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      name="CreateDate" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\get and append BSW currency rates.Paths[OLE DB Source Output]"
+              endId="Package\get and append BSW currency rates\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\get and append BSW currency rates\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate dimCurrencyRates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DTSID="{0DC8269A-7F04-49DB-B998-E60A28118139}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate dimCurrencyRates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{69306EA6-6893-4703-8F5E-9B75AD509E73}"
+          SQLTask:SqlStatementSource="Truncate TABLE [CorpDw].[dbo].[dimCurrencyRates]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{597A2EEE-8435-40F6-9CFE-CBE7D8371D2F}"
+      DTS:From="Package\Truncate dimCurrencyRates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\get and append BSW currency rates" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="214,44"
+          Id="Package\get and append BSW currency rates"
+          TopLeft="20.4811320754717,121.990566037736" />
+        <NodeLayout
+          Size="220,44"
+          Id="Package\Truncate dimCurrencyRates"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="115.311320754717,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12,72.566037735849"
+              Start="0,0"
+              End="12,65.066037735849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.3018867924529" />
+                  <mssgle:LineSegment
+                    End="12,36.3018867924529" />
+                  <mssgle:LineSegment
+                    End="12,65.066037735849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\get and append BSW currency rates">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\get and append BSW currency rates\Source - Query"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\get and append BSW currency rates\Destination - Query"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\get and append BSW currency rates.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\get and append BSW currency rates\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

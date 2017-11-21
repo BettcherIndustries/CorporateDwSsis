@@ -1,0 +1,3096 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/6/2008 8:33:26 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="BIRM01718A"
+  DTS:CreatorName="BETLAN\mikej"
+  DTS:Description="DTS Wizard-generated package"
+  DTS:DTSID="{54D2E7F3-9CC0-4A95-ADC4-1B627497B6FF}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="dimWhseImport"
+  DTS:VersionBuild="133"
+  DTS:VersionGUID="{27E145C8-16B8-41BE-86E7-79ACE93301E8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BettcherDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F002963F-D869-4F81-B204-90A04E32DD6F}"
+      DTS:ObjectName="BettcherDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birm01886b;Initial Catalog=BettcherDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{34023D37-56CA-4B82-A87C-AD36EF08B317}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMTSL902;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BSW_Apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AF6A9B46-A4A7-41ED-99D2-E33499363B02}"
+      DTS:ObjectName="BSW_Apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMTSL902;Initial Catalog=Bsw_app;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{FE1D7256-FD0F-45F4-B79B-C21E703E78DD}BIRMTSL902.Bsw_app;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4FAD76C2-9E80-487A-B172-A7ED7A0720F2}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CB255D40-6806-49C2-AD70-AE6937920611}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4BB934A8-1C03-4B5D-A821-04ED388561D1}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMTSL902;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LTG_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DD91DEB0-1F7E-4352-A6D4-2AD3F59E3030}"
+      DTS:ObjectName="LTG_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMSYTEDBS;Initial Catalog=LTG_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{738239AF-0F8B-45D5-965D-61CE0F24CC6F}cjack.bs;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MED_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DC89AD0E-1726-4B0B-B92D-52524EDD9444}"
+      DTS:ObjectName="MED_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMTSL902;Initial Catalog=MED_App;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{A96D1CEE-38C7-45B9-9AB7-B6C7CAC93591}BIRMTSL902.MED_App;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{C9EBE0B4-3D75-4FA2-84E7-6C3707805BA2}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{8FC140F9-56A4-4E82-8A0A-74D32ED08DA4}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBettcherDw&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{8407CBB4-05F7-44C4-83C3-0B7243192298}"
+      DTS:ObjectName="connBettcherDw" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBsw_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{CF01C842-BC02-4299-8E35-6B0644D3EE89}"
+      DTS:ObjectName="connBsw_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{4DB19BD5-4CC2-4037-8943-2404DBF69D5E}"
+      DTS:ObjectName="connGan_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connLtg_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{FEFA5ABC-8DC1-4C57-80F0-64052592D78E}"
+      DTS:ObjectName="connLtg_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connMed_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{DD80DECD-7B24-4553-A097-7154B09A66C7}"
+      DTS:ObjectName="connMed_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{13C247C5-BCC6-416C-AE7E-6CE4E6A14112}"
+      DTS:ObjectName="connCorpDW" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1" />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Process BET"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{90D88B8D-A6EA-42C8-BD88-BFC14CAFB552}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process BET">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process BET\Get BET"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{F4E7ACCB-F73E-45C9-B0D9-F0F1DC80D0A1}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get BET">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process BET\Get BET\Data Conversion"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process BET\Get BET\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BET\Get BET\Data Conversion.Inputs[Data Conversion Input].Columns[SiteKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process BET\Get BET\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process BET\Get BET\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BET\Get BET\Destination - Query"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimWhse]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BET\Get BET\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                          cachedDataType="i4"
+                          cachedName="SiteKey"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                        <inputColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          lineageId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].Columns[whse]"
+                          cachedDataType="wstr"
+                          cachedLength="4"
+                          cachedName="whse"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[whse]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="WhseDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
+                          dataType="i4"
+                          name="WhseKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="WhseKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BET\Get BET\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BET\Get BET\Source - Query"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     1 AS SiteKey, 'BET' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+
+FROM         whse_mst as whse</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BET\Get BET\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Bet_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[Bet_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          name="SiteKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          length="3"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          length="4"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          name="whse"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          name="whse" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          name="SiteKey" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          name="whse" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process BET\Get BET.Paths[Data Conversion Output]"
+                  endId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process BET\Get BET\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process BET\Get BET.Paths[OLE DB Source Output]"
+                  endId="Package\Process BET\Get BET\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process BET\Get BET\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process BSW"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{18A1D4F4-411F-4B03-8E97-E31E8385FA49}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process BSW">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process BSW\Get BSW"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{5382B010-C295-42F0-AF0D-2E6E29529E27}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get BSW">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process BSW\Get BSW\Data Conversion"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process BSW\Get BSW\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW\Data Conversion.Inputs[Data Conversion Input].Columns[SiteKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process BSW\Get BSW\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process BSW\Get BSW\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BSW\Get BSW\Destination - Query"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimWhse]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BSW\Get BSW\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                          cachedDataType="i4"
+                          cachedName="SiteKey"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          lineageId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].Columns[whse]"
+                          cachedDataType="wstr"
+                          cachedLength="4"
+                          cachedName="whse"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[whse]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="WhseDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
+                          dataType="i4"
+                          name="WhseKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="WhseKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BSW\Get BSW\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BSW\Get BSW\Source - Query"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     5 AS SiteKey, 'BSW' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+
+FROM         whse_mst as whse</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BSW\Get BSW\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BSW_Apps]"
+                      connectionManagerRefId="Package.ConnectionManagers[BSW_Apps]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          name="SiteKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          length="3"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          length="4"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          name="whse"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          name="whse" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          name="SiteKey" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          name="whse" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process BSW\Get BSW.Paths[Data Conversion Output]"
+                  endId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process BSW\Get BSW\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process BSW\Get BSW.Paths[OLE DB Source Output]"
+                  endId="Package\Process BSW\Get BSW\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process BSW\Get BSW\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process GAN"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7B1EE849-33BD-471B-A62E-94412073161C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process GAN">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process GAN\Get GAN"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{0B005231-E325-4133-9599-2C5078969195}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get GAN">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process GAN\Get GAN\Data Conversion"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process GAN\Get GAN\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process GAN\Get GAN\Data Conversion.Inputs[Data Conversion Input].Columns[SiteKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process GAN\Get GAN\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process GAN\Get GAN\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process GAN\Get GAN\Destination - Query"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimWhse]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process GAN\Get GAN\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                          cachedDataType="i4"
+                          cachedName="SiteKey"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                        <inputColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          lineageId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].Columns[whse]"
+                          cachedDataType="wstr"
+                          cachedLength="4"
+                          cachedName="whse"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[whse]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="WhseDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
+                          dataType="i4"
+                          name="WhseKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="WhseKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process GAN\Get GAN\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process GAN\Get GAN\Source - Query"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+
+FROM         whse_mst as whse</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process GAN\Get GAN\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[GAN_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[GAN_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          name="SiteKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          length="3"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          length="4"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          name="whse"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          name="whse" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          name="SiteKey" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          name="whse" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process GAN\Get GAN.Paths[Data Conversion Output]"
+                  endId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process GAN\Get GAN\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process GAN\Get GAN.Paths[OLE DB Source Output]"
+                  endId="Package\Process GAN\Get GAN\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process GAN\Get GAN\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process LTG"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{96F6F674-BE73-4B5F-B1E6-19BEDCE36EA5}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process LTG">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process LTG\Get LTG"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{86FD91FB-8100-4F2E-A980-4AAB89E0BE6D}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get LTG">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process LTG\Get LTG\Data Conversion"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process LTG\Get LTG\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process LTG\Get LTG\Data Conversion.Inputs[Data Conversion Input].Columns[SiteKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process LTG\Get LTG\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process LTG\Get LTG\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process LTG\Get LTG\Destination - Query"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimWhse]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process LTG\Get LTG\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                          cachedDataType="i4"
+                          cachedName="SiteKey"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                        <inputColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          lineageId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].Columns[whse]"
+                          cachedDataType="wstr"
+                          cachedLength="4"
+                          cachedName="whse"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[whse]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="WhseDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
+                          dataType="i4"
+                          name="WhseKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="WhseKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process LTG\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process LTG\Get LTG\Source - Query"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     3 AS SiteKey, 'LTG' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+
+FROM         whse</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process LTG\Get LTG\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LTG_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[LTG_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          name="SiteKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          length="3"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          length="4"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          name="whse"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          name="whse" />
+                        <externalMetadataColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          name="SiteKey" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          name="whse" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process LTG\Get LTG.Paths[Data Conversion Output]"
+                  endId="Package\Process LTG\Get LTG\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process LTG\Get LTG\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process LTG\Get LTG.Paths[OLE DB Source Output]"
+                  endId="Package\Process LTG\Get LTG\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process LTG\Get LTG\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process MED"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7B0EBFAC-780B-4E2A-8E9C-416A5A472C62}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process MED">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process MED\Get MED"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{93B31754-8363-4F83-AA57-24382446A4A8}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get MED">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process MED\Get MED\Data Conversion"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process MED\Get MED\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process MED\Get MED\Data Conversion.Inputs[Data Conversion Input].Columns[SiteKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process MED\Get MED\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process MED\Get MED\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process MED\Get MED\Destination - Query"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimWhse]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process MED\Get MED\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                          cachedDataType="i4"
+                          cachedName="SiteKey"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                        <inputColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="SiteKeyAlternative"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          lineageId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Output].Columns[SiteKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].Columns[whse]"
+                          cachedDataType="wstr"
+                          cachedLength="4"
+                          cachedName="whse"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[whse]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="WhseDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
+                          dataType="i4"
+                          name="WhseKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="WhseKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process MED\Get MED\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process MED\Get MED\Source - Query"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     4 AS SiteKey, 'MED' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+
+FROM         whse_mst as whse</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process MED\Get MED\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[MED_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[MED_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          name="SiteKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          length="3"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          length="4"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[whse]"
+                          name="whse"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          dataType="i4"
+                          name="SiteKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="SiteKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          name="whse" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          name="SiteKey" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                          name="SiteKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          dataType="wstr"
+                          length="4"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[whse]"
+                          name="whse" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process MED\Get MED.Paths[Data Conversion Output]"
+                  endId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process MED\Get MED\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process MED\Get MED.Paths[OLE DB Source Output]"
+                  endId="Package\Process MED\Get MED\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process MED\Get MED\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process Whse"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{EE217E54-6C0F-4027-87C6-1E7AEDFF199E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process Whse">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process Whse\Drop Create dimWhse"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{891102E6-1623-44E5-8480-95B67D4AD7A2}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Drop Create dimWhse"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4FAD76C2-9E80-487A-B172-A7ED7A0720F2}"
+              SQLTask:SqlStatementSource="&#xA;IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dimWhse]') AND type in (N'U'))&#xA;DROP TABLE [dbo].[dimWhse]&#xA;GO&#xA;&#xA;&#xA;&#xA;CREATE TABLE [dbo].[dimWhse](&#xA;&#x9;[SiteKey] [int] NULL,&#xA;&#x9;[SiteKeyAlternative] [nvarchar](8) NULL,&#xA;&#x9;[WhseDescription] [nvarchar](25) NULL,&#xA;&#x9;[WhseKey] [int] IDENTITY(1,1) NOT NULL,&#xA;&#x9;[WhseKeyAlternative] [nchar](8) NULL&#xA;) ON [PRIMARY]&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{ACEA504F-5226-41A9-BBA9-20A705786928}"
+      DTS:From="Package\Process Whse"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Process LTG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BD57ACEC-A482-48E4-9AEA-8B8A983F0821}"
+      DTS:From="Package\Process LTG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Process GAN" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{EDC37CE2-2FFA-431C-995C-87BEFCF032A5}"
+      DTS:From="Package\Process GAN"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Process BET" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{A24FCC4E-996E-416E-B5CC-6ACED88037B1}"
+      DTS:From="Package\Process BET"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Process MED" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{B76E9C05-E4EC-4660-AD4A-5D438A4378EB}"
+      DTS:From="Package\Process MED"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Process BSW" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="223,44"
+          Id="Package\Process BET\Get BET"
+          TopLeft="89.433962264151,15.9056603773585" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="366,87"
+          Size="366,131"
+          Id="Package\Process BET"
+          TopLeft="5.5,603.160377358491" />
+        <NodeLayout
+          Size="223,44"
+          Id="Package\Process BSW\Get BSW"
+          TopLeft="89.433962264151,15.9056603773585" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="366,88"
+          Size="366,131"
+          Id="Package\Process BSW"
+          TopLeft="5.5,902.632075471698" />
+        <NodeLayout
+          Size="223,44"
+          Id="Package\Process GAN\Get GAN"
+          TopLeft="21.5094339622642,37.9811320754717" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="372,108"
+          Size="372,152"
+          Id="Package\Process GAN"
+          TopLeft="13.0849056603774,416.820754716981" />
+        <NodeLayout
+          Size="223,44"
+          Id="Package\Process LTG\Get LTG"
+          TopLeft="53.8113207547171,11.0377358490566" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="342,115"
+          Size="342,159"
+          Id="Package\Process LTG"
+          TopLeft="57.8018867924529,238.632075471698" />
+        <NodeLayout
+          Size="223,44"
+          Id="Package\Process MED\Get MED"
+          TopLeft="89.433962264151,15.9056603773585" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="366,88"
+          Size="366,131"
+          Id="Package\Process MED"
+          TopLeft="5.5,752.896226415094" />
+        <NodeLayout
+          Size="234,44"
+          Id="Package\Process Whse\Drop Create dimWhse"
+          TopLeft="53.8490566037735,8.47169811320754" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="338,90"
+          Size="338,134"
+          Id="Package\Process Whse"
+          TopLeft="35.8773584905662,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="204.858490566038,139.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24.0754716981132,99.1320754716981"
+              Start="0,0"
+              End="24.0754716981132,91.6320754716981">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5471698113207" />
+                  <mssgle:LineSegment
+                    End="24.0754716981132,49.5471698113207" />
+                  <mssgle:LineSegment
+                    End="24.0754716981132,91.6320754716981" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="228.933962264151,397.38679245283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-30.0754716981132,19.4339622641509"
+              Start="0,0"
+              End="-30.0754716981132,11.9339622641509">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.69811320754718" />
+                  <mssgle:LineSegment
+                    End="-30.0754716981132,9.69811320754718" />
+                  <mssgle:LineSegment
+                    End="-30.0754716981132,11.9339622641509" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="198.858490566038,568.820754716981">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.1509433962265,34.3396226415094"
+              Start="0,0"
+              End="-10.1509433962265,26.8396226415094">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.1698113207547" />
+                  <mssgle:LineSegment
+                    End="-10.1509433962265,17.1698113207547" />
+                  <mssgle:LineSegment
+                    End="-10.1509433962265,26.8396226415094" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="188.707547169811,734.028301886793">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,18.8679245283018"
+              Start="0,0"
+              End="0,11.3679245283018">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.3679245283018" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="188.707547169811,883.764150943396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,18.867924528302"
+              Start="0,0"
+              End="0,11.367924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.367924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Process BET\Get BET">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Process BET\Get BET\Destination - Query"
+          TopLeft="45,229" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Process BET\Get BET\Source - Query"
+          TopLeft="25,74" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Process BET\Get BET\Data Conversion"
+          TopLeft="9,133" />
+        <EdgeLayout
+          Id="Package\Process BET\Get BET.Paths[OLE DB Source Output]"
+          TopLeft="175,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10,59"
+              Start="0,0"
+              End="-2.5,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,4" />
+                  <mssgle:LineSegment
+                    End="22.5,55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,55"
+                    Point2="22.5,59"
+                    Point3="18.5,59" />
+                  <mssgle:LineSegment
+                    End="-2.5,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process BET\Get BET.Paths[Data Conversion Output]"
+          TopLeft="87,175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.5,54"
+              Start="0,0"
+              End="43.5,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="39.5,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.5,27"
+                    Point2="43.5,27"
+                    Point3="43.5,31" />
+                  <mssgle:LineSegment
+                    End="43.5,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BET\Get BET\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process BSW\Get BSW">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Process BSW\Get BSW\Destination - Query"
+          TopLeft="20,159" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Process BSW\Get BSW\Source - Query"
+          TopLeft="44,55" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Process BSW\Get BSW\Data Conversion"
+          TopLeft="33,109" />
+        <EdgeLayout
+          Id="Package\Process BSW\Get BSW.Paths[OLE DB Source Output]"
+          TopLeft="194,76">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-5,54"
+              Start="0,0"
+              End="2.5,54">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,4" />
+                  <mssgle:LineSegment
+                    End="22.5,50" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,50"
+                    Point2="22.5,54"
+                    Point3="18.5,54" />
+                  <mssgle:LineSegment
+                    End="2.5,54" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process BSW\Get BSW.Paths[Data Conversion Output]"
+          TopLeft="189,135.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="2,44.3333333333333"
+              Start="0,0"
+              End="9.5,44.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="20.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.5,0"
+                    Point2="24.5,0"
+                    Point3="24.5,4" />
+                  <mssgle:LineSegment
+                    End="24.5,40.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5,40.3333333333333"
+                    Point2="24.5,44.3333333333333"
+                    Point3="20.5,44.3333333333333" />
+                  <mssgle:LineSegment
+                    End="9.5,44.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BSW\Get BSW\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process GAN\Get GAN">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Process GAN\Get GAN\Destination - Query"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Process GAN\Get GAN\Source - Query"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Process GAN\Get GAN\Data Conversion"
+          TopLeft="13,107.5" />
+        <EdgeLayout
+          Id="Package\Process GAN\Get GAN.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process GAN\Get GAN.Paths[Data Conversion Output]"
+          TopLeft="91,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process GAN\Get GAN\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process LTG\Get LTG">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process LTG\Get LTG\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process LTG\Get LTG\Source - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process LTG\Get LTG\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Process LTG\Get LTG.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process LTG\Get LTG.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process MED\Get MED">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Process MED\Get MED\Destination - Query"
+          TopLeft="20,191" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Process MED\Get MED\Source - Query"
+          TopLeft="31,42" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Process MED\Get MED\Data Conversion"
+          TopLeft="29,118" />
+        <EdgeLayout
+          Id="Package\Process MED\Get MED.Paths[OLE DB Source Output]"
+          TopLeft="106.5,84">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process MED\Get MED.Paths[Data Conversion Output]"
+          TopLeft="106.25,160">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED\Get MED\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

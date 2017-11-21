@@ -1,0 +1,2988 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/16/2008 10:20:41 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01718A"
+  DTS:CreatorName="BETLAN\MikeJ"
+  DTS:Description="DTS Wizard-generated package"
+  DTS:DTSID="{51CBA68F-C077-404E-B834-B65C3FDB468A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="dimFsPartnerImport"
+  DTS:VersionBuild="141"
+  DTS:VersionGUID="{ACB137CF-88F4-4A25-9919-A069C523DBE6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BDB_Apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{b66e4413-48e9-47f7-8cf6-59de32445b5c}"
+      DTS:ObjectName="BDB_Apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BDB_App;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{FE1D7256-FD0F-45F4-B79B-C21E703E78DD}BIRMCSIDBS.Bsw_app;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9C2E8985-393C-417E-8E7A-EA9852F73AB6}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BSW_Apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9F7CA0F6-D8C2-41C5-B740-1174F335DC1B}"
+      DTS:ObjectName="BSW_Apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=Bsw_apps;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{FE1D7256-FD0F-45F4-B79B-C21E703E78DD}BIRMCSIDBS.Bsw_app;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{95D94219-7B6F-4BD9-9FE3-4C9A000FDFEF}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2F9D1BE9-16F7-4149-89CB-1432C6865A42}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2D198B71-668C-4057-994A-6C8B571111A6}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LTG_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A9CAEF5D-0A3E-4FBD-B25D-76D4A091131E}"
+      DTS:ObjectName="LTG_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=LTG_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{738239AF-0F8B-45D5-965D-61CE0F24CC6F}cjack.bs;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MED_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{19CEAB31-0B81-4293-907F-75874D686FBE}"
+      DTS:ObjectName="MED_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=MED_App;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{A96D1CEE-38C7-45B9-9AB7-B6C7CAC93591}BIRMCSIDBS.MED_App;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{BAD8B201-2034-4265-8F1F-A89628D8665E}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{02467897-7828-4EFA-A7FD-D0065F55483C}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBsw_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{BE91989B-EE5A-4E15-A835-F825055B5489}"
+      DTS:ObjectName="connBsw_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{12DF4F47-A189-4B05-B96E-72FE213BBFCE}"
+      DTS:ObjectName="connGan_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connLtg_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{2204E58F-D2F7-4E6F-90E9-F76079E9FED5}"
+      DTS:ObjectName="connLtg_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connMed_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{A01EAC61-9B85-4CDC-B952-BFCEDFD45FC4}"
+      DTS:ObjectName="connMed_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{52CDD926-C40E-48CA-BF29-BD00A8D2E929}"
+      DTS:ObjectName="connCorpDW" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Process BBR"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{1a83f623-72b5-47a9-8011-255e6cca109b}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process BBR">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process BBR\Get BBR FS Partner"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{0b73fd3f-f481-46b2-9365-915c95bcfe87}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get BBR FS Partner">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process BBR\Get BBR FS Partner\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Inputs[Data Conversion Input].Columns[DivisionKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BBR\Get BBR FS Partner\Destination - Query"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimFsPartner]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="PartnerDescription"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]" />
+                        <inputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="PartnerKeyAlternative"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="DivisionKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="FsPartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKey]"
+                          dataType="i4"
+                          name="FsPartnerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="FsPartnerKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BBR\Get BBR FS Partner\Source - Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  distinct 6 as DivisionKey, 'BBR' as DivisionKeyAlternative,   RTRIM(LTRIM(partner_id)) AS PartnerKeyAlternative, name AS PartnerDescription
+FROM         fs_partner_mst as fs_partner
+Union
+SELECT  distinct 6 as DivisionKey, 'BBR' as DivisionKeyAlternative,   '0000' AS PartnerKeyAlternative, 'FS Blank' AS PartnerDescription</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BDB_Apps]"
+                      connectionManagerRefId="Package.ConnectionManagers[BDB_Apps]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          length="10"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          length="60"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          name="PartnerDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          length="50"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="PartnerKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          name="PartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="DivisionKeyAlternative" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          name="PartnerDescription" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process BBR\Get BBR FS Partner.Paths[Data Conversion Output]"
+                  endId="Package\Process BBR\Get BBR FS Partner\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process BBR\Get BBR FS Partner.Paths[OLE DB Source Output]"
+                  endId="Package\Process BBR\Get BBR FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process BBR\Get BBR FS Partner\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process Bet"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{5D883F38-26EE-42A7-A79B-DD5B1A8F4A6E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process Bet">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process Bet\Get BetFS Partner"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{5F9F501D-3242-4235-94D7-D7C7A3ADA063}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get BetFS Partner">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process Bet\Get BetFS Partner\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Inputs[Data Conversion Input].Columns[DivisionKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process Bet\Get BetFS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process Bet\Get BetFS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process Bet\Get BetFS Partner\Destination - Query"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimFsPartner]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="PartnerDescription"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]" />
+                        <inputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="PartnerKeyAlternative"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="DivisionKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="FsPartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKey]"
+                          dataType="i4"
+                          name="FsPartnerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="FsPartnerKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process Bet\Get BetFS Partner\Source - Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  distinct 1 as DivisionKey, 'BET' as DivisionKeyAlternative,   RTRIM(LTRIM(partner_id)) AS PartnerKeyAlternative, name AS PartnerDescription
+FROM         fs_partner_mst as fs_partner
+Union
+SELECT  distinct 1 as DivisionKey, 'BET' as DivisionKeyAlternative,   '0000' AS PartnerKeyAlternative, 'FS Blank' AS PartnerDescription
+FROM         fs_partner_mst as fs_partner</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process Bet\Get BetFS Partner\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Bet_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[Bet_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          length="10"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          length="60"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          name="PartnerDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          length="50"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="PartnerKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          name="PartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="DivisionKeyAlternative" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          name="PartnerDescription" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process Bet\Get BetFS Partner.Paths[Data Conversion Output]"
+                  endId="Package\Process Bet\Get BetFS Partner\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process Bet\Get BetFS Partner\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process Bet\Get BetFS Partner.Paths[OLE DB Source Output]"
+                  endId="Package\Process Bet\Get BetFS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process Bet\Get BetFS Partner\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process BSW"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{665DE82F-EB3C-4989-9C79-4A03F25C6E97}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process BSW">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process BSW\Get BSW FS Partner"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{7458C5B1-02D2-47D8-9BCE-8A21F7300333}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get BSW FS Partner">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process BSW\Get BSW FS Partner\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Inputs[Data Conversion Input].Columns[DivisionKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BSW\Get BSW FS Partner\Destination - Query"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimFsPartner]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="PartnerDescription"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]" />
+                        <inputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="PartnerKeyAlternative"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="DivisionKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="FsPartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKey]"
+                          dataType="i4"
+                          name="FsPartnerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="FsPartnerKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process BSW\Get BSW FS Partner\Source - Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  distinct 5 as DivisionKey, 'BSW' as DivisionKeyAlternative,   RTRIM(LTRIM(partner_id)) AS PartnerKeyAlternative, name AS PartnerDescription
+FROM         fs_partner_mst as fs_partner
+Union
+SELECT  distinct 5 as DivisionKey, 'BSW' as DivisionKeyAlternative,   '0000' AS PartnerKeyAlternative, 'FS Blank' AS PartnerDescription
+FROM         fs_partner_mst as fs_partner</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BSW_Apps]"
+                      connectionManagerRefId="Package.ConnectionManagers[BSW_Apps]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          length="10"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          length="60"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          name="PartnerDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          length="50"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="PartnerKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          name="PartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="DivisionKeyAlternative" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          name="PartnerDescription" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process BSW\Get BSW FS Partner.Paths[Data Conversion Output]"
+                  endId="Package\Process BSW\Get BSW FS Partner\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process BSW\Get BSW FS Partner.Paths[OLE DB Source Output]"
+                  endId="Package\Process BSW\Get BSW FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process BSW\Get BSW FS Partner\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process GAN"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E0510E58-F163-4F0F-8361-3D31168E9A90}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process GAN">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process GAN\Drop and create"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DTSID="{FD01C606-D2D2-4D90-BBAC-47789C82B9F5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Drop and create"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{95D94219-7B6F-4BD9-9FE3-4C9A000FDFEF}"
+              SQLTask:SqlStatementSource="USE [CorpDw]&#xA;GO&#xA;&#xA;/****** Object:  Table [dbo].[dimFsPartner]    Script Date: 03/17/2011 16:12:14 ******/&#xA;IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dimFsPartner]') AND type in (N'U'))&#xA;DROP TABLE [dbo].[dimFsPartner]&#xA;GO&#xA;&#xA;USE [CorpDw]&#xA;GO&#xA;&#xA;/****** Object:  Table [dbo].[dimFsPartner]    Script Date: 03/17/2011 16:12:14 ******/&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[dimFsPartner](&#xA;&#x9;[DivisionKey] [int] NULL,&#xA;&#x9;[DivisionKeyAlternative] [nvarchar](8) NULL,&#xA;&#x9;[FsPartnerDescription] [nvarchar](25) NULL,&#xA;&#x9;[FsPartnerKey] [int] IDENTITY(1,1) NOT NULL,&#xA;&#x9;[FsPartnerKeyAlternative] [nvarchar](10) NULL&#xA;) ON [PRIMARY]&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process GAN\Get Gainco FS Partner"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{2EB88A33-40D2-4BA0-BE98-3A7FB3FA9586}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Gainco FS Partner">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Inputs[Data Conversion Input].Columns[DivisionKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimFsPartner]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="PartnerDescription"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]" />
+                        <inputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="PartnerKeyAlternative"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="DivisionKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="FsPartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKey]"
+                          dataType="i4"
+                          name="FsPartnerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="FsPartnerKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process GAN\Get Gainco FS Partner\Source - Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  distinct 2 as DivisionKey, 'GAN' as DivisionKeyAlternative,   RTRIM(LTRIM(partner_id)) AS PartnerKeyAlternative, name AS PartnerDescription
+FROM         fs_partner_mst as fs_partner
+Union
+SELECT  distinct 2 as DivisionKey, 'GAN' as DivisionKeyAlternative,   '0000' AS PartnerKeyAlternative, 'FS Blank' AS PartnerDescription
+FROM         fs_partner_mst as fs_partner</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[GAN_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[GAN_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          length="10"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          length="60"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          name="PartnerDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          length="50"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="PartnerKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          name="PartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="DivisionKeyAlternative" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          name="PartnerDescription" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process GAN\Get Gainco FS Partner.Paths[Data Conversion Output]"
+                  endId="Package\Process GAN\Get Gainco FS Partner\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process GAN\Get Gainco FS Partner.Paths[OLE DB Source Output]"
+                  endId="Package\Process GAN\Get Gainco FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process GAN\Get Gainco FS Partner\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process GAN.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{8B9BC5B5-1D11-49F1-B5D1-40FCFF33CF3C}"
+          DTS:From="Package\Process GAN\Drop and create"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Process GAN\Get Gainco FS Partner" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process MED"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{8AA42FE9-F72D-4C8B-A335-296C509D186F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process MED">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process MED\Get MED FS Partner"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:DTSID="{55094A65-7468-4B03-9664-359DF2596228}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get MED FS Partner">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              engineThreads="5"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process MED\Get MED FS Partner\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process MED\Get MED FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Data Conversion.Inputs[Data Conversion Input].Columns[DivisionKeyAlternative]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process MED\Get MED FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process MED\Get MED FS Partner\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process MED\Get MED FS Partner\Destination - Query"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Query"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dimFsPartner]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process MED\Get MED FS Partner\Destination - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].Columns[DivisionKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DivisionKeyAlternative"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          lineageId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Output].Columns[DivisionKeyAlternative]" />
+                        <inputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="PartnerDescription"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]" />
+                        <inputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].Columns[PartnerKeyAlternative]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="PartnerKeyAlternative"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[DivisionKeyAlternative]"
+                          dataType="wstr"
+                          length="8"
+                          name="DivisionKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerDescription]"
+                          dataType="wstr"
+                          length="25"
+                          name="FsPartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKey]"
+                          dataType="i4"
+                          name="FsPartnerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input].ExternalColumns[FsPartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="FsPartnerKeyAlternative" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process MED\Get MED FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process MED\Get MED FS Partner\Source - Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Source - Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  distinct 4 as DivisionKey, 'MED' as DivisionKeyAlternative,   RTRIM(LTRIM(partner_id)) AS PartnerKeyAlternative, name AS PartnerDescription
+FROM         fs_partner_mst as fs_partner
+Union
+SELECT  distinct 4 as DivisionKey, 'MED' as DivisionKeyAlternative,   '0000' AS PartnerKeyAlternative, 'FS Blank' AS PartnerDescription
+FROM         fs_partner_mst as fs_partner</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process MED\Get MED FS Partner\Source - Query.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[MED_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[MED_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          length="10"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          length="60"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[PartnerDescription]"
+                          name="PartnerDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          length="50"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          name="PartnerKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          name="PartnerDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="DivisionKeyAlternative" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[DivisionKeyAlternative]"
+                          name="DivisionKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerKeyAlternative]"
+                          name="PartnerKeyAlternative" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[PartnerDescription]"
+                          name="PartnerDescription" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process MED\Get MED FS Partner.Paths[Data Conversion Output]"
+                  endId="Package\Process MED\Get MED FS Partner\Destination - Query.Inputs[Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Process MED\Get MED FS Partner\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Process MED\Get MED FS Partner.Paths[OLE DB Source Output]"
+                  endId="Package\Process MED\Get MED FS Partner\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process MED\Get MED FS Partner\Source - Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC46FC06-DB4A-4A6C-9712-2606582413A1}"
+      DTS:From="Package\Process GAN"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Process Bet" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{1893444B-7074-4DB1-AB7B-376F3822F6BA}"
+      DTS:From="Package\Process Bet"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Process MED" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{49FEB4C9-3E3F-47EA-B480-8612E1E15409}"
+      DTS:From="Package\Process MED"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Process BSW" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{8978D08E-6EE2-4B3B-BA23-897ABDC94278}"
+      DTS:From="Package\Process BSW"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Process BBR" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,43"
+          Id="Package\Process BBR\Get BBR FS Partner"
+          TopLeft="5.5,5.50000000000004" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="185,103"
+          Size="185,146"
+          Id="Package\Process BBR"
+          TopLeft="16.6666664183141,933.833316635092" />
+        <NodeLayout
+          Size="164,43"
+          Id="Package\Process Bet\Get BetFS Partner"
+          TopLeft="5.5,5.50000000000004" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="175,103"
+          Size="175,146"
+          Id="Package\Process Bet"
+          TopLeft="15.5000000000001,314.166666666667" />
+        <NodeLayout
+          Size="173,43"
+          Id="Package\Process BSW\Get BSW FS Partner"
+          TopLeft="5.5,5.50000000000004" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="185,103"
+          Size="185,146"
+          Id="Package\Process BSW"
+          TopLeft="10.5000000000001,726.166666666667" />
+        <NodeLayout
+          Size="156,43"
+          Id="Package\Process GAN\Drop and create"
+          TopLeft="19.5,5.50000000000004" />
+        <NodeLayout
+          Size="184,43"
+          Id="Package\Process GAN\Get Gainco FS Partner"
+          TopLeft="5.50000000000001,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Process GAN.PrecedenceConstraints[Constraint]"
+          TopLeft="97.5,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="195,206"
+          Size="195,249"
+          Id="Package\Process GAN"
+          TopLeft="5.50000000000003,5.49999999999993" />
+        <NodeLayout
+          Size="173,43"
+          Id="Package\Process MED\Get MED FS Partner"
+          TopLeft="5.5,5.50000000000004" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="185,103"
+          Size="185,146"
+          Id="Package\Process MED"
+          TopLeft="10.5000000000001,520.166666666667" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="102.833333333333,254.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="102.833333333333,460.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="102.833333333333,666.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="105.91666654249,872.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.6666499684259"
+              Start="0,0"
+              End="0,54.1666499684259">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.1666499684259" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Process BBR\Get BBR FS Partner">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Process BBR\Get BBR FS Partner\Destination - Query"
+          TopLeft="5.50000000000003,210.833333333334" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Process BBR\Get BBR FS Partner\Source - Query"
+          TopLeft="16.1666666666667,5.50000000000004" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Process BBR\Get BBR FS Partner\Data Conversion"
+          TopLeft="12.8333333333334,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Process BBR\Get BBR FS Partner.Paths[OLE DB Source Output]"
+          TopLeft="91.5,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process BBR\Get BBR FS Partner.Paths[Data Conversion Output]"
+          TopLeft="91.5,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BBR\Get BBR FS Partner\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process Bet\Get BetFS Partner">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Process Bet\Get BetFS Partner\Destination - Query"
+          TopLeft="5.50000000000003,210.833333333334" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Process Bet\Get BetFS Partner\Source - Query"
+          TopLeft="16.1666666666667,5.50000000000004" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Process Bet\Get BetFS Partner\Data Conversion"
+          TopLeft="12.8333333333334,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Process Bet\Get BetFS Partner.Paths[OLE DB Source Output]"
+          TopLeft="91.5,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process Bet\Get BetFS Partner.Paths[Data Conversion Output]"
+          TopLeft="91.5,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process BSW\Get BSW FS Partner">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Process BSW\Get BSW FS Partner\Destination - Query"
+          TopLeft="5.50000000000003,210.833333333334" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Process BSW\Get BSW FS Partner\Source - Query"
+          TopLeft="16.1666666666667,5.50000000000004" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Process BSW\Get BSW FS Partner\Data Conversion"
+          TopLeft="12.8333333333334,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Process BSW\Get BSW FS Partner.Paths[OLE DB Source Output]"
+          TopLeft="91.5,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process BSW\Get BSW FS Partner.Paths[Data Conversion Output]"
+          TopLeft="91.5,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process GAN\Get Gainco FS Partner">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process GAN\Get Gainco FS Partner\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process GAN\Get Gainco FS Partner\Source - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process GAN\Get Gainco FS Partner\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Process GAN\Get Gainco FS Partner.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process GAN\Get Gainco FS Partner.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process MED\Get MED FS Partner">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process MED\Get MED FS Partner\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process MED\Get MED FS Partner\Source - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process MED\Get MED FS Partner\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Process MED\Get MED FS Partner.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process MED\Get MED FS Partner.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

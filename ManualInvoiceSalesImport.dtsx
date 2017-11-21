@@ -1,0 +1,1066 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/6/2014 1:45:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01886B"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{5F1DFDF4-7808-47A5-9685-206D874A5103}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ManualInvoiceSalesImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{42C1C8F1-C156-4C99-8AE6-F08A24FBC00A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DF0177E9-20C3-4F1E-88CD-E9ECD3B1D656}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3E07AEFC-07F8-4D66-8ECE-09993FA5B1BC}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{89D7554E-3850-4B59-AFCE-53135CF63CED}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.15.0;Data Source=E:\data\ssis\CorporateDwSsis\InvoiceSalesImportBBR.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[RDM_BETTCHER]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2F478322-C975-4358-B71E-38809476F957}"
+      DTS:ObjectName="RDM_BETTCHER">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=RDM_BETTCHER;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-Package2-{8E610BE9-D959-4D9F-A20C-C9EC26494FE2}BIRMCSIDBS.RDM_BETTCHER;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{03DA7902-441F-4297-BC7A-3F3AA1E16B3C}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{6D837DDE-AD05-4126-B8D0-21926721434C}"
+      DTS:ObjectName="connCorpDW" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connRdmBettcher&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{CB0922F0-9F9A-4A5E-8E0B-8E56509A135F}"
+      DTS:ObjectName="connRdmBettcher" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Calculate unit price for IPI Value"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{d8f3663a-02fe-4244-81a7-28a29d0e09a7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Calculate unit price for IPI Value"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF0177E9-20C3-4F1E-88CD-E9ECD3B1D656}"
+          SQLTask:SqlStatementSource="Update tblInvoiceSalesImportBBR&#xA;Set       unit_price_gross=Gross_sales/qty_invoiced&#xA;,ICMS=(Gross_sales/qty_invoiced)-unit_price_net&#xA;Where qty_invoiced &lt;&gt; 0&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Clean up"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{435750ab-2d25-48dd-a041-908ac069df2c}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean up"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF0177E9-20C3-4F1E-88CD-E9ECD3B1D656}"
+          SQLTask:SqlStatementSource="&#xA;Begin Transaction;&#xA;Update tblInvoiceSalesImportBBR&#xA;Set        item= RTRIM(REPLACE(item, 'B', ''))&#xA;&#xA;Commit Transaction;&#xA;&#xA;&#xA;Begin Transaction;&#xA;Update tblInvoiceSalesImportBBR&#xA;Set tblInvoiceSalesImportBBR.item= tblOldFnNewFn.NewFn&#xA;FROM            tblInvoiceSalesImportBBR INNER JOIN&#xA;                         tblOldFnNewFn ON tblInvoiceSalesImportBBR.item = tblOldFnNewFn.OldFn&#xA;&#xA;&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;&#xA;Begin Transaction;&#xA;&#xA;&#xA;Delete&#xA;FROM            tblInvoiceSalesImportBBR&#xA;WHERE        (inv_date IS NULL) &#xA; AND (cust_num IS NULL)&#xA;AND  (cust_name IS NULL) &#xA;&#xA;&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\import Brazil from Excel"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{99FE4A2B-8785-4CDD-9A39-99B596B582E7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="import Brazil from Excel"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\import Brazil from Excel\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Sales$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\import Brazil from Excel\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[sitekey]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[sitekey]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[sitekey]"
+                      name="sitekey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[site_ref]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[site_ref]"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[site_ref]"
+                      name="site_ref"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[cust_num]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[cust_num]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[cust_num]"
+                      name="cust_num"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[cust_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[cust_name]"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[cust_name]"
+                      name="cust_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[inv_date]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_date]"
+                      name="inv_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_num]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[inv_num]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_num]"
+                      name="inv_num"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[qty_invoiced]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[qty_invoiced]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[qty_invoiced]"
+                      name="qty_invoiced"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[item]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[item]"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[item]"
+                      name="item"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[unit price gross]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[unit price gross]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[unit price gross]"
+                      name="unit price gross"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[Gross sales]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[Gross sales]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[Gross sales]"
+                      name="Gross sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[F5]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[F5]"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[F5]"
+                      name="F5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_year]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[inv_year]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_year]"
+                      name="inv_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[net sales]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[net sales]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[net sales]"
+                      name="net sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[unit price net]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[unit price net]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[unit price net]"
+                      name="unit price net"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[ICMS (VAT)]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[ICMS (VAT)]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[ICMS (VAT)]"
+                      name="ICMS (VAT)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[DESCRIPTION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[DESCRIPTION]"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[DESCRIPTION]"
+                      name="DESCRIPTION"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[segment]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[segment]"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[segment]"
+                      name="segment"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[sitekey]"
+                      dataType="r8"
+                      name="sitekey" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[site_ref]"
+                      dataType="wstr"
+                      length="255"
+                      name="site_ref" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[cust_num]"
+                      dataType="r8"
+                      name="cust_num" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[cust_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="cust_name" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[inv_date]"
+                      dataType="date"
+                      name="inv_date" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[inv_num]"
+                      dataType="r8"
+                      name="inv_num" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[qty_invoiced]"
+                      dataType="r8"
+                      name="qty_invoiced" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[item]"
+                      dataType="wstr"
+                      length="255"
+                      name="item" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[unit price gross]"
+                      dataType="r8"
+                      name="unit price gross" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[Gross sales]"
+                      dataType="r8"
+                      name="Gross sales" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[F5]"
+                      dataType="wstr"
+                      length="255"
+                      name="F5" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[inv_year]"
+                      dataType="r8"
+                      name="inv_year" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[net sales]"
+                      dataType="r8"
+                      name="net sales" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[unit price net]"
+                      dataType="r8"
+                      name="unit price net" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[ICMS (VAT)]"
+                      dataType="r8"
+                      name="ICMS (VAT)" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[DESCRIPTION]"
+                      dataType="wstr"
+                      length="255"
+                      name="DESCRIPTION" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].ExternalColumns[segment]"
+                      dataType="wstr"
+                      length="255"
+                      name="segment" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[sitekey]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[sitekey]"
+                      name="sitekey" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[site_ref]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[site_ref]"
+                      name="site_ref" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[cust_num]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[cust_num]"
+                      name="cust_num" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[cust_name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[cust_name]"
+                      name="cust_name" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[F5]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[F5]"
+                      name="F5" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[inv_date]"
+                      dataType="date"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[inv_date]"
+                      name="inv_date" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[inv_year]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[inv_year]"
+                      name="inv_year" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[net sales]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[net sales]"
+                      name="net sales" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[unit price net]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[unit price net]"
+                      name="unit price net" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[unit price gross]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[unit price gross]"
+                      name="unit price gross" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[inv_num]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[inv_num]"
+                      name="inv_num" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[ICMS (VAT)]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[ICMS (VAT)]"
+                      name="ICMS (VAT)" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[Gross sales]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[Gross sales]"
+                      name="Gross sales" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[qty_invoiced]"
+                      dataType="r8"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[qty_invoiced]"
+                      name="qty_invoiced" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[item]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[item]"
+                      name="item" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[DESCRIPTION]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[DESCRIPTION]"
+                      name="DESCRIPTION" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[segment]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[segment]"
+                      name="segment" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import Brazil from Excel\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblInvoiceSalesImportBBR]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\import Brazil from Excel\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sitekey]"
+                      cachedDataType="r8"
+                      cachedName="sitekey"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sitekey]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[sitekey]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[site_ref]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="site_ref"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[site_ref]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[site_ref]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cust_num]"
+                      cachedDataType="r8"
+                      cachedName="cust_num"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cust_num]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[cust_num]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cust_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="cust_name"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cust_name]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[cust_name]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[inv_date]"
+                      cachedDataType="date"
+                      cachedName="inv_date"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inv_date]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_date]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[inv_year]"
+                      cachedDataType="r8"
+                      cachedName="inv_year"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inv_year]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_year]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[net sales]"
+                      cachedDataType="r8"
+                      cachedName="net sales"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[net_sales]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[net sales]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[unit price net]"
+                      cachedDataType="r8"
+                      cachedName="unit price net"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_net]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[unit price net]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[inv_num]"
+                      cachedDataType="r8"
+                      cachedName="inv_num"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inv_num]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[inv_num]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ICMS (VAT)]"
+                      cachedDataType="r8"
+                      cachedName="ICMS (VAT)"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICMS]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[ICMS (VAT)]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[qty_invoiced]"
+                      cachedDataType="r8"
+                      cachedName="qty_invoiced"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[qty_invoiced]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[qty_invoiced]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[item]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="item"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[item]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[item]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DESCRIPTION]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DESCRIPTION"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[DESCRIPTION]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[unit price gross]"
+                      cachedDataType="r8"
+                      cachedName="unit price gross"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_gross]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[unit price gross]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gross sales]"
+                      cachedDataType="r8"
+                      cachedName="Gross sales"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gross_sales]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[Gross sales]" />
+                    <inputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[segment]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="segment"
+                      externalMetadataColumnId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Segment]"
+                      lineageId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output].Columns[segment]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sitekey]"
+                      dataType="i4"
+                      name="sitekey" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[site_ref]"
+                      dataType="wstr"
+                      length="8"
+                      name="site_ref" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cust_num]"
+                      dataType="wstr"
+                      length="7"
+                      name="cust_num" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cust_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="cust_name" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inv_date]"
+                      dataType="dbTimeStamp"
+                      name="inv_date" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inv_year]"
+                      dataType="i4"
+                      name="inv_year" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[net_sales]"
+                      dataType="cy"
+                      name="net_sales" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_net]"
+                      dataType="cy"
+                      name="unit_price_net" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_gross]"
+                      dataType="cy"
+                      name="unit_price_gross" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inv_num]"
+                      dataType="wstr"
+                      length="12"
+                      name="inv_num" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ICMS]"
+                      dataType="cy"
+                      name="ICMS" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gross_sales]"
+                      dataType="cy"
+                      name="Gross_sales" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[qty_invoiced]"
+                      dataType="numeric"
+                      name="qty_invoiced"
+                      precision="19"
+                      scale="8" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[item]"
+                      dataType="wstr"
+                      length="30"
+                      name="item" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Segment]"
+                      dataType="wstr"
+                      length="255"
+                      name="Segment" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import Brazil from Excel\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import Brazil from Excel\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import Brazil from Excel\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import Brazil from Excel\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\import Brazil from Excel.Paths[Excel Source Output]"
+              endId="Package\import Brazil from Excel\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Excel Source Output"
+              startId="Package\import Brazil from Excel\Excel Source.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate tblInvoiceSalesImportBBR"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4AC15673-002E-4980-856E-B5E56F75288B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate tblInvoiceSalesImportBBR"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF0177E9-20C3-4F1E-88CD-E9ECD3B1D656}"
+          SQLTask:SqlStatementSource="truncate table tblInvoiceSalesImportBBR" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CCC91BC4-9965-4BEE-96A4-1E5D29AC3A85}"
+      DTS:From="Package\Truncate tblInvoiceSalesImportBBR"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\import Brazil from Excel" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{1557CA6E-25A0-4E66-B89C-97FC513B8581}"
+      DTS:From="Package\import Brazil from Excel"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Clean up" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{B2E2CA7B-B958-4157-B2FC-83710C3EA87E}"
+      DTS:From="Package\Clean up"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Calculate unit price for IPI Value" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Calculate unit price for IPI Value"
+          TopLeft="44.2708326736465,214.208330456664" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Clean up"
+          TopLeft="39.5238089348588,165.904758938154" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\import Brazil from Excel"
+          TopLeft="44.3333329235514,113.366666573684" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Truncate tblInvoiceSalesImportBBR"
+          TopLeft="26.3333330228925,54.8999991166592" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="149.666666356226,97.5666657833259">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86.6666665673256,37.1333341236914"
+              Start="0,0"
+              End="79.1666665673256,37.1333341236914">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.1333341236914" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.1333341236914"
+                    Point2="0,37.1333341236914"
+                    Point3="4,37.1333341236914" />
+                  <mssgle:LineSegment
+                    End="79.1666665673256,37.1333341236914" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="236.333332923551,140.477777684795">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-81.4761906553593,25.4269812533589"
+              Start="0,0"
+              End="-81.4761906553593,17.9269812533589">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-77.4761906553593,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-77.4761906553593,0"
+                    Point2="-81.4761906553593,0"
+                    Point3="-81.4761906553593,4" />
+                  <mssgle:LineSegment
+                    End="-81.4761906553593,17.9269812533589" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="39.5238089348588,187.238092271487">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="4.74702373878772,48.30357151851"
+              Start="0,0"
+              End="-2.75297626121228,48.30357151851">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,44.30357151851" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,44.30357151851"
+                    Point2="-22.5,48.30357151851"
+                    Point3="-18.5,48.30357151851" />
+                  <mssgle:LineSegment
+                    End="-2.75297626121228,48.30357151851" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\import Brazil from Excel">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\import Brazil from Excel\OLE DB Destination"
+          TopLeft="5.50000000000001,108.166666666667" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\import Brazil from Excel\Excel Source"
+          TopLeft="31.6666661947966,26.4333328606685" />
+        <EdgeLayout
+          Id="Package\import Brazil from Excel.Paths[Excel Source Output]"
+          TopLeft="101.333332861463,69.0999995273352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.83333286146322,39.0666671393316"
+              Start="0,0"
+              End="-9.83333286146322,31.5666671393316">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5333335696658" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5333335696658"
+                    Point2="0,19.5333335696658"
+                    Point3="-4,19.5333335696658" />
+                  <mssgle:LineSegment
+                    End="-5.83333286146322,19.5333335696658" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.83333286146322,19.5333335696658"
+                    Point2="-9.83333286146322,19.5333335696658"
+                    Point3="-9.83333286146322,23.5333335696658" />
+                  <mssgle:LineSegment
+                    End="-9.83333286146322,31.5666671393316" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\import Brazil from Excel\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\import Brazil from Excel\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

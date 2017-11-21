@@ -1,0 +1,2677 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/6/2008 8:33:26 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01718A"
+  DTS:CreatorName="BETLAN\mikej"
+  DTS:Description="DTS Wizard-generated package"
+  DTS:DTSID="{7E386045-479C-4327-80C6-A547AB46D1A5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="dimSalesmanImport"
+  DTS:VersionBuild="152"
+  DTS:VersionGUID="{B04344A8-2ED2-486A-B79E-C91B3A439864}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BDB_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{565BE88D-D44C-4355-BE55-267355FCE0DC}"
+      DTS:ObjectName="BDB_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BDB_App;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BettcherDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F4D95151-FBD7-4779-AD21-B1DC73633A5D}"
+      DTS:ObjectName="BettcherDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birm01886b;Initial Catalog=BettcherDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{98E2AF17-5754-40B7-9124-72166184338A}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BSW_Apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{21B8EBEF-9E36-4B26-9B60-6D7E4E7F6FD0}"
+      DTS:ObjectName="BSW_Apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=Bsw_apps;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{FE1D7256-FD0F-45F4-B79B-C21E703E78DD}BIRMCSIDBS.Bsw_app;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{29A0C9FD-F565-44E7-B050-51AD8DC77ECB}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BC070DD2-6742-4C63-89E3-F4B1F45D7868}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{72A4E667-EE3D-47F9-A8AC-B110761854F5}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LTG_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0A262CD6-AF22-4091-8AC7-F06241F18338}"
+      DTS:ObjectName="LTG_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=LTG_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{738239AF-0F8B-45D5-965D-61CE0F24CC6F}cjack.bs;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MED_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DEF595A5-9CCA-4762-9AE5-F3783ECCC32C}"
+      DTS:ObjectName="MED_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=MED_App;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{A96D1CEE-38C7-45B9-9AB7-B6C7CAC93591}BIRMCSIDBS.MED_App;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{064D4531-4C21-453F-A52F-9C5E82B3AFDB}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{814BA0BF-6EF4-4911-A34F-A7897B4412BF}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBettcherDw&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{CBE6D26B-861A-43E5-89EA-21E6C752505C}"
+      DTS:ObjectName="connBettcherDw" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBsw_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{3118138A-FD2F-49CA-A90E-71C1F14E79E2}"
+      DTS:ObjectName="connBsw_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{4C77CA39-1D69-4DBD-9065-363D8E91CAE5}"
+      DTS:ObjectName="connGan_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connLtg_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{A192BE40-310D-4571-BF03-E68685DA827E}"
+      DTS:ObjectName="connLtg_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connMed_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{55D0584C-EC60-41CB-A4D4-E65884205200}"
+      DTS:ObjectName="connMed_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{290F5FDE-CBEE-4651-8052-BBBAEADC056B}"
+      DTS:ObjectName="connCorpDW" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1" />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Check for T00 for All"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{12A34A71-DF89-41FB-AEA3-D699B305FCCE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check for T00 for All"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{29A0C9FD-F565-44E7-B050-51AD8DC77ECB}"
+          SQLTask:SqlStatementSource="&#xA;&#xA;--check LTG&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 3) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(3,'LTG','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;--check GAN&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 2) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(2,'GAN','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;--check BET&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 1) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(1,'BET','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;--check MED&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 4) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(4,'MED','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;--check BSW&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 5) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(5,'BSW','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;--check BBR&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey =6) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(6,'BBR','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\get and append bet Salesman"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{FD493B14-65C8-4AEA-98C7-4CB5A806D6CB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get and append bet Salesman">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\get and append bet Salesman\Destination - Query"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblSalesmanImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append bet Salesman\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKeyAlternative"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                    <inputColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].Columns[slsman]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="slsman"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]" />
+                    <inputColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="35"
+                      name="name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\get and append bet Salesman\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append bet Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append bet Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\get and append bet Salesman\Source - Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     1 AS SiteKey, 'BET' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+FROM         slsman_mst as slsman INNER JOIN
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append bet Salesman\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Bet_App]"
+                  connectionManagerRefId="Package.ConnectionManagers[Bet_App]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      length="3"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      length="3"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="35"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      length="8"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      name="slsman"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="46"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      name="slsman" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="46"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\get and append bet Salesman.Paths[OLE DB Source Output]"
+              endId="Package\get and append bet Salesman\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\get and append bet Salesman\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\get and append BSW Salesman"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{EE39FB68-801D-46B7-BA58-65138FBB1180}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get and append BSW Salesman">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\get and append BSW Salesman\Destination - Query"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblSalesmanImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append BSW Salesman\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKeyAlternative"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].Columns[slsman]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="slsman"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]" />
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="35"
+                      name="name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\get and append BSW Salesman\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\get and append BSW Salesman\Source - Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     5 AS SiteKey, 'BSW' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+FROM         slsman_mst as slsman INNER JOIN
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append BSW Salesman\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[BSW_Apps]"
+                  connectionManagerRefId="Package.ConnectionManagers[BSW_Apps]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      length="3"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      length="3"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="35"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      length="8"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      name="slsman"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="46"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      name="slsman" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="46"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\get and append BSW Salesman.Paths[OLE DB Source Output]"
+              endId="Package\get and append BSW Salesman\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\get and append BSW Salesman\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\get and append BSW Salesman 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{10497446-883d-41dc-b665-b419d41fd95d}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get and append BSW Salesman 1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\get and append BSW Salesman 1\Destination - Query"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblSalesmanImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append BSW Salesman 1\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKeyAlternative"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].Columns[slsman]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="slsman"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]" />
+                    <inputColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="35"
+                      name="name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\get and append BSW Salesman 1\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman 1\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman 1\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\get and append BSW Salesman 1\Source - Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+FROM         slsman_mst as slsman INNER JOIN
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num
+Union 
+SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, NULL as slsman, NULL as name</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append BSW Salesman 1\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[BDB_App]"
+                  connectionManagerRefId="Package.ConnectionManagers[BDB_App]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      length="3"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      length="3"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="35"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      length="8"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      name="slsman"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="46"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      name="slsman" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="46"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\get and append BSW Salesman 1.Paths[OLE DB Source Output]"
+              endId="Package\get and append BSW Salesman 1\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\get and append BSW Salesman 1\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\get and append gan Salesman"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{452074E8-D50D-40EB-8A9C-1E127CB2FE91}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get and append gan Salesman">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\get and append gan Salesman\Destination - Query"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblSalesmanImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append gan Salesman\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKeyAlternative"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                    <inputColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].Columns[slsman]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="slsman"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="35"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\get and append gan Salesman\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append gan Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append gan Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\get and append gan Salesman\Source - Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+FROM         slsman_mst as slsman INNER JOIN
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append gan Salesman\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[GAN_App]"
+                  connectionManagerRefId="Package.ConnectionManagers[GAN_App]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      length="3"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      length="3"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="35"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      length="8"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      name="slsman"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="46"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      name="slsman" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="46"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\get and append gan Salesman.Paths[OLE DB Source Output]"
+              endId="Package\get and append gan Salesman\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\get and append gan Salesman\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\get and append MED Salesman"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{F4CC52D5-7CCD-4E16-A683-545603EBF6B3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get and append MED Salesman">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\get and append MED Salesman\Destination - Query"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblSalesmanImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append MED Salesman\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKeyAlternative"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                    <inputColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].Columns[slsman]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="slsman"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]" />
+                    <inputColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="35"
+                      name="name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\get and append MED Salesman\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append MED Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append MED Salesman\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\get and append MED Salesman\Source - Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     4 AS SiteKey, 'MED' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+FROM         slsman_mst as slsman INNER JOIN
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\get and append MED Salesman\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MED_App]"
+                  connectionManagerRefId="Package.ConnectionManagers[MED_App]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      length="3"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      length="3"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="35"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      length="8"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      name="slsman"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="46"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      name="slsman" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="46"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\get and append MED Salesman.Paths[OLE DB Source Output]"
+              endId="Package\get and append MED Salesman\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\get and append MED Salesman\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get LTG"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Disabled="True"
+      DTS:DTSID="{1A8EBBD8-65A2-48DE-9F5D-8A717932A903}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get LTG">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\Get LTG\Destination - Query"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Query"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tblSalesmanImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get LTG\Destination - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get LTG\Destination - Query.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                      cachedDataType="i4"
+                      cachedName="SiteKey"
+                      externalMetadataColumnId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                    <inputColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].Columns[SiteKeyAlternative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SiteKeyAlternative"
+                      externalMetadataColumnId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]" />
+                    <inputColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].Columns[slsman]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="slsman"
+                      externalMetadataColumnId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="35"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Destination - Query.Inputs[Destination Input].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Get LTG\Destination - Query.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get LTG\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get LTG\Source - Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     3 AS SiteKey, 'LTG' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+FROM         slsman INNER JOIN
+                      employee ON slsman.ref_num = employee.emp_num</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get LTG\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LTG_App]"
+                  connectionManagerRefId="Package.ConnectionManagers[LTG_App]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="35"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                      name="SiteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      length="3"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      length="8"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].Columns[slsman]"
+                      name="slsman"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="46"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                      dataType="i4"
+                      name="SiteKey" />
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SiteKeyAlternative" />
+                    <externalMetadataColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      name="slsman" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      dataType="i4"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                      name="SiteKey" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKeyAlternative]"
+                      name="SiteKeyAlternative" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[slsman]"
+                      name="slsman" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="46"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get LTG.Paths[OLE DB Source Output]"
+              endId="Package\Get LTG\Destination - Query.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get LTG\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge into dimSalesMan"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C9CFCECF-4E5D-4313-9495-32DA45DF7249}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge into dimSalesMan"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{29A0C9FD-F565-44E7-B050-51AD8DC77ECB}"
+          SQLTask:SqlStatementSource="BEGIN TRANSACTION;&#xA;&#xA;MERGE dimSalesman AS target&#xA;    USING (SELECT     SiteKey, SiteKeyAlternative, slsman, name&#xA;FROM         tblSalesmanImport) AS source&#xA;    ON (target.SiteKey=source.SiteKey AND target.SalesmanKeyAlternative=source.slsman )&#xA;    &#xA;&#xA;WHEN MATCHED THEN &#xA;     Update set &#xA;     target.Salesman=source.name&#xA;  &#xA; WHEN NOT MATCHED THEN &#xA;     INSERT (&#xA;&#x9;SiteKey&#xA;&#x9;,SiteKeyAlternative&#xA;&#x9;,SalesmanKeyAlternative &#xA;                 ,Salesman    )&#xA;     VALUES (&#xA;&#x9;source.SiteKey&#xA;&#x9;,source.SiteKeyAlternative&#xA;&#x9;,slsman&#xA;&#x9;,name&#xA; );&#xA;&#xA;&#xA;&#xA;&#xA;COMMIT TRANSACTION;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate tblSalesmanImport"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{F5D09AA6-DEFA-41EC-B52D-21CBAF982775}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate tblSalesmanImport"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{29A0C9FD-F565-44E7-B050-51AD8DC77ECB}"
+          SQLTask:SqlStatementSource="truncate table tblSalesmanImport&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A8A16C5F-E91F-432F-81B6-F7DE6D1C61EA}"
+      DTS:From="Package\get and append bet Salesman"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\get and append MED Salesman" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{35347E45-B561-44F6-BA50-06FFA6453B24}"
+      DTS:From="Package\Get LTG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\get and append gan Salesman" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{182E46D7-D8DC-48A7-A986-47DB7EDCE7CF}"
+      DTS:From="Package\get and append gan Salesman"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\get and append bet Salesman" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{0F20BD5A-A8F4-495C-B7FB-4F16BCF8E9D4}"
+      DTS:From="Package\Check for T00 for All"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Merge into dimSalesMan" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{B1D0D5E5-60A2-4544-B4D1-ABE17D92531A}"
+      DTS:From="Package\truncate tblSalesmanImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Get LTG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{7D7C0D2F-A8F4-4854-A3C0-09EC3E44C62F}"
+      DTS:From="Package\get and append MED Salesman"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\get and append BSW Salesman" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,43"
+          Id="Package\Check for T00 for All"
+          TopLeft="33.8095237651752,621.5" />
+        <NodeLayout
+          Size="220,43"
+          Id="Package\get and append bet Salesman"
+          TopLeft="11.8095237651752,313.5" />
+        <NodeLayout
+          Size="227,43"
+          Id="Package\get and append BSW Salesman"
+          TopLeft="8.47619043184189,518.833333333333" />
+        <NodeLayout
+          Size="227,43"
+          Id="Package\get and append BSW Salesman 1"
+          TopLeft="16.8095236409988,573.023814062277" />
+        <NodeLayout
+          Size="223,43"
+          Id="Package\get and append gan Salesman"
+          TopLeft="10.4761904318418,210.833333333333" />
+        <NodeLayout
+          Size="227,43"
+          Id="Package\get and append MED Salesman"
+          TopLeft="8.47619043184187,416.166666666666" />
+        <NodeLayout
+          Size="117,43"
+          Id="Package\Get LTG"
+          TopLeft="63.1428570985085,108.166666666666" />
+        <NodeLayout
+          Size="195,43"
+          Id="Package\Merge into dimSalesMan"
+          TopLeft="24.4761904318419,724.166666666667" />
+        <NodeLayout
+          Size="211,43"
+          Id="Package\truncate tblSalesmanImport"
+          TopLeft="16.4761904318418,5.49999999999993" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="121.809523765175,356.166666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="121.809523765175,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999998"
+              Start="0,0"
+              End="0,52.4999999999998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="121.809523765175,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="121.809523765175,664.166666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="121.809523765175,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="121.809523765175,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\get and append BSW Salesman 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\get and append BSW Salesman 1\Source - Query"
+          TopLeft="16.1666666666667,5.50000000000004" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\get and append BSW Salesman 1\Destination - Query"
+          TopLeft="5.50000000000001,108.166666666667" />
+        <EdgeLayout
+          Id="Package\get and append BSW Salesman 1.Paths[OLE DB Source Output]"
+          TopLeft="91.5,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\get and append BSW Salesman 1\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\get and append gan Salesman">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\get and append gan Salesman\Source - Query"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\get and append gan Salesman\Destination - Query"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\get and append gan Salesman.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

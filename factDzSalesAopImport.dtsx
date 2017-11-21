@@ -1,0 +1,1564 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/22/2012 9:47:53 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01886B"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{F258702E-1E9B-4BE6-99A7-DFB3ABD5ADF3}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2164.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="factDzSalesAopImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="153"
+  DTS:VersionGUID="{DA367EC9-E938-4F16-90DD-250BD8F475FF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C5623642-36FE-4FAC-A828-F133FA196AAC}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A674CDF9-381C-490A-82C3-C295A3FEF3F3}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A172360E-5FD5-45E9-B594-74516299FE47}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{B6643DF9-E991-406F-BB94-A7181ED043B9}"
+      DTS:ObjectName="CorpMain" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{78D58AE9-A130-402C-B317-80FD0F85C5D3}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{5107FC91-BD30-4DA8-BDC1-B270A8124987}"
+      DTS:ObjectName="connCorpDW" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{458E4D69-E825-45AC-9139-C38BEAFC5823}"
+      DTS:ObjectName="connGan_app" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{4E06D77E-0AEF-4736-B6E2-D5898E4DDDAC}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Load data into tblDzSAlesAop 1"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{D2047BC3-35DD-4674-A4E0-00A776E1FDC0}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load data into tblDzSAlesAop 1"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination 1"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblDzSalesAop]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ProdLine]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ProdLine"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdLine]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdLine]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Category]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Category"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Category]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Prodgrp]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Prodgrp"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Prodgrp]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Prodgrp]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Family]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Family"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Family]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Family]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Territory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Territory"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Territory]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Territory]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[DomesticForeign]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DomesticForeign"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DomesticForeign]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DomesticForeign]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[State]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="State"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="CountryCode"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CountryCode]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryCode]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[GrossSales]"
+                          cachedDataType="numeric"
+                          cachedName="GrossSales"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[GrossSales]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[GrossSales]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[SubRegion]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="SubRegion"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SubRegion]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[SubRegion]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[AopSales]"
+                          cachedDataType="numeric"
+                          cachedName="AopSales"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AopSales]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[AopSales]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[MonthDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="MonthDate"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[MonthDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[MonthDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[YearDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="YearDate"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[YearDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[YearDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[QuarterDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="QuarterDate"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[QuarterDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[QuarterDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Cost]"
+                          cachedDataType="numeric"
+                          cachedName="Cost"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cost]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Date]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="Date"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TransDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Date]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[DivKey]"
+                          cachedDataType="i4"
+                          cachedName="DivKey"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DivKey]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[TerritoryKey]"
+                          cachedDataType="i4"
+                          cachedName="TerritoryKey"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritoryKey]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[TerritoryKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Division]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Division"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Division]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Division]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Level1Description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Level1Description"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level1Description]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level1Description]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Level2Description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Level2Description"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level2Description]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level2Description]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Level2Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Level2Key"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level2Key]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level2Key]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Level1Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="Level1Key"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level1Key]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level1Key]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[LoadDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LoadDate"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[LoadDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[AopCost]"
+                          cachedDataType="numeric"
+                          cachedName="AopCost"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AopCost]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[AopCost]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                          dataType="wstr"
+                          length="4"
+                          name="Year" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level2Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Level2Key" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level2Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Level2Description" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level1Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Level1Key" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Level1Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Level1Description" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Division]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Division" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdLineKey]"
+                          dataType="i4"
+                          name="ProdLineKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdLine]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProdLine" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CategoryKey]"
+                          dataType="i4"
+                          name="CategoryKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          dataType="wstr"
+                          length="50"
+                          name="Category" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdGroupKey]"
+                          dataType="i4"
+                          name="ProdGroupKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Prodgrp]"
+                          dataType="wstr"
+                          length="50"
+                          name="Prodgrp" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Family]"
+                          dataType="wstr"
+                          length="50"
+                          name="Family" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritoryKey]"
+                          dataType="wstr"
+                          length="10"
+                          name="SalesTerritoryKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Territory]"
+                          dataType="wstr"
+                          length="50"
+                          name="Territory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DomesticForeign]"
+                          dataType="wstr"
+                          length="50"
+                          name="DomesticForeign" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                          dataType="wstr"
+                          length="50"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CountryCode]"
+                          dataType="wstr"
+                          length="50"
+                          name="CountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[GrossSales]"
+                          dataType="cy"
+                          name="GrossSales" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AopSales]"
+                          dataType="cy"
+                          name="AopSales" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SubRegion]"
+                          dataType="wstr"
+                          length="100"
+                          name="SubRegion" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="100"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[MonthDate]"
+                          dataType="dbTimeStamp2"
+                          name="MonthDate"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[YearDate]"
+                          dataType="dbTimeStamp2"
+                          name="YearDate"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[QuarterDate]"
+                          dataType="dbTimeStamp2"
+                          name="QuarterDate"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          dataType="cy"
+                          name="Cost" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TransDate]"
+                          dataType="dbTimeStamp2"
+                          name="TransDate"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DivKey]"
+                          dataType="i4"
+                          name="DivKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          name="LoadDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                          dataType="wstr"
+                          length="255"
+                          name="Continent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AopCost]"
+                          dataType="cy"
+                          name="AopCost" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">with cteData
+as
+(
+
+SELECT       factInvoiceSales.SiteKey as DivKey ,  
+                          DimTime.MonthDate AS Date, DimTime.MonthDate, DimTime.Year, DimTime.QuarterDate, DimTime.YearDate,  dimSiteLevelKey.Level2Key, dimSiteLevelKey.Level2Description, dimSiteLevelKey.Level1Key, dimSiteLevelKey.Level1Description, 
+                         dimSiteLevelKey.Level3Description AS Division, dimProduct.ProdLineKey, dimProduct.ProdLineDescription AS ProdLine, dimProduct.CategoryKey, dimProduct.CategoryDescription AS Category, 
+                         dimProduct.ProdGroupKey, dimProduct.ProdGroupDescription AS Prodgrp, dimItemFamilyCode.ItemFamilyCodeDescription AS Family, dimSalesTerritory.SalesTerritoryKeyAlternative
+ as TerritoryKey, 
+                         dimSalesTerritory.SalesTerritoryDescription AS Territory, dimGeographic.DomesticForeign, dimGeographic.State, dimGeographic.CountryCode, dimGeographic.SubRegionKeyAlternative as SubRegion, 
+                         dimGeographic.RegionKeyAlternative as Region, SUM(factInvoiceSales.ExtCorpListprice) AS GrossSales, 0 AS AopSales, SUM(factInvoiceSales.ExtCost)  as Cost, 0 as AopCost
+                      
+
+FROM            factInvoiceSales INNER JOIN
+                         DimTime ON factInvoiceSales.InvoiceDateKey = DimTime.TimeKey INNER JOIN
+                         dimSiteLevelKey ON factInvoiceSales.SiteKey = dimSiteLevelKey.LevelId INNER JOIN
+                         dimProduct ON factInvoiceSales.ProdCodeSlKey = dimProduct.ProdCodeSlKey INNER JOIN
+                         dimSalesTerritory ON factInvoiceSales.SalesTerritoryKey = dimSalesTerritory.SalesTerritoryKey INNER JOIN
+                         dimGeographic ON factInvoiceSales.GeographicKey = dimGeographic.GeographicKey INNER JOIN
+                         dimItemFamilyCode ON factInvoiceSales.ItemFamilyCodeKey = dimItemFamilyCode.ItemFamilyCodeKey LEFT OUTER JOIN
+                         dimOrderEndType ON factInvoiceSales.OrderEndKey = dimOrderEndType.OrderEndKey
+WHERE        (factInvoiceSales.SiteKey IN (1, 2, 4,5,6)) 
+
+
+GROUP BY factInvoiceSales.SiteKey,DimTime.MonthDate, DimTime.Year, DimTime.QuarterDate,  DimTime.YearDate, dimSiteLevelKey.Level2Key, dimSiteLevelKey.Level2Description, dimSiteLevelKey.Level1Key, dimSiteLevelKey.Level1Description, dimOrderEndType.OrderEndDescription,
+                          dimSiteLevelKey.Level3Description, dimProduct.ProdLineKey, dimProduct.ProdLineDescription, dimProduct.CategoryKey, dimProduct.CategoryDescription, dimProduct.ProdGroupKey, 
+                         dimProduct.ProdGroupDescription, dimSalesTerritory.SalesTerritoryKey,dimSalesTerritory.SalesTerritoryKeyAlternative
+, dimSalesTerritory.SalesTerritoryDescription, dimGeographic.DomesticForeign, dimGeographic.State, dimGeographic.CountryCode, 
+                         dimGeographic.SubRegionKeyAlternative, dimGeographic.RegionKeyAlternative, dimItemFamilyCode.ItemFamilyCodeDescription 
+						 HAVING        (DimTime.[Year] &gt;= 2015) 
+						 AND (dimOrderEndType.OrderEndDescription = N'Sales')
+Union All
+SELECT   factPlanSales.SiteKey as DivKey  ,    
+                       DimTime.MonthDate AS Date, DimTime.MonthDate, DimTime.Year, DimTime.QuarterDate, DimTime.YearDate, dimSiteLevelKey.Level2Key, dimSiteLevelKey.Level2Description, dimSiteLevelKey.Level1Key, 
+                         dimSiteLevelKey.Level1Description, dimSiteLevelKey.Level3Description AS Division, dimProduct.ProdLineKey, dimProduct.ProdLineDescription AS ProdLine, dimProduct.CategoryKey, 
+                         dimProduct.CategoryDescription AS Category, dimProduct.ProdGroupKey, dimProduct.ProdGroupDescription AS Prodgrp, dimItemFamilyCode.ItemFamilyCodeDescription AS Family, 
+                        dimSalesTerritory.SalesTerritoryKeyAlternative
+ as TerritoryKey, dimSalesTerritory.SalesTerritoryDescription AS Territory, dimGeographic.DomesticForeign, dimGeographic.State, dimGeographic.CountryCode, 
+                         dimGeographic.SubRegionKeyAlternative as SubRegion, dimGeographic.RegionKeyAlternative as Region, 0 AS GrossSales, factPlanSales.GrossAmtPlan AS AopSales,  0  as Cost,CostPlan as AopCost
+FROM            factPlanSales INNER JOIN
+                         DimTime ON factPlanSales.InvoiceDateKey = DimTime.TimeKey INNER JOIN
+                         dimSiteLevelKey ON factPlanSales.SiteKey = dimSiteLevelKey.LevelId INNER JOIN
+                         dimProduct ON factPlanSales.ProdCodeSlKey = dimProduct.ProdCodeSlKey INNER JOIN
+                         dimSalesTerritory ON factPlanSales.SalesTerritoryKey = dimSalesTerritory.SalesTerritoryKey INNER JOIN
+                         dimGeographic ON factPlanSales.GeographicKey = dimGeographic.GeographicKey INNER JOIN
+                         dimItemFamilyCode ON factPlanSales.ItemFamilyCodeKey = dimItemFamilyCode.ItemFamilyCodeKey
+WHERE        (factPlanSales.SiteKey IN (1, 2, 4,5,6)) AND (DimTime.Year &gt;= 2015) 
+)
+
+Select 
+DivKey
+,Level2Key
+, Level2Description
+, Level1Key
+, Level1Description
+,Date
+, MonthDate
+,QuarterDate
+,YearDate
+, Division
+, ProdLine
+, Category
+,Prodgrp
+, Family
+,TerritoryKey
+, Territory
+, DomesticForeign
+, State
+, CountryCode
+, Region
+, SubRegion
+,Sum(GrossSales) as GrossSales
+, Sum(AopSales) as AopSales
+, Sum(Cost) as Cost
+, Sum(AopCost) as AopCost
+,GetDate() as LoadDate
+ from cteData
+ Group By 
+ DivKey,
+ Level2Key
+, Level2Description
+, Level1Key
+, Level1Description
+,Date, 
+ MonthDate,
+ QuarterDate,
+ YearDate, 
+ Division, 
+ ProdLine, 
+ Category,
+ Prodgrp, 
+ Family, 
+TerritoryKey,
+ Territory, 
+ DomesticForeign, 
+ State, 
+ CountryCode,
+ Region, 
+ SubRegion</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Date]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Date]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Date]"
+                          name="Date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Division]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Division]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Division]"
+                          name="Division"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdLine]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProdLine]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdLine]"
+                          name="ProdLine"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Category]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Category]"
+                          name="Category"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Prodgrp]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Prodgrp]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Prodgrp]"
+                          name="Prodgrp"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Family]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Family]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Family]"
+                          name="Family"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Territory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Territory]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Territory]"
+                          name="Territory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DomesticForeign]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DomesticForeign]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DomesticForeign]"
+                          name="DomesticForeign"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                          name="State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                          name="CountryCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[GrossSales]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GrossSales]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[GrossSales]"
+                          name="GrossSales"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[SubRegion]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SubRegion]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[SubRegion]"
+                          name="SubRegion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[AopSales]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AopSales]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[AopSales]"
+                          name="AopSales"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[MonthDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MonthDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[MonthDate]"
+                          name="MonthDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[QuarterDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QuarterDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[QuarterDate]"
+                          name="QuarterDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[YearDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[YearDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[YearDate]"
+                          name="YearDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cost]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cost]"
+                          name="Cost"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivKey]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivKey]"
+                          name="DivKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level2Key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level2Key]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level2Key]"
+                          name="Level2Key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level2Description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level2Description]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level2Description]"
+                          name="Level2Description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level1Key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level1Key]"
+                          length="10"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level1Key]"
+                          name="Level1Key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level1Description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level1Description]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Level1Description]"
+                          name="Level1Description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[TerritoryKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TerritoryKey]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[TerritoryKey]"
+                          name="TerritoryKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[LoadDate]"
+                          name="LoadDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[AopCost]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AopCost]"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[AopCost]"
+                          name="AopCost"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Date]"
+                          dataType="dbTimeStamp"
+                          name="Date" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Division]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Division" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProdLine]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProdLine" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                          dataType="wstr"
+                          length="50"
+                          name="Category" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Prodgrp]"
+                          dataType="wstr"
+                          length="50"
+                          name="Prodgrp" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Family]"
+                          dataType="wstr"
+                          length="50"
+                          name="Family" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Territory]"
+                          dataType="wstr"
+                          length="50"
+                          name="Territory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DomesticForeign]"
+                          dataType="wstr"
+                          length="50"
+                          name="DomesticForeign" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                          dataType="wstr"
+                          length="50"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                          dataType="wstr"
+                          length="50"
+                          name="CountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GrossSales]"
+                          dataType="numeric"
+                          name="GrossSales"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="100"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SubRegion]"
+                          dataType="wstr"
+                          length="100"
+                          name="SubRegion" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AopSales]"
+                          dataType="numeric"
+                          name="AopSales"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MonthDate]"
+                          dataType="dbTimeStamp"
+                          name="MonthDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QuarterDate]"
+                          dataType="dbTimeStamp"
+                          name="QuarterDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[YearDate]"
+                          dataType="dbTimeStamp"
+                          name="YearDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivKey]"
+                          dataType="i4"
+                          name="DivKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level2Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Level2Key" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level2Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Level2Description" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level1Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Level1Key" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Level1Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Level1Description" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TerritoryKey]"
+                          dataType="wstr"
+                          length="8"
+                          name="TerritoryKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          name="LoadDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AopCost]"
+                          dataType="numeric"
+                          name="AopCost"
+                          precision="38"
+                          scale="8" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivKey]"
+                          name="DivKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level2Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level2Key]"
+                          name="Level2Key" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level2Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level2Description]"
+                          name="Level2Description" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level1Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level1Key]"
+                          name="Level1Key" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level1Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Level1Description]"
+                          name="Level1Description" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Date]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Date]"
+                          name="Date" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MonthDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MonthDate]"
+                          name="MonthDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QuarterDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QuarterDate]"
+                          name="QuarterDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[YearDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[YearDate]"
+                          name="YearDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Division]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Division]"
+                          name="Division" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProdLine]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProdLine]"
+                          name="ProdLine" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Category]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Category]"
+                          name="Category" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Prodgrp]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Prodgrp]"
+                          name="Prodgrp" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Family]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Family]"
+                          name="Family" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TerritoryKey]"
+                          dataType="wstr"
+                          length="8"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TerritoryKey]"
+                          name="TerritoryKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Territory]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Territory]"
+                          name="Territory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DomesticForeign]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DomesticForeign]"
+                          name="DomesticForeign" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                          name="State" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                          name="CountryCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SubRegion]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SubRegion]"
+                          name="SubRegion" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GrossSales]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GrossSales]"
+                          name="GrossSales"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AopSales]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AopSales]"
+                          name="AopSales"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          name="Cost"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AopCost]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AopCost]"
+                          name="AopCost"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LoadDate]"
+                          name="LoadDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Load data into tblDzSAlesAop 1.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\truncate table tblDzSalesAop"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E2CC0EAB-1CFD-43B7-B804-6FF2E4DF84EC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="truncate table tblDzSalesAop"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+              SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzSalesAop]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Update continent"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7bda5db1-1800-4407-9561-0cf537a40575}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update continent"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+              SQLTask:SqlStatementSource=" MERGE tblDzSalesAop AS target  &#xA;    USING (SELECT        Country, Continent&#xA;FROM            tblCountryContinent&#xA;   ) AS source  &#xA;    ON (target.CountryCode = source.Country)  &#xA;    WHEN MATCHED THEN   &#xA;        UPDATE SET target.Continent = source.Continent; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Update State from Abbrev"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{35320BC3-3BF9-4E3F-B52E-DF955FC8BD85}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update State from Abbrev"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+              SQLTask:SqlStatementSource=" MERGE tblDzSalesAop AS target  &#xA;    USING (SELECT     tblStatesAbbrev.State&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;, tblStatesAbbrev.Abbreviation&#xA;&#x9;&#x9;&#x9;FROM            tblStatesAbbrev&#xA;&#x9;&#x9;&#x9;) AS source  &#xA;    ON (target.State = source.Abbreviation)  &#xA;    WHEN MATCHED THEN   &#xA;        UPDATE SET target.State = source.State; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AB3E1135-3168-4FED-A567-E96AA2D7C50F}"
+          DTS:From="Package\Sequence Container\truncate table tblDzSalesAop"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Load data into tblDzSAlesAop 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{9C9C717D-4425-4CE1-B481-10E4FBDC3922}"
+          DTS:From="Package\Sequence Container\Load data into tblDzSAlesAop 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Update State from Abbrev" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{2CE30D2F-355F-4193-B2CD-09ED662B30E9}"
+          DTS:From="Package\Sequence Container\Update State from Abbrev"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Update continent" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="226.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load data into tblDzSAlesAop 1"
+          TopLeft="7.58333330228926,73.5000006198886" />
+        <NodeLayout
+          Size="214.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\truncate table tblDzSalesAop"
+          TopLeft="11.5,5.50000000000004" />
+        <NodeLayout
+          Size="160,42.6666666666667"
+          Id="Package\Sequence Container\Update continent"
+          TopLeft="52.3055546966692,201.44444023437" />
+        <NodeLayout
+          Size="202.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Update State from Abbrev"
+          TopLeft="36.3333327124516,142.666663257281" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="119.874999984478,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.3333339532219"
+              Start="0,0"
+              End="0,17.8333339532219">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8333339532219" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="120.916666635623,116.166667286555">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.7499994101623,26.4999959707257"
+              Start="0,0"
+              End="16.7499994101623,18.9999959707257">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.24999798536287" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.24999798536287"
+                    Point2="0,13.2499979853629"
+                    Point3="4,13.2499979853629" />
+                  <mssgle:LineSegment
+                    End="12.7499994101623,13.2499979853629" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.7499994101623,13.2499979853629"
+                    Point2="16.7499994101623,13.2499979853629"
+                    Point3="16.7499994101623,17.2499979853629" />
+                  <mssgle:LineSegment
+                    End="16.7499994101623,18.9999959707257" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="137.666666045785,185.333329923948">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74.6388886508842,37.4444436437555"
+              Start="0,0"
+              End="67.1388886508842,37.4444436437555">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4444436437555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.4444436437555"
+                    Point2="0,37.4444436437555"
+                    Point3="4,37.4444436437555" />
+                  <mssgle:LineSegment
+                    End="67.1388886508842,37.4444436437555" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="381.333333333334,300"
+          Size="381.333333333334,342.666666666667"
+          Id="Package\Sequence Container"
+          TopLeft="5.50000000000003,5.50000000000006" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Load data into tblDzSAlesAop 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source"
+          TopLeft="28,4.63333334883059" />
+        <NodeLayout
+          Size="181.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1"
+          TopLeft="15.5833332898715,109.033333317836" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Load data into tblDzSAlesAop 1.Paths[OLE DB Source Output]"
+          TopLeft="104.791666644936,47.3000000154973">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.7333333023392"
+              Start="0,0"
+              End="0,54.2333333023392">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.2333333023392" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

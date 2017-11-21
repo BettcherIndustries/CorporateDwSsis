@@ -1,0 +1,2694 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/30/2011 3:46:05 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01886B"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{CF173F26-6ED5-46BD-ABB5-778EB73F51B4}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="dimVendorImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{AE77D671-4A11-442D-AF3F-5C25208F96D3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BDB_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{95F0AE90-F418-48B0-B004-AF36ED23E847}"
+      DTS:ObjectName="BDB_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BDB_App;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{23673069-7D53-4479-A2A0-63AE572410BA}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BSW_Apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{393873EC-7009-4CEA-95E9-435A487AF3A8}"
+      DTS:ObjectName="BSW_Apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=Bsw_apps;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{FE1D7256-FD0F-45F4-B79B-C21E703E78DD}BIRMCSIDBS.Bsw_app;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AEBBFB4F-A8F4-48CC-B1F6-BF1410C1893F}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{35AB5C9C-1FEE-4AC8-B78C-986627E416FA}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5782CBCD-3A4F-41F4-8CB2-3DBCB35340A6}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MED_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{07AD06B0-C803-4005-BEF9-DC1B9C9D8861}"
+      DTS:ObjectName="MED_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=MED_App;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-dimCustomerImport-{A96D1CEE-38C7-45B9-9AB7-B6C7CAC93591}BIRMCSIDBS.MED_App;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{B3BB23EB-409A-4F9B-957F-0D8C94FA03F6}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{9617E694-A170-4C82-8349-0D62EAC332C7}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBsw_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{527A6802-A958-486D-836F-4252CEDCFDD3}"
+      DTS:ObjectName="connBsw_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{B97D62B7-1A33-40B0-B6F1-C675E91DE6B0}"
+      DTS:ObjectName="connGan_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connMed_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{D5AA2766-ED18-408B-866A-C888FCED54F0}"
+      DTS:ObjectName="connMed_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{7242C86E-64E0-446E-886F-851743E76183}"
+      DTS:ObjectName="connCorpDW" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Process dimVendor"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{064438A1-89B8-449B-BAFA-2BCCD6945EA9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process dimVendor">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Import BBR vendor addr 1 1"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{bd8667ef-e7b7-41fb-8241-8eee83ec0e23}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import BBR vendor addr 1 1"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblVendortemp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[vend_num]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="vend_num"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="city"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="state"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[zip]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="zip"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="country"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="50"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="50"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    6 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BDB_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[BDB_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          name="vend_num"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          name="city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          name="state"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          name="zip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          name="country"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          name="vend_num" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          name="city" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          name="state" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          name="zip" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          name="country" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process dimVendor\Import BBR vendor addr 1 1.Paths[OLE DB Source Output]"
+                  endId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Import BET vendor addr"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{2AEA4EEC-124A-4672-99EF-D33A9B0C357E}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import BET vendor addr"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblVendortemp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[vend_num]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="vend_num"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="city"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="state"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[zip]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="zip"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="country"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="50"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="50"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    1 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Bet_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[Bet_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          name="vend_num"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          name="city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          name="state"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          name="zip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          name="country"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          name="vend_num" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          name="city" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          name="state" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          name="zip" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          name="country" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process dimVendor\Import BET vendor addr.Paths[OLE DB Source Output]"
+                  endId="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process dimVendor\Import BET vendor addr\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Import BSW vendor addr 1"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{BA7B73E7-DF9A-4B52-A542-3B8569D3A59E}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import BSW vendor addr 1"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblVendortemp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[vend_num]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="vend_num"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="city"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="state"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[zip]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="zip"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="country"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="50"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="50"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    5 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BSW_Apps]"
+                      connectionManagerRefId="Package.ConnectionManagers[BSW_Apps]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          name="vend_num"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          name="city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          name="state"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          name="zip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          name="country"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          name="vend_num" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          name="city" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          name="state" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          name="zip" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          name="country" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process dimVendor\Import BSW vendor addr 1.Paths[OLE DB Source Output]"
+                  endId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Import GAN vendor addr"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{40DB714C-9683-4594-92F7-B38A6F8412FB}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import GAN vendor addr"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblVendortemp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[vend_num]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="vend_num"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="city"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="state"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[zip]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="zip"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="country"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="50"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="50"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     2 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[GAN_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[GAN_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          name="vend_num"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          name="city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          name="state"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          name="zip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          name="country"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          name="vend_num" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          name="city" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          name="state" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          name="zip" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          name="country" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process dimVendor\Import GAN vendor addr.Paths[OLE DB Source Output]"
+                  endId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Import MED vendor addr"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{75437E99-4F1A-451C-B551-BAB1BF43B253}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import MED vendor addr"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblVendortemp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DivisionKey]"
+                          cachedDataType="i4"
+                          cachedName="DivisionKey"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[vend_num]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="vend_num"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="city"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="state"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[zip]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="zip"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]" />
+                        <inputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="country"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="50"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="50"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    4 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[MED_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[MED_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivisionKey]"
+                          name="DivisionKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[vend_num]"
+                          name="vend_num"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                          name="city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                          name="state"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[zip]"
+                          name="zip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                          name="country"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivisionKey]"
+                          dataType="i4"
+                          name="DivisionKey" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          name="vend_num" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="60"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                          dataType="wstr"
+                          length="30"
+                          name="city" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                          dataType="wstr"
+                          length="5"
+                          name="state" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          name="zip" />
+                        <externalMetadataColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="30"
+                          name="country" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivisionKey]"
+                          name="DivisionKey" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vend_num]"
+                          name="vend_num" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                          name="city" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                          name="state" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[zip]"
+                          name="zip" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                          name="country" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process dimVendor\Import MED vendor addr.Paths[OLE DB Source Output]"
+                  endId="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process dimVendor\Import MED vendor addr\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Merge from tblVendorImport"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{280CB9F5-0D0B-4C25-9ACF-70BC9F0F8D50}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge from tblVendorImport"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AEBBFB4F-A8F4-48CC-B1F6-BF1410C1893F}"
+              SQLTask:SqlStatementSource="BEGIN TRANSACTION;&#xA;&#xA;MERGE dimVendor AS target&#xA;    USING (SELECT     DivisionKey, vend_num AS VendorNoAlternativeKey, name AS Vendor, name + ', ' + ISNULL(city, '') + ', ' + ISNULL(state, '') + ', ' + ISNULL(country, '') &#xA;                      + '(' + vend_num + ')' AS VendorNameAddr&#xA;FROM         tblVendortemp) AS source&#xA;    ON (target.VendorNoAlternativeKey=source.VendorNoAlternativeKey AND target.DivisionKey=source.DivisionKey )&#xA;    &#xA; WHEN NOT MATCHED THEN &#xA;     INSERT (DivisionKey&#xA;           ,VendorNoAlternativeKey&#x9;          &#xA;           ,Vendor&#xA;           ,VendorNameAddr)&#xA;     VALUES (source.DivisionKey,source.VendorNoAlternativeKey,source.Vendor,source.VendorNameAddr )&#xA;&#xA;&#xA;WHEN MATCHED THEN &#xA;        UPDATE SET&#xA;&#x9;target.Vendor=source.Vendor&#xA;           ,target.VendorNameAddr=source.VendorNameAddr;&#xA;&#xA;COMMIT TRANSACTION;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process dimVendor\Truncate tblVendorTemp"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DTSID="{DA07B302-394E-4B55-BCAD-BB3B5A435F21}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate tblVendorTemp"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AEBBFB4F-A8F4-48CC-B1F6-BF1410C1893F}"
+              SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblVendorTemp]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process dimVendor.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{0D3498C1-1A49-4240-AE8A-A42390FB3808}"
+          DTS:From="Package\Process dimVendor\Import GAN vendor addr"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Process dimVendor\Import BET vendor addr" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process dimVendor.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{1FB4C066-460A-4A52-88A3-0F08D168CF29}"
+          DTS:From="Package\Process dimVendor\Truncate tblVendorTemp"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Process dimVendor\Import GAN vendor addr" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process dimVendor.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{F54A6D8D-64D2-40FE-ABD6-F1E52D24B781}"
+          DTS:From="Package\Process dimVendor\Import BET vendor addr"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Process dimVendor\Import MED vendor addr" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process dimVendor.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{7C53D322-302D-474E-8771-0EE2E86965DC}"
+          DTS:From="Package\Process dimVendor\Import MED vendor addr"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Process dimVendor\Import BSW vendor addr 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process dimVendor.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{92F65563-D123-425C-B8CD-4DCF1453AE8E}"
+          DTS:From="Package\Process dimVendor\Import BBR vendor addr 1 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Process dimVendor\Merge from tblVendorImport" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="213,43"
+          Id="Package\Process dimVendor\Import BBR vendor addr 1 1"
+          TopLeft="278.416662599892,476.222222984169" />
+        <NodeLayout
+          Size="193,43"
+          Id="Package\Process dimVendor\Import BET vendor addr"
+          TopLeft="287.166666666667,210.833333333334" />
+        <NodeLayout
+          Size="207,43"
+          Id="Package\Process dimVendor\Import BSW vendor addr 1"
+          TopLeft="280.5,416.166666666667" />
+        <NodeLayout
+          Size="196,43"
+          Id="Package\Process dimVendor\Import GAN vendor addr"
+          TopLeft="285.833333333333,108.166666666667" />
+        <NodeLayout
+          Size="197,43"
+          Id="Package\Process dimVendor\Import MED vendor addr"
+          TopLeft="285.5,313.5" />
+        <NodeLayout
+          Size="215,43"
+          Id="Package\Process dimVendor\Merge from tblVendorImport"
+          TopLeft="250.638885236035,538.222220039699" />
+        <NodeLayout
+          Size="197,43"
+          Id="Package\Process dimVendor\Truncate tblVendorTemp"
+          TopLeft="285.5,5.50000000000004" />
+        <EdgeLayout
+          Id="Package\Process dimVendor.PrecedenceConstraints[Constraint]"
+          TopLeft="383.833333333333,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process dimVendor.PrecedenceConstraints[Constraint 1]"
+          TopLeft="383.833333333333,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process dimVendor.PrecedenceConstraints[Constraint 2]"
+          TopLeft="383.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process dimVendor.PrecedenceConstraints[Constraint 3]"
+          TopLeft="383.833333333333,356.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process dimVendor.PrecedenceConstraints[Constraint 4]"
+          TopLeft="278.416662599892,497.555556317502">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="79.5555559694766,40.6666637221973"
+              Start="0,0"
+              End="79.5555559694766,33.1666637221973">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="75.5555559694766,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="75.5555559694766,0"
+                    Point2="79.5555559694766,0"
+                    Point3="79.5555559694766,4" />
+                  <mssgle:LineSegment
+                    End="79.5555559694766,33.1666637221973" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="499,636"
+          Size="499,679"
+          Id="Package\Process dimVendor"
+          TopLeft="5.50000000000009,5.50000000000006" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Process dimVendor\Import BBR vendor addr 1 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source"
+          TopLeft="16.1666666666667,5.50000000000004" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination"
+          TopLeft="5.50000000000001,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Process dimVendor\Import BBR vendor addr 1 1.Paths[OLE DB Source Output]"
+          TopLeft="91.5,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process dimVendor\Import GAN vendor addr">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Process dimVendor\Import GAN vendor addr.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

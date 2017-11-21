@@ -1,0 +1,988 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/11/2011 3:54:09 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="BIRM01886B"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{433BECB7-80CD-4AC4-B7ED-68B39EB63C4E}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="factCustOrderLateImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{CFC5F86A-7C24-42E9-9E18-0B1E561E091A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BF704089-90ED-437F-9559-1494CE7E9321}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1DE59A93-7286-4585-A7D7-E20941EB6122}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{FAD7D47A-558F-40DC-BDA5-D6E74EC8F340}"
+      DTS:ObjectName="connCorpMainXml" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{F11D4A4E-117E-4FFA-A95C-3E93EC6C0D3A}"
+      DTS:ObjectName="connCorpDW" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Append Customer Order All to tblCustomerOrderLate"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DTSID="{F2123F31-8CEA-46D4-875C-C23DFBC791F4}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Append Customer Order All to tblCustomerOrderLate">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[factCustomerOrderLate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CoNum]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="CoNum"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoNum]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CoNum]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Sitekey]"
+                      cachedDataType="i4"
+                      cachedName="Sitekey"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sitekey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[Sitekey]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GeographicKey]"
+                      cachedDataType="i4"
+                      cachedName="GeographicKey"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GeographicKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[GeographicKey]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustNoKey]"
+                      cachedDataType="i4"
+                      cachedName="CustNoKey"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustNoKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CustNoKey]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustNoSeqKey]"
+                      cachedDataType="i4"
+                      cachedName="CustNoSeqKey"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustNoSeqKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CustNoSeqKey]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NoOrdersLateDue]"
+                      cachedDataType="i4"
+                      cachedName="NoOrdersLateDue"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoOrdersLateDue]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersLateDue]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NoOrdersLatePromise]"
+                      cachedDataType="i4"
+                      cachedName="NoOrdersLatePromise"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoOrdersLatePromise]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersLatePromise]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SalesTerritoryKey]"
+                      cachedDataType="i4"
+                      cachedName="SalesTerritoryKey"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritoryKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[SalesTerritoryKey]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NoOrdersShip]"
+                      cachedDataType="i4"
+                      cachedName="NoOrdersShip"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoOrdersShip]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersShip]" />
+                    <inputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CoGrossSalesShip]"
+                      cachedDataType="numeric"
+                      cachedName="CoGrossSalesShip"
+                      cachedPrecision="38"
+                      cachedScale="8"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoGrossSalesShip]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CoGrossSalesShip]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoNum]"
+                      dataType="wstr"
+                      length="25"
+                      name="CoNum" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sitekey]"
+                      dataType="i4"
+                      name="Sitekey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GeographicKey]"
+                      dataType="i4"
+                      name="GeographicKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustNoKey]"
+                      dataType="i4"
+                      name="CustNoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreateDateKey]"
+                      dataType="i4"
+                      name="CreateDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustNoSeqKey]"
+                      dataType="i4"
+                      name="CustNoSeqKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipDateKey]"
+                      dataType="i4"
+                      name="ShipDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoOrdersLateDue]"
+                      dataType="i4"
+                      name="NoOrdersLateDue" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoOrdersLatePromise]"
+                      dataType="i4"
+                      name="NoOrdersLatePromise" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritoryKey]"
+                      dataType="i4"
+                      name="SalesTerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoOrdersShip]"
+                      dataType="i4"
+                      name="NoOrdersShip" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoGrossSalesShip]"
+                      dataType="numeric"
+                      name="CoGrossSalesShip"
+                      precision="38"
+                      scale="8" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoGrossSalesLateDue]"
+                      dataType="numeric"
+                      name="CoGrossSalesLateDue"
+                      precision="38"
+                      scale="8" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoGrossSalesLatePromise]"
+                      dataType="numeric"
+                      name="CoGrossSalesLatePromise"
+                      precision="38"
+                      scale="8" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     CoNum, 1 as NoOrdersShip,SUM(ExtCorpListprice) AS CoGrossSalesShip, Sitekey, GeographicKey, SalesTerritoryKey,CustNoKey,  CustNoSeqKey,0 as NoOrdersLateDue,0 as NoOrdersLatePromise
+FROM         factCustomerOrders
+WHERE     (ShipDateKey IS NOT NULL)
+GROUP BY CoNum, Sitekey, GeographicKey, CustNoKey,  CustNoSeqKey, SalesTerritoryKey</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                  connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CoNum]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CoNum]"
+                      length="25"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CoNum]"
+                      name="CoNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[Sitekey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Sitekey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[Sitekey]"
+                      name="Sitekey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[GeographicKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[GeographicKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[GeographicKey]"
+                      name="GeographicKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CustNoKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustNoKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CustNoKey]"
+                      name="CustNoKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CustNoSeqKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustNoSeqKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CustNoSeqKey]"
+                      name="CustNoSeqKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersLateDue]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[NoOrdersLateDue]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersLateDue]"
+                      name="NoOrdersLateDue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersLatePromise]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[NoOrdersLatePromise]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersLatePromise]"
+                      name="NoOrdersLatePromise"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[SalesTerritoryKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SalesTerritoryKey]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[SalesTerritoryKey]"
+                      name="SalesTerritoryKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersShip]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[NoOrdersShip]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[NoOrdersShip]"
+                      name="NoOrdersShip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CoGrossSalesShip]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CoGrossSalesShip]"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].Columns[CoGrossSalesShip]"
+                      name="CoGrossSalesShip"
+                      precision="38"
+                      scale="8"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CoNum]"
+                      dataType="wstr"
+                      length="25"
+                      name="CoNum" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Sitekey]"
+                      dataType="i4"
+                      name="Sitekey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[GeographicKey]"
+                      dataType="i4"
+                      name="GeographicKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustNoKey]"
+                      dataType="i4"
+                      name="CustNoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustNoSeqKey]"
+                      dataType="i4"
+                      name="CustNoSeqKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[NoOrdersLateDue]"
+                      dataType="i4"
+                      name="NoOrdersLateDue" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[NoOrdersLatePromise]"
+                      dataType="i4"
+                      name="NoOrdersLatePromise" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SalesTerritoryKey]"
+                      dataType="i4"
+                      name="SalesTerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[NoOrdersShip]"
+                      dataType="i4"
+                      name="NoOrdersShip" />
+                    <externalMetadataColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CoGrossSalesShip]"
+                      dataType="numeric"
+                      name="CoGrossSalesShip"
+                      precision="38"
+                      scale="8" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CoNum]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CoNum]"
+                      name="CoNum" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[NoOrdersShip]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[NoOrdersShip]"
+                      name="NoOrdersShip" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CoGrossSalesShip]"
+                      dataType="numeric"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CoGrossSalesShip]"
+                      name="CoGrossSalesShip"
+                      precision="38"
+                      scale="8" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[Sitekey]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[Sitekey]"
+                      name="Sitekey" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[GeographicKey]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[GeographicKey]"
+                      name="GeographicKey" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[SalesTerritoryKey]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[SalesTerritoryKey]"
+                      name="SalesTerritoryKey" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustNoKey]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustNoKey]"
+                      name="CustNoKey" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustNoSeqKey]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustNoSeqKey]"
+                      name="CustNoSeqKey" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[NoOrdersLateDue]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[NoOrdersLateDue]"
+                      name="NoOrdersLateDue" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[NoOrdersLatePromise]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[NoOrdersLatePromise]"
+                      name="NoOrdersLatePromise" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Append Customer Order All to tblCustomerOrderLate.Paths[OLE DB Source Output]"
+              endId="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete factCustomerOrderLate"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CAF0EBF0-EE66-44D4-90E9-5FA0B8BD2100}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete factCustomerOrderLate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BF704089-90ED-437F-9559-1494CE7E9321}"
+          SQLTask:SqlStatementSource="DELETE FROM [CorpDw].[dbo].[factCustomerOrderLate]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update date Keys"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F837A071-24C7-4976-9E94-14C4C96536E3}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update date Keys"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BF704089-90ED-437F-9559-1494CE7E9321}"
+          SQLTask:SqlStatementSource="       &#xA; &#xA;&#xA;Begin Transaction &#xA;UPDATE    factCustomerOrderLate&#xA;SET              ShipDateKey =&#xA;                          (SELECT     TOP (1) ShipDateKey&#xA;                            FROM          factCustomerOrders&#xA;                            WHERE      (CoNum = factCustomerOrderLate.CoNum))&#xA;&#xA;Commit Transaction&#xA;&#xA;Begin Transaction &#xA;UPDATE    factCustomerOrderLate&#xA;SET              CreateDateKey =&#xA;                          (SELECT     TOP (1) CreateDateKey&#xA;                            FROM          factCustomerOrders&#xA;                            WHERE      (CoNum = factCustomerOrderLate.CoNum))&#xA;&#xA;Commit Transaction&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update DueDate Early"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{10CC437A-7361-42DB-B0E3-BC463FB3C35D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update DueDate Early"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BF704089-90ED-437F-9559-1494CE7E9321}"
+          SQLTask:SqlStatementSource="       &#xA; Begin Transaction &#xA;UPDATE    factCustomerOrderLate&#xA;SET              NoOrdersEarlyDue=1&#xA;                      ,CoGrossSalesEarlyDue=CoGrossSalesShip&#xA;&#xA;&#xA;Where      CoNum in (SELECT DISTINCT factCustomerOrders.CoNum&#xA;     FROM         factCustomerOrders INNER JOIN&#xA;                           DimTime ON factCustomerOrders.DueDateKey = DimTime.TimeKey INNER JOIN&#xA;                        DimTime AS DimTime_1 ON factCustomerOrders.ShipDateKey = DimTime_1.TimeKey AND DimTime.Date &gt; DimTime_1.Date)&#xA;&#xA;Commit Transaction&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update DueDate Lates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{055F9486-CB33-4D8D-8C1D-49385DEB4B15}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update DueDate Lates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BF704089-90ED-437F-9559-1494CE7E9321}"
+          SQLTask:SqlStatementSource="       &#xA; Begin Transaction &#xA;UPDATE    factCustomerOrderLate&#xA;SET              NoOrdersLateDue=1&#xA;                      ,CoGrossSalesLateDue=CoGrossSalesShip&#xA;&#xA;&#xA;Where      CoNum in (SELECT DISTINCT factCustomerOrders.CoNum&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;FROM         factCustomerOrders INNER JOIN&#xA;                      &#x9;&#x9;&#x9;&#x9;&#x9;DimTime ON factCustomerOrders.DueDateKey = DimTime.TimeKey INNER JOIN&#xA;                      &#x9;&#x9;DimTime AS DimTime_1 ON factCustomerOrders.ShipDateKey = DimTime_1.TimeKey AND DimTime.Date &lt; DimTime_1.Date)&#xA;&#xA;Commit Transaction&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update PrmiseDate Early"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6CAB90F8-6278-4DC7-B200-64410A94CB52}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update PrmiseDate Early"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BF704089-90ED-437F-9559-1494CE7E9321}"
+          SQLTask:SqlStatementSource="       &#xA; Begin Transaction &#xA;UPDATE    factCustomerOrderLate&#xA;SET              NoOrdersEarlyPromise=1&#xA;                      ,CoGrossSalesEarlyPromise=CoGrossSalesShip &#xA;&#xA;&#xA;Where      CoNum in (SELECT DISTINCT factCustomerOrders.CoNum&#xA;FROM         factCustomerOrders INNER JOIN&#xA;                      DimTime AS DimTime_1 ON factCustomerOrders.ShipDateKey = DimTime_1.TimeKey INNER JOIN&#xA;                      DimTime ON factCustomerOrders.PromiseDateKey = DimTime.TimeKey AND DimTime_1.TimeKey &lt; DimTime.TimeKey)&#xA;&#xA;Commit Transaction&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update PrmiseDate Lates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F83E39B2-3C32-4F18-A179-EA069822901A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update PrmiseDate Lates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BF704089-90ED-437F-9559-1494CE7E9321}"
+          SQLTask:SqlStatementSource="       &#xA; Begin Transaction &#xA;UPDATE    factCustomerOrderLate&#xA;SET              NoOrdersLatePromise=1&#xA;                      ,CoGrossSalesLatePromise=CoGrossSalesShip &#xA;&#xA;&#xA;Where      CoNum in (SELECT DISTINCT factCustomerOrders.CoNum&#xA;FROM         factCustomerOrders INNER JOIN&#xA;                      DimTime AS DimTime_1 ON factCustomerOrders.ShipDateKey = DimTime_1.TimeKey INNER JOIN&#xA;                      DimTime ON factCustomerOrders.PromiseDateKey = DimTime.TimeKey AND DimTime_1.TimeKey &gt; DimTime.TimeKey)&#xA;&#xA;Commit Transaction&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A4CC7BE8-CFEB-4F1F-A034-5853B8F58D0E}"
+      DTS:From="Package\Delete factCustomerOrderLate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Append Customer Order All to tblCustomerOrderLate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BF5DD2B8-09ED-4559-AFF4-B4D2AEF9518B}"
+      DTS:From="Package\Append Customer Order All to tblCustomerOrderLate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update date Keys" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C9A3F882-2590-4042-B9C5-BDD5E4578ED5}"
+      DTS:From="Package\Update date Keys"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update DueDate Lates" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{F41D7ACC-DABA-42A3-AABD-CE9FEFFB5F8A}"
+      DTS:From="Package\Update DueDate Lates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update PrmiseDate Lates" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{15DA0AD5-E240-4204-8E06-9CB32BA4BD06}"
+      DTS:From="Package\Update PrmiseDate Lates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Update DueDate Early" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{54CA42DE-CF59-4ED3-B82F-A1634A85D879}"
+      DTS:From="Package\Update DueDate Early"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Update PrmiseDate Early" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="366,44"
+          Id="Package\Append Customer Order All to tblCustomerOrderLate"
+          TopLeft="30.9716981132075,100.858490566038" />
+        <NodeLayout
+          Size="298,44"
+          Id="Package\Delete factCustomerOrderLate"
+          TopLeft="36.9716981132075,5.5" />
+        <NodeLayout
+          Size="316,44"
+          Id="Package\Update date Keys"
+          TopLeft="5.5,296.028301886792" />
+        <NodeLayout
+          Size="316,44"
+          Id="Package\Update DueDate Early"
+          TopLeft="5.5,487.424528301887" />
+        <NodeLayout
+          Size="316,44"
+          Id="Package\Update DueDate Lates"
+          TopLeft="9.5,356.858490566038" />
+        <NodeLayout
+          Size="316,44"
+          Id="Package\Update PrmiseDate Early"
+          TopLeft="5.5,550.216981132075" />
+        <NodeLayout
+          Size="316,44"
+          Id="Package\Update PrmiseDate Lates"
+          TopLeft="22.4811320754717,424.632075471698" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="185.72641509434,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28.4528301886792,51.4339622641509"
+              Start="0,0"
+              End="28.4528301886792,43.9339622641509">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.6981132075472" />
+                  <mssgle:LineSegment
+                    End="28.4528301886792,25.6981132075472" />
+                  <mssgle:LineSegment
+                    End="28.4528301886792,43.9339622641509" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="214.179245283019,144.783018867925">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-50.4528301886792,151.245283018868"
+              Start="0,0"
+              End="-50.4528301886792,143.745283018868">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.6226415094339" />
+                  <mssgle:LineSegment
+                    End="-50.4528301886792,75.6226415094339" />
+                  <mssgle:LineSegment
+                    End="-50.4528301886792,143.745283018868" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="163.72641509434,339.952830188679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="4,16.9056603773585"
+              Start="0,0"
+              End="4,9.40566037735852">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.45283018867929" />
+                  <mssgle:LineSegment
+                    End="4,8.45283018867929" />
+                  <mssgle:LineSegment
+                    End="4,9.40566037735852" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="167.72641509434,400.783018867925">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.9811320754717,23.8490566037736"
+              Start="0,0"
+              End="12.9811320754717,16.3490566037736">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.9245283018868" />
+                  <mssgle:LineSegment
+                    End="12.9811320754717,11.9245283018868" />
+                  <mssgle:LineSegment
+                    End="12.9811320754717,16.3490566037736" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="180.707547169811,468.556603773585">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16.9811320754717,18.8679245283019"
+              Start="0,0"
+              End="-16.9811320754717,11.3679245283019">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.43396226415092" />
+                  <mssgle:LineSegment
+                    End="-16.9811320754717,9.43396226415092" />
+                  <mssgle:LineSegment
+                    End="-16.9811320754717,11.3679245283019" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="163.72641509434,531.349056603774">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,18.8679245283019"
+              Start="0,0"
+              End="0,11.3679245283019">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.3679245283019" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Append Customer Order All to tblCustomerOrderLate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Append Customer Order All to tblCustomerOrderLate\OLE DB Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query"
+          TopLeft="16,5.5" />
+        <EdgeLayout
+          Id="Package\Append Customer Order All to tblCustomerOrderLate.Paths[OLE DB Source Output]"
+          TopLeft="91,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Append Customer Order All to tblCustomerOrderLate\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

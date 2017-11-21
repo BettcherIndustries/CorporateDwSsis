@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2016 8:03:29 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRMCORPDW01"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{32282E3C-73F8-4C20-8F15-EF3E3475B48B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="factKpiDirectIndirectImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{7D9419EB-9B10-4107-AC04-64BE4AEEB394}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BIRMCSIDBS.ShopFloor]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2B70B3F3-3373-4CC1-A6CF-A2799D7B3A85}"
+      DTS:ObjectName="BIRMCSIDBS.ShopFloor">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=Shopfloor;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EA541355-75C6-478D-B016-F3EAD421565C}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OneDrive Connection Manager]"
+      DTS:CreationName="OneDrive (KingswaySoft)"
+      DTS:DTSID="{C35C3798-E2FB-4C93-8CF2-7644B50BEBEB}"
+      DTS:ObjectName="OneDrive Connection Manager">
+      <DTS:ObjectData>
+        <ConnectionManager
+          ConnectionString="AccountId=73acb598-9fb0-413f-8ce6-658e624c0bbd;TokenLocation=LocalMachine;AccountType=Business;ProxyUsername=;ProxyServer=;ProxyServerPort=0;ServiceTimeout=120;ApiThrottleRate=10;RetryOnIntermittentErrors=False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Process Kpi Operating 15"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{CCBC4249-D23B-48D2-8297-186804C57AE0}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process Kpi Operating 15">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process Kpi Operating 15\Process"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{9EB7A343-D1CE-4BD2-8CD0-0F6E46C19F5B}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Process"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process Kpi Operating 15\Process\Multicast"
+                  componentClassID="Microsoft.Multicast"
+                  contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+                  name="Multicast">
+                  <inputs>
+                    <input
+                      refId="Package\Process Kpi Operating 15\Process\Multicast.Inputs[Multicast Input 1]"
+                      name="Multicast Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process Kpi Operating 15\Process\Multicast.Outputs[Multicast Output 1]"
+                      deleteOutputOnPathDetached="true"
+                      name="Multicast Output 1"
+                      synchronousInputId="Package\Process Kpi Operating 15\Process\Multicast.Inputs[Multicast Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process Kpi Operating 15\Process\Multicast.Outputs[Multicast Output 2]"
+                      dangling="true"
+                      deleteOutputOnPathDetached="true"
+                      name="Multicast Output 2"
+                      synchronousInputId="Package\Process Kpi Operating 15\Process\Multicast.Inputs[Multicast Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process Kpi Operating 15\Process\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblDzIndirectDirectIndirect]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ClockingShiftID]"
+                          cachedDataType="i4"
+                          cachedName="ClockingShiftID"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClockingShiftID]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClockingShiftID]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ShiftDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ShiftDate"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShiftDate]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ShiftDate]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OperatorID]"
+                          cachedDataType="i4"
+                          cachedName="OperatorID"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperatorID]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperatorID]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OperatorName]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="OperatorName"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperatorName]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperatorName]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DeptID]"
+                          cachedDataType="i4"
+                          cachedName="DeptID"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeptID]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeptID]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Dept]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Dept"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dept]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dept]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Description]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Description"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Description]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Job]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="Job"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Job]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Job]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[JobDesc]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="JobDesc"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[JobDesc]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[JobDesc]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OperNum]"
+                          cachedDataType="i4"
+                          cachedName="OperNum"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperNum]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperNum]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OperationTitle]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="OperationTitle"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperationTitle]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperationTitle]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Direct]"
+                          cachedDataType="r8"
+                          cachedName="Direct"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Direct]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Direct]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Indirect]"
+                          cachedDataType="r8"
+                          cachedName="Indirect"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Indirect]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Indirect]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Total]"
+                          cachedDataType="r8"
+                          cachedName="Total"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Total]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IndjobHrs_Note]"
+                          cachedDataType="r8"
+                          cachedName="IndjobHrs_Note"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IndjobHrs_Note]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[IndjobHrs_Note]" />
+                        <inputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmployeeId]"
+                          cachedDataType="i4"
+                          cachedName="EmployeeId"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeNum]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeId]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                          dataType="wstr"
+                          length="255"
+                          name="Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClockingShiftID]"
+                          dataType="i4"
+                          name="ClockingShiftID" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShiftDate]"
+                          dataType="dbTimeStamp"
+                          name="ShiftDate" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperatorID]"
+                          dataType="i4"
+                          name="OperatorID" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperatorName]"
+                          dataType="wstr"
+                          length="255"
+                          name="OperatorName" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeptID]"
+                          dataType="i4"
+                          name="DeptID" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dept]"
+                          dataType="wstr"
+                          length="55"
+                          name="Dept" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Job]"
+                          dataType="wstr"
+                          length="25"
+                          name="Job" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[JobDesc]"
+                          dataType="wstr"
+                          length="255"
+                          name="JobDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperNum]"
+                          dataType="i4"
+                          name="OperNum" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OperationTitle]"
+                          dataType="wstr"
+                          length="255"
+                          name="OperationTitle" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Direct]"
+                          dataType="r8"
+                          name="Direct" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Indirect]"
+                          dataType="r8"
+                          name="Indirect" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Total]"
+                          dataType="r8"
+                          name="Total" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IndjobHrs_Note]"
+                          dataType="r8"
+                          name="IndjobHrs_Note" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="EmployeeNum" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivId]"
+                          dataType="i4"
+                          name="DivId" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeDept]"
+                          dataType="wstr"
+                          length="50"
+                          name="EmployeeDept" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process Kpi Operating 15\Process\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @StartDate datetime
+DECLARE @EndDate datetime
+DECLARE @OperatorID int
+DECLARE @DeptID int
+
+Set @StartDate='01/01/2015'
+Set @EndDate=DateAdd(Day, DATEDIFF(Day, 0, GetDate()), 0)
+
+
+EXECUTE  [dbo].[BI_IndirectDirectIndByDept_rpt] 
+   @StartDate
+  ,@EndDate
+  ,@OperatorID
+  ,@DeptID
+
+ WITH RESULT SETS
+(
+       (
+       [ClockingShiftID] [int] NULL,
+		[ShiftDate] [datetime] NULL,
+                                [EmployeeId] [int] NULL,
+		[OperatorID] [int] NULL,
+		[OperatorName] [nvarchar](255) NULL,
+		[DeptID] [int] NULL,
+		[Dept] [nvarchar](255)NULL,
+		[Description] [nvarchar](255) NULL,
+		[Job] [nvarchar](25) NULL,
+		[JobDesc] [nvarchar](255) NULL,
+		[OperNum] [int] NULL,
+		[OperationTitle] [nvarchar](255) NULL,
+		[Direct] [float] NULL,
+		[Indirect] [float] NULL,
+		[Total] [float] NULL,
+		[IndjobHrs_Note] [float] NULL
+       ) 
+)</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BIRMCSIDBS.ShopFloor]"
+                      connectionManagerRefId="Package.ConnectionManagers[BIRMCSIDBS.ShopFloor]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClockingShiftID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClockingShiftID]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClockingShiftID]"
+                          name="ClockingShiftID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ShiftDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ShiftDate]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ShiftDate]"
+                          name="ShiftDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperatorID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperatorID]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperatorID]"
+                          name="OperatorID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperatorName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperatorName]"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperatorName]"
+                          name="OperatorName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeptID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DeptID]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeptID]"
+                          name="DeptID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dept]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Dept]"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dept]"
+                          name="Dept"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Description]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Description]"
+                          name="Description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Job]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Job]"
+                          length="25"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Job]"
+                          name="Job"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[JobDesc]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[JobDesc]"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[JobDesc]"
+                          name="JobDesc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperNum]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperNum]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperNum]"
+                          name="OperNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperationTitle]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperationTitle]"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[OperationTitle]"
+                          name="OperationTitle"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Direct]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Direct]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Direct]"
+                          name="Direct"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Indirect]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Indirect]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Indirect]"
+                          name="Indirect"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total]"
+                          name="Total"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[IndjobHrs_Note]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IndjobHrs_Note]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[IndjobHrs_Note]"
+                          name="IndjobHrs_Note"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeId]"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeId]"
+                          name="EmployeeId"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClockingShiftID]"
+                          dataType="i4"
+                          name="ClockingShiftID" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ShiftDate]"
+                          dataType="dbTimeStamp"
+                          name="ShiftDate" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperatorID]"
+                          dataType="i4"
+                          name="OperatorID" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperatorName]"
+                          dataType="wstr"
+                          length="255"
+                          name="OperatorName" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DeptID]"
+                          dataType="i4"
+                          name="DeptID" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Dept]"
+                          dataType="wstr"
+                          length="255"
+                          name="Dept" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                          dataType="wstr"
+                          length="255"
+                          name="Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Job]"
+                          dataType="wstr"
+                          length="25"
+                          name="Job" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[JobDesc]"
+                          dataType="wstr"
+                          length="255"
+                          name="JobDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperNum]"
+                          dataType="i4"
+                          name="OperNum" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OperationTitle]"
+                          dataType="wstr"
+                          length="255"
+                          name="OperationTitle" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Direct]"
+                          dataType="r8"
+                          name="Direct" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Indirect]"
+                          dataType="r8"
+                          name="Indirect" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total]"
+                          dataType="r8"
+                          name="Total" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IndjobHrs_Note]"
+                          dataType="r8"
+                          name="IndjobHrs_Note" />
+                        <externalMetadataColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeId]"
+                          dataType="i4"
+                          name="EmployeeId" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClockingShiftID]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClockingShiftID]"
+                          name="ClockingShiftID" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ShiftDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ShiftDate]"
+                          name="ShiftDate" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmployeeId]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmployeeId]"
+                          name="EmployeeId" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperatorID]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperatorID]"
+                          name="OperatorID" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperatorName]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperatorName]"
+                          name="OperatorName" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DeptID]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DeptID]"
+                          name="DeptID" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Dept]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Dept]"
+                          name="Dept" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Description]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Description]"
+                          name="Description" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Job]"
+                          dataType="wstr"
+                          length="25"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Job]"
+                          name="Job" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[JobDesc]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[JobDesc]"
+                          name="JobDesc" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperNum]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperNum]"
+                          name="OperNum" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperationTitle]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OperationTitle]"
+                          name="OperationTitle" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Direct]"
+                          dataType="r8"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Direct]"
+                          name="Direct" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Indirect]"
+                          dataType="r8"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Indirect]"
+                          name="Indirect" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total]"
+                          dataType="r8"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total]"
+                          name="Total" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IndjobHrs_Note]"
+                          dataType="r8"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IndjobHrs_Note]"
+                          name="IndjobHrs_Note" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process Kpi Operating 15\Process.Paths[Multicast Output 1]"
+                  endId="Package\Process Kpi Operating 15\Process\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Multicast Output 1"
+                  startId="Package\Process Kpi Operating 15\Process\Multicast.Outputs[Multicast Output 1]" />
+                <path
+                  refId="Package\Process Kpi Operating 15\Process.Paths[OLE DB Source Output]"
+                  endId="Package\Process Kpi Operating 15\Process\Multicast.Inputs[Multicast Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Process Kpi Operating 15\Process\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process Kpi Operating 15\Truncate Table tblDzIndirectDirectIndirect"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{19A4CC57-C286-46B0-B8F1-0B70972FDB70}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Table tblDzIndirectDirectIndirect"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EA541355-75C6-478D-B016-F3EAD421565C}"
+              SQLTask:SqlStatementSource="Truncate Table tblDzIndirectDirectIndirect" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process Kpi Operating 15\Update Employee Dept"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{255BA694-B77A-40E3-BD33-78D52CB25164}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Employee Dept"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EA541355-75C6-478D-B016-F3EAD421565C}"
+              SQLTask:SqlStatementSource="Update tblDzIndirectDirectIndirect &#xA;&#xA;SET     &#xA;tblDzIndirectDirectIndirect.DivId=1   &#xA;,tblDzIndirectDirectIndirect.EmployeeDept=dimEmployee.DeptKeyAlternative&#xA;FROM            tblDzIndirectDirectIndirect INNER JOIN&#xA;                         dimEmployee ON tblDzIndirectDirectIndirect.EmployeeNum = dimEmployee.EmpKeyAlternative&#xA;WHERE        (dimEmployee.SiteKey = 1)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process Kpi Operating 15.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{F31404B7-E6D0-4A5D-906E-95CC692FEB66}"
+          DTS:From="Package\Process Kpi Operating 15\Truncate Table tblDzIndirectDirectIndirect"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Process Kpi Operating 15\Process" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process Kpi Operating 15.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{38AB5334-2D94-47C8-8895-073CD5329BE7}"
+          DTS:From="Package\Process Kpi Operating 15\Process"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Process Kpi Operating 15\Update Employee Dept" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\Process Kpi Operating 15\Process"
+          TopLeft="29.8333333333334,107.5" />
+        <NodeLayout
+          Size="163.333333333334,42"
+          Id="Package\Process Kpi Operating 15\Truncate Table tblDzIndirectDirectIndirect"
+          TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\Process Kpi Operating 15\Update Employee Dept"
+          TopLeft="13.4166663872699,171.91666273425" />
+        <EdgeLayout
+          Id="Package\Process Kpi Operating 15.PrecedenceConstraints[Constraint]"
+          TopLeft="87.1666666666667,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process Kpi Operating 15.PrecedenceConstraints[Constraint 1]"
+          TopLeft="144.5,128.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-37.0833336127301,43.0833294009169"
+              Start="0,0"
+              End="-37.0833336127301,35.5833294009169">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-33.0833336127301,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-33.0833336127301,0"
+                    Point2="-37.0833336127301,0"
+                    Point3="-37.0833336127301,4" />
+                  <mssgle:LineSegment
+                    End="-37.0833336127301,35.5833294009169" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="274,285.333333333334"
+          Size="274,328"
+          Id="Package\Process Kpi Operating 15"
+          TopLeft="5.50000000000006,5.50000000000003" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Process Kpi Operating 15\Process">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.333333333334,42"
+          Id="Package\Process Kpi Operating 15\Process\OLE DB Destination"
+          TopLeft="8.74999986961484,189.366663280527" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Process Kpi Operating 15\Process\OLE DB Source"
+          TopLeft="90.4166653193534,64.9333332093559" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\Process Kpi Operating 15\Process\Multicast"
+          TopLeft="210.416663531214,113.966664628784" />
+        <EdgeLayout
+          Id="Package\Process Kpi Operating 15\Process.Paths[Multicast Output 1]"
+          TopLeft="271.083330197881,156.633331295451">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-176.666663661599,32.7333319850765"
+              Start="0,0"
+              End="-176.666663661599,25.2333319850765">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.3666659925382" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.3666659925382"
+                    Point2="0,16.3666659925382"
+                    Point3="-4,16.3666659925382" />
+                  <mssgle:LineSegment
+                    End="-172.666663661599,16.3666659925382" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-172.666663661599,16.3666659925382"
+                    Point2="-176.666663661599,16.3666659925382"
+                    Point3="-176.666663661599,20.3666659925382" />
+                  <mssgle:LineSegment
+                    End="-176.666663661599,25.2333319850765" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process Kpi Operating 15\Process.Paths[OLE DB Source Output]"
+          TopLeft="241.08333198602,86.2666665426892">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.9999982118607,27.6999980860946"
+              Start="0,0"
+              End="29.9999982118607,20.1999980860946">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.9999982118607,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.9999982118607,0"
+                    Point2="29.9999982118607,0"
+                    Point3="29.9999982118607,4" />
+                  <mssgle:LineSegment
+                    End="29.9999982118607,20.1999980860946" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process Kpi Operating 15\Process\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process Kpi Operating 15\Process\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1130 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/22/2012 9:47:53 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01886B"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{0330BDC5-672B-410D-9DB4-4067CC458689}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="factDzInventoryEndBal"
+  DTS:PackageType="5"
+  DTS:VersionBuild="192"
+  DTS:VersionGUID="{E3EC2E13-E973-4B69-BB9E-7A60CDEEF814}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3E3334B9-8A97-45EF-B48B-4C4D818579DC}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E49EC007-309D-4CAD-94B9-C03842E0A616}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{02926A17-947F-4346-85D7-D7DADFEA4D02}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{2ECB4030-9458-4A79-967F-F5F55E95A38C}"
+      DTS:ObjectName="CorpMain" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{FC3B0987-12BC-42C4-A127-306EF9064F71}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{9A94BF8B-527C-4C65-A348-B78F14FEBFA9}"
+      DTS:ObjectName="connCorpDW" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{440176D5-7962-41A0-8453-B2DE574F6988}"
+      DTS:ObjectName="connGan_app" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{9BF8988B-88C5-4457-94CC-85C1D7339368}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Load data into tblDzInventoryEndBal"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{97320DB7-0744-4D74-87F5-61D1D200C57C}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load data into tblDzInventoryEndBal"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination 1"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblDzInventoryEndBal]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Item]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Item"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Item]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[Item]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ProdCode]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="ProdCode"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdCode]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdCode]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ProdCodeDesc]"
+                          cachedDataType="wstr"
+                          cachedLength="40"
+                          cachedName="ProdCodeDesc"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdCodeDesc]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdCodeDesc]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ItemDesc]"
+                          cachedDataType="wstr"
+                          cachedLength="40"
+                          cachedName="ItemDesc"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ItemDesc]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDesc]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PlannerCode]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="PlannerCode"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PlannerCode]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PlannerCode]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PlannerDesc]"
+                          cachedDataType="wstr"
+                          cachedLength="40"
+                          cachedName="PlannerDesc"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PlannerDesc]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PlannerDesc]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[BegBalance]"
+                          cachedDataType="numeric"
+                          cachedName="BegBalance"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[BegBalance]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[BegBalance]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Balance]"
+                          cachedDataType="numeric"
+                          cachedName="Balance"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Balance]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[Balance]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[TransDateStarting]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="TransDateStarting"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TransDateStarting]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransDateStarting]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[TransDateEnding]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="TransDateEnding"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TransDateEnding]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransDateEnding]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IssAmount]"
+                          cachedDataType="numeric"
+                          cachedName="IssAmount"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IssAmount]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[IssAmount]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[RecAmount]"
+                          cachedDataType="numeric"
+                          cachedName="RecAmount"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[RecAmount]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecAmount]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[BegBalanceQty]"
+                          cachedDataType="numeric"
+                          cachedName="BegBalanceQty"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[BegBalanceQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[BegBalanceQty]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[EndBalanceQty]"
+                          cachedDataType="numeric"
+                          cachedName="EndBalanceQty"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EndBalanceQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[EndBalanceQty]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[IssQty]"
+                          cachedDataType="numeric"
+                          cachedName="IssQty"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IssQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[IssQty]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[RecQty]"
+                          cachedDataType="numeric"
+                          cachedName="RecQty"
+                          cachedPrecision="18"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[RecQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecQty]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[LeadTime]"
+                          cachedDataType="i2"
+                          cachedName="LeadTime"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LeadTime]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[LeadTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[SafetyStk]"
+                          cachedDataType="numeric"
+                          cachedName="SafetyStk"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SafetyStk]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SafetyStk]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[DivId]"
+                          cachedDataType="i4"
+                          cachedName="DivId"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DivId]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivId]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Item]"
+                          dataType="wstr"
+                          length="30"
+                          name="Item" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdCode]"
+                          dataType="wstr"
+                          length="10"
+                          name="ProdCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ProdCodeDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="ProdCodeDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ItemDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="ItemDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PlannerCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="PlannerCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PlannerDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="PlannerDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[BegBalance]"
+                          dataType="numeric"
+                          name="BegBalance"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Balance]"
+                          dataType="numeric"
+                          name="Balance"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TransDateStarting]"
+                          dataType="dbTimeStamp2"
+                          name="TransDateStarting"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TransDateEnding]"
+                          dataType="dbTimeStamp2"
+                          name="TransDateEnding"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IssAmount]"
+                          dataType="numeric"
+                          name="IssAmount"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[RecAmount]"
+                          dataType="numeric"
+                          name="RecAmount"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[BegBalanceQty]"
+                          dataType="numeric"
+                          name="BegBalanceQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EndBalanceQty]"
+                          dataType="numeric"
+                          name="EndBalanceQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[IssQty]"
+                          dataType="numeric"
+                          name="IssQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[RecQty]"
+                          dataType="numeric"
+                          name="RecQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LeadTime]"
+                          dataType="i2"
+                          name="LeadTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SafetyStk]"
+                          dataType="numeric"
+                          name="SafetyStk"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DivId]"
+                          dataType="i4"
+                          name="DivId" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT      1 as DivId, BI_tblInventoryEndBal.ProdCode, BI_tblInventoryEndBal.ProdCodeDesc, BI_tblInventoryEndBal.Item, BI_tblInventoryEndBal.ItemDesc, BI_tblInventoryEndBal.PlannerCode, 
+                         BI_tblInventoryEndBal.PlannerDesc, BI_tblInventoryEndBal.BegBalance, BI_tblInventoryEndBal.Balance, BI_tblInventoryEndBal.TransDateStarting, BI_tblInventoryEndBal.TransDateEnding, 
+                         BI_tblInventoryEndBal.IssAmount, BI_tblInventoryEndBal.RecAmount, BI_tblInventoryEndBal.BegBalanceQty, BI_tblInventoryEndBal.EndBalanceQty, BI_tblInventoryEndBal.IssQty, 
+                         BI_tblInventoryEndBal.RecQty, itm.lead_time AS LeadTime,
+                             (SELECT        SUM(ISNULL(itmw.qty_reorder, 0)) AS Expr1
+                               FROM            itemwhse_mst AS itmw INNER JOIN
+                                                         whse_mst AS whse ON itmw.whse = whse.whse
+                               WHERE        (itmw.item = itm.item) AND (whse.dedicated_inventory = 0)) AS SafetyStk
+FROM            BI_tblInventoryEndBal INNER JOIN
+                         item_mst AS itm ON BI_tblInventoryEndBal.Item = itm.item
+WHERE        (YEAR(BI_tblInventoryEndBal.TransDateStarting) &gt;= 2016)</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Bet_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[Bet_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[Item]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Item]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[Item]"
+                          name="Item"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivId]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[DivId]"
+                          name="DivId"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProdCode]"
+                          length="10"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdCode]"
+                          name="ProdCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdCodeDesc]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProdCodeDesc]"
+                          length="40"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProdCodeDesc]"
+                          name="ProdCodeDesc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDesc]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemDesc]"
+                          length="40"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDesc]"
+                          name="ItemDesc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PlannerCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PlannerCode]"
+                          length="3"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PlannerCode]"
+                          name="PlannerCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PlannerDesc]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PlannerDesc]"
+                          length="40"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[PlannerDesc]"
+                          name="PlannerDesc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[BegBalance]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BegBalance]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[BegBalance]"
+                          name="BegBalance"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[Balance]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Balance]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[Balance]"
+                          name="Balance"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransDateStarting]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransDateStarting]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransDateStarting]"
+                          name="TransDateStarting"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransDateEnding]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransDateEnding]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransDateEnding]"
+                          name="TransDateEnding"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[IssAmount]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IssAmount]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[IssAmount]"
+                          name="IssAmount"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecAmount]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecAmount]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecAmount]"
+                          name="RecAmount"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[BegBalanceQty]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BegBalanceQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[BegBalanceQty]"
+                          name="BegBalanceQty"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[EndBalanceQty]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EndBalanceQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[EndBalanceQty]"
+                          name="EndBalanceQty"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[IssQty]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IssQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[IssQty]"
+                          name="IssQty"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecQty]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecQty]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecQty]"
+                          name="RecQty"
+                          precision="18"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[LeadTime]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LeadTime]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[LeadTime]"
+                          name="LeadTime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SafetyStk]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SafetyStk]"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].Columns[SafetyStk]"
+                          name="SafetyStk"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Item]"
+                          dataType="wstr"
+                          length="30"
+                          name="Item" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DivId]"
+                          dataType="i4"
+                          name="DivId" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProdCode]"
+                          dataType="wstr"
+                          length="10"
+                          name="ProdCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ProdCodeDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="ProdCodeDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="ItemDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PlannerCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="PlannerCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PlannerDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="PlannerDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BegBalance]"
+                          dataType="numeric"
+                          name="BegBalance"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Balance]"
+                          dataType="numeric"
+                          name="Balance"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransDateStarting]"
+                          dataType="dbTimeStamp"
+                          name="TransDateStarting" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransDateEnding]"
+                          dataType="dbTimeStamp"
+                          name="TransDateEnding" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IssAmount]"
+                          dataType="numeric"
+                          name="IssAmount"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecAmount]"
+                          dataType="numeric"
+                          name="RecAmount"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BegBalanceQty]"
+                          dataType="numeric"
+                          name="BegBalanceQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EndBalanceQty]"
+                          dataType="numeric"
+                          name="EndBalanceQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IssQty]"
+                          dataType="numeric"
+                          name="IssQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecQty]"
+                          dataType="numeric"
+                          name="RecQty"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LeadTime]"
+                          dataType="i2"
+                          name="LeadTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SafetyStk]"
+                          dataType="numeric"
+                          name="SafetyStk"
+                          precision="38"
+                          scale="8" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivId]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DivId]"
+                          name="DivId" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProdCode]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProdCode]"
+                          name="ProdCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProdCodeDesc]"
+                          dataType="wstr"
+                          length="40"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ProdCodeDesc]"
+                          name="ProdCodeDesc" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Item]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Item]"
+                          name="Item" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemDesc]"
+                          dataType="wstr"
+                          length="40"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemDesc]"
+                          name="ItemDesc" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PlannerCode]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PlannerCode]"
+                          name="PlannerCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PlannerDesc]"
+                          dataType="wstr"
+                          length="40"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PlannerDesc]"
+                          name="PlannerDesc" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BegBalance]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BegBalance]"
+                          name="BegBalance"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Balance]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Balance]"
+                          name="Balance"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransDateStarting]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransDateStarting]"
+                          name="TransDateStarting" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransDateEnding]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransDateEnding]"
+                          name="TransDateEnding" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IssAmount]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IssAmount]"
+                          name="IssAmount"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecAmount]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecAmount]"
+                          name="RecAmount"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BegBalanceQty]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BegBalanceQty]"
+                          name="BegBalanceQty"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EndBalanceQty]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EndBalanceQty]"
+                          name="EndBalanceQty"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IssQty]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IssQty]"
+                          name="IssQty"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecQty]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecQty]"
+                          name="RecQty"
+                          precision="18"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LeadTime]"
+                          dataType="i2"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LeadTime]"
+                          name="LeadTime" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SafetyStk]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SafetyStk]"
+                          name="SafetyStk"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Load data into tblDzInventoryEndBal.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\truncate table tblDzInventoryEndBal"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8716951A-1C8F-47AB-9B49-047AE1DE7AF5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="truncate table tblDzInventoryEndBal"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{E49EC007-309D-4CAD-94B9-C03842E0A616}"
+              SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzInventoryEndBal]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{B3BD8856-A087-4265-9E1D-00367BB4645E}"
+          DTS:From="Package\Sequence Container\truncate table tblDzInventoryEndBal"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Load data into tblDzInventoryEndBal" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="252,43"
+          Id="Package\Sequence Container\Load data into tblDzInventoryEndBal"
+          TopLeft="28,63.1000008058551" />
+        <NodeLayout
+          Size="215,43"
+          Id="Package\Sequence Container\truncate table tblDzInventoryEndBal"
+          TopLeft="30.6666667163372,5.50000000000004" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="245.333333383004,26.8333333333334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-91.3333333830038,36.2666674725217"
+              Start="0,0"
+              End="-91.3333333830038,28.7666674725217">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-87.3333333830038,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-87.3333333830038,0"
+                    Point2="-91.3333333830038,0"
+                    Point3="-91.3333333830038,4" />
+                  <mssgle:LineSegment
+                    End="-91.3333333830038,28.7666674725217" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="376,295"
+          Size="376,338"
+          Id="Package\Sequence Container"
+          TopLeft="5.50000000000003,5.93333332558478" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Load data into tblDzInventoryEndBal">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181,43"
+          Id="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1"
+          TopLeft="15.5833332898715,109.033333317836" />
+        <NodeLayout
+          Size="151,43"
+          Id="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source"
+          TopLeft="88,40.6333333488306" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Load data into tblDzInventoryEndBal.Paths[OLE DB Source Output]"
+          TopLeft="163.5,83.6333333488306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-57.4166667101285,25.3999999690054"
+              Start="0,0"
+              End="-57.4166667101285,17.8999999690054">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.6999999845027" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.6999999845027"
+                    Point2="0,12.6999999845027"
+                    Point3="-4,12.6999999845027" />
+                  <mssgle:LineSegment
+                    End="-53.4166667101285,12.6999999845027" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-53.4166667101285,12.6999999845027"
+                    Point2="-57.4166667101285,12.6999999845027"
+                    Point3="-57.4166667101285,16.6999999845027" />
+                  <mssgle:LineSegment
+                    End="-57.4166667101285,17.8999999690054" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load data into tblDzInventoryEndBal\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
