@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="dimVendorImport"
   DTS:PackageType="5"
-  DTS:VersionBuild="24"
-  DTS:VersionGUID="{AE77D671-4A11-442D-AF3F-5C25208F96D3}">
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{33BD459A-1662-4565-9795-894309BEA5DB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -125,7 +125,17 @@
       DTS:DTSID="{7242C86E-64E0-446E-886F-851743E76183}"
       DTS:ObjectName="connCorpDW" />
   </DTS:Configurations>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CF13472-EBCE-459B-ABA3-E8D231DB64AF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DaysBack">
+      <DTS:VariableValue
+        DTS:DataType="3">30</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Process dimVendor"
@@ -178,7 +188,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -363,8 +373,9 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    6 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
-FROM         vendaddr_mst as vendaddr</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    6 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr
+where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -385,7 +396,7 @@ FROM         vendaddr_mst as vendaddr</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{8CF13472-EBCE-459B-ABA3-E8D231DB64AF};</property>
                   </properties>
                   <connections>
                     <connection
@@ -623,7 +634,7 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -808,8 +819,9 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    1 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
-FROM         vendaddr_mst as vendaddr</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    1 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr
+ where    (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -830,7 +842,7 @@ FROM         vendaddr_mst as vendaddr</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{8CF13472-EBCE-459B-ABA3-E8D231DB64AF};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1068,7 +1080,7 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1253,8 +1265,9 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    5 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
-FROM         vendaddr_mst as vendaddr</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    5 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr
+where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -1275,7 +1288,7 @@ FROM         vendaddr_mst as vendaddr</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{8CF13472-EBCE-459B-ABA3-E8D231DB64AF};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1513,7 +1526,7 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1698,8 +1711,9 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     2 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
-FROM         vendaddr_mst as vendaddr</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     2 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr
+where     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -1720,7 +1734,7 @@ FROM         vendaddr_mst as vendaddr</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{8CF13472-EBCE-459B-ABA3-E8D231DB64AF};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1958,7 +1972,7 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2143,8 +2157,9 @@ FROM         vendaddr_mst as vendaddr</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    4 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
-FROM         vendaddr_mst as vendaddr</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    4 AS DivisionKey, RTRIM(LTRIM(vend_num)) AS vend_num, name, city, state, zip, country
+FROM         vendaddr_mst as vendaddr
+where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -2165,7 +2180,7 @@ FROM         vendaddr_mst as vendaddr</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{8CF13472-EBCE-459B-ABA3-E8D231DB64AF};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2445,7 +2460,7 @@ FROM         vendaddr_mst as vendaddr</property>
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -2453,31 +2468,31 @@ FROM         vendaddr_mst as vendaddr</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="213,43"
+          Size="212.8,43.2"
           Id="Package\Process dimVendor\Import BBR vendor addr 1 1"
           TopLeft="278.416662599892,476.222222984169" />
         <NodeLayout
-          Size="193,43"
+          Size="192.8,43.2"
           Id="Package\Process dimVendor\Import BET vendor addr"
           TopLeft="287.166666666667,210.833333333334" />
         <NodeLayout
-          Size="207,43"
+          Size="207.2,43.2"
           Id="Package\Process dimVendor\Import BSW vendor addr 1"
           TopLeft="280.5,416.166666666667" />
         <NodeLayout
-          Size="196,43"
+          Size="196,43.2"
           Id="Package\Process dimVendor\Import GAN vendor addr"
           TopLeft="285.833333333333,108.166666666667" />
         <NodeLayout
-          Size="197,43"
+          Size="196.8,43.2"
           Id="Package\Process dimVendor\Import MED vendor addr"
           TopLeft="285.5,313.5" />
         <NodeLayout
-          Size="215,43"
+          Size="215.2,43.2"
           Id="Package\Process dimVendor\Merge from tblVendorImport"
           TopLeft="250.638885236035,538.222220039699" />
         <NodeLayout
-          Size="197,43"
+          Size="196.8,43.2"
           Id="Package\Process dimVendor\Truncate tblVendorTemp"
           TopLeft="285.5,5.50000000000004" />
         <EdgeLayout
@@ -2599,8 +2614,8 @@ FROM         vendaddr_mst as vendaddr</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="499,636"
-          Size="499,679"
+          PanelSize="499.2,636"
+          Size="499.2,679.2"
           Id="Package\Process dimVendor"
           TopLeft="5.50000000000009,5.50000000000006" />
       </GraphLayout>
@@ -2612,11 +2627,11 @@ FROM         vendaddr_mst as vendaddr</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Source"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\Process dimVendor\Import BBR vendor addr 1 1\OLE DB Destination"
           TopLeft="5.50000000000001,108.166666666667" />
         <EdgeLayout
@@ -2653,16 +2668,108 @@ FROM         vendaddr_mst as vendaddr</property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
+    design-time-name="Package\Process dimVendor\Import BET vendor addr">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process dimVendor\Import BET vendor addr\OLE DB Source"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process dimVendor\Import BET vendor addr\OLE DB Destination"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\Process dimVendor\Import BET vendor addr.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process dimVendor\Import BET vendor addr\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process dimVendor\Import BSW vendor addr 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Destination"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\Process dimVendor\Import BSW vendor addr 1.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process dimVendor\Import BSW vendor addr 1\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\Process dimVendor\Import GAN vendor addr">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source"
           TopLeft="16,5.5" />
         <NodeLayout
-          Size="171,42"
+          Size="171.2,41.6"
           Id="Package\Process dimVendor\Import GAN vendor addr\OLE DB Destination"
           TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
@@ -2690,5 +2797,59 @@ FROM         vendaddr_mst as vendaddr</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process dimVendor\Import GAN vendor addr\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process dimVendor\Import MED vendor addr">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process dimVendor\Import MED vendor addr\OLE DB Source"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process dimVendor\Import MED vendor addr\OLE DB Destination"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\Process dimVendor\Import MED vendor addr.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process dimVendor\Import MED vendor addr\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -13,7 +13,7 @@
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimEmployeeImport"
   DTS:VersionBuild="150"
-  DTS:VersionGUID="{5F6F5239-F245-47EC-8D65-138857678401}">
+  DTS:VersionGUID="{495B7743-C5C4-40B5-8F51-058A8AF8B708}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

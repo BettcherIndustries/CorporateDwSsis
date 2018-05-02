@@ -9,12 +9,12 @@
   DTS:DTSID="{B3F3137B-1222-4FDD-8816-BE4DC89968A7}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimCurrencyRateImport"
   DTS:VersionBuild="308"
-  DTS:VersionGUID="{4E6BFF0C-DF9D-40B4-87E2-3FF34A72B55E}">
+  DTS:VersionGUID="{1B6A1773-E519-42CD-A03C-90E9B2B884C5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -85,7 +85,7 @@
       DTS:ObjectName="LTG_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMSYTEDBS;Initial Catalog=LTG_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{738239AF-0F8B-45D5-965D-61CE0F24CC6F}cjack.bs;" />
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=LTG_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{738239AF-0F8B-45D5-965D-61CE0F24CC6F}cjack.bs;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -192,7 +192,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -428,7 +428,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     5 AS SiteKey, from_curr_code as
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     5 AS SiteKey, from_curr_code as
 curr_code, eff_date, buy_rate, sell_rate, user_code, to_curr_code as dom_curr_code, RecordDate, CreatedBy, UpdatedBy, CreateDate
 FROM         currate_mst as currate</property>
                 <property

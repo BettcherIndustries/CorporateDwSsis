@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimWhseImport"
-  DTS:VersionBuild="137"
-  DTS:VersionGUID="{AE2CEEC6-90EE-4647-A484-81D3C2FCF0E4}">
+  DTS:VersionBuild="138"
+  DTS:VersionGUID="{9D399CA1-824B-4BEC-994F-04D10F9CBE4F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -158,11 +158,38 @@
       DTS:DTSID="{13C247C5-BCC6-416C-AE7E-6CE4E6A14112}"
       DTS:ObjectName="connCorpDW" />
   </DTS:Configurations>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3D6BA236-3F2E-4DC9-9A3A-A0FA34E0630C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DaysBack">
+      <DTS:VariableValue
+        DTS:DataType="3">30</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:LoggingOptions
     DTS:FilterKind="0"
     DTS:LoggingMode="1" />
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MERGE dimWhse"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{52CEE80F-F67A-4DF6-9C7F-10F488BFBC85}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MERGE dimWhse"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4FAD76C2-9E80-487A-B172-A7ED7A0720F2}"
+          SQLTask:SqlStatementSource="BEGIN TRANSACTION;&#xA;&#xA;MERGE dimWhse AS target&#xA;    USING (SELECT DISTINCT &#xA;&#x9;&#x9;     [SiteKey] &#xA;      ,[SiteKeyAlternative]&#xA;      ,[WhseDescription]&#xA;      ,[WhseKeyAlternative] &#xA;FROM         tblWhseImport) AS source&#xA;    ON ( target.WhseKeyAlternative=source.WhseKeyAlternative&#xA;&#x9;AND &#xA;&#x9;target.SiteKey=source.SiteKey)&#xA;   &#xA; WHEN MATCHED THEN &#xA;&#xA;     UPDATE SET &#xA;&#x9;&#xA;      &#xA;      [SiteKeyAlternative]=source.[SiteKeyAlternative]&#xA;      ,[WhseDescription]=source.[WhseDescription]&#xA;  &#xA;&#xA;WHEN NOT MATCHED THEN &#xA;     INSERT ( &#xA;&#x9;      [SiteKey] &#xA;      ,[SiteKeyAlternative]&#xA;      ,[WhseDescription]&#xA;      ,[WhseKeyAlternative]&#xA;)&#xA;     VALUES (&#xA;&#x9; &#xA;&#x9;      source.[SiteKey] &#xA;      ,source.[SiteKeyAlternative]&#xA;      ,source.[WhseDescription]&#xA;      ,source.[WhseKeyAlternative]&#xA;);&#xA;&#xA;&#xA;COMMIT TRANSACTION;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Process BBR"
       DTS:CreationName="STOCK:SEQUENCE"
@@ -287,7 +314,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimWhse]</property>
+                      name="OpenRowset">[dbo].[tblWhseImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -296,7 +323,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -388,10 +415,6 @@
                           length="25"
                           name="WhseDescription" />
                         <externalMetadataColumn
-                          refId="Package\Process BBR\Get BBR\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
-                          dataType="i4"
-                          name="WhseKey" />
-                        <externalMetadataColumn
                           refId="Package\Process BBR\Get BBR\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -449,7 +472,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT    6 AS SiteKey, 'BBR' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    6 AS SiteKey, 'BBR' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
 
 FROM         whse_mst as whse</property>
                     <property
@@ -740,7 +763,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimWhse]</property>
+                      name="OpenRowset">[dbo].[tblWhseImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -749,7 +772,7 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -841,10 +864,6 @@ FROM         whse_mst as whse</property>
                           length="25"
                           name="WhseDescription" />
                         <externalMetadataColumn
-                          refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
-                          dataType="i4"
-                          name="WhseKey" />
-                        <externalMetadataColumn
                           refId="Package\Process BET\Get BET\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -902,9 +921,10 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     1 AS SiteKey, 'BET' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     1 AS SiteKey, 'BET' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
 
-FROM         whse_mst as whse</property>
+FROM         whse_mst as whse
+where (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -925,7 +945,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{3D6BA236-3F2E-4DC9-9A3A-A0FA34E0630C};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1193,7 +1213,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimWhse]</property>
+                      name="OpenRowset">[dbo].[tblWhseImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1202,7 +1222,7 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1294,10 +1314,6 @@ FROM         whse_mst as whse</property>
                           length="25"
                           name="WhseDescription" />
                         <externalMetadataColumn
-                          refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
-                          dataType="i4"
-                          name="WhseKey" />
-                        <externalMetadataColumn
                           refId="Package\Process BSW\Get BSW\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -1355,9 +1371,10 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     5 AS SiteKey, 'BSW' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     5 AS SiteKey, 'BSW' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
 
-FROM         whse_mst as whse</property>
+FROM         whse_mst as whse
+where (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -1378,7 +1395,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{3D6BA236-3F2E-4DC9-9A3A-A0FA34E0630C};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1646,7 +1663,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimWhse]</property>
+                      name="OpenRowset">[dbo].[tblWhseImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1655,7 +1672,7 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1747,10 +1764,6 @@ FROM         whse_mst as whse</property>
                           length="25"
                           name="WhseDescription" />
                         <externalMetadataColumn
-                          refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
-                          dataType="i4"
-                          name="WhseKey" />
-                        <externalMetadataColumn
                           refId="Package\Process GAN\Get GAN\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -1808,9 +1821,10 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
 
-FROM         whse_mst as whse</property>
+FROM         whse_mst as whse
+where (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -1831,7 +1845,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{3D6BA236-3F2E-4DC9-9A3A-A0FA34E0630C};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2099,7 +2113,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimWhse]</property>
+                      name="OpenRowset">[dbo].[tblWhseImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -2108,7 +2122,7 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2200,10 +2214,6 @@ FROM         whse_mst as whse</property>
                           length="25"
                           name="WhseDescription" />
                         <externalMetadataColumn
-                          refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKey]"
-                          dataType="i4"
-                          name="WhseKey" />
-                        <externalMetadataColumn
                           refId="Package\Process MED\Get MED\Destination - Query.Inputs[Destination Input].ExternalColumns[WhseKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -2261,9 +2271,10 @@ FROM         whse_mst as whse</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     4 AS SiteKey, 'MED' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     4 AS SiteKey, 'MED' AS SiteKeyAlternative, whse, ISNULL(name, whse) AS name
 
-FROM         whse_mst as whse</property>
+FROM         whse_mst as whse
+where (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -2284,7 +2295,7 @@ FROM         whse_mst as whse</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{3D6BA236-3F2E-4DC9-9A3A-A0FA34E0630C};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2439,13 +2450,13 @@ FROM         whse_mst as whse</property>
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Process Whse\Drop Create dimWhse"
+          DTS:refId="Package\Process Whse\truncate tblWhseImport"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:DTSID="{891102E6-1623-44E5-8480-95B67D4AD7A2}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Drop Create dimWhse"
+          DTS:ObjectName="truncate tblWhseImport"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
           DTS:ThreadHint="0">
           <DTS:Variables />
@@ -2454,7 +2465,7 @@ FROM         whse_mst as whse</property>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{4FAD76C2-9E80-487A-B172-A7ED7A0720F2}"
-              SQLTask:SqlStatementSource="&#xA;IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dimWhse]') AND type in (N'U'))&#xA;DROP TABLE [dbo].[dimWhse]&#xA;GO&#xA;&#xA;&#xA;&#xA;CREATE TABLE [dbo].[dimWhse](&#xA;&#x9;[SiteKey] [int] NULL,&#xA;&#x9;[SiteKeyAlternative] [nvarchar](8) NULL,&#xA;&#x9;[WhseDescription] [nvarchar](25) NULL,&#xA;&#x9;[WhseKey] [int] IDENTITY(1,1) NOT NULL,&#xA;&#x9;[WhseKeyAlternative] [nchar](8) NULL&#xA;) ON [PRIMARY]&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="&#xA;truncate table tblWhseImport&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -2469,6 +2480,14 @@ FROM         whse_mst as whse</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Process GAN" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{858B728F-F131-4C91-9CAE-787048377922}"
+      DTS:From="Package\Process BBR"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\MERGE dimWhse" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -2507,7 +2526,7 @@ FROM         whse_mst as whse</property>
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -2515,71 +2534,105 @@ FROM         whse_mst as whse</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="119,43"
+          Size="119.2,43.2"
           Id="Package\Process BBR\Get BBR"
           TopLeft="5.49999999999999,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="369,103"
-          Size="369,146"
+          PanelSize="368.8,102.4"
+          Size="368.8,145.6"
           Id="Package\Process BBR"
-          TopLeft="53.499998509884,895.83333379825" />
+          TopLeft="36.3571410750857,832.209803494189" />
         <NodeLayout
-          Size="117,43"
+          Size="116.8,43.2"
           Id="Package\Process BET\Get BET"
           TopLeft="5.49999999999999,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="362,99"
-          Size="362,142"
+          PanelSize="361.6,99.2"
+          Size="361.6,142.4"
           Id="Package\Process BET"
           TopLeft="65.1666666666668,347.5" />
         <NodeLayout
-          Size="121,43"
+          Size="120.8,43.2"
           Id="Package\Process BSW\Get BSW"
           TopLeft="5.49999999999999,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="369,66"
-          Size="369,109"
+          PanelSize="368.8,65.6"
+          Size="368.8,108.8"
           Id="Package\Process BSW"
-          TopLeft="34.750000006209,744.5" />
+          TopLeft="39.3214286554886,698.617646415341" />
         <NodeLayout
-          Size="120,43"
+          Size="120,43.2"
           Id="Package\Process GAN\Get GAN"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="325,96"
-          Size="325,139"
+          PanelSize="324.8,96"
+          Size="324.8,139.2"
           Id="Package\Process GAN"
           TopLeft="50.8333333333334,186.5" />
         <NodeLayout
-          Size="121,43"
+          Size="120.8,43.2"
           Id="Package\Process MED\Get MED"
           TopLeft="5.49999999999999,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="362,103"
-          Size="362,146"
+          PanelSize="361.6,103.2"
+          Size="361.6,145.6"
           Id="Package\Process MED"
           TopLeft="56.1666666666668,519.5" />
         <NodeLayout
-          Size="183,43"
-          Id="Package\Process Whse\Drop Create dimWhse"
+          Size="183.2,43.2"
+          Id="Package\Process Whse\truncate tblWhseImport"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="193,103"
-          Size="193,146"
+          PanelSize="192.8,103.2"
+          Size="192.8,145.6"
           Id="Package\Process Whse"
           TopLeft="25.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="122,151.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.3333333333334,35"
+              Start="0,0"
+              End="91.3333333333334,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="4,17.5" />
+                  <mssgle:LineSegment
+                    End="87.3333333333334,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="87.3333333333334,17.5"
+                    Point2="91.3333333333334,17.5"
+                    Point3="91.3333333333334,21.5" />
+                  <mssgle:LineSegment
+                    End="91.3333333333334,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="375.833333333333,256">
@@ -2644,30 +2697,30 @@ FROM         whse_mst as whse</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="237.166666666667,665.5">
+          TopLeft="236.966666666667,665.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-17.9166666604578,79"
+              EndConnector="-13.2452380111782,33.5176464153409"
               Start="0,0"
-              End="-17.9166666604578,71.5">
+              End="-13.2452380111782,26.0176464153409">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.5" />
+                    End="0,12.7588232076704" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,35.5"
-                    Point2="0,39.5"
-                    Point3="-4,39.5" />
+                    Point1="0,12.7588232076704"
+                    Point2="0,16.7588232076704"
+                    Point3="-4,16.7588232076704" />
                   <mssgle:LineSegment
-                    End="-13.9166666604578,39.5" />
+                    End="-9.24523801117823,16.7588232076704" />
                   <mssgle:CubicBezierSegment
-                    Point1="-13.9166666604578,39.5"
-                    Point2="-17.9166666604578,39.5"
-                    Point3="-17.9166666604578,43.5" />
+                    Point1="-9.24523801117823,16.7588232076704"
+                    Point2="-13.2452380111782,16.7588232076704"
+                    Point3="-13.2452380111782,20.7588232076704" />
                   <mssgle:LineSegment
-                    End="-17.9166666604578,71.5" />
+                    End="-13.2452380111782,26.0176464153409" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2678,30 +2731,18 @@ FROM         whse_mst as whse</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="219.250000006209,853.5">
+          TopLeft="222.239284865287,807.417646415341">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="18.749998503675,42.3333337982499"
+              EndConnector="0,24.7921570788484"
               Start="0,0"
-              End="18.749998503675,34.8333337982499">
+              End="0,17.2921570788484">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.1666668991249" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.1666668991249"
-                    Point2="0,21.1666668991249"
-                    Point3="4,21.1666668991249" />
-                  <mssgle:LineSegment
-                    End="14.749998503675,21.1666668991249" />
-                  <mssgle:CubicBezierSegment
-                    Point1="14.749998503675,21.1666668991249"
-                    Point2="18.749998503675,21.1666668991249"
-                    Point3="18.749998503675,25.1666668991249" />
-                  <mssgle:LineSegment
-                    End="18.749998503675,34.8333337982499" />
+                    End="0,17.2921570788484" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2710,32 +2751,36 @@ FROM         whse_mst as whse</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\MERGE dimWhse"
+          TopLeft="128.571430760987,1007.81177040285" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="122,151.5">
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="220.757141075086,977.809803494189">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="91.3333333333334,35"
+              EndConnector="-10.9857103140987,30.0019669086598"
               Start="0,0"
-              End="91.3333333333334,27.5">
+              End="-10.9857103140987,22.5019669086598">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.5" />
+                    End="0,11.0009834543299" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.5"
-                    Point2="0,17.5"
-                    Point3="4,17.5" />
+                    Point1="0,11.0009834543299"
+                    Point2="0,15.0009834543299"
+                    Point3="-4,15.0009834543299" />
                   <mssgle:LineSegment
-                    End="87.3333333333334,17.5" />
+                    End="-6.9857103140987,15.0009834543299" />
                   <mssgle:CubicBezierSegment
-                    Point1="87.3333333333334,17.5"
-                    Point2="91.3333333333334,17.5"
-                    Point3="91.3333333333334,21.5" />
+                    Point1="-6.9857103140987,15.0009834543299"
+                    Point2="-10.9857103140987,15.0009834543299"
+                    Point3="-10.9857103140987,19.0009834543299" />
                   <mssgle:LineSegment
-                    End="91.3333333333334,27.5" />
+                    End="-10.9857103140987,22.5019669086598" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2751,17 +2796,17 @@ FROM         whse_mst as whse</property>
     design-time-name="Package\Process BBR\Get BBR">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\Process BBR\Get BBR\Destination - Query"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\Process BBR\Get BBR\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\Process BBR\Get BBR\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -2783,9 +2828,7 @@ FROM         whse_mst as whse</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2807,9 +2850,7 @@ FROM         whse_mst as whse</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2840,77 +2881,126 @@ FROM         whse_mst as whse</property>
     design-time-name="Package\Process BET\Get BET">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="170.4,41.6"
           Id="Package\Process BET\Get BET\Destination - Query"
           TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="149.6,41.6"
           Id="Package\Process BET\Get BET\Source - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="28,42.4" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="155.2,41.6"
           Id="Package\Process BET\Get BET\Data Conversion"
-          TopLeft="NaN,NaN" />
+          TopLeft="28,100.8" />
         <EdgeLayout
           Id="Package\Process BET\Get BET.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="28,63.2">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="0,58.4"
               Start="0,0"
-              End="0,0">
+              End="-7.5,58.4">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,54.4" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,54.4"
+                    Point2="-22.5,58.4"
+                    Point3="-18.5,58.4" />
+                  <mssgle:LineSegment
+                    End="-7.5,58.4" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Process BET\Get BET.Paths[Data Conversion Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="105.6,142.4">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="NaN,NaN"
               Start="0,0"
-              End="0,0">
+              End="NaN,NaN">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,NaN" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,NaN"
+                    Point2="0,NaN"
+                    Point3="-4,NaN" />
+                  <mssgle:LineSegment
+                    End="NaN,NaN" />
+                  <mssgle:CubicBezierSegment
+                    Point1="NaN,NaN"
+                    Point2="NaN,NaN"
+                    Point3="NaN,NaN" />
+                  <mssgle:LineSegment
+                    End="NaN,NaN" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BET\Get BET\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BET\Get BET\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Process BSW\Get BSW">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\Process BSW\Get BSW\Destination - Query"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\Process BSW\Get BSW\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\Process BSW\Get BSW\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -2932,9 +3022,7 @@ FROM         whse_mst as whse</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2956,133 +3044,250 @@ FROM         whse_mst as whse</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BSW\Get BSW\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BSW\Get BSW\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Process GAN\Get GAN">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="170.4,41.6"
           Id="Package\Process GAN\Get GAN\Destination - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="0,168.847061191546" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="149.6,41.6"
           Id="Package\Process GAN\Get GAN\Source - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="34.2857143927594,36.0941181532652" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="155.2,41.6"
           Id="Package\Process GAN\Get GAN\Data Conversion"
-          TopLeft="NaN,NaN" />
+          TopLeft="34.8571429739193,83.2000011668486" />
         <EdgeLayout
           Id="Package\Process GAN\Get GAN.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="34.2857143927594,56.8941181532652">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="0.571428581159935,47.1058830135834"
               Start="0,0"
-              End="0,0">
+              End="-6.92857141884006,47.1058830135834">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,43.1058830135834" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,43.1058830135834"
+                    Point2="-22.5,47.1058830135834"
+                    Point3="-18.5,47.1058830135834" />
+                  <mssgle:LineSegment
+                    End="-6.92857141884006,47.1058830135834" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Process GAN\Get GAN.Paths[Data Conversion Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="112.457142973919,124.800001166849">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="-27.2571429739193,44.0470600246971"
               Start="0,0"
-              End="0,0">
+              End="-27.2571429739193,36.5470600246971">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0235300123485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.0235300123485"
+                    Point2="0,22.0235300123485"
+                    Point3="-4,22.0235300123485" />
+                  <mssgle:LineSegment
+                    End="-23.2571429739193,22.0235300123485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23.2571429739193,22.0235300123485"
+                    Point2="-27.2571429739193,22.0235300123485"
+                    Point3="-27.2571429739193,26.0235300123485" />
+                  <mssgle:LineSegment
+                    End="-27.2571429739193,36.5470600246971" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process GAN\Get GAN\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process GAN\Get GAN\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Process MED\Get MED">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="170.4,41.6"
           Id="Package\Process MED\Get MED\Destination - Query"
           TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="149.6,41.6"
           Id="Package\Process MED\Get MED\Source - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="28,28.8" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="155.2,41.6"
           Id="Package\Process MED\Get MED\Data Conversion"
-          TopLeft="NaN,NaN" />
+          TopLeft="28,73.6" />
         <EdgeLayout
           Id="Package\Process MED\Get MED.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="28,49.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="0,44.8"
               Start="0,0"
-              End="0,0">
+              End="-7.5,44.8">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,40.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,40.8"
+                    Point2="-22.5,44.8"
+                    Point3="-18.5,44.8" />
+                  <mssgle:LineSegment
+                    End="-7.5,44.8" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Process MED\Get MED.Paths[Data Conversion Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="105.6,115.2">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="NaN,NaN"
               Start="0,0"
-              End="0,0">
+              End="NaN,NaN">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,NaN" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,NaN"
+                    Point2="0,NaN"
+                    Point3="-4,NaN" />
+                  <mssgle:LineSegment
+                    End="NaN,NaN" />
+                  <mssgle:CubicBezierSegment
+                    Point1="NaN,NaN"
+                    Point2="NaN,NaN"
+                    Point3="NaN,NaN" />
+                  <mssgle:LineSegment
+                    End="NaN,NaN" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED\Get MED\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED\Get MED\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -5,22 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="BIRM01886B"
   DTS:CreatorName="BETLAN\administrator"
-  DTS:DTSID="{7288C85C-8B5C-4BF6-8E84-7EF31122EB11}"
-  DTS:EnableConfig="True"
+  DTS:DTSID="{9A6933D9-15F3-456F-ACF7-49D98099AB53}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:ObjectName="factDzBackOrdersImport"
   DTS:PackageType="5"
-  DTS:VersionBuild="149"
-  DTS:VersionGUID="{5052D3E6-D51A-4842-AB67-9B79AED428A3}">
+  DTS:VersionBuild="152"
+  DTS:VersionGUID="{C8F55030-4B63-4F39-9B20-D56B5179E5B8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Bet_App]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{5DFB1AE6-02F5-4647-AB3E-BBC1178A228F}"
+      DTS:DTSID="{9156A446-F967-4C78-8D33-498AD9FEE7F9}"
       DTS:ObjectName="Bet_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -30,17 +29,17 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[CorpDw]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{02F76E4C-836E-4261-94CD-CB9F44BDF0FF}"
+      DTS:DTSID="{A4FEA4AB-AF69-44EF-9012-2990DD9CD8B0}"
       DTS:ObjectName="CorpDw">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[CorpMain]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{814D6D5D-2E35-4507-8A9F-4666ACB4F7E0}"
+      DTS:DTSID="{A154FCCE-D160-478A-80DB-0D4EFF084CB8}"
       DTS:ObjectName="CorpMain">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -50,7 +49,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[GAN_App]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{AB620F49-A6A0-49DF-9191-2F5DCA8FE794}"
+      DTS:DTSID="{8B815EA6-F7A2-4A25-B3B1-E93C816B6581}"
       DTS:ObjectName="GAN_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -60,7 +59,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[MED_App]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{9e0d8744-b9d5-446a-805d-096bf7bc8dbf}"
+      DTS:DTSID="{083C7FA9-C136-47CF-8F1F-4E57661B33BC}"
       DTS:ObjectName="MED_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -73,31 +72,31 @@
       DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
       DTS:ConfigurationType="1"
       DTS:CreationName=""
-      DTS:DTSID="{166DCEF6-92C5-4A0E-B11A-CA5F251663E5}"
+      DTS:DTSID="{4152269E-976A-46A5-9E17-FD39E3F8177E}"
       DTS:ObjectName="CorpMain" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{083A286D-F996-4A05-A156-5FE3F681D8EB}"
+      DTS:DTSID="{1200C1DB-249D-4A31-A036-8B8E3C659E1E}"
       DTS:ObjectName="connBett_app" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{0A562776-4CE0-4AED-975D-C4B30E0D2FEC}"
+      DTS:DTSID="{F185AA76-42D5-433C-885F-B7BCF57B79CB}"
       DTS:ObjectName="connCorpDW" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{6CD1361A-A6BF-414A-94A9-AB281DF56659}"
+      DTS:DTSID="{FC89A9ED-DF90-4816-99FD-6E64471BAF4E}"
       DTS:ObjectName="connGan_app" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connMed_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{144FD846-7834-4D56-94EA-2E7E4ABCBDFF}"
+      DTS:DTSID="{DE9BD101-73D6-4AA5-8A48-1C585D6B78AB}"
       DTS:ObjectName="connMed_app" />
   </DTS:Configurations>
   <DTS:Variables />
@@ -106,7 +105,7 @@
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{8B01BAF9-9884-4333-A8D3-26C4676FD553}"
+      DTS:DTSID="{D5BA0D9F-CBDB-470B-A27F-6DAFA0EDF2F3}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -116,7 +115,7 @@
           DTS:refId="Package\Sequence Container\Load data into tblDzSAlesAop Bet"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{4318B232-910D-4EF4-A6C9-637B0586EDAF}"
+          DTS:DTSID="{0EE2E23B-040A-4CB2-A3AD-3FBB828D69D1}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop Bet"
@@ -124,6 +123,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               version="1">
@@ -231,7 +231,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -494,7 +494,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     1 as SiteKey,  1 as DivId, 'Bettcher' AS Div, DATEPART(yyyy, BI_tblOpenBackOrders.AsOfDate) AS Year, LTRIM(BI_tblOpenBackOrders.cust_num) AS CustNum, BI_tblOpenBackOrders.item, BI_tblOpenBackOrders.item + '-' + BI_tblOpenBackOrders.description AS ItemDescription, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     1 as SiteKey,  1 as DivId, 'Bettcher' AS Div, DATEPART(yyyy, BI_tblOpenBackOrders.AsOfDate) AS Year, LTRIM(BI_tblOpenBackOrders.cust_num) AS CustNum, BI_tblOpenBackOrders.item, BI_tblOpenBackOrders.item + '-' + BI_tblOpenBackOrders.description AS ItemDescription, 
                          SUM(BI_tblOpenBackOrders.extd_list_price) AS GrossSales, 0 AS GrossSalePrev, BI_tblOpenBackOrders.product_code AS ProdCode, BI_tblOpenBackOrders.cust_shortname AS Customer, 
                          prodcode_mst.description AS ProdCodeDescription, CASE WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) = 'E' THEN 'Equipment' WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) 
                          = 'P' THEN 'Parts' WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) = 'S' THEN 'Service' WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) 
@@ -892,7 +892,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
           DTS:refId="Package\Sequence Container\Load data into tblDzSAlesAop Med"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{86249228-62fe-4dfb-8ef8-d74c6c52c7c1}"
+          DTS:DTSID="{F2D60B9C-CD7D-4253-81D9-392D552F0CA2}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop Med"
@@ -900,6 +900,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               version="1">
@@ -1007,7 +1008,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1270,7 +1271,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT       5 as SiteKey,   'Exsurco' AS Div,DATEPART(yyyy, BI_tblOpenBackOrders.AsOfDate) AS Year,  LTRIM(BI_tblOpenBackOrders.cust_num) AS CustNum, BI_tblOpenBackOrders.item, BI_tblOpenBackOrders.item + '-' + BI_tblOpenBackOrders.description AS ItemDescription, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT       5 as SiteKey,   'Exsurco' AS Div,DATEPART(yyyy, BI_tblOpenBackOrders.AsOfDate) AS Year,  LTRIM(BI_tblOpenBackOrders.cust_num) AS CustNum, BI_tblOpenBackOrders.item, BI_tblOpenBackOrders.item + '-' + BI_tblOpenBackOrders.description AS ItemDescription, 
                          SUM(BI_tblOpenBackOrders.extd_list_price) AS GrossSales, 0 AS GrossSalePrev, BI_tblOpenBackOrders.product_code AS ProdCode, BI_tblOpenBackOrders.cust_shortname AS Customer, 
                          prodcode_mst.description AS ProdCodeDescription, CASE WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) = 'E' THEN 'Equipment' WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) 
                          = 'P' THEN 'Parts' WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) = 'S' THEN 'Service' WHEN SUBSTRING(BI_tblOpenBackOrders.product_code, 1, 1) 
@@ -1650,7 +1651,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
           DTS:refId="Package\Sequence Container\truncate table tblDzBackOrders"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{A6F4669E-EEE1-4AEF-BA57-59800FA49E8E}"
+          DTS:DTSID="{FAC49B49-A435-46E0-812A-EBDAF5B67A95}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="truncate table tblDzBackOrders"
@@ -1659,7 +1660,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{02F76E4C-836E-4261-94CD-CB9F44BDF0FF}"
+              SQLTask:Connection="{A4FEA4AB-AF69-44EF-9012-2990DD9CD8B0}"
               SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzBackOrders]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -1668,7 +1669,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{5A3546A0-FC95-491E-A46F-1DA96BE4DB92}"
+          DTS:DTSID="{8638C1B5-FB05-4911-97C4-D19A8ED336D8}"
           DTS:From="Package\Sequence Container\Load data into tblDzSAlesAop Bet"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -1676,7 +1677,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{4D87D74E-D8CB-40A6-9C39-3A0A3330A9E3}"
+          DTS:DTSID="{27218E70-2C83-472D-A6E7-CB1FCD66D7C7}"
           DTS:From="Package\Sequence Container\truncate table tblDzBackOrders"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
@@ -1689,7 +1690,7 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -1755,10 +1756,10 @@ GROUP BY BI_tblOpenBackOrders.cust_num, BI_tblOpenBackOrders.co_num, BI_tblOpenB
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="252,307"
+          PanelSize="252,306"
           Size="252,349"
           Id="Package\Sequence Container"
-          TopLeft="5.50000000000006,5.50000000000009" />
+          TopLeft="148.5,29.5000000000001" />
       </GraphLayout>
     </LayoutInfo>
   </Package>

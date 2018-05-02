@@ -9,12 +9,12 @@
   DTS:DTSID="{B5B8144D-1632-4291-9F43-86EB8E948D49}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="MatlTranSsisRefresh"
   DTS:VersionBuild="62"
-  DTS:VersionGUID="{A355CAC7-980A-4EB5-872A-021CA2B387BE}">
+  DTS:VersionGUID="{C39B9C88-FA73-441A-8429-60371E4B8691}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

@@ -1,35 +1,35 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="2/22/2012 9:47:53 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="BIRM01886B"
   DTS:CreatorName="BETLAN\administrator"
-  DTS:DTSID="{72806AA3-2FB2-4BE6-B306-9A4070F82E57}"
+  DTS:DTSID="{50DFED2E-9203-4C94-85AF-60DF9855783B}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:ObjectName="factDzOrderToForecastImport"
   DTS:PackageType="5"
-  DTS:VersionBuild="291"
-  DTS:VersionGUID="{9E9E73F0-C455-4580-B319-70C50C988C4F}">
+  DTS:VersionBuild="293"
+  DTS:VersionGUID="{86619E49-800F-483D-8947-B67AD66646C8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[CorpDw]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{1140F218-854D-4517-9686-99DAF387DE2B}"
+      DTS:DTSID="{DE71B6BE-F433-4389-A535-657267FCB098}"
       DTS:ObjectName="CorpDw">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[CorpMain]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{382B36D0-33E2-4907-AEA3-B876EBDB23A4}"
+      DTS:DTSID="{CD8EF511-B365-4E32-AAA4-DFE841BA03B4}"
       DTS:ObjectName="CorpMain">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -42,25 +42,25 @@
       DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
       DTS:ConfigurationType="1"
       DTS:CreationName=""
-      DTS:DTSID="{047E2CDA-996D-4C99-A1C3-A1FC7B492D2F}"
+      DTS:DTSID="{35863915-9988-440E-8F92-C03215FB07CD}"
       DTS:ObjectName="CorpMain" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{85C84B68-B81B-4B63-9870-E2399E747EC4}"
+      DTS:DTSID="{CE54C8DA-7FAD-4DB7-A712-BABFA7E7BB19}"
       DTS:ObjectName="connBett_app" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{B725309B-6D3A-4661-A6AA-3B5EE2EDFDA5}"
+      DTS:DTSID="{B91CB39F-8CA7-424F-91C5-1C4EE92081DF}"
       DTS:ObjectName="connCorpDW" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{2C23D247-AEEB-4F40-BF95-73051E7C9952}"
+      DTS:DTSID="{38C0A614-5ACD-4814-81AC-7855153A3091}"
       DTS:ObjectName="connGan_app" />
   </DTS:Configurations>
   <DTS:Variables />
@@ -69,7 +69,7 @@
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{3A794617-A444-4E1C-AEF6-5AD2330EEA31}"
+      DTS:DTSID="{88A210D8-C497-40C6-9770-DCBB6651B2CC}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -79,7 +79,7 @@
           DTS:refId="Package\Sequence Container\delete all 0"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{2B32F4E4-D2F4-46F8-B5F3-04EF79503209}"
+          DTS:DTSID="{6B15AA12-6FC9-4450-9B00-21D2352CEA75}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="delete all 0"
@@ -87,7 +87,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Delete FROM            tblDzOrderToForecast&#xA;WHERE        (QtyOrdered + QtyForecast + QtyForecastMfg + QtyProduced + QtyOrderedPy = 0)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -96,7 +96,7 @@
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
           DTS:Disabled="True"
-          DTS:DTSID="{5E89F4B4-43E2-4242-93F3-896134E10C62}"
+          DTS:DTSID="{EE0F9425-0EEE-44A2-9627-3871F80370BC}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop 1"
@@ -133,7 +133,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -474,7 +474,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @MonthDateFrom as  date=Null
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Declare @MonthDateFrom as  date=Null
 ,@MonthDateTo as  date =NULL
  ,@DivisionKey as int=1
 
@@ -1335,7 +1335,7 @@ End</property>
           DTS:refId="Package\Sequence Container\Load data into tblDzSAlesAop 1 1"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{e009d7a5-856a-4f7d-832d-6baa81f13389}"
+          DTS:DTSID="{F13D38D1-6418-429C-8AEC-F13B0AB4B6B1}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop 1 1"
@@ -1372,7 +1372,7 @@ End</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1871,7 +1871,7 @@ End</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE	@return_value int
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE	@return_value int
 
 EXEC	@return_value = [dbo].[BI_Rpt_OrderToForecastSp]
 		@MonthDateFrom = '01/01/2017',
@@ -2772,7 +2772,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:refId="Package\Sequence Container\truncate table tblDzOrderToForecast"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{E6AE4010-8D8C-4A23-BE66-0AC3450D31C7}"
+          DTS:DTSID="{C579239A-DEBB-4E9E-A139-8B3BD1610722}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="truncate table tblDzOrderToForecast"
@@ -2781,7 +2781,7 @@ SELECT	'Return Value' = @return_value</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzOrderToForecast]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -2790,7 +2790,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
           DTS:Disabled="True"
-          DTS:DTSID="{0f6e5672-ffec-454c-a4c3-836008831705}"
+          DTS:DTSID="{7F4D35ED-FC06-430E-99C8-C275C7EF23A3}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="update assembly"
@@ -2798,7 +2798,7 @@ SELECT	'Return Value' = @return_value</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Begin Transaction;&#xA;update tblDzOrderToForecast&#xA;SET        IsAssembly=1&#xA;,ItemAssembly= tblItemFamilyAssembly.HeadAsm&#xA;,ItemFamilyCodeKeyAlternativeAssembly= tblItemFamilyAssembly.FamilyCodeHead&#xA;,ItemFamilyCodeDescriptionAssembly= tblItemFamilyAssembly.Description&#xA;FROM            tblDzOrderToForecast INNER JOIN&#xA;                         tblItemFamilyAssembly ON tblDzOrderToForecast.DivId = tblItemFamilyAssembly.DivId AND tblDzOrderToForecast.ItemFamilyCodeKeyAlternative = tblItemFamilyAssembly.FamilyCodeFinished&#xA;Commit Transaction;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -2806,7 +2806,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:refId="Package\Sequence Container\Update some as Top"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{b87e6bab-bbd6-41ed-a7f9-e6d30263b8a4}"
+          DTS:DTSID="{8AFCCF57-39D0-411B-BB0A-FDCF8DDABE5B}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update some as Top"
@@ -2814,7 +2814,7 @@ SELECT	'Return Value' = @return_value</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Update tblDzOrderToForecast&#xA;Set  IsTopItem=1&#xA;WHERE        (LEFT(ItemNoDescription, 6) IN ('183605', '183365', '183141', '183060', '183072', '183154', '183838', '183143', '183063', '185606', '183606', '183646', '183772', '183071', '183070', '183651', '183142', '102078', &#xA;                         '183661', '173519'))" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -2822,7 +2822,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:refId="Package\Sequence Container\Update some mape to 100"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{77534e6e-218a-4e95-9256-4d41da8a87f1}"
+          DTS:DTSID="{FC5AC7E7-D22D-4885-AAB9-8468A1ED0D70}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update some mape to 100"
@@ -2830,7 +2830,7 @@ SELECT	'Return Value' = @return_value</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Begin Transaction;&#xA;&#xA;Update tblDzOrderToForecast&#xA;Set MAPE=100&#xA;WHERE        (MAPE &gt; 100)&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;Begin Transaction;&#xA;&#xA;Update tblDzOrderToForecast&#xA;Set MAPEFamily=100&#xA;WHERE        (MAPEFamily &gt; 100)&#xA;Commit Transaction;&#xA;   &#xA;   &#xA;   &#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -2838,7 +2838,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:refId="Package\Sequence Container\Update some metric"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{F0BCC37C-1F07-45ED-A0F2-C359E35FA53C}"
+          DTS:DTSID="{00EBE793-BC88-48B3-B3BD-55C844177F32}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update some metric"
@@ -2846,7 +2846,7 @@ SELECT	'Return Value' = @return_value</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Begin Transaction;&#xA;&#xA;Update tblDzOrderToForecast&#xA;Set MAPE=Case When QtyOrdered=0 AND QtyForecast&gt; 0 Then 100&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;When (QtyOrdered+ QtyForecast)= 0 Then 0&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;--When ((abs((QtyOrdered-QtyForecast)))/(QtyOrdered))*100 &gt; 100 Then 100&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xA;&#x9;( abs(QtyOrdered-QtyForecast)/QtyOrdered)*100 &#xA;&#x9;&#x9;&#x9;&#x9;End&#x9;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;,MAD=abs((QtyOrdered-QtyForecast)) &#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;,AbsDiff=abs(QtyOrdered-QtyForecast)&#xA;     &#x9;&#x9;&#x9;&#x9; ,AbsDiffMfg=    abs(QtyOrdered-QtyForecastMfg)&#xA;Commit Transaction;&#xA;&#xA;Begin Transaction;&#xA;Update tblDzOrderToForecast&#xA;Set MADCost=MAD*stdcost&#xA;Commit Transaction;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -2854,7 +2854,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:refId="Package\Sequence Container\Update some metric family level"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{85d6872a-8439-4b23-9fd3-6e2b57bc8971}"
+          DTS:DTSID="{17EBFBD9-642E-49E8-97C7-9885E88AA329}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update some metric family level"
@@ -2862,7 +2862,7 @@ SELECT	'Return Value' = @return_value</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Begin Transaction;&#xA;&#xA;Update tblDzOrderToForecast&#xA;Set MAPEFamily=Case When QtyOrderedFamily=0 AND QtyForecastFamily&gt; 0 Then 100&#xA;     &#xA;     When (QtyOrderedFamily+ QtyForecastFamily)= 0 Then 0&#xA;     --When ((abs((QtyOrdered-QtyForecast)))/(QtyOrdered))*100 &gt; 100 Then 100&#xA;     Else&#xA; ( abs(QtyOrderedFamily-QtyForecastFamily)/QtyOrderedFamily)*100 &#xA;    End &#xA;&#xA;    &#xA;    ,MADFamily=abs((QtyOrderedFamily-QtyForecastFamily)) &#xA;&#xA;    &#xA;&#xA;&#x9;&#x9;  FROM            tblDzOrderToForecast INNER JOIN&#xA;                             (SELECT        DivId, Month, DomesticForeign, SalesTerritoryKeyAlternative, ItemFamilyCodeKeyAlternative, SUM(QtyOrdered) AS QtyOrderedFamily, SUM(QtyForecast) AS QtyForecastFamily&#xA;                               FROM            tblDzOrderToForecast AS tblDzOrderToForecast_1&#xA;                               GROUP BY DivId, Month, DomesticForeign, SalesTerritoryKeyAlternative, ItemFamilyCodeKeyAlternative) AS derivedtbl_1 ON tblDzOrderToForecast.DivId = derivedtbl_1.DivId AND &#xA;                         tblDzOrderToForecast.Month = derivedtbl_1.Month AND tblDzOrderToForecast.DomesticForeign = derivedtbl_1.DomesticForeign AND &#xA;                         tblDzOrderToForecast.SalesTerritoryKeyAlternative = derivedtbl_1.SalesTerritoryKeyAlternative AND tblDzOrderToForecast.ItemFamilyCodeKeyAlternative = derivedtbl_1.ItemFamilyCodeKeyAlternative&#xA;Commit Transaction;&#xA;&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -2871,7 +2871,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{237DD0D2-DDB3-410A-A2C5-EA11300343B8}"
+          DTS:DTSID="{E39DFA49-D3A4-4A40-A65A-7FEAE3BC0344}"
           DTS:From="Package\Sequence Container\truncate table tblDzOrderToForecast"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -2879,7 +2879,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{BE1DDE95-6CC3-4E76-81E7-86CE83A60BBA}"
+          DTS:DTSID="{9A064A70-EB1A-4DC4-BBBF-D223164D8523}"
           DTS:From="Package\Sequence Container\Load data into tblDzSAlesAop 1 1"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
@@ -2887,7 +2887,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{6201F275-76F4-40FD-BD47-F4D888F84E9E}"
+          DTS:DTSID="{6C41F58C-9F60-4C20-B9C5-7517B7624033}"
           DTS:From="Package\Sequence Container\delete all 0"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
@@ -2895,7 +2895,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
-          DTS:DTSID="{F729E2E8-0DE9-4DE0-BB47-853E71B4D41F}"
+          DTS:DTSID="{253F0990-E61F-4D90-B411-03A4FB1D9843}"
           DTS:From="Package\Sequence Container\Load data into tblDzSAlesAop 1"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
@@ -2903,7 +2903,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
           DTS:CreationName=""
-          DTS:DTSID="{A2CF0B6B-9A9E-4D9C-AF59-BA2A82D39840}"
+          DTS:DTSID="{4305E3AF-2633-40EB-881E-EDC00898DA94}"
           DTS:From="Package\Sequence Container\Update some metric"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
@@ -2911,7 +2911,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
           DTS:CreationName=""
-          DTS:DTSID="{A08D07DC-C6DE-4D56-BF1D-B03197CF0441}"
+          DTS:DTSID="{8008D96A-C7CF-4A0F-BE51-C5191F413BF4}"
           DTS:From="Package\Sequence Container\Update some mape to 100"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 5"
@@ -2919,7 +2919,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
           DTS:CreationName=""
-          DTS:DTSID="{8D0A0D38-A9F4-4582-B896-35DA0682AFC1}"
+          DTS:DTSID="{2F6C35D5-D5DC-426A-8276-74D8F4E957EC}"
           DTS:From="Package\Sequence Container\update assembly"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 6"
@@ -2927,7 +2927,7 @@ SELECT	'Return Value' = @return_value</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
           DTS:CreationName=""
-          DTS:DTSID="{93739120-52E6-4BCD-9BD1-8D962A1D621F}"
+          DTS:DTSID="{8E45FA98-0515-4577-9DFF-D3402C79B9B8}"
           DTS:From="Package\Sequence Container\Update some metric family level"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 7"
@@ -2938,7 +2938,7 @@ SELECT	'Return Value' = @return_value</property>
       DTS:refId="Package\with family assemby"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{b32e038e-583e-4685-bc03-6b7eadbf3804}"
+      DTS:DTSID="{BA34D787-1735-4FB9-82D2-3ECFFD7DC1FB}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="with family assemby">
@@ -2948,7 +2948,7 @@ SELECT	'Return Value' = @return_value</property>
           DTS:refId="Package\with family assemby\Load data into tblDzSAlesAop 1 1"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{0b883d6b-d450-4e15-a23a-84ad4b550bbc}"
+          DTS:DTSID="{3949D1B3-E03A-4A19-AE2B-E5DE8EBF4122}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop 1 1"
@@ -2985,7 +2985,7 @@ SELECT	'Return Value' = @return_value</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -3482,7 +3482,7 @@ SELECT	'Return Value' = @return_value</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     [Year], DivId, [Month], MonthDate, MonthName, DomesticForeign, ProdlineDescription, CategoryDescription, ProdGroupDescription, SUM(QtyOrdered) AS QtyOrdered, SUM(QtyForecast) AS QtyForecast, SUM(QtyForecastMfg) AS QtyForecastMfg, SUM(QtyInvoiced) 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     [Year], DivId, [Month], MonthDate, MonthName, DomesticForeign, ProdlineDescription, CategoryDescription, ProdGroupDescription, SUM(QtyOrdered) AS QtyOrdered, SUM(QtyForecast) AS QtyForecast, SUM(QtyForecastMfg) AS QtyForecastMfg, SUM(QtyInvoiced) 
                   AS QtyInvoiced, SUM(QtyPlan) AS QtyPlan, AbcCode, ItemFamilyCodeKeyAlternative, IsAssembly, SalesResponsible, ItemFamilyCodeDescription, ItemPlannerCodeDescription, PlannerCodeKeyAlternative, ProdCodeSlKeyAlternative, SalesTerritoryKeyAlternative, 
                   LTRIM(RTRIM(ItemAssembly)) AS ItemAssembly, MADFamily, MAPEFamily
 FROM        tblDzOrderToForecast AS a
@@ -4116,7 +4116,7 @@ HAVING     (IsAssembly = 1)</property>
           DTS:refId="Package\with family assemby\Load data into tblDzSAlesAop 1 1 1"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{8d9f4fd6-2a22-4581-bcbd-569fd02860fa}"
+          DTS:DTSID="{B47912E8-0D63-44D8-A53A-D74C0C1DA0DE}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop 1 1 1"
@@ -4153,7 +4153,7 @@ HAVING     (IsAssembly = 1)</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -4721,7 +4721,7 @@ HAVING     (IsAssembly = 1)</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     [Year], DivId, [Month], MonthDate, MonthName, DomesticForeign, ProdlineDescription, CategoryDescription, ProdGroupDescription, SUM(QtyOrdered) AS QtyOrdered, SUM(QtyForecast) AS QtyForecast, SUM(QtyForecastMfg) AS QtyForecastMfg, SUM(QtyInvoiced) 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     [Year], DivId, [Month], MonthDate, MonthName, DomesticForeign, ProdlineDescription, CategoryDescription, ProdGroupDescription, SUM(QtyOrdered) AS QtyOrdered, SUM(QtyForecast) AS QtyForecast, SUM(QtyForecastMfg) AS QtyForecastMfg, SUM(QtyInvoiced) 
                   AS QtyInvoiced, SUM(QtyPlan) AS QtyPlan, AbcCode, ItemFamilyCodeKeyAlternative, IsAssembly, SalesResponsible, ItemFamilyCodeDescription, ItemPlannerCodeDescription, PlannerCodeKeyAlternative, ProdCodeSlKeyAlternative, SalesTerritoryKeyAlternative, 
                   Item, ProdCodeSlKey, SalesTerritoryKey, ItemFamilyCodeKey, ItemKey, ItemNoDescription, StdCost, QtyOrdered AS Expr1, QtyForecast AS Expr2, QtyForecastMfg AS Expr3, QtyOrderedPy, QtyProduced, AbsDiff, AbsDiffMfg, IsTopItem, ItemCount, MADFamily, 
                   MAPEFamily
@@ -5660,7 +5660,7 @@ HAVING     (IsAssembly = 0)</property>
           DTS:refId="Package\with family assemby\truncate table tblDzOrderToForecastAssembly"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{d9a8d709-9840-43e5-96a9-185f4f1bbc1f}"
+          DTS:DTSID="{FE567E2C-D470-4114-8EE3-E9D265D5E83A}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="truncate table tblDzOrderToForecastAssembly"
@@ -5669,7 +5669,7 @@ HAVING     (IsAssembly = 0)</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzOrderToForecastAssembly]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -5677,7 +5677,7 @@ HAVING     (IsAssembly = 0)</property>
           DTS:refId="Package\with family assemby\update assemby item"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{A2640CEB-2676-4E1D-BFB8-39BA5BD8C3D9}"
+          DTS:DTSID="{4DE5D9D1-1CB9-4C5F-84FA-1C3D2DC77254}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="update assemby item"
@@ -5685,7 +5685,7 @@ HAVING     (IsAssembly = 0)</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Update a&#xA;SEt        a.ProdCodeSlKey= dimItem.ProdCodeSlKey&#xA;--, a.ItemFamilyCodeKey= dimItem.ItemFamilyCodeKey &#xA;, a.ItemKey= dimItem.ItemKey&#xA;, a.ItemNoDescription=dimItem.ItemNoDescription&#xA;,a.PlannerCodeKeyAlternative=dimItem.PlannerCodeKeyAlternative&#xA; ,a.StdCost= dimItem.StdCost &#xA;&#xA; -- ,a.ItemFamilyCodeDescription=dimItemFamilyCode.ItemFamilyCodeDescription&#xA;FROM            tblDzOrderToForecastAssembly AS a INNER JOIN&#xA;                         dimItem ON a.Item = dimItem.ItemKeyAlternative AND a.DivId = dimItem.SiteKey INNER JOIN&#xA;                         dimItemFamilyCode ON dimItem.ItemFamilyCodeKey = dimItemFamilyCode.ItemFamilyCodeKey&#xA;Where isAssembly=1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -5693,7 +5693,7 @@ HAVING     (IsAssembly = 0)</property>
           DTS:refId="Package\with family assemby\Update some mape to 100"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{6c38ac6b-9f82-4c37-bea9-fccc1bfb9bae}"
+          DTS:DTSID="{6FCAB907-2418-4343-8C5C-AC773D6064CF}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update some mape to 100"
@@ -5701,7 +5701,7 @@ HAVING     (IsAssembly = 0)</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Begin Transaction;&#xA;&#xA;Update tblDzOrderToForecastAssembly&#xA;Set MAPE=100&#xA;WHERE        (MAPE &gt; 100)&#xA;Commit Transaction;&#xA;   &#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -5709,7 +5709,7 @@ HAVING     (IsAssembly = 0)</property>
           DTS:refId="Package\with family assemby\Update some metric"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{0d7e6f59-75c6-4e16-a9d3-d0f9ae6c05c4}"
+          DTS:DTSID="{5A484965-B8D1-4156-BC4F-B745CF32C1B1}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update some metric"
@@ -5717,7 +5717,7 @@ HAVING     (IsAssembly = 0)</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1140F218-854D-4517-9686-99DAF387DE2B}"
+              SQLTask:Connection="{DE71B6BE-F433-4389-A535-657267FCB098}"
               SQLTask:SqlStatementSource="Begin Transaction;&#xA;&#xA;Update tblDzOrderToForecastAssembly&#xA;Set MAPE=Case When QtyOrdered=0 AND QtyForecast&gt; 0 Then 100&#xA;     &#xA;     When (QtyOrdered+ QtyForecast)= 0 Then 0&#xA;     --When ((abs((QtyOrdered-QtyForecast)))/(QtyOrdered))*100 &gt; 100 Then 100&#xA;     Else&#xA; ( abs(QtyOrdered-QtyForecast)/QtyOrdered)*100 &#xA;    End &#xA;&#xA;    &#xA;    ,MAD=abs((QtyOrdered-QtyForecast)) &#xA;&#xA;     ,AbsDiff=abs(QtyOrdered-QtyForecast)&#xA;          ,AbsDiffMfg=    abs(QtyOrdered-QtyForecastMfg)&#xA;Commit Transaction;&#xA;&#xA;Begin Transaction;&#xA;Update tblDzOrderToForecastAssembly&#xA;Set MADCost=MAD*stdcost&#xA;Commit Transaction;&#xA;   &#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -5726,7 +5726,7 @@ HAVING     (IsAssembly = 0)</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\with family assemby.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{D2B962AC-B63A-4780-8BC7-99E0C5FADE50}"
+          DTS:DTSID="{B7BC41A7-1BAC-41E9-ABE9-2949A51297D5}"
           DTS:From="Package\with family assemby\truncate table tblDzOrderToForecastAssembly"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -5734,7 +5734,7 @@ HAVING     (IsAssembly = 0)</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\with family assemby.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{2CEE0290-64DB-42B7-BCE3-0517B518A114}"
+          DTS:DTSID="{3C07864F-8E5F-4C82-B4DD-6E772828D308}"
           DTS:From="Package\with family assemby\Load data into tblDzSAlesAop 1 1"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
@@ -5742,7 +5742,7 @@ HAVING     (IsAssembly = 0)</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\with family assemby.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{9B7FAE9A-6E7E-47B8-9C34-19D3DB66F0F8}"
+          DTS:DTSID="{8C95312F-D92F-4D73-9227-72F28B1D3AD0}"
           DTS:From="Package\with family assemby\update assemby item"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
@@ -5750,7 +5750,7 @@ HAVING     (IsAssembly = 0)</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\with family assemby.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
-          DTS:DTSID="{0261E4A8-EC85-4D02-95E1-B034FD9D3FD3}"
+          DTS:DTSID="{E1ED01C0-6CC5-4B56-AC21-0BFF0E07B19B}"
           DTS:From="Package\with family assemby\Load data into tblDzSAlesAop 1 1 1"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
@@ -5758,7 +5758,7 @@ HAVING     (IsAssembly = 0)</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\with family assemby.PrecedenceConstraints[Constraint 4]"
           DTS:CreationName=""
-          DTS:DTSID="{dd3ca5d9-c127-4350-af39-eb5a778ee4b0}"
+          DTS:DTSID="{80A79350-0E80-4CE6-B76E-EBE853E2D5F9}"
           DTS:From="Package\with family assemby\Update some metric"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
@@ -5770,7 +5770,7 @@ HAVING     (IsAssembly = 0)</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{BEC691F1-4D58-476F-934F-4A2F6EA0DDA2}"
+      DTS:DTSID="{428D53A4-7BCB-4FBF-A1D7-19FFCBF00E03}"
       DTS:From="Package\Sequence Container"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"

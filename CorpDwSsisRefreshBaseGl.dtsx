@@ -8,12 +8,12 @@
   DTS:DTSID="{AE615B7C-C5A4-4A8D-A0C5-0FE5DDC9E4EB}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:ObjectName="CorpDwSsisRefreshBaseGl"
   DTS:PackageType="5"
   DTS:VersionBuild="47"
-  DTS:VersionGUID="{ECB71B4E-0004-47BF-ADE3-F1D47C540EFD}">
+  DTS:VersionGUID="{E114E3DF-EC24-4CF9-897B-CE2E0DABF905}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

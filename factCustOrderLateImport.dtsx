@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="factCustOrderLateImport"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{1C5C00B5-5E3E-40A6-9C08-96E057509EC0}">
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{CE967D6C-9AFA-4B96-93B7-A4757155DE37}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -64,6 +64,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
+          autoAdjustBufferSize="true"
           BLOBTempStoragePath=""
           bufferTempStoragePath=""
           engineThreads="5"
@@ -94,7 +95,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -323,7 +324,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     CoNum, 1 as NoOrdersShip,SUM(ExtCorpListprice) AS CoGrossSalesShip, Sitekey, GeographicKey, SalesTerritoryKey,CustNoKey,  CustNoSeqKey,0 as NoOrdersLateDue,0 as NoOrdersLatePromise
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     CoNum, 1 as NoOrdersShip,SUM(ExtCorpListprice) AS CoGrossSalesShip, Sitekey, GeographicKey, SalesTerritoryKey,CustNoKey,  CustNoSeqKey,0 as NoOrdersLateDue,0 as NoOrdersLatePromise
 FROM         factCustomerOrders
 WHERE     (ShipDateKey IS NOT NULL)
 GROUP BY CoNum, Sitekey, GeographicKey, CustNoKey,  CustNoSeqKey, SalesTerritoryKey</property>
@@ -747,7 +748,7 @@ GROUP BY CoNum, Sitekey, GeographicKey, CustNoKey,  CustNoSeqKey, SalesTerritory
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">

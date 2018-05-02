@@ -1,0 +1,483 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/6/2015 10:28:19 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRMCORPDW01"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{1F50933F-7298-4D35-8BDF-6201AC2C179E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CorpDwSsisRefreshFact2"
+  DTS:PackageType="5"
+  DTS:VersionBuild="107"
+  DTS:VersionGUID="{B440F5A8-F7EC-4225-89C9-B5D81B2DB30F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BIRMCORPDW02.CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{07F2E653-D090-45C9-A962-9DF31C2E78B9}"
+      DTS:ObjectName="BIRMCORPDW02.CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\factAssetHoursImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{169aa120-2d0b-4080-be10-f186e561cac1}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factAssetHoursImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factAssetHoursImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factCustOrderImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{6E448745-F629-47AC-8637-81B9D4954362}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factCustOrderImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factCustOrderImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factCustOrderLateImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{7CE8A086-9F3F-4FD2-8A60-542A04ECE85C}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factCustOrderLateImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factCustOrderLateImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factCustOrderLogImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{966F7804-A2F0-404E-AE7D-2502C95F3F62}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factCustOrderLogImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factCustOrderLogImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factDzIncidentImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{9E833F5B-BC38-4AE3-8BF9-1389CF3E2C1D}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factDzIncidentImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factIncidentImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factDzScrapImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{51C90784-2257-4A71-BE52-DCDA0B8FFB57}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factDzScrapImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factDzScrapImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factGlJobRunSetupImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{6B6728AA-C0FA-446F-8597-763E6E547815}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factGlJobRunSetupImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factGlJobRunSetupImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\factKpiEmployeeLaborImport"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{1DEA3650-7633-4167-BC17-1CE0158AC0E5}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="factKpiEmployeeLaborImport"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <PackageName>\CorporateDw\factKpiEmployeeLaborImport</PackageName>
+          <Connection>{07F2E653-D090-45C9-A962-9DF31C2E78B9}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DAE511B6-7D3B-4325-B1E2-C6F2814E43EE}"
+      DTS:From="Package\factCustOrderLateImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\factDzScrapImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C8CB6F9B-7E10-47B7-8D82-7C42CCFF46FC}"
+      DTS:From="Package\factDzIncidentImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\factAssetHoursImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 13]"
+      DTS:CreationName=""
+      DTS:DTSID="{EB6FB555-4BE2-420D-A298-452F00B91CD9}"
+      DTS:From="Package\factCustOrderImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 13"
+      DTS:To="Package\factCustOrderLogImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 14]"
+      DTS:CreationName=""
+      DTS:DTSID="{1804F80D-B90A-4DED-B73D-3A53A22CB755}"
+      DTS:From="Package\factCustOrderLogImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 14"
+      DTS:To="Package\factCustOrderLateImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{206E02AA-7089-42D0-B4DA-3BEEE7CEE7D1}"
+      DTS:From="Package\factDzScrapImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\factGlJobRunSetupImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{EE068C5C-8E98-4D0A-A40E-58895C8F5A43}"
+      DTS:From="Package\factGlJobRunSetupImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\factKpiEmployeeLaborImport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{950AACC9-CEDC-4691-A1D8-844328795477}"
+      DTS:From="Package\factKpiEmployeeLaborImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\factDzIncidentImport" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181,42"
+          Id="Package\factAssetHoursImport"
+          TopLeft="252,724" />
+        <NodeLayout
+          Size="176,43"
+          Id="Package\factCustOrderImport"
+          TopLeft="19,211.5" />
+        <NodeLayout
+          Size="197,43"
+          Id="Package\factCustOrderLateImport"
+          TopLeft="8.50000000000006,417.5" />
+        <NodeLayout
+          Size="193,43"
+          Id="Package\factCustOrderLogImport"
+          TopLeft="8.5,313.5" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\factDzIncidentImport"
+          TopLeft="20.7653063824157,734.387392479655" />
+        <NodeLayout
+          Size="197,43"
+          Id="Package\factDzScrapImport"
+          TopLeft="77.0714234040707,517.147055649015" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\factGlJobRunSetupImport"
+          TopLeft="64.2142804301514,607.005879513038" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\factKpiEmployeeLaborImport"
+          TopLeft="38.7857121448127,675.276470571076" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="106.9,460.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68.5714234040706,56.4470556490149"
+              Start="0,0"
+              End="68.5714234040706,48.9470556490149">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.2235278245074" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.2235278245074"
+                    Point2="0,28.2235278245074"
+                    Point3="4,28.2235278245074" />
+                  <mssgle:LineSegment
+                    End="64.5714234040706,28.2235278245074" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64.5714234040706,28.2235278245074"
+                    Point2="68.5714234040706,28.2235278245074"
+                    Point3="68.5714234040706,32.2235278245074" />
+                  <mssgle:LineSegment
+                    End="68.5714234040706,48.9470556490149" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="198.765306382416,761.054059146322">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53.2346936175843,-16.0540591463216"
+              Start="0,0"
+              End="45.7346936175843,-16.0540591463216">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.4660174899897,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.4660174899897,0"
+                    Point2="22.4660174899897,0"
+                    Point3="22.4660174899897,-4" />
+                  <mssgle:LineSegment
+                    End="22.4660174899897,-12.0540591463216" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.4660174899897,-12.0540591463216"
+                    Point2="22.4660174899897,-16.0540591463216"
+                    Point3="26.4660174899897,-16.0540591463216" />
+                  <mssgle:LineSegment
+                    End="45.7346936175843,-16.0540591463216" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 13]"
+          TopLeft="106,254.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 14]"
+          TopLeft="106,356.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="175.471423404071,560.347055649015">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.8571429739193,46.6588238640228"
+              Start="0,0"
+              End="-12.8571429739193,39.1588238640228">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.3294119320114" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.3294119320114"
+                    Point2="0,23.3294119320114"
+                    Point3="-4,23.3294119320114" />
+                  <mssgle:LineSegment
+                    End="-8.85714297391928,23.3294119320114" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.85714297391928,23.3294119320114"
+                    Point2="-12.8571429739193,23.3294119320114"
+                    Point3="-12.8571429739193,27.3294119320114" />
+                  <mssgle:LineSegment
+                    End="-12.8571429739193,39.1588238640228" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="162.614280430151,648.605879513038">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-25.4285682853387,26.6705910580381"
+              Start="0,0"
+              End="-25.4285682853387,19.1705910580381">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.33529552901905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.33529552901905"
+                    Point2="0,13.335295529019"
+                    Point3="-4,13.335295529019" />
+                  <mssgle:LineSegment
+                    End="-21.4285682853387,13.335295529019" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.4285682853387,13.335295529019"
+                    Point2="-25.4285682853387,13.335295529019"
+                    Point3="-25.4285682853387,17.335295529019" />
+                  <mssgle:LineSegment
+                    End="-25.4285682853387,19.1705910580381" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="137.185712144813,716.876470571076">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="61.979594237603,38.3109219085793"
+              Start="0,0"
+              End="54.479594237603,38.3109219085793">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.3109219085793" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.3109219085793"
+                    Point2="0,38.3109219085793"
+                    Point3="4,38.3109219085793" />
+                  <mssgle:LineSegment
+                    End="54.479594237603,38.3109219085793" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

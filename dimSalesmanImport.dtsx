@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimSalesmanImport"
-  DTS:VersionBuild="152"
-  DTS:VersionGUID="{B04344A8-2ED2-486A-B79E-C91B3A439864}">
+  DTS:VersionBuild="153"
+  DTS:VersionGUID="{B0A430E5-87C9-44FC-A162-0FCA809D1553}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -158,7 +158,17 @@
       DTS:DTSID="{290F5FDE-CBEE-4651-8052-BBBAEADC056B}"
       DTS:ObjectName="connCorpDW" />
   </DTS:Configurations>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EFCF25A0-03A2-4FD5-8A75-D5C644F876F9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DaysBack">
+      <DTS:VariableValue
+        DTS:DataType="3">30</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:LoggingOptions
     DTS:FilterKind="0"
     DTS:LoggingMode="1" />
@@ -177,7 +187,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{29A0C9FD-F565-44E7-B050-51AD8DC77ECB}"
-          SQLTask:SqlStatementSource="&#xA;&#xA;--check LTG&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 3) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(3,'LTG','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;--check GAN&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 2) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(2,'GAN','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;--check BET&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 1) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(1,'BET','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;--check MED&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 4) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(4,'MED','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;--check BSW&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 5) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(5,'BSW','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;--check BBR&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey =6) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(6,'BBR','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#xA;--check GAN&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 2) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(2,'GAN','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;--check BET&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 1) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(1,'BET','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;&#xA;--check MED&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 4) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(4,'MED','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;--check BSW&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey = 5) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(5,'BSW','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;&#xA;&#xA;&#xA;--check BBR&#xA;Begin Transaction;&#xA;if not exists(SELECT     SalesmanKeyAlternative&#xA;FROM         dimSalesman&#xA;WHERE     (SiteKey =6) AND (SalesmanKeyAlternative = N'T00'))&#xA;Insert into dimSalesman&#xA;(SiteKey, SiteKeyAlternative,  SalesmanKeyAlternative, Salesman)&#xA;Values&#xA;(6,'BBR','T00', 'NO SALESMAN ASSIGNED')&#xA;Commit Transaction;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -221,7 +231,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -374,9 +384,10 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     1 AS SiteKey, 'BET' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     1 AS SiteKey, 'BET' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
 FROM         slsman_mst as slsman INNER JOIN
-                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num
+where    (slsman.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -397,7 +408,7 @@ FROM         slsman_mst as slsman INNER JOIN
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{EFCF25A0-03A2-4FD5-8A75-D5C644F876F9};</property>
               </properties>
               <connections>
                 <connection
@@ -577,7 +588,7 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -730,9 +741,10 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     5 AS SiteKey, 'BSW' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     5 AS SiteKey, 'BSW' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
 FROM         slsman_mst as slsman INNER JOIN
-                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num
+where    (slsman.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -753,7 +765,7 @@ FROM         slsman_mst as slsman INNER JOIN
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{EFCF25A0-03A2-4FD5-8A75-D5C644F876F9};</property>
               </properties>
               <connections>
                 <connection
@@ -933,7 +945,7 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1086,9 +1098,10 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
 FROM         slsman_mst as slsman INNER JOIN
                       employee_mst as employee ON slsman.ref_num = employee.emp_num
+where    (slsman.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 Union 
 SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, NULL as slsman, NULL as name</property>
                 <property
@@ -1111,7 +1124,7 @@ SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, NULL as slsman, NULL as na
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{EFCF25A0-03A2-4FD5-8A75-D5C644F876F9};</property>
               </properties>
               <connections>
                 <connection
@@ -1291,7 +1304,7 @@ SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, NULL as slsman, NULL as na
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1444,9 +1457,10 @@ SELECT     6 AS SiteKey, 'BBR' AS SiteKeyAlternative, NULL as slsman, NULL as na
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
 FROM         slsman_mst as slsman INNER JOIN
-                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num
+where    (slsman.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1467,7 +1481,7 @@ FROM         slsman_mst as slsman INNER JOIN
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{EFCF25A0-03A2-4FD5-8A75-D5C644F876F9};</property>
               </properties>
               <connections>
                 <connection
@@ -1647,7 +1661,7 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1800,9 +1814,10 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     4 AS SiteKey, 'MED' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     4 AS SiteKey, 'MED' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
 FROM         slsman_mst as slsman INNER JOIN
-                      employee_mst as employee ON slsman.ref_num = employee.emp_num</property>
+                      employee_mst as employee ON slsman.ref_num = employee.emp_num
+where    (slsman.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1823,7 +1838,7 @@ FROM         slsman_mst as slsman INNER JOIN
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{EFCF25A0-03A2-4FD5-8A75-D5C644F876F9};</property>
               </properties>
               <connections>
                 <connection
@@ -2008,7 +2023,7 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2159,7 +2174,7 @@ FROM         slsman_mst as slsman INNER JOIN
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     3 AS SiteKey, 'LTG' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     3 AS SiteKey, 'LTG' AS SiteKeyAlternative, slsman.slsman, employee.name + ' (' + slsman.slsman + ')' as name
 FROM         slsman INNER JOIN
                       employee ON slsman.ref_num = employee.emp_num</property>
                 <property
@@ -2411,7 +2426,7 @@ FROM         slsman INNER JOIN
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -2419,39 +2434,39 @@ FROM         slsman INNER JOIN
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="176,43"
+          Size="176,43.2"
           Id="Package\Check for T00 for All"
           TopLeft="33.8095237651752,621.5" />
         <NodeLayout
-          Size="220,43"
+          Size="220,43.2"
           Id="Package\get and append bet Salesman"
           TopLeft="11.8095237651752,313.5" />
         <NodeLayout
-          Size="227,43"
+          Size="227.2,43.2"
           Id="Package\get and append BSW Salesman"
           TopLeft="8.47619043184189,518.833333333333" />
         <NodeLayout
-          Size="227,43"
+          Size="227.2,43.2"
           Id="Package\get and append BSW Salesman 1"
           TopLeft="16.8095236409988,573.023814062277" />
         <NodeLayout
-          Size="223,43"
+          Size="223.2,43.2"
           Id="Package\get and append gan Salesman"
           TopLeft="10.4761904318418,210.833333333333" />
         <NodeLayout
-          Size="227,43"
+          Size="227.2,43.2"
           Id="Package\get and append MED Salesman"
           TopLeft="8.47619043184187,416.166666666666" />
         <NodeLayout
-          Size="117,43"
+          Size="116.8,43.2"
           Id="Package\Get LTG"
           TopLeft="63.1428570985085,108.166666666666" />
         <NodeLayout
-          Size="195,43"
+          Size="195.2,43.2"
           Id="Package\Merge into dimSalesMan"
           TopLeft="24.4761904318419,724.166666666667" />
         <NodeLayout
-          Size="211,43"
+          Size="211.2,43.2"
           Id="Package\truncate tblSalesmanImport"
           TopLeft="16.4761904318418,5.49999999999993" />
         <EdgeLayout
@@ -2590,16 +2605,108 @@ FROM         slsman INNER JOIN
     </LayoutInfo>
   </Package>
   <TaskHost
+    design-time-name="Package\get and append bet Salesman">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\get and append bet Salesman\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\get and append bet Salesman\Destination - Query"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\get and append bet Salesman.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\get and append bet Salesman\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\get and append BSW Salesman">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\get and append BSW Salesman\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\get and append BSW Salesman\Destination - Query"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\get and append BSW Salesman.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\get and append BSW Salesman\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\get and append BSW Salesman 1">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\get and append BSW Salesman 1\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\get and append BSW Salesman 1\Destination - Query"
           TopLeft="5.50000000000001,108.166666666667" />
         <EdgeLayout
@@ -2641,11 +2748,11 @@ FROM         slsman INNER JOIN
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\get and append gan Salesman\Source - Query"
           TopLeft="16,5.5" />
         <NodeLayout
-          Size="171,42"
+          Size="171.2,41.6"
           Id="Package\get and append gan Salesman\Destination - Query"
           TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
@@ -2673,5 +2780,59 @@ FROM         slsman INNER JOIN
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\get and append gan Salesman\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\get and append MED Salesman">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\get and append MED Salesman\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\get and append MED Salesman\Destination - Query"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\get and append MED Salesman.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\get and append MED Salesman\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="factSroInvoiceSalesImport"
-  DTS:VersionBuild="478"
-  DTS:VersionGUID="{8BE38A30-F1A7-4A49-A31C-4F4866D8AFDF}">
+  DTS:VersionBuild="491"
+  DTS:VersionGUID="{3DF77824-12F1-4737-BFA9-800193767027}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -54,7 +54,7 @@
       DTS:ObjectName="GAN_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=16384;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -116,7 +116,17 @@
       DTS:DTSID="{A524CCA1-062B-4899-804B-6B1154383A2B}"
       DTS:ObjectName="connMed_app" />
   </DTS:Configurations>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{12357608-5CB9-4941-B35A-9E3A97A06499}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="YearLoadFrom">
+      <DTS:VariableValue
+        DTS:DataType="3">2018</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\New  Load"
@@ -139,6 +149,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -247,7 +258,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -715,7 +726,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                        ISNULL(fs_con_inv_item.item, '000000') AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 0 AS cust_po, fs_con_inv_hdr.cust_seq,
                        RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, fs_con_inv_item.qty, 
@@ -724,7 +735,8 @@ FROM         fs_con_inv_hdr INNER JOIN
                       fs_con_inv_item ON fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num AND fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num INNER JOIN
                       fs_contract ON fs_con_inv_hdr.contract = fs_contract.contract AND fs_con_inv_hdr.cust_num = fs_contract.cust_num AND 
                       fs_con_inv_hdr.cust_seq = fs_contract.cust_seq INNER JOIN
-                      customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq</property>
+                      customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq
+where DATEPART(Year, fs_con_inv_hdr.inv_date) &gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -745,7 +757,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1285,6 +1297,7 @@ FROM         fs_con_inv_hdr INNER JOIN
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -1393,7 +1406,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1858,7 +1871,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                        ISNULL(fs_con_inv_item.item, '000000') AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 0 AS cust_po, fs_con_inv_hdr.cust_seq,
                        RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, fs_con_inv_item.qty, 
@@ -1867,7 +1880,8 @@ FROM         fs_con_inv_hdr INNER JOIN
                       fs_con_inv_item ON fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num AND fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num INNER JOIN
                       fs_contract ON fs_con_inv_hdr.contract = fs_contract.contract AND fs_con_inv_hdr.cust_num = fs_contract.cust_num AND 
                       fs_con_inv_hdr.cust_seq = fs_contract.cust_seq INNER JOIN
-                      customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq</property>
+                      customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq
+where DATEPART(Year, fs_con_inv_hdr.inv_date) &gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -1888,7 +1902,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2443,6 +2457,7 @@ FROM         fs_con_inv_hdr INNER JOIN
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               version="1">
@@ -2550,7 +2565,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -3125,7 +3140,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, fs_sro_inv_item.inv_line, 0 AS ref_release, 1 AS activity_seq, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, fs_sro_inv_item.inv_line, 0 AS ref_release, 1 AS activity_seq, 
                          CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, ISNULL(fs_sro_inv_item.item, N'000000') AS item, 
                          fs_sro_inv_item.description AS InvItemDescription, fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, 
                          RTRIM(LTRIM(fs_sro_inv_hdr.sro_num)) AS sro_num, fs_sro_inv_item.sro_line, fs_sro_inv_item.qty * fs_sro_inv_item.price AS total_billed, fs_sro_line.product_code AS sro_product_code, item.product_code, 
@@ -3138,7 +3153,8 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                          fs_sro_inv_hdr_mst AS fs_sro_inv_hdr ON fs_sro_inv_item.inv_num = fs_sro_inv_hdr.inv_num INNER JOIN
                          customer_mst AS customer ON fs_sro_inv_hdr.cust_num = customer.cust_num AND fs_sro_inv_hdr.cust_seq = customer.cust_seq INNER JOIN
                          fs_sro_line_mst AS fs_sro_line ON fs_sro_inv_item.sro_num = fs_sro_line.sro_num AND fs_sro_inv_item.sro_line = fs_sro_line.sro_line LEFT OUTER JOIN
-                         item_mst AS item ON fs_sro_inv_item.item = item.item</property>
+                         item_mst AS item ON fs_sro_inv_item.item = item.item
+where  DATEPART(Year, fs_sro_inv_hdr.inv_date)&gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -3159,7 +3175,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -4051,6 +4067,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               version="1">
@@ -4158,7 +4175,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -4733,7 +4750,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, fs_sro_inv_item.inv_line, 0 AS ref_release, 1 AS activity_seq, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, fs_sro_inv_item.inv_line, 0 AS ref_release, 1 AS activity_seq, 
                          CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, ISNULL(fs_sro_inv_item.item, N'000000') AS item, 
                          fs_sro_inv_item.description AS InvItemDescription, fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, 
                          RTRIM(LTRIM(fs_sro_inv_hdr.sro_num)) AS sro_num, fs_sro_inv_item.sro_line, fs_sro_inv_item.qty * fs_sro_inv_item.price AS total_billed, fs_sro_line.product_code AS sro_product_code,  fs_sro_line.product_code AS sro_product_code2,item.product_code, 
@@ -4746,7 +4763,8 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                          fs_sro_inv_hdr_mst AS fs_sro_inv_hdr ON fs_sro_inv_item.inv_num = fs_sro_inv_hdr.inv_num INNER JOIN
                          customer_mst AS customer ON fs_sro_inv_hdr.cust_num = customer.cust_num AND fs_sro_inv_hdr.cust_seq = customer.cust_seq INNER JOIN
                          fs_sro_line_mst AS fs_sro_line ON fs_sro_inv_item.sro_num = fs_sro_line.sro_num AND fs_sro_inv_item.sro_line = fs_sro_line.sro_line LEFT OUTER JOIN
-                         item_mst AS item ON fs_sro_inv_item.item = item.item</property>
+                         item_mst AS item ON fs_sro_inv_item.item = item.item
+ where DATEPART(Year, fs_sro_inv_hdr.inv_date)&gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -4767,7 +4785,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -5732,7 +5750,14 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{81644C9B-6882-4CC2-9BC2-59D795B7E783}"
-              SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblSroInvoiceSalesImportNewLoad]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="delete from [CorpDw].[dbo].[tblSroInvoiceSalesImportNewLoad]&#xA;WHERE        (inv_year &gt;=?)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::YearLoadFrom"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -6196,7 +6221,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -6606,7 +6631,7 @@ FROM            fs_sro_inv_item_mst AS fs_sro_inv_item INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                       ISNULL(fs_con_inv_item.item, '000000') AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 
                       0 AS cust_po, fs_con_inv_hdr.cust_seq, RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, 
@@ -7194,6 +7219,7 @@ FROM        fs_con_inv_hdr_mst AS fs_con_inv_hdr INNER JOIN
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -7329,7 +7355,7 @@ FROM        fs_con_inv_hdr_mst AS fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -7739,7 +7765,7 @@ FROM        fs_con_inv_hdr_mst AS fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                       ISNULL(fs_con_inv_item.item, '000000') AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 
                       0 AS cust_po, fs_con_inv_hdr.cust_seq, RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, 
@@ -8435,7 +8461,7 @@ FROM        fs_con_inv_hdr_mst AS fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -8834,7 +8860,7 @@ FROM        fs_con_inv_hdr_mst AS fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     inv_year, site_ref, Sitekey, inv_num, inv_line, 0 AS ref_release, activity_seq, CreateDate, ISNULL(item, '000000') AS item, inv_date, due_date, cust_num, cust_po, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     inv_year, site_ref, Sitekey, inv_num, inv_line, 0 AS ref_release, activity_seq, CreateDate, ISNULL(item, '000000') AS item, inv_date, due_date, cust_num, cust_po, 
                       cust_seq, sro_num, InvActExtPrice AS Total_Price, product_code, qty, extcost AS Total_Cost, territory_code, type, stat
 FROM         tblSroInvoiceSalesImport5</property>
                     <property
@@ -9488,7 +9514,7 @@ FROM         tblSroInvoiceSalesImport5</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -10063,7 +10089,7 @@ FROM         tblSroInvoiceSalesImport5</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr.inv_date, 
                       fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, fs_sro_labor_1.sro_line, 
                       fs_sro_labor_1.sro_num, fs_sro_labor_1.work_code, fs_sro_labor_1.bill_code, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, 
@@ -11034,6 +11060,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -11142,7 +11169,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -11717,7 +11744,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr.inv_date, 
                       fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, fs_sro_labor_1.sro_line, 
                       fs_sro_labor_1.sro_num, fs_sro_labor_1.work_code, fs_sro_labor_1.bill_code, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, 
@@ -11742,8 +11769,8 @@ GROUP BY fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.inv_num, fs_sro_inv_item.inv_nu
                       fs_sro_labor_1.bill_code, fs_sro_labor_1.hrs_to_bill, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, fs_sro_labor_1.wip_vov, 
                       fs_sro_labor_1.wip_out, fs_sro_labor_1.extcost, fs_sro_labor_1.extprice, fs_sro_labor_1.sro_oper, fs_sro_oper.total_price, fs_sro_oper.partner_id, fs_sro_oper.whse,
                        customer.territory_code, fs_sro.total_price, fs_sro_labor_1.trans_num, fs_sro.product_code, fs_sro.sro_type, inv_hdr.freight, inv_hdr.price
-HAVING      (fs_sro_labor_1.type = N'A') OR
-                      (fs_sro_labor_1.type IS NULL)
+HAVING      (fs_sro_labor_1.type = N'A') and  DATEPART(Year, fs_sro_inv_hdr.inv_date) &gt;=? OR
+                      (fs_sro_labor_1.type IS NULL) and  DATEPART(Year, fs_sro_inv_hdr.inv_date)&gt;= ?
 UNION ALL
 SELECT     DATEPART(Year, fs_sro_inv_hdr_1.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr_1.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr_1.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr_1.inv_date, 
@@ -11770,8 +11797,8 @@ GROUP BY fs_sro_inv_hdr_1.inv_date, fs_sro_inv_hdr_1.inv_num, fs_sro_inv_item_1.
                       fs_sro_matl_1.extcost, fs_sro_matl_1.extprice, fs_sro_matl_1.sro_oper, fs_sro_oper_1.total_price, fs_sro_oper_1.partner_id, fs_sro_oper_1.whse, 
                       customer_1.territory_code, fs_sro_1.total_price, fs_sro_matl_1.trans_num, fs_sro_1.product_code, fs_sro_1.sro_type, fs_sro_matl_1.item, fs_sro_matl_1.matl_qty, 
                       inv_hdr.price, inv_hdr.freight
-HAVING      (fs_sro_matl_1.type = N'A') OR
-                      (fs_sro_matl_1.type IS NULL)</property>
+HAVING      (fs_sro_matl_1.type = N'A') and  DATEPART(Year, fs_sro_inv_hdr_1.inv_date) &gt;=?  OR
+                      (fs_sro_matl_1.type IS NULL) and  DATEPART(Year, fs_sro_inv_hdr_1.inv_date) &gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -11792,7 +11819,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};"Parameter1:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};"Parameter2:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};"Parameter3:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -12686,6 +12713,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -12794,7 +12822,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -13369,7 +13397,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr.inv_date, 
                       fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, fs_sro_labor_1.sro_line, 
                       fs_sro_labor_1.sro_num, fs_sro_labor_1.work_code, fs_sro_labor_1.bill_code, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, 
@@ -13394,8 +13422,8 @@ GROUP BY fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.inv_num, fs_sro_inv_item.inv_nu
                       fs_sro_labor_1.bill_code, fs_sro_labor_1.hrs_to_bill, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, fs_sro_labor_1.wip_vov, 
                       fs_sro_labor_1.wip_out, fs_sro_labor_1.extcost, fs_sro_labor_1.extprice, fs_sro_labor_1.sro_oper, fs_sro_oper.total_price, fs_sro_oper.partner_id, fs_sro_oper.whse,
                        customer.territory_code, fs_sro.total_price, fs_sro_labor_1.trans_num, fs_sro.product_code, fs_sro.sro_type, inv_hdr.freight, inv_hdr.price
-HAVING      (fs_sro_labor_1.type = N'A') OR
-                      (fs_sro_labor_1.type IS NULL)
+HAVING      (fs_sro_labor_1.type = N'A') and  DATEPART(Year, fs_sro_inv_hdr.inv_date) &gt;=? 
+                     OR  (fs_sro_labor_1.type IS NULL) and  DATEPART(Year, fs_sro_inv_hdr.inv_date) &gt;=? 
 UNION ALL
 SELECT     DATEPART(Year, fs_sro_inv_hdr_1.inv_date) AS inv_year, 'MED' AS site_ref, 4  AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr_1.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr_1.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr_1.inv_date, 
@@ -13422,8 +13450,8 @@ GROUP BY fs_sro_inv_hdr_1.inv_date, fs_sro_inv_hdr_1.inv_num, fs_sro_inv_item_1.
                       fs_sro_matl_1.extcost, fs_sro_matl_1.extprice, fs_sro_matl_1.sro_oper, fs_sro_oper_1.total_price, fs_sro_oper_1.partner_id, fs_sro_oper_1.whse, 
                       customer_1.territory_code, fs_sro_1.total_price, fs_sro_matl_1.trans_num, fs_sro_1.product_code, fs_sro_1.sro_type, fs_sro_matl_1.item, fs_sro_matl_1.matl_qty, 
                       inv_hdr.price, inv_hdr.freight
-HAVING      (fs_sro_matl_1.type = N'A') OR
-                      (fs_sro_matl_1.type IS NULL)</property>
+HAVING      (fs_sro_matl_1.type = N'A') and  DATEPART(Year, fs_sro_inv_hdr_1.inv_date) &gt;=?  OR
+                      (fs_sro_matl_1.type IS NULL) and  DATEPART(Year, fs_sro_inv_hdr_1.inv_date) &gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -13444,7 +13472,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};"Parameter1:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};"Parameter2:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};"Parameter3:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -14631,6 +14659,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -14739,7 +14768,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -15144,7 +15173,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                       '000000' AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 0 AS cust_po, fs_con_inv_hdr.cust_seq,
                        RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, fs_con_inv_item.qty, 
@@ -15153,7 +15182,8 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                       fs_con_inv_item_mst as  fs_con_inv_item ON fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num AND fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num INNER JOIN
                       fs_contract_mst as fs_contract ON fs_con_inv_hdr.contract = fs_contract.contract AND fs_con_inv_hdr.cust_num = fs_contract.cust_num AND 
                       fs_con_inv_hdr.cust_seq = fs_contract.cust_seq INNER JOIN
-                      customer_mst as customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq</property>
+                      customer_mst as customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq
+where DATEPART(Year, fs_con_inv_hdr.inv_date)&gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -15174,7 +15204,7 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -15717,6 +15747,7 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -15825,7 +15856,7 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -16280,18 +16311,16 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        DATEPART([Year], fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
-                         fs_sro.ref_release, 1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
-                         '000000' AS item, fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, 
-                         fs_sro_inv_hdr.cust_seq, RTRIM(LTRIM(fs_sro_inv_hdr.sro_num)) AS sro_num, fs_sro.total_billed, fs_sro.product_code, fs_sro.qty, fs_sro.total_cost_lbr, 
-                         fs_sro.total_cost_matl, fs_sro.total_cost_misc, fs_sro.freight, fs_sro.freight_t, fs_sro_inv_hdr.total_price - fs_sro.freight - fs_sro.freight_t AS total_price, 
-                         fs_sro.total_cost_lbr + fs_sro.total_cost_matl + fs_sro.total_cost_misc AS total_cost, ISNULL(customer.territory_code, N'0') AS territory_code, 'R' AS type, 
-                         'O' AS stat,RANK() OVER 
-    (PARTITION BY  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num)) ORDER BY fs_sro_inv_hdr.total_price - fs_sro.freight - fs_sro.freight_t DESC) AS 'RANKING'
-
-FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
-                         dbo.fs_sro_mst as fs_sro ON fs_sro_inv_hdr.sro_num = fs_sro.sro_num INNER JOIN
-                         dbo.customer_mst as customer ON fs_sro_inv_hdr.cust_num = customer.cust_num AND fs_sro_inv_hdr.cust_seq = customer.cust_seq</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART([Year], fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, fs_sro.ref_release, 1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 
+                  10) + ' 00:00:00.000' AS Datetime) AS CreateDate, '000000' AS item, fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, 
+                  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num)) AS sro_num, fs_sro.total_billed, fs_sro.product_code, fs_sro.qty, fs_sro.total_cost_lbr, fs_sro.total_cost_matl, fs_sro.total_cost_misc, fs_sro.freight, fs_sro.freight_t, 
+                  fs_sro_inv_hdr.total_price - fs_sro.freight - fs_sro.freight_t AS total_price, fs_sro.total_cost_lbr + fs_sro.total_cost_matl + fs_sro.total_cost_misc AS total_cost, ISNULL(customer.territory_code, N'0') AS territory_code, 'R' AS type, 'O' AS stat, RANK() 
+                  OVER (PARTITION BY RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))
+ORDER BY fs_sro_inv_hdr.total_price - fs_sro.freight - fs_sro.freight_t DESC) AS 'RANKING'
+FROM        dbo.fs_sro_inv_hdr_mst AS fs_sro_inv_hdr INNER JOIN
+                  dbo.fs_sro_mst AS fs_sro ON fs_sro_inv_hdr.sro_num = fs_sro.sro_num INNER JOIN
+                  dbo.customer_mst AS customer ON fs_sro_inv_hdr.cust_num = customer.cust_num AND fs_sro_inv_hdr.cust_seq = customer.cust_seq
+where DATEPART([Year], fs_sro_inv_hdr.inv_date)&gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -16312,7 +16341,7 @@ FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -17038,6 +17067,7 @@ FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -17146,7 +17176,7 @@ FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -17601,7 +17631,7 @@ FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        DATEPART([Year], fs_sro_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        DATEPART([Year], fs_sro_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
                          fs_sro.ref_release, 1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                          '000000' AS item, fs_sro_inv_hdr.inv_date, fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, 
                          fs_sro_inv_hdr.cust_seq, RTRIM(LTRIM(fs_sro_inv_hdr.sro_num)) AS sro_num, fs_sro.total_billed, fs_sro.product_code, fs_sro.qty, fs_sro.total_cost_lbr, 
@@ -17613,7 +17643,8 @@ FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
 FROM            dbo.fs_sro_inv_hdr_mst as fs_sro_inv_hdr INNER JOIN
                          dbo.fs_sro_mst as fs_sro ON fs_sro_inv_hdr.sro_num = fs_sro.sro_num INNER JOIN
                          dbo.customer_mst as customer ON fs_sro_inv_hdr.cust_num = customer.cust_num AND fs_sro_inv_hdr.cust_seq = customer.cust_seq
-where  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))  not in ('S000000010')</property>
+where  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))  not in ('S000000010')
+and DATEPART([Year], fs_sro_inv_hdr.inv_date) &gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -17634,7 +17665,7 @@ where  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))  not in ('S000000010')</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -18321,6 +18352,7 @@ where  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))  not in ('S000000010')</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -18429,7 +18461,7 @@ where  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))  not in ('S000000010')</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -18834,7 +18866,7 @@ where  RTRIM(LTRIM(fs_sro_inv_hdr.sro_num))  not in ('S000000010')</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'MED' AS site_ref, 4 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                       '000000' AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 0 AS cust_po, fs_con_inv_hdr.cust_seq,
                        RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, fs_con_inv_item.qty, 
@@ -18843,7 +18875,9 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                       fs_con_inv_item_mst as  fs_con_inv_item ON fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num AND fs_con_inv_hdr.inv_num = fs_con_inv_item.inv_num INNER JOIN
                       fs_contract_mst as fs_contract ON fs_con_inv_hdr.contract = fs_contract.contract AND fs_con_inv_hdr.cust_num = fs_contract.cust_num AND 
                       fs_con_inv_hdr.cust_seq = fs_contract.cust_seq INNER JOIN
-                      customer_mst as customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq</property>
+                      customer_mst as customer ON fs_con_inv_hdr.cust_num = customer.cust_num AND fs_con_inv_hdr.cust_seq = customer.cust_seq
+
+where DATEPART(Year, fs_con_inv_hdr.inv_date) &gt;=?</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -18864,7 +18898,7 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{12357608-5CB9-4941-B35A-9E3A97A06499};</property>
                   </properties>
                   <connections>
                     <connection
@@ -19598,7 +19632,7 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -20003,7 +20037,7 @@ FROM         fs_con_inv_hdr_mst as  fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_con_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_con_inv_hdr.inv_num)) AS inv_num, 0 AS ref_release, 
                       1 AS activity_seq, fs_con_inv_item.cont_line, CAST(LEFT(CONVERT(varchar(30), fs_con_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, 
                       '000000' AS item, fs_con_inv_hdr.inv_date, fs_con_inv_hdr.due_date, RTRIM(LTRIM(fs_con_inv_hdr.cust_num)) AS cust_num, 0 AS cust_po, fs_con_inv_hdr.cust_seq,
                        RTRIM(LTRIM(fs_con_inv_hdr.contract)) AS contract, fs_con_inv_hdr.total_amount AS total_billed, fs_contract.product_code, fs_con_inv_item.qty, 
@@ -20606,7 +20640,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -21139,7 +21173,7 @@ FROM         fs_con_inv_hdr INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr.inv_date, 
                       fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, fs_sro_labor_1.sro_line, 
                       fs_sro_labor_1.sro_num, fs_sro_labor_1.work_code, fs_sro_labor_1.bill_code, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, 
@@ -22108,7 +22142,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -22641,7 +22675,7 @@ HAVING      (fs_sro_matl_1.type = N'A') OR
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DATEPART(Year, fs_sro_inv_hdr.inv_date) AS inv_year, 'GAN' AS site_ref, 2 AS Sitekey, RTRIM(LTRIM(fs_sro_inv_hdr.inv_num)) AS inv_num, 1 AS inv_line, 
                       1 AS activity_seq, CAST(LEFT(CONVERT(varchar(30), fs_sro_inv_hdr.CreateDate, 120), 10) + ' 00:00:00.000' AS Datetime) AS CreateDate, fs_sro_inv_hdr.inv_date, 
                       fs_sro_inv_hdr.due_date, RTRIM(LTRIM(fs_sro_inv_hdr.cust_num)) AS cust_num, fs_sro_inv_hdr.cust_po, fs_sro_inv_hdr.cust_seq, fs_sro_labor_1.sro_line, 
                       fs_sro_labor_1.sro_num, fs_sro_labor_1.work_code, fs_sro_labor_1.bill_code, fs_sro_labor_1.wip_matl, fs_sro_labor_1.wip_lbr, fs_sro_labor_1.wip_fov, 
@@ -23656,7 +23690,7 @@ HAVING      (fs_sro_matl_1.type = N'A')</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -24051,7 +24085,7 @@ HAVING      (fs_sro_matl_1.type = N'A')</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     inv_year, site_ref, Sitekey, inv_num, inv_line, 0 AS ref_release, activity_seq, CreateDate, '000000' AS item, inv_date, due_date, cust_num, cust_po, cust_seq, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     inv_year, site_ref, Sitekey, inv_num, inv_line, 0 AS ref_release, activity_seq, CreateDate, '000000' AS item, inv_date, due_date, cust_num, cust_po, cust_seq, 
                       0 AS sro_num, TotalInvPrice AS Total_Price, product_code, 0 AS Qty, SUM(extcost) AS Total_Cost, territory_code, type, stat
 FROM         tblSroInvoiceSalesImport2
 GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDate, inv_date, due_date, cust_num, cust_po, cust_seq, territory_code, type, stat, TotalInvPrice, 
@@ -24750,7 +24784,14 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{81644C9B-6882-4CC2-9BC2-59D795B7E783}"
-              SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblSroInvoiceSalesImport]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="delete from tblSroInvoiceSalesImport&#xA;WHERE        (inv_year &gt;=?)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::YearLoadFrom"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -24795,7 +24836,7 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -24803,63 +24844,63 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
       <GraphLayout
         Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="324,43"
+          Size="324,43.2"
           Id="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport"
           TopLeft="99.5000000000002,1340.16666666667" />
         <NodeLayout
-          Size="323,43"
+          Size="323.2,43.2"
           Id="Package\New  Load\get and append gan contract FS  tblSroSAlesImport"
           TopLeft="100.166666666667,1237.5" />
         <NodeLayout
-          Size="211,43"
+          Size="211.2,43.2"
           Id="Package\New  Load\Merge ExtCost for Template"
           TopLeft="156.166666666667,313.499999999999" />
         <NodeLayout
-          Size="151,43"
+          Size="151.2,43.2"
           Id="Package\New  Load\New Load-GAN"
           TopLeft="186.166666666667,108.166666666666" />
         <NodeLayout
-          Size="149,43"
+          Size="148.8,43.2"
           Id="Package\New  Load\New Load-Med"
           TopLeft="186.833333333333,210.833333333333" />
         <NodeLayout
-          Size="297,43"
+          Size="296.8,43.2"
           Id="Package\New  Load\Override any that are marked ZONE CHARGES"
           TopLeft="112.833333333333,1032.16666666667" />
         <NodeLayout
-          Size="188,43"
+          Size="188,43.2"
           Id="Package\New  Load\Set cost to 0 for others"
           TopLeft="167.5,724.166666666665" />
         <NodeLayout
-          Size="277,43"
+          Size="276.8,43.2"
           Id="Package\New  Load\Set Cost to 0 for Warranty and No Charge"
           TopLeft="122.833333333333,621.499999999999" />
         <NodeLayout
-          Size="243,43"
+          Size="243.2,43.2"
           Id="Package\New  Load\Truncate tblSroInvoiceSalesImport"
           TopLeft="140.166666666667,5.49999999999993" />
         <NodeLayout
-          Size="168,43"
+          Size="168,43.2"
           Id="Package\New  Load\Update Core Items"
           TopLeft="177.5,826.833333333332" />
         <NodeLayout
-          Size="257,43"
+          Size="256.8,43.2"
           Id="Package\New  Load\Update Cost For P and item is '00000'"
           TopLeft="132.833333333333,416.166666666666" />
         <NodeLayout
-          Size="195,43"
+          Size="195.2,43.2"
           Id="Package\New  Load\Update Install Tempates"
           TopLeft="164.166666666667,929.499999999999" />
         <NodeLayout
-          Size="209,43"
+          Size="208.8,43.2"
           Id="Package\New  Load\Update item that are 00000"
           TopLeft="156.833333333333,1134.83333333333" />
         <NodeLayout
-          Size="221,43"
+          Size="220.8,43.2"
           Id="Package\New  Load\Update product codes missing"
           TopLeft="150.833333333333,518.833333333332" />
         <NodeLayout
-          Size="512,43"
+          Size="512,43.2"
           Id="Package\New  Load\Update tblSroInvoiceSalesImportNewLoad order end type and OrderClassificationAlternative"
           TopLeft="5.50000000000017,1442.83333333333" />
         <EdgeLayout
@@ -25173,84 +25214,84 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="523,1541"
-          Size="523,1583"
+          PanelSize="523.2,1540.8"
+          Size="523.2,1583.2"
           Id="Package\New  Load"
           TopLeft="643.5,931.5" />
         <NodeLayout
-          Size="159,43"
+          Size="159.2,43.2"
           Id="Package\Process for Strataview\Check Difference"
           TopLeft="166.833333333333,1134.83333333333" />
         <NodeLayout
-          Size="168,43"
+          Size="168,43.2"
           Id="Package\Process for Strataview\Check Difference 1"
           TopLeft="162.166666666667,1237.5" />
         <NodeLayout
-          Size="109,43"
+          Size="108.8,43.2"
           Id="Package\Process for Strataview\Delete"
           TopLeft="191.5,518.833333333334" />
         <NodeLayout
-          Size="241,43"
+          Size="240.8,43.2"
           Id="Package\Process for Strataview\Delete 000000 items with no price"
           TopLeft="125.5,1340.16666666667" />
         <NodeLayout
-          Size="164,43"
+          Size="164,43.2"
           Id="Package\Process for Strataview\Execute SQL Task"
           TopLeft="164.166666666667,621.500000000001" />
         <NodeLayout
-          Size="326,43"
+          Size="326.4,43.2"
           Id="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6"
           TopLeft="83.1666666666669,1750.83333333333" />
         <NodeLayout
-          Size="328,43"
+          Size="328,43.2"
           Id="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6"
           TopLeft="82.1666666666669,1648.16666666667" />
         <NodeLayout
-          Size="291,43"
+          Size="291.2,43.2"
           Id="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport"
           TopLeft="100.833333333333,1545.5" />
         <NodeLayout
-          Size="268,43"
+          Size="268,43.2"
           Id="Package\Process for Strataview\get and append gan FS with actual item"
           TopLeft="112.166666666667,108.166666666667" />
         <NodeLayout
-          Size="348,43"
+          Size="348,43.2"
           Id="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue"
           TopLeft="72.1666666666667,210.833333333334" />
         <NodeLayout
-          Size="361,43"
+          Size="360.8,43.2"
           Id="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1"
           TopLeft="65.5,313.500000000001" />
         <NodeLayout
-          Size="248,43"
+          Size="248,43.2"
           Id="Package\Process for Strataview\Truncate tblSroInvoiceSalesImport6"
           TopLeft="122.166666666667,1442.83333333333" />
         <NodeLayout
-          Size="315,43"
+          Size="315.2,43.2"
           Id="Package\Process for Strataview\Truncate truncate table tblSroInvoiceSalesesImpo"
           TopLeft="88.8333333333333,5.50000000000015" />
         <NodeLayout
-          Size="233,43"
+          Size="232.8,43.2"
           Id="Package\Process for Strataview\Update  InvActExtPrice for Labor"
           TopLeft="129.5,1032.16666666667" />
         <NodeLayout
-          Size="245,43"
+          Size="244.8,43.2"
           Id="Package\Process for Strataview\Update  InvActExtPrice for material"
           TopLeft="123.5,929.5" />
         <NodeLayout
-          Size="177,43"
+          Size="176.8,43.2"
           Id="Package\Process for Strataview\Update TotalActPrice"
           TopLeft="157.5,416.166666666668" />
         <NodeLayout
-          Size="204,43"
+          Size="204,43.2"
           Id="Package\Process for Strataview\Update TotalActPriceLabor"
           TopLeft="144.166666666667,724.166666666667" />
         <NodeLayout
-          Size="204,43"
+          Size="204,43.2"
           Id="Package\Process for Strataview\Update TotalInvPriceLabor"
           TopLeft="144.166666666667,826.833333333334" />
         <NodeLayout
-          Size="481,43"
+          Size="480.8,43.2"
           Id="Package\Process for Strataview\Update ttblSroInvoiceSalesImport6  order end type and OrderClassificationAlternative"
           TopLeft="5.50000000000023,1853.5" />
         <EdgeLayout
@@ -25652,16 +25693,16 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="492,1951"
-          Size="492,1994"
+          PanelSize="492,1951.2"
+          Size="492,1993.6"
           Id="Package\Process for Strataview"
           TopLeft="658.833333333334,2574.83333333333" />
         <NodeLayout
-          Size="323,43"
+          Size="323.2,43.2"
           Id="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport"
           TopLeft="5.50000000000003,108.166666666667" />
         <NodeLayout
-          Size="291,43"
+          Size="291.2,43.2"
           Id="Package\Process GAN\get and append gan FS to tblSroSAlesImport"
           TopLeft="21.5,5.50000000000004" />
         <EdgeLayout
@@ -25689,36 +25730,48 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="334,206"
-          Size="334,249"
+          PanelSize="334.4,206.4"
+          Size="334.4,248.8"
           Id="Package\Process GAN"
           TopLeft="737.833333333333,211.5" />
         <NodeLayout
-          Size="164,43"
+          Size="164,43.2"
           Id="Package\Process MED\Execute SQL Task"
           TopLeft="86.1666666666667,210.833333333334" />
         <NodeLayout
-          Size="291,43"
+          Size="291.2,43.2"
           Id="Package\Process MED\get and append gan FS to tblSroSAlesImport"
           TopLeft="22.8333333333333,5.50000000000004" />
         <NodeLayout
-          Size="325,43"
+          Size="324.8,43.2"
           Id="Package\Process MED\get and append med contract FS  tblSroSAlesImport"
-          TopLeft="5.5,108.166666666667" />
+          TopLeft="22.5,106.166666666667" />
         <EdgeLayout
           Id="Package\Process MED.PrecedenceConstraints[Constraint]"
-          TopLeft="168.166666666667,48.1666666666667">
+          TopLeft="168.333333333333,48.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="16.6666666666667,57.6666666666669"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="16.6666666666667,50.1666666666669">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,24.8333333333335" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.8333333333335"
+                    Point2="0,28.8333333333335"
+                    Point3="4,28.8333333333335" />
+                  <mssgle:LineSegment
+                    End="12.6666666666667,28.8333333333335" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.6666666666667,28.8333333333335"
+                    Point2="16.6666666666667,28.8333333333335"
+                    Point3="16.6666666666667,32.8333333333335" />
+                  <mssgle:LineSegment
+                    End="16.6666666666667,50.1666666666669" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -25729,18 +25782,30 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Process MED.PrecedenceConstraints[Constraint 1]"
-          TopLeft="168.166666666667,150.833333333333">
+          TopLeft="185,149.166666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="-16.8333333333333,61.666666666667"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="-16.8333333333333,54.166666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,26.8333333333335" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.8333333333335"
+                    Point2="0,30.8333333333335"
+                    Point3="-4,30.8333333333335" />
+                  <mssgle:LineSegment
+                    End="-12.8333333333333,30.8333333333335" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12.8333333333333,30.8333333333335"
+                    Point2="-16.8333333333333,30.8333333333335"
+                    Point3="-16.8333333333333,34.8333333333335" />
+                  <mssgle:LineSegment
+                    End="-16.8333333333333,54.166666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -25752,52 +25817,52 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="336,309"
-          Size="336,351"
+          PanelSize="352,308.8"
+          Size="352,352"
           Id="Package\Process MED"
           TopLeft="736.833333333333,520.166666666666" />
         <NodeLayout
-          Size="225,43"
+          Size="224.8,43.2"
           Id="Package\Sequence Container\Coorect bill type for warranties"
           TopLeft="313.166666666667,416.166666666666" />
         <NodeLayout
-          Size="208,43"
+          Size="208,43.2"
           Id="Package\Sequence Container\Coorrect ExtCost for others"
           TopLeft="321.833333333333,621.499999999999" />
         <NodeLayout
-          Size="164,43"
+          Size="164,43.2"
           Id="Package\Sequence Container\Execute SQL Task"
           TopLeft="343.833333333333,210.833333333333" />
         <NodeLayout
-          Size="323,43"
+          Size="323.2,43.2"
           Id="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport"
           TopLeft="264.5,929.5" />
         <NodeLayout
-          Size="189,43"
+          Size="188.8,43.2"
           Id="Package\Sequence Container\get and append gan FS"
           TopLeft="331.166666666667,108.166666666666" />
         <NodeLayout
-          Size="199,43"
+          Size="199.2,43.2"
           Id="Package\Sequence Container\get and append gan FS 1"
           TopLeft="5.5000000000001,929.5" />
         <NodeLayout
-          Size="291,43"
+          Size="291.2,43.2"
           Id="Package\Sequence Container\get and append gan FS to tblSroSAlesImport"
           TopLeft="280.5,826.833333333333" />
         <NodeLayout
-          Size="315,43"
+          Size="315.2,43.2"
           Id="Package\Sequence Container\Truncate truncate table tblSroInvoiceSalesesImpo"
           TopLeft="268.5,5.49999999999993" />
         <NodeLayout
-          Size="188,43"
+          Size="188,43.2"
           Id="Package\Sequence Container\Update  InvActExtPrice"
           TopLeft="331.833333333333,313.499999999999" />
         <NodeLayout
-          Size="134,43"
+          Size="134.4,43.2"
           Id="Package\Sequence Container\Update Any"
           TopLeft="358.833333333333,724.166666666666" />
         <NodeLayout
-          Size="197,43"
+          Size="196.8,43.2"
           Id="Package\Sequence Container\Update ExtCost for non L"
           TopLeft="327.166666666667,518.833333333333" />
         <EdgeLayout
@@ -26001,19 +26066,19 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="593,1027"
-          Size="593,1070"
+          PanelSize="592.8,1027.2"
+          Size="592.8,1070.4"
           Id="Package\Sequence Container"
           TopLeft="5.5000000000004,3036.83333333333" />
         <NodeLayout
-          Size="243,43"
+          Size="243.2,43.2"
           Id="Package\Some preliminary work\Truncate tblSroInvoiceSalesImport"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="253,103"
-          Size="253,146"
+          PanelSize="252.8,103.2"
+          Size="252.8,145.6"
           Id="Package\Some preliminary work"
           TopLeft="778.166666666667,5.5" />
         <EdgeLayout
@@ -26040,18 +26105,30 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="904.833333333333,460.166666666666">
+          TopLeft="904.833333333333,460.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="8,59.6666666666659"
               Start="0,0"
-              End="0,52.5">
+              End="8,52.1666666666659">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,25.833333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.833333333333"
+                    Point2="0,29.833333333333"
+                    Point3="4,29.833333333333" />
+                  <mssgle:LineSegment
+                    End="4,29.833333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,29.833333333333"
+                    Point2="8,29.833333333333"
+                    Point3="8,33.833333333333" />
+                  <mssgle:LineSegment
+                    End="8,52.1666666666659" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -26084,18 +26161,18 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="904.833333333333,871.5">
+          TopLeft="908.916666666667,872.166666666666">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="0,59.3333333333341"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="0,51.8333333333341">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,51.8333333333341" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -26108,20 +26185,92 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
     </LayoutInfo>
   </Package>
   <TaskHost
+    design-time-name="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\New  Load\get and append Exs  contract FS  tblSroSAlesImport\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\New  Load\get and append gan contract FS  tblSroSAlesImport">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\New  Load\get and append gan contract FS  tblSroSAlesImport\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\New  Load\get and append gan contract FS  tblSroSAlesImport\Destination - Query"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\New  Load\get and append gan contract FS  tblSroSAlesImport\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -26171,21 +26320,29 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\New  Load\get and append gan contract FS  tblSroSAlesImport\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\New  Load\New Load-GAN">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\New  Load\New Load-GAN\OLE DB Destination"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\New  Load\New Load-GAN\OLE DB Source"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\New  Load\New Load-GAN\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -26235,21 +26392,565 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\New  Load\New Load-GAN\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\New  Load\New Load-Med">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\New  Load\New Load-Med\OLE DB Destination"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\New  Load\New Load-Med\OLE DB Source"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\New  Load\New Load-Med\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\New  Load\New Load-Med.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\New  Load\New Load-Med.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\New  Load\New Load-Med\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6\Source - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append Exs contract FS  tblSroSAlesImport6.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan contract FS  tblSroSAlesImport6.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan FS to tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process for Strataview\get and append gan FS with actual item">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process for Strataview\get and append gan FS with actual item\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process for Strataview\get and append gan FS with actual item\Source - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Process for Strataview\get and append gan FS with actual item\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan FS with actual item.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan FS with actual item.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process for Strataview\get and append gan FS with actual item-fix 960009 issue\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process for Strataview\get and append MED FS with actual item-fix 960009 issue 1\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process GAN\get and append gan contract FS  tblSroSAlesImport\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Process GAN\get and append gan FS to tblSroSAlesImport">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\Process GAN\get and append gan FS to tblSroSAlesImport\Destination - Query"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\Process GAN\get and append gan FS to tblSroSAlesImport\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\Process GAN\get and append gan FS to tblSroSAlesImport\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -26294,6 +26995,350 @@ GROUP BY inv_year, site_ref, Sitekey, inv_num, inv_line, activity_seq, CreateDat
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process GAN\get and append gan FS to tblSroSAlesImport\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process MED\get and append gan FS to tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process MED\get and append gan FS to tblSroSAlesImport\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process MED\get and append gan FS to tblSroSAlesImport\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process MED\get and append gan FS to tblSroSAlesImport\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process MED\get and append gan FS to tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process MED\get and append gan FS to tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED\get and append gan FS to tblSroSAlesImport\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Process MED\get and append med contract FS  tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Process MED\get and append med contract FS  tblSroSAlesImport\Destination - Query"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Process MED\get and append med contract FS  tblSroSAlesImport\Source - Query"
+          TopLeft="15.9,5.49999999999995" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Process MED\get and append med contract FS  tblSroSAlesImport\Data Conversion"
+          TopLeft="13.1,107.1" />
+        <EdgeLayout
+          Id="Package\Process MED\get and append med contract FS  tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process MED\get and append med contract FS  tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="90.7,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED\get and append med contract FS  tblSroSAlesImport\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport\Source - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\get and append gan contract FS  tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Sequence Container\get and append gan FS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS\Source - Query"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Sequence Container\get and append gan FS.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Sequence Container\get and append gan FS 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS 1\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS 1\Source - Query"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Sequence Container\get and append gan FS 1.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Sequence Container\get and append gan FS to tblSroSAlesImport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS to tblSroSAlesImport\Destination - Query"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS to tblSroSAlesImport\Data Conversion"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Sequence Container\get and append gan FS to tblSroSAlesImport\Source - Query"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Sequence Container\get and append gan FS to tblSroSAlesImport.Paths[Data Conversion Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\get and append gan FS to tblSroSAlesImport.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

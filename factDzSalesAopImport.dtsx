@@ -1,26 +1,25 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="2/22/2012 9:47:53 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="BIRM01886B"
   DTS:CreatorName="BETLAN\administrator"
-  DTS:DTSID="{F258702E-1E9B-4BE6-99A7-DFB3ABD5ADF3}"
-  DTS:EnableConfig="True"
+  DTS:DTSID="{29014665-CE18-45B7-AFA5-2B4696FA996C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="13.0.2164.0"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:ObjectName="factDzSalesAopImport"
   DTS:PackageType="5"
-  DTS:VersionBuild="153"
-  DTS:VersionGUID="{DA367EC9-E938-4F16-90DD-250BD8F475FF}">
+  DTS:VersionBuild="156"
+  DTS:VersionGUID="{A77434DD-FDD8-4E7E-B440-CC5E58439884}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Bet_App]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{C5623642-36FE-4FAC-A828-F133FA196AAC}"
+      DTS:DTSID="{B0B3910D-5714-4692-906F-9A09CAD0CB09}"
       DTS:ObjectName="Bet_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -30,17 +29,17 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[CorpDw]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+      DTS:DTSID="{C89ED887-DF76-49E2-9E84-4AA359EEC328}"
       DTS:ObjectName="CorpDw">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMCORPDW01;Initial Catalog=CorpDw;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[CorpMain]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{A674CDF9-381C-490A-82C3-C295A3FEF3F3}"
+      DTS:DTSID="{197CE93E-A72C-4D61-B34D-A4A8BC45D63B}"
       DTS:ObjectName="CorpMain">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -50,7 +49,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[GAN_App]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{A172360E-5FD5-45E9-B594-74516299FE47}"
+      DTS:DTSID="{21E75DC6-9380-47B3-B091-4485BA62F02A}"
       DTS:ObjectName="GAN_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -63,25 +62,25 @@
       DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
       DTS:ConfigurationType="1"
       DTS:CreationName=""
-      DTS:DTSID="{B6643DF9-E991-406F-BB94-A7181ED043B9}"
+      DTS:DTSID="{DC8831A6-9C69-4498-B634-210FD3F9176A}"
       DTS:ObjectName="CorpMain" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{78D58AE9-A130-402C-B317-80FD0F85C5D3}"
+      DTS:DTSID="{2C1B8D5A-5FFA-416C-BEF7-1BB239674918}"
       DTS:ObjectName="connBett_app" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{5107FC91-BD30-4DA8-BDC1-B270A8124987}"
+      DTS:DTSID="{D4A7086E-AC48-45AB-AA7D-8DEEA79A9298}"
       DTS:ObjectName="connCorpDW" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{458E4D69-E825-45AC-9139-C38BEAFC5823}"
+      DTS:DTSID="{8A1D898C-7E1F-4B68-B18C-585F71ACBA2C}"
       DTS:ObjectName="connGan_app" />
   </DTS:Configurations>
   <DTS:Variables />
@@ -90,7 +89,7 @@
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{4E06D77E-0AEF-4736-B6E2-D5898E4DDDAC}"
+      DTS:DTSID="{F7C19A42-9DB1-46FC-9F10-4E89165E915C}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -100,7 +99,7 @@
           DTS:refId="Package\Sequence Container\Load data into tblDzSAlesAop 1"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{D2047BC3-35DD-4674-A4E0-00A776E1FDC0}"
+          DTS:DTSID="{B6BA165C-23AE-40C8-990F-2A77D9763290}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load data into tblDzSAlesAop 1"
@@ -137,7 +136,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -575,7 +574,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">with cteData
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">with cteData
 as
 (
 
@@ -1305,7 +1304,7 @@ TerritoryKey,
           DTS:refId="Package\Sequence Container\truncate table tblDzSalesAop"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{E2CC0EAB-1CFD-43B7-B804-6FF2E4DF84EC}"
+          DTS:DTSID="{160EDCAA-BD10-4BFA-9348-B2A7849C996C}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="truncate table tblDzSalesAop"
@@ -1314,7 +1313,7 @@ TerritoryKey,
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+              SQLTask:Connection="{C89ED887-DF76-49E2-9E84-4AA359EEC328}"
               SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzSalesAop]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -1322,7 +1321,7 @@ TerritoryKey,
           DTS:refId="Package\Sequence Container\Update continent"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{7bda5db1-1800-4407-9561-0cf537a40575}"
+          DTS:DTSID="{41A3C6F7-8658-4CB6-84C7-4ADBC3A2050B}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update continent"
@@ -1330,7 +1329,7 @@ TerritoryKey,
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+              SQLTask:Connection="{C89ED887-DF76-49E2-9E84-4AA359EEC328}"
               SQLTask:SqlStatementSource=" MERGE tblDzSalesAop AS target  &#xA;    USING (SELECT        Country, Continent&#xA;FROM            tblCountryContinent&#xA;   ) AS source  &#xA;    ON (target.CountryCode = source.Country)  &#xA;    WHEN MATCHED THEN   &#xA;        UPDATE SET target.Continent = source.Continent; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -1338,7 +1337,7 @@ TerritoryKey,
           DTS:refId="Package\Sequence Container\Update State from Abbrev"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{35320BC3-3BF9-4E3F-B52E-DF955FC8BD85}"
+          DTS:DTSID="{164B9AAF-D29D-4A15-AAA5-5602FF03C01F}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update State from Abbrev"
@@ -1346,7 +1345,7 @@ TerritoryKey,
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{8A83431C-530A-461B-A0DA-3CACE91956B7}"
+              SQLTask:Connection="{C89ED887-DF76-49E2-9E84-4AA359EEC328}"
               SQLTask:SqlStatementSource=" MERGE tblDzSalesAop AS target  &#xA;    USING (SELECT     tblStatesAbbrev.State&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;, tblStatesAbbrev.Abbreviation&#xA;&#x9;&#x9;&#x9;FROM            tblStatesAbbrev&#xA;&#x9;&#x9;&#x9;) AS source  &#xA;    ON (target.State = source.Abbreviation)  &#xA;    WHEN MATCHED THEN   &#xA;        UPDATE SET target.State = source.State; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -1355,7 +1354,7 @@ TerritoryKey,
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{AB3E1135-3168-4FED-A567-E96AA2D7C50F}"
+          DTS:DTSID="{AA7C21B9-9045-4697-82CE-C3AAB5609C66}"
           DTS:From="Package\Sequence Container\truncate table tblDzSalesAop"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -1363,7 +1362,7 @@ TerritoryKey,
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{9C9C717D-4425-4CE1-B481-10E4FBDC3922}"
+          DTS:DTSID="{E55653EA-9D8C-43D8-B8BC-978DAE5509DB}"
           DTS:From="Package\Sequence Container\Load data into tblDzSAlesAop 1"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
@@ -1371,7 +1370,7 @@ TerritoryKey,
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{2CE30D2F-355F-4193-B2CD-09ED662B30E9}"
+          DTS:DTSID="{34E3947D-967B-41CA-B39A-B0FE8C7F36B3}"
           DTS:From="Package\Sequence Container\Update State from Abbrev"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
@@ -1392,19 +1391,19 @@ TerritoryKey,
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="226.666666666667,42.6666666666667"
+          Size="227,43"
           Id="Package\Sequence Container\Load data into tblDzSAlesAop 1"
           TopLeft="7.58333330228926,73.5000006198886" />
         <NodeLayout
-          Size="214.666666666667,42.6666666666667"
+          Size="215,43"
           Id="Package\Sequence Container\truncate table tblDzSalesAop"
           TopLeft="11.5,5.50000000000004" />
         <NodeLayout
-          Size="160,42.6666666666667"
+          Size="160,43"
           Id="Package\Sequence Container\Update continent"
           TopLeft="52.3055546966692,201.44444023437" />
         <NodeLayout
-          Size="202.666666666667,42.6666666666667"
+          Size="203,43"
           Id="Package\Sequence Container\Update State from Abbrev"
           TopLeft="36.3333327124516,142.666663257281" />
         <EdgeLayout
@@ -1494,10 +1493,10 @@ TerritoryKey,
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="381.333333333334,300"
-          Size="381.333333333334,342.666666666667"
+          PanelSize="381,300"
+          Size="381,343"
           Id="Package\Sequence Container"
-          TopLeft="5.50000000000003,5.50000000000006" />
+          TopLeft="5.50000000000003,4.50000000000006" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1507,11 +1506,11 @@ TerritoryKey,
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="151,43"
           Id="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Source"
           TopLeft="28,4.63333334883059" />
         <NodeLayout
-          Size="181.333333333334,42.6666666666667"
+          Size="181,43"
           Id="Package\Sequence Container\Load data into tblDzSAlesAop 1\OLE DB Destination 1"
           TopLeft="15.5833332898715,109.033333317836" />
         <EdgeLayout

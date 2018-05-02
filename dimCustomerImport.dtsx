@@ -13,8 +13,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimCustomerImport"
-  DTS:VersionBuild="377"
-  DTS:VersionGUID="{2B7DB5A4-BD95-4DB1-8AC0-8F91C16E0FED}">
+  DTS:VersionBuild="394"
+  DTS:VersionGUID="{C2A97E40-FBD6-4D42-8037-F8F8B60003B9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
       DTS:ObjectName="Bet_App">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=16732;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -45,7 +45,7 @@
       DTS:ObjectName="CorpDw">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Packet Size=16732;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -133,7 +133,17 @@
       DTS:DTSID="{D52875B7-2FA0-499F-A52E-569B8B3B71D1}"
       DTS:ObjectName="connCorpMainXml" />
   </DTS:Configurations>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2FF73071-50B9-416F-84CE-BE0D02634206}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DaysBack">
+      <DTS:VariableValue
+        DTS:DataType="3">1825</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\append BBR customers"
@@ -160,6 +170,23 @@
             <SQLTask:SqlTaskData
               SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
               SQLTask:SqlStatementSource="if not exists (SELECT     SiteKey, CompanyNo, CustNoAlternateKey, CustNoSeqKey&#xA;&#xA;FROM         dimCustomer&#xA;WHERE     (SiteKey = 6) AND (CustNoAlternateKey = N'0') AND (CustNoSeqKey = 0))&#xA;&#xA;Begin&#xA; &#xA;&#xA;INSERT INTO [CorpDw].[dbo].[dimCustomer]&#xA;           ([SiteKey]&#xA;           ,[SiteKeyAlternative]&#xA;           ,[CustNoAlternateKey]&#xA;           ,[Customer]&#xA;           ,[CustNoSeqKey]&#xA;  ,[CorpCustNoAlternateKey] &#xA;      ,[CompanyNo]     )&#xA;     VALUES&#xA;           (6&#xA;           ,'BBR'&#xA;           ,0&#xA;           ,'New Customer-Domestic'&#xA;           ,0&#xA; ,0&#xA;,1)&#xA;End&#xA;GO&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\append BBR customers\delete bbr dups"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6EA9868B-2672-4BBB-8A6E-0CB51654E2EF}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="delete bbr dups"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
+              SQLTask:SqlStatementSource="With cte_duplicate (CustNoAlternateKey,rownumber)&#xA;as (&#xA;select CustNoAlternateKey , row_number()over(partition by CustNoAlternateKey order by CustNoAlternateKey)as rank from tblCustomerShipToImport&#xA;where sitekey=6&#xA;)&#xA;&#xA;&#xA;&#xA;delete from cte_duplicate where rownumber&lt;&gt;1  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -194,7 +221,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomerShipTo]</property>
+                      name="OpenRowset">[dbo].[tblCustomerShipToImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -203,7 +230,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -396,8 +423,9 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT sitekey, site_ref AS ship_site, cust_num, 0 AS cust_seq, cust_name, cust_num AS corp_cust, NULL AS CustAddr, 'BBR' as CurrencyCode
-FROM            tblInvoiceSalesImportBBR</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT sitekey, site_ref AS ship_site, cust_num, 0 AS cust_seq, cust_name, cust_num AS corp_cust, NULL AS CustAddr, 'BBR' as CurrencyCode
+FROM            tblInvoiceSalesImportBBR
+where (inv_date &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -418,7 +446,7 @@ FROM            tblInvoiceSalesImportBBR</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -645,6 +673,7 @@ FROM            tblInvoiceSalesImportBBR</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -666,7 +695,7 @@ FROM            tblInvoiceSalesImportBBR</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomer]</property>
+                      name="OpenRowset">[dbo].[tblCustomerImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -675,7 +704,7 @@ FROM            tblInvoiceSalesImportBBR</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -798,10 +827,6 @@ FROM            tblInvoiceSalesImportBBR</property>
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoKey]"
-                          dataType="i4"
-                          name="CustNoKey" />
-                        <externalMetadataColumn
                           refId="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
                           dataType="wstr"
                           length="100"
@@ -834,10 +859,6 @@ FROM            tblInvoiceSalesImportBBR</property>
                           refId="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
                           dataType="nText"
                           name="CustomerAddr" />
-                        <externalMetadataColumn
-                          refId="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoKey]"
-                          dataType="i4"
-                          name="CorpCustNoKey" />
                         <externalMetadataColumn
                           refId="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
                           dataType="wstr"
@@ -872,6 +893,11 @@ FROM            tblInvoiceSalesImportBBR</property>
                           dataType="wstr"
                           length="75"
                           name="CustAppKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
+                          dataType="wstr"
+                          length="50"
+                          name="CrmRecordId" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -925,12 +951,13 @@ FROM            tblInvoiceSalesImportBBR</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select *
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select *
 From 
 (
 SELECT DISTINCT sitekey, site_ref, cust_num, 0 AS cust_seq, cust_name, cust_num AS corp_cust, NULL AS CustAddr, 0 AS territory_code, NULL AS Customer2, 1 AS cust_type, cast('NT' as nvarchar(10)) AS tax_code1
 ,Rank() over (Partition BY cust_num order by cust_name) as Rank
 FROM            tblInvoiceSalesImportBBR
+where (inv_date &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 GROUP BY sitekey, site_ref,cust_num, cust_name
 ) tmp
 WHERE rank = 1;</property>
@@ -954,7 +981,7 @@ WHERE rank = 1;</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1260,6 +1287,14 @@ WHERE rank = 1;</property>
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\append BBR customers\get and append BBR customershipto" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\append BBR customers.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{375CC836-7878-4E7C-92C8-707F0BDD8847}"
+          DTS:From="Package\append BBR customers\get and append BBR customershipto"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\append BBR customers\delete bbr dups" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -1335,6 +1370,7 @@ WHERE rank = 1;</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -1402,7 +1438,7 @@ WHERE rank = 1;</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomer]</property>
+                      name="OpenRowset">[dbo].[tblCustomerImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1411,7 +1447,7 @@ WHERE rank = 1;</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1543,10 +1579,6 @@ WHERE rank = 1;</property>
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\append BET Customers\get and append bet customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoKey]"
-                          dataType="i4"
-                          name="CustNoKey" />
-                        <externalMetadataColumn
                           refId="Package\append BET Customers\get and append bet customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
                           dataType="wstr"
                           length="100"
@@ -1579,10 +1611,6 @@ WHERE rank = 1;</property>
                           refId="Package\append BET Customers\get and append bet customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
                           dataType="nText"
                           name="CustomerAddr" />
-                        <externalMetadataColumn
-                          refId="Package\append BET Customers\get and append bet customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoKey]"
-                          dataType="i4"
-                          name="CorpCustNoKey" />
                         <externalMetadataColumn
                           refId="Package\append BET Customers\get and append bet customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
                           dataType="wstr"
@@ -1675,14 +1703,15 @@ WHERE rank = 1;</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                          1 AS SiteKey, CAST('BET' AS nvarchar(5)) AS ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq, RTRIM(LTRIM(custaddr.name)) AS Customer, ISNULL(LTRIM(custaddr.corp_cust), 
                          LTRIM(custaddr.cust_num)) AS corp_cust, ISNULL(RTRIM(LTRIM(custaddr.addr##1)), N'') + ', ' + ISNULL(RTRIM(LTRIM(custaddr.addr##2)), N'') + ISNULL(RTRIM(LTRIM(custaddr.city)), N'') 
                          + ', ' + ISNULL(RTRIM(LTRIM(custaddr.state)), N'') AS CustAddr, ISNULL(customer.territory_code, 0) AS territory_code, RTRIM(LTRIM(custaddr.name)) + '(' + ISNULL(RTRIM(LTRIM(custaddr.city)), N'') 
                          + ', ' + ISNULL(LTRIM(RTRIM(custaddr.state)), N'') + ')  -' + LTRIM(custaddr.cust_num) AS Customer2, customer.cust_type, ISNULL(customer.tax_code1, 'NT') AS tax_code1, customer.Uf_CrmRecordId
 FROM            custaddr_mst AS custaddr INNER JOIN
                          customer_mst AS customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
-WHERE        (custaddr.cust_seq = 0)
+WHERE        (custaddr.cust_seq = 0) and (custaddr.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
+
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -1704,7 +1733,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2021,6 +2050,7 @@ ORDER BY cust_num</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -2120,7 +2150,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomerShipTo]</property>
+                      name="OpenRowset">[dbo].[tblCustomerShipToImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -2129,7 +2159,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2324,12 +2354,13 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       1 AS SiteKey, CAST('BET' AS nvarchar(5)) AS ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq, RTRIM(custaddr.name) AS Customer, 
                       ISNULL(RTRIM(custaddr.addr##1), N'') + ', ' + ISNULL(ltrim(RTRIM(custaddr.addr##2)), N'') + ISNULL(ltrim(RTRIM(custaddr.city)), N'') + ', ' + ISNULL(ltrim(RTRIM(custaddr.state)), N'') 
                       AS CustAddr, custaddr.curr_code as CurrencyCode
 FROM         custaddr_mst as custaddr INNER JOIN
                       customer_mst as customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
+     where (custaddr.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -2351,7 +2382,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2783,7 +2814,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -3054,7 +3085,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     1 AS SiteKey, dimCustomer.SiteKey AS SiteKeyAlternative, dimCustomer.CustNoKeyAlternative, CAST(SUBSTRING(Customer, 0, CHARINDEX(',', Customer, 0)) AS nvarchar(100)) AS Customer, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     1 AS SiteKey, dimCustomer.SiteKey AS SiteKeyAlternative, dimCustomer.CustNoKeyAlternative, CAST(SUBSTRING(Customer, 0, CHARINDEX(',', Customer, 0)) AS nvarchar(100)) AS Customer, 
                       0 AS CustNoSeqKey, dimCustomer.MainCustNoKeyAlternative, dimCustomer.CompanyNo, CAST(REPLACE(dimCustomer.WhizTerritory, 'BET', '') AS nvarchar(5)) 
                       AS WhizTerritory, CAST(REPLACE(dimCustomer.SbbTerritory, 'BET', '') AS nvarchar(5)) AS SbbTerritory, dimGeographic.City, dimGeographic.State, 
                       dimGeographic.CountryDescription, dimGeographic.CountryCode, dimGeographic.ForeignDomestic
@@ -3604,6 +3635,7 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -3625,7 +3657,7 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomer]</property>
+                      name="OpenRowset">[dbo].[tblCustomerImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -3634,7 +3666,7 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -3759,10 +3791,6 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoKey]"
-                          dataType="i4"
-                          name="CustNoKey" />
-                        <externalMetadataColumn
                           refId="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
                           dataType="wstr"
                           length="100"
@@ -3795,10 +3823,6 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
                           refId="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
                           dataType="nText"
                           name="CustomerAddr" />
-                        <externalMetadataColumn
-                          refId="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoKey]"
-                          dataType="i4"
-                          name="CorpCustNoKey" />
                         <externalMetadataColumn
                           refId="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
                           dataType="wstr"
@@ -3833,6 +3857,11 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
                           dataType="wstr"
                           length="75"
                           name="CustAppKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
+                          dataType="wstr"
+                          length="50"
+                          name="CrmRecordId" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -3886,7 +3915,7 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       5 AS SiteKey, customer.ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq,rtrim(ltrim(custaddr.name)) AS Customer, ISNULL(LTRIM(custaddr.corp_cust), LTRIM(custaddr.cust_num)) AS corp_cust, 
                       ISNULL(custaddr.addr##1, N'') + ', ' + ISNULL(custaddr.addr##2, N'') + ISNULL(custaddr.city, N'') + ', ' + ISNULL(custaddr.state, N'') AS CustAddr, 
                       isnull(customer.territory_code,0) as territory_code,rtrim(ltrim(custaddr.name)) + '(' + ISNULL(rtrim(ltrim(custaddr.city)), N'') 
@@ -3896,7 +3925,7 @@ WHERE     (dimCustomer.CustNoKeyAlternative IS NOT NULL)</property>
 FROM            custaddr_mst AS custaddr INNER JOIN
                          customer_mst AS customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
 
-WHERE     (custaddr.cust_seq = 0)
+WHERE     (custaddr.cust_seq = 0) and      (custaddr.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -3918,7 +3947,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -4308,7 +4337,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomerShipTo]</property>
+                      name="OpenRowset">[dbo].[tblCustomerShipToImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -4317,7 +4346,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -4512,13 +4541,14 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       5 AS SiteKey, customer.ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq, rtrim(custaddr.name) + ' (' + ISNULL(rtrim(custaddr.addr##1), N'') 
                       + ', ' + ISNULL(rtrim(custaddr.addr##2), N'') + ISNULL(rtrim(custaddr.city), N'') + ', ' + ISNULL(rtrim(custaddr.state) ,N'') + ')  (' + LTRIM(rtrim(custaddr.cust_num) )
                       + '-' + CAST(custaddr.cust_seq AS varchar(2)) + ')' AS Customer, ISNULL(rtrim(custaddr.addr##1), N'') + ', ' + ISNULL(rtrim(custaddr.addr##2), N'') + ISNULL(rtrim(custaddr.city), N'') 
                       + ', ' + ISNULL(rtrim(custaddr.state), N'') AS CustAddr, custaddr.curr_code as CurrencyCode
 FROM         custaddr_mst as custaddr INNER JOIN
                       customer_mst as customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
+where      (custaddr.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -4540,7 +4570,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -4782,6 +4812,7 @@ ORDER BY cust_num</property>
         <DTS:Executable
           DTS:refId="Package\append GAN Customers\Add GAN Customer 0"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{20638938-1247-4757-BED5-93FEF4CA667E}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -4799,6 +4830,7 @@ ORDER BY cust_num</property>
         <DTS:Executable
           DTS:refId="Package\append GAN Customers\Add GAN Customer 0 foreign"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{32ACCC8C-1C99-47C1-BA2D-95A3F030780D}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -4814,23 +4846,24 @@ ORDER BY cust_num</property>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\append GAN Customers\get and append gan customers to dim customer"
+          DTS:refId="Package\append GAN Customers\get and append gan customers to tblcustomer"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:DTSID="{AEE02556-592E-4989-8F7E-7E95A3CA50D9}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:FailPackageOnFailure="True"
           DTS:LocaleID="-1"
-          DTS:ObjectName="get and append gan customers to dim customer">
+          DTS:ObjectName="get and append gan customers to tblcustomer">
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
               version="1">
               <components>
                 <component
-                  refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query"
+                  refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -4845,7 +4878,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomer]</property>
+                      name="OpenRowset">[dbo].[tblCustomerImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -4854,7 +4887,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -4887,7 +4920,7 @@ ORDER BY cust_num</property>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Connections[OleDbConnection]"
+                      refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Connections[OleDbConnection]"
                       connectionManagerID="Package.ConnectionManagers[CorpDw]"
                       connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
                       description="The OLE DB runtime connection used to access the database."
@@ -4895,173 +4928,173 @@ ORDER BY cust_num</property>
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input]"
+                      refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[SiteKey]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="3"
                           cachedName="SiteKey"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[ship_site]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[ship_site]"
                           cachedDataType="wstr"
                           cachedLength="8"
                           cachedName="ship_site"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[ship_site]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[ship_site]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[cust_num]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[cust_num]"
                           cachedDataType="wstr"
                           cachedLength="7"
                           cachedName="cust_num"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoAlternateKey]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_num]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoAlternateKey]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_num]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[cust_seq]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[cust_seq]"
                           cachedDataType="i4"
                           cachedName="cust_seq"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoSeqKey]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_seq]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoSeqKey]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_seq]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[Customer]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[Customer]"
                           cachedDataType="wstr"
                           cachedLength="100"
                           cachedName="Customer"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[corp_cust]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[corp_cust]"
                           cachedDataType="wstr"
                           cachedLength="7"
                           cachedName="corp_cust"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoAlternateKey]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[corp_cust]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoAlternateKey]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[corp_cust]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[CustAddr]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[CustAddr]"
                           cachedDataType="wstr"
                           cachedLength="206"
                           cachedName="CustAddr"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[CustAddr]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[CustAddr]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[territory_code]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[territory_code]"
                           cachedDataType="wstr"
                           cachedLength="8"
                           cachedName="territory_code"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[territory_code]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[territory_code]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[cust_type]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[cust_type]"
                           cachedDataType="wstr"
                           cachedLength="6"
                           cachedName="cust_type"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CompanyNo]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_type]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CompanyNo]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_type]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[tax_code1]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[tax_code1]"
                           cachedDataType="wstr"
                           cachedLength="6"
                           cachedName="tax_code1"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKeyAlternative]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[tax_code1]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKeyAlternative]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[tax_code1]" />
                         <inputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].Columns[Uf_CrmRecordId]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].Columns[Uf_CrmRecordId]"
                           cachedDataType="wstr"
                           cachedLength="75"
                           cachedName="Uf_CrmRecordId"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Uf_CrmRecordId]" />
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Uf_CrmRecordId]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKey]"
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoKey]"
                           dataType="i4"
                           name="CustNoKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[Customer]"
                           dataType="wstr"
                           length="100"
                           name="Customer" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CompanyNo]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CompanyNo]"
                           dataType="wstr"
                           length="1"
                           name="CompanyNo" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
                           dataType="wstr"
                           length="5"
                           name="SiteKeyAlternative" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoAlternateKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoAlternateKey]"
                           dataType="wstr"
                           length="20"
                           name="CustNoAlternateKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoSeqKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustNoSeqKey]"
                           dataType="i4"
                           name="CustNoSeqKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoAlternateKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoAlternateKey]"
                           dataType="wstr"
                           length="20"
                           name="CorpCustNoAlternateKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustomerAddr]"
                           dataType="nText"
                           name="CustomerAddr" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustNoKey]"
                           dataType="i4"
                           name="CorpCustNoKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[TerritoryNoAlternative]"
                           dataType="wstr"
                           length="20"
                           name="TerritoryNoAlternative" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustomer]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CorpCustomer]"
                           dataType="wstr"
                           length="100"
                           name="CorpCustomer" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKeyAlternative]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKeyAlternative]"
                           dataType="wstr"
                           length="6"
                           name="CustTaxCodeKeyAlternative" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKey]"
                           dataType="i4"
                           name="CustTaxCodeKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustMarketKeyAlternative]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustMarketKeyAlternative]"
                           dataType="wstr"
                           length="75"
                           name="CustMarketKeyAlternative" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustSegKeyAlternative]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustSegKeyAlternative]"
                           dataType="wstr"
                           length="75"
                           name="CustSegKeyAlternative" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustAppKeyAlternative]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustAppKeyAlternative]"
                           dataType="wstr"
                           length="75"
                           name="CustAppKeyAlternative" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
                           dataType="wstr"
                           length="50"
                           name="CrmRecordId" />
@@ -5070,22 +5103,22 @@ ORDER BY cust_num</property>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input]">
+                      synchronousInputId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -5094,7 +5127,7 @@ ORDER BY cust_num</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query"
+                  refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query"
                   componentClassID="Microsoft.OLEDBSource"
                   contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
                   description="OLE DB Source"
@@ -5118,14 +5151,14 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                          2 AS SiteKey, customer.ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq, RTRIM(LTRIM(custaddr.name)) AS Customer, ISNULL(LTRIM(custaddr.corp_cust), LTRIM(custaddr.cust_num)) 
                          AS corp_cust, ISNULL(custaddr.addr##1, N'') + ', ' + ISNULL(custaddr.addr##2, N'') + ISNULL(custaddr.city, N'') + ', ' + ISNULL(custaddr.state, N'') AS CustAddr, ISNULL(customer.territory_code, 0) 
                          AS territory_code, RTRIM(LTRIM(custaddr.name)) + '(' + ISNULL(RTRIM(LTRIM(custaddr.city)), N'') + ', ' + ISNULL(custaddr.state, N'') + ')  -' + LTRIM(custaddr.cust_num) AS Customer2, customer.cust_type, 
                          ISNULL(customer.tax_code1, 'NT') AS tax_code1, customer.Uf_CrmRecordId
 FROM            custaddr_mst AS custaddr INNER JOIN
                          customer_mst AS customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
-WHERE        (custaddr.cust_seq = 0)
+WHERE        (custaddr.cust_seq = 0) and (customer.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -5147,11 +5180,11 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Connections[OleDbConnection]"
+                      refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Connections[OleDbConnection]"
                       connectionManagerID="Package.ConnectionManagers[GAN_App]"
                       connectionManagerRefId="Package.ConnectionManagers[GAN_App]"
                       description="The OLE DB runtime connection used to access the database."
@@ -5159,277 +5192,277 @@ ORDER BY cust_num</property>
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output]"
+                      refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output]"
                       name="OLE DB Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
                           length="3"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[SiteKey]"
                           name="SiteKey"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[ship_site]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[ship_site]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[ship_site]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[ship_site]"
                           length="8"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[ship_site]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[ship_site]"
                           name="ship_site"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_num]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_num]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_num]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_num]"
                           length="7"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_num]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_num]"
                           name="cust_num"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_seq]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_seq]"
                           dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_seq]"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_seq]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_seq]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_seq]"
                           name="cust_seq"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
                           length="100"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer]"
                           name="Customer"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[corp_cust]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[corp_cust]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[corp_cust]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[corp_cust]"
                           length="7"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[corp_cust]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[corp_cust]"
                           name="corp_cust"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[CustAddr]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[CustAddr]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustAddr]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustAddr]"
                           length="206"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[CustAddr]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[CustAddr]"
                           name="CustAddr"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[territory_code]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[territory_code]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[territory_code]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[territory_code]"
                           length="8"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[territory_code]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[territory_code]"
                           name="territory_code"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer2]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer2]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer2]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer2]"
                           length="109"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer2]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Customer2]"
                           name="Customer2"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_type]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_type]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_type]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_type]"
                           length="6"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_type]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[cust_type]"
                           name="cust_type"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[tax_code1]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[tax_code1]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[tax_code1]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[tax_code1]"
                           length="6"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[tax_code1]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[tax_code1]"
                           name="tax_code1"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Uf_CrmRecordId]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Uf_CrmRecordId]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Uf_CrmRecordId]"
+                          externalMetadataColumnId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Uf_CrmRecordId]"
                           length="75"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].Columns[Uf_CrmRecordId]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].Columns[Uf_CrmRecordId]"
                           name="Uf_CrmRecordId"
                           truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[SiteKey]"
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[ship_site]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[ship_site]"
                           dataType="wstr"
                           length="8"
                           name="ship_site" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_num]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_num]"
                           dataType="wstr"
                           length="7"
                           name="cust_num" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_seq]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_seq]"
                           dataType="i4"
                           name="cust_seq" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
                           dataType="wstr"
                           length="60"
                           name="Customer" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[corp_cust]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[corp_cust]"
                           dataType="wstr"
                           length="7"
                           name="corp_cust" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustAddr]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[CustAddr]"
                           dataType="wstr"
                           length="139"
                           name="CustAddr" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[territory_code]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[territory_code]"
                           dataType="wstr"
                           length="8"
                           name="territory_code" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer2]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Customer2]"
                           dataType="wstr"
                           length="109"
                           name="Customer2" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_type]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[cust_type]"
                           dataType="wstr"
                           length="6"
                           name="cust_type" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[tax_code1]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[tax_code1]"
                           dataType="wstr"
                           length="6"
                           name="tax_code1" />
                         <externalMetadataColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Uf_CrmRecordId]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output].ExternalColumns[Uf_CrmRecordId]"
                           dataType="wstr"
                           length="75"
                           name="Uf_CrmRecordId" />
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output]"
+                      refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output]"
                       isErrorOut="true"
                       name="OLE DB Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
                           dataType="i4"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[SiteKey]"
                           name="SiteKey" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ship_site]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ship_site]"
                           dataType="wstr"
                           length="8"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ship_site]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ship_site]"
                           name="ship_site" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_num]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_num]"
                           dataType="wstr"
                           length="7"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_num]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_num]"
                           name="cust_num" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_seq]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_seq]"
                           dataType="i4"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_seq]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_seq]"
                           name="cust_seq" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer]"
                           dataType="wstr"
                           length="60"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer]"
                           name="Customer" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[corp_cust]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[corp_cust]"
                           dataType="wstr"
                           length="7"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[corp_cust]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[corp_cust]"
                           name="corp_cust" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustAddr]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustAddr]"
                           dataType="wstr"
                           length="139"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustAddr]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[CustAddr]"
                           name="CustAddr" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[territory_code]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[territory_code]"
                           dataType="wstr"
                           length="8"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[territory_code]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[territory_code]"
                           name="territory_code" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer2]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer2]"
                           dataType="wstr"
                           length="109"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer2]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Customer2]"
                           name="Customer2" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_type]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_type]"
                           dataType="wstr"
                           length="6"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_type]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[cust_type]"
                           name="cust_type" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[tax_code1]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[tax_code1]"
                           dataType="wstr"
                           length="6"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[tax_code1]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[tax_code1]"
                           name="tax_code1" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Uf_CrmRecordId]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Uf_CrmRecordId]"
                           dataType="wstr"
                           length="75"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Uf_CrmRecordId]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[Uf_CrmRecordId]"
                           name="Uf_CrmRecordId" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -5440,10 +5473,10 @@ ORDER BY cust_num</property>
               </components>
               <paths>
                 <path
-                  refId="Package\append GAN Customers\get and append gan customers to dim customer.Paths[OLE DB Source Output]"
-                  endId="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query.Inputs[Destination Input]"
+                  refId="Package\append GAN Customers\get and append gan customers to tblcustomer.Paths[OLE DB Source Output]"
+                  endId="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query.Inputs[Destination Input]"
                   name="OLE DB Source Output"
-                  startId="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query.Outputs[OLE DB Source Output]" />
+                  startId="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query.Outputs[OLE DB Source Output]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -5459,6 +5492,7 @@ ORDER BY cust_num</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -5558,7 +5592,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomerShipTo]</property>
+                      name="OpenRowset">[dbo].[tblCustomerShipToImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -5567,7 +5601,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -5762,13 +5796,14 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       2 AS SiteKey, customer.ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq, rtrim(custaddr.name) + ' (' + ISNULL(rtrim(custaddr.addr##1), N'') 
                       + ', ' + ISNULL(rtrim(custaddr.addr##2), N'') + ISNULL(rtrim(custaddr.city), N'') + ', ' + ISNULL(rtrim(custaddr.state) ,N'') + ')  (' + LTRIM(rtrim(custaddr.cust_num) )
                       + '-' + CAST(custaddr.cust_seq AS varchar(2)) + ')' AS Customer, ISNULL(rtrim(custaddr.addr##1), N'') + ', ' + ISNULL(rtrim(custaddr.addr##2), N'') + ISNULL(rtrim(custaddr.city), N'') 
                       + ', ' + ISNULL(rtrim(custaddr.state), N'') AS CustAddr, custaddr.curr_code as CurrencyCode
 FROM         custaddr_mst as custaddr INNER JOIN
                       customer_mst as customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
+ where (custaddr.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -5790,7 +5825,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -5997,7 +6032,7 @@ ORDER BY cust_num</property>
           DTS:refId="Package\append GAN Customers.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
           DTS:DTSID="{236BA392-D679-4DB6-8193-D02184705FA6}"
-          DTS:From="Package\append GAN Customers\get and append gan customers to dim customer"
+          DTS:From="Package\append GAN Customers\get and append gan customers to tblcustomer"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\append GAN Customers\Add GAN Customer 0" />
@@ -6074,6 +6109,7 @@ ORDER BY cust_num</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -6095,7 +6131,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomer]</property>
+                      name="OpenRowset">[dbo].[tblCustomerImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -6104,7 +6140,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -6284,6 +6320,30 @@ ORDER BY cust_num</property>
                           dataType="wstr"
                           length="6"
                           name="CustTaxCodeKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustTaxCodeKey]"
+                          dataType="i4"
+                          name="CustTaxCodeKey" />
+                        <externalMetadataColumn
+                          refId="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustMarketKeyAlternative]"
+                          dataType="wstr"
+                          length="75"
+                          name="CustMarketKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustSegKeyAlternative]"
+                          dataType="wstr"
+                          length="75"
+                          name="CustSegKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CustAppKeyAlternative]"
+                          dataType="wstr"
+                          length="75"
+                          name="CustAppKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query.Inputs[Destination Input].ExternalColumns[CrmRecordId]"
+                          dataType="wstr"
+                          length="50"
+                          name="CrmRecordId" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -6337,7 +6397,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       4 AS SiteKey, customer.ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq,rtrim(ltrim(custaddr.name)) AS Customer, ISNULL(LTRIM(custaddr.corp_cust), LTRIM(custaddr.cust_num)) AS corp_cust, 
                       ISNULL(custaddr.addr##1, N'') + ', ' + ISNULL(custaddr.addr##2, N'') + ISNULL(custaddr.city, N'') + ', ' + ISNULL(custaddr.state, N'') AS CustAddr, 
                       isnull(customer.territory_code,0) as territory_code,rtrim(ltrim(custaddr.name)) + '(' + ISNULL(rtrim(ltrim(custaddr.city)), N'') 
@@ -6348,7 +6408,8 @@ ORDER BY cust_num</property>
 FROM            custaddr_mst AS custaddr INNER JOIN
                          customer_mst AS customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
 
-WHERE     (custaddr.cust_seq = 0)
+WHERE     (custaddr.cust_seq = 0) and (customer.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
+
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -6370,7 +6431,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -6661,6 +6722,7 @@ ORDER BY cust_num</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -6760,7 +6822,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimCustomerShipTo]</property>
+                      name="OpenRowset">[dbo].[tblCustomerShipToImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -6769,7 +6831,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -6964,13 +7026,15 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       4 AS SiteKey, customer.ship_site, LTRIM(custaddr.cust_num) AS cust_num, custaddr.cust_seq, rtrim(custaddr.name) + ' (' + ISNULL(rtrim(custaddr.addr##1), N'') 
                       + ', ' + ISNULL(rtrim(custaddr.addr##2), N'') + ISNULL(rtrim(custaddr.city), N'') + ', ' + ISNULL(rtrim(custaddr.state) ,N'') + ')  (' + LTRIM(rtrim(custaddr.cust_num) )
                       + '-' + CAST(custaddr.cust_seq AS varchar(2)) + ')' AS Customer, ISNULL(rtrim(custaddr.addr##1), N'') + ', ' + ISNULL(rtrim(custaddr.addr##2), N'') + ISNULL(rtrim(custaddr.city), N'') 
                       + ', ' + ISNULL(rtrim(custaddr.state), N'') AS CustAddr, custaddr.curr_code as CurrencyCode
 FROM         custaddr_mst as custaddr INNER JOIN
                       customer_mst as customer ON custaddr.cust_num = customer.cust_num AND custaddr.cust_seq = customer.cust_seq
+where (customer.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
+
 ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
@@ -6992,7 +7056,7 @@ ORDER BY cust_num</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{2FF73071-50B9-416F-84CE-BE0D02634206};</property>
                   </properties>
                   <connections>
                     <connection
@@ -7234,6 +7298,7 @@ ORDER BY cust_num</property>
         <DTS:Executable
           DTS:refId="Package\Drop and Create dimCustomer\Create dimCustomer"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{4B8ED372-4524-42DA-A297-1742D7C103FA}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -7251,6 +7316,7 @@ ORDER BY cust_num</property>
         <DTS:Executable
           DTS:refId="Package\Drop and Create dimCustomer\Create dimCustomerShipTo"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{077C73E3-DE13-4DE7-A608-96FC080F09F1}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -7268,6 +7334,7 @@ ORDER BY cust_num</property>
         <DTS:Executable
           DTS:refId="Package\Drop and Create dimCustomer\Drop dimCustomer"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{52DBE3E1-DC4B-4871-B581-F485425F8949}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -7285,6 +7352,7 @@ ORDER BY cust_num</property>
         <DTS:Executable
           DTS:refId="Package\Drop and Create dimCustomer\Drop dimCustomerShipTo"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{0294C4B1-1CE0-4B03-AB4C-1D97CE1FE09A}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -7297,6 +7365,40 @@ ORDER BY cust_num</property>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
               SQLTask:SqlStatementSource="Drop TABLE [CorpDw].[dbo].[dimCustomerShipTo]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Drop and Create dimCustomer\truncate tblCustomerImport"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{52E430F9-2B64-4D1E-AE5F-FDEC09F73997}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="truncate tblCustomerImport"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[tblCustomerImport]&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Drop and Create dimCustomer\truncate tblCustomerShipToImport 1"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{860506a7-a961-40f9-9ec6-c701c730b52f}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="truncate tblCustomerShipToImport 1"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[tblCustomerShipToImport]&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -7325,7 +7427,49 @@ ORDER BY cust_num</property>
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
           DTS:To="Package\Drop and Create dimCustomer\Create dimCustomerShipTo" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Drop and Create dimCustomer.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{E866DCB4-D9F2-49CE-9F72-AB79BA106351}"
+          DTS:From="Package\Drop and Create dimCustomer\truncate tblCustomerImport"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Drop and Create dimCustomer\truncate tblCustomerShipToImport 1" />
       </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MERGE dimCust"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A79C6ACD-ADED-4AD8-BC2E-502F6C12B4AD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MERGE dimCust"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
+          SQLTask:SqlStatementSource="BEGIN TRANSACTION;&#xA;&#xA;&#xA;&#xA;MERGE dimCustomerShipTo AS target&#xA;    USING (SELECT DISTINCT &#xA;&#x9;&#x9;  [SiteKey]&#xA;      ,[SiteKeyAlternative] &#xA;      ,[CustNoAlternateKey] &#xA;      ,[ShipToName] &#xA;      ,[CustNoSeqKey] &#xA;      ,[CompanyNo] &#xA;      ,[ShipToAddr] &#xA;      ,[CurrencyCode] &#xA;FROM         tblCustomerShipToImport) AS source&#xA;    ON ( target.CustNoAlternateKey=source.[CustNoAlternateKey] &#xA;&#x9;and target.[CustNoSeqKey] =source.[CustNoSeqKey] &#xA;&#x9;AND target.SiteKey=source.SiteKey)&#xA;   &#xA; WHEN MATCHED THEN &#xA;&#xA;     UPDATE SET &#xA;&#x9;&#xA;      [SiteKeyAlternative] = source.SiteKeyAlternative&#xA;      ,[CustNoAlternateKey] =  source.CustNoAlternateKey&#xA;      ,[ShipToName] =  source.ShipToName&#xA;      ,[CustNoSeqKey] =  source.CustNoSeqKey&#xA;      ,[CompanyNo] =  source.CompanyNo&#xA;      ,[ShipToAddr] =  source.ShipToAddr&#xA;      ,[CurrencyCode] =  source.CurrencyCode&#xA;    &#xA;     &#xA;&#x9;&#xA;&#xA;WHEN NOT MATCHED THEN &#xA;     INSERT (&#xA;&#x9;  [SiteKey]&#xA;           ,[SiteKeyAlternative]&#xA;           ,[CustNoAlternateKey]&#xA;           ,[ShipToName]&#xA;           ,[CustNoSeqKey]&#xA;           ,[CompanyNo]&#xA;           ,[ShipToAddr]&#xA;           ,[CurrencyCode])&#xA;     VALUES&#xA;           (source.SiteKey&#xA;           ,source.SiteKeyAlternative&#xA;           ,source.CustNoAlternateKey&#xA;           ,source.ShipToName&#xA;           ,source.CustNoSeqKey&#xA;           ,source.CompanyNo&#xA;           ,source.ShipToAddr&#xA;           ,source.CurrencyCode&#xA;&#x9;&#x9;   );&#xA;&#xA;&#xA;COMMIT TRANSACTION;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge into DimCustomer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9F877059-8869-48D1-BA6E-4BBD0E4BA8C3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge into DimCustomer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0437458F-06EB-425A-8F5F-578A8ABC6891}"
+          SQLTask:SqlStatementSource="MERGE dimCustomer AS target&#xA;    USING (SELECT DISTINCT &#xA;&#x9;&#x9;SiteKey, SiteKeyAlternative, CustNoAlternateKey, Customer, CustNoSeqKey, CompanyNo, CustomerAddr, CorpCustNoAlternateKey,TerritoryNoAlternative, CorpCustomer, &#xA;                         CustTaxCodeKey, CustTaxCodeKeyAlternative, CustMarketKeyAlternative, CustSegKeyAlternative, CustAppKeyAlternative, CrmRecordId&#xA;&#xA;FROM         tblCustomerImport) AS source&#xA;    ON ( target.CustNoAlternateKey=source.CustNoAlternateKey AND target.SiteKey=source.SiteKey)&#xA;   &#xA; WHEN MATCHED THEN &#xA;&#xA;     UPDATE SET &#xA;&#x9;&#xA;      [SiteKeyAlternative] = source.SiteKeyAlternative&#xA;       ,[Customer] = source.Customer&#xA;      ,[CustNoSeqKey] = source.CustNoSeqKey&#xA;      ,[CompanyNo] = source.CompanyNo&#xA;      ,[CustomerAddr] = source.CustomerAddr&#xA;      ,[CorpCustNoAlternateKey] = source.CorpCustNoAlternateKey&#xA;     &#xA;      ,[TerritoryNoAlternative] = source.TerritoryNoAlternative&#xA;      ,[CorpCustomer] = source.CorpCustomer&#xA;    &#xA;      ,[CustTaxCodeKeyAlternative] = source.CustTaxCodeKeyAlternative&#xA;      ,[CustMarketKeyAlternative] = source.CustMarketKeyAlternative&#xA;      ,[CustSegKeyAlternative] = source.CustSegKeyAlternative&#xA;      ,[CustAppKeyAlternative] = source.CustAppKeyAlternative&#xA;      ,[CrmRecordId] = source.CrmRecordId&#xA;&#x9;&#xA;&#xA;WHEN NOT MATCHED THEN &#xA;     INSERT (SiteKey, SiteKeyAlternative,  CustNoAlternateKey, Customer, CustNoSeqKey, CompanyNo, CustomerAddr, CorpCustNoAlternateKey,  TerritoryNoAlternative, CorpCustomer, &#xA;                          CustTaxCodeKeyAlternative, CustMarketKeyAlternative, CustSegKeyAlternative, CustAppKeyAlternative, CrmRecordId&#xA;)&#xA;     VALUES (SiteKey, SiteKeyAlternative,  CustNoAlternateKey, Customer, CustNoSeqKey, CompanyNo, CustomerAddr, CorpCustNoAlternateKey,  TerritoryNoAlternative, CorpCustomer, &#xA;                          CustTaxCodeKeyAlternative, CustMarketKeyAlternative, CustSegKeyAlternative, CustAppKeyAlternative, CrmRecordId&#xA;);&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Process CorpCustNoKey"
@@ -7348,6 +7492,7 @@ ORDER BY cust_num</property>
           <DTS:Variables />
           <DTS:ObjectData>
             <pipeline
+              autoAdjustBufferSize="true"
               BLOBTempStoragePath=""
               bufferTempStoragePath=""
               engineThreads="5"
@@ -7378,7 +7523,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -7523,7 +7668,7 @@ ORDER BY cust_num</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT   distinct  CustNoKey, CustNoSeqKey,CustNoAlternateKey,SiteKey
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT   distinct  CustNoKey, CustNoSeqKey,CustNoAlternateKey,SiteKey
 FROM         dimCustomer</property>
                     <property
                       dataType="System.String"
@@ -8051,6 +8196,14 @@ FROM         dimCustomer</property>
       DTS:ObjectName="Constraint"
       DTS:To="Package\append GAN Customers" />
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{09DB66E9-241B-41DA-B272-38203EFCEE68}"
+      DTS:From="Package\append BBR customers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Merge into DimCustomer" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{8F2FE561-4A1A-4543-8743-E90D4538F8A5}"
@@ -8101,10 +8254,18 @@ FROM         dimCustomer</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
       DTS:CreationName=""
-      DTS:DTSID="{FD132A9B-0A07-443E-AD3E-4DC178F0A82B}"
-      DTS:From="Package\append BBR customers"
+      DTS:DTSID="{8C7F7E81-E503-47DC-A8A9-F75979890803}"
+      DTS:From="Package\Merge into DimCustomer"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 8"
+      DTS:To="Package\MERGE dimCust" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC720BF9-60F1-4757-A891-3144FE063D5E}"
+      DTS:From="Package\MERGE dimCust"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
       DTS:To="Package\Process CorpCustNoKey" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
@@ -8112,7 +8273,7 @@ FROM         dimCustomer</property>
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -8120,15 +8281,15 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="180,42"
+          Size="180,41.6"
           Id="Package\append BBR customers\Add BBR Customer 0"
           TopLeft="69.5,108.166666666667" />
         <NodeLayout
-          Size="252,42"
+          Size="252,41.6"
           Id="Package\append BBR customers\get and append BBR customershipto"
           TopLeft="33.5,210.833333333334" />
         <NodeLayout
-          Size="308,42"
+          Size="308,41.6"
           Id="Package\append BBR customers\get and append BDB customers to dim customer"
           TopLeft="5.5,5.50000000000004" />
         <EdgeLayout
@@ -8175,43 +8336,75 @@ FROM         dimCustomer</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\append BBR customers\delete bbr dups"
+          TopLeft="125.942860840778,272.988239515364" />
+        <EdgeLayout
+          Id="Package\append BBR customers.PrecedenceConstraints[Constraint 2]"
+          TopLeft="159.5,252.433333333334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-33.557139159222,41.3549061820301"
+              Start="0,0"
+              End="-26.057139159222,41.3549061820301">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.3549061820301" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.3549061820301"
+                    Point2="0,41.3549061820301"
+                    Point3="-4,41.3549061820301" />
+                  <mssgle:LineSegment
+                    End="-26.057139159222,41.3549061820301" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="318,309"
-          Size="318,351"
+          PanelSize="318.4,320"
+          Size="318.4,363.2"
           Id="Package\append BBR customers"
-          TopLeft="66.1666666666671,3500.16666666667" />
+          TopLeft="90.9523809913063,3934.51961393478" />
         <NodeLayout
-          Size="178,42"
+          Size="177.6,41.6"
           Id="Package\append BET Customers\Add BET Customer 0"
           TopLeft="68.8333333333334,416.166666666666" />
         <NodeLayout
-          Size="214,42"
+          Size="214.4,41.6"
           Id="Package\append BET Customers\Add BET Customer 0 foreign"
           TopLeft="50.8333333333334,518.833333333333" />
         <NodeLayout
-          Size="192,42"
+          Size="192,41.6"
           Id="Package\append BET Customers\Delete duplicate foreign"
           TopLeft="61.5,210.833333333333" />
         <NodeLayout
-          Size="304,42"
+          Size="304,41.6"
           Id="Package\append BET Customers\get and append bet customers to dim customer"
           TopLeft="5.50000000000003,313.5" />
         <NodeLayout
-          Size="244,42"
+          Size="244,41.6"
           Id="Package\append BET Customers\get and append betcustomershipto"
           TopLeft="35.5000000000001,621.5" />
         <NodeLayout
-          Size="206,42"
+          Size="206.4,41.6"
           Id="Package\append BET Customers\Get BettcherDw customers"
           TopLeft="54.8333333333333,108.166666666666" />
         <NodeLayout
-          Size="274,42"
+          Size="273.6,41.6"
           Id="Package\append BET Customers\Merge any from tblBettcherDwCustomers"
           TopLeft="20.8333333333334,724.166666666667" />
         <NodeLayout
-          Size="236,42"
+          Size="236,41.6"
           Id="Package\append BET Customers\Truncate tblBettcherDwCustomer"
           TopLeft="39.5,5.49999999999993" />
         <EdgeLayout
@@ -8371,24 +8564,24 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="314,822"
-          Size="314,865"
+          PanelSize="313.6,822.4"
+          Size="313.6,864.8"
           Id="Package\append BET Customers"
-          TopLeft="68.166666666667,2061.5" />
+          TopLeft="92.9523809913063,2495.8529472681" />
         <NodeLayout
-          Size="180,42"
+          Size="180,41.6"
           Id="Package\append BSW Customers\Add BSW Customer 0"
           TopLeft="70.8333333333334,108.166666666667" />
         <NodeLayout
-          Size="218,42"
+          Size="217.6,41.6"
           Id="Package\append BSW Customers\Add BSW Customer 0 foreign"
           TopLeft="52.1666666666667,210.833333333334" />
         <NodeLayout
-          Size="310,42"
+          Size="310.4,41.6"
           Id="Package\append BSW Customers\get and append BSW customers to dim customer"
           TopLeft="5.5,5.50000000000004" />
         <NodeLayout
-          Size="254,42"
+          Size="254.4,41.6"
           Id="Package\append BSW Customers\get and append BSW customershipto"
           TopLeft="33.5000000000001,313.5" />
         <EdgeLayout
@@ -8460,40 +8653,40 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="322,411"
-          Size="322,454"
+          PanelSize="321.6,411.2"
+          Size="321.6,454.4"
           Id="Package\append BSW Customers"
-          TopLeft="64.8333333333338,2986.16666666667" />
+          TopLeft="89.6190476579731,3420.51961393478" />
         <NodeLayout
-          Size="178,42"
+          Size="177.6,41.6"
           Id="Package\append GAN Customers\Add GAN Customer 0"
           TopLeft="69.5,108.166666666667" />
         <NodeLayout
-          Size="216,42"
+          Size="216,41.6"
           Id="Package\append GAN Customers\Add GAN Customer 0 foreign"
           TopLeft="50.8333333333334,210.833333333334" />
         <NodeLayout
-          Size="306,42"
-          Id="Package\append GAN Customers\get and append gan customers to dim customer"
+          Size="296,41.6"
+          Id="Package\append GAN Customers\get and append gan customers to tblcustomer"
           TopLeft="5.5,5.50000000000004" />
         <NodeLayout
-          Size="250,42"
+          Size="249.6,41.6"
           Id="Package\append GAN Customers\get and append gan customershipto"
           TopLeft="34.1666666666667,313.5" />
         <EdgeLayout
           Id="Package\append GAN Customers.PrecedenceConstraints[Constraint]"
-          TopLeft="158.833333333333,48.1666666666667">
+          TopLeft="155.9,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="0,61.066666666667"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="0,53.566666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,53.566666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8549,24 +8742,24 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="318,411"
-          Size="318,454"
+          PanelSize="318.4,485.6"
+          Size="318.4,528.8"
           Id="Package\append GAN Customers"
-          TopLeft="67.8333333333335,611.5" />
+          TopLeft="92.6190476579727,1045.85294726811" />
         <NodeLayout
-          Size="180,42"
+          Size="180,41.6"
           Id="Package\append MED Customers\Add MED Customer 0"
           TopLeft="70.8333333333334,108.166666666667" />
         <NodeLayout
-          Size="216,42"
+          Size="216,41.6"
           Id="Package\append MED Customers\Add MED Customer 0 foreign"
           TopLeft="52.8333333333334,210.833333333334" />
         <NodeLayout
-          Size="310,42"
+          Size="310.4,41.6"
           Id="Package\append MED Customers\get and append MED customers to dim customer"
           TopLeft="5.5,5.50000000000004" />
         <NodeLayout
-          Size="254,42"
+          Size="254.4,41.6"
           Id="Package\append MED Customers\get and append MED customershipto"
           TopLeft="34.1666666666667,313.5" />
         <EdgeLayout
@@ -8638,26 +8831,34 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="322,411"
-          Size="322,454"
+          PanelSize="321.6,411.2"
+          Size="321.6,454.4"
           Id="Package\append MED Customers"
-          TopLeft="64.8333333333336,1547.5" />
+          TopLeft="89.6190476579729,1981.85294726811" />
         <NodeLayout
-          Size="176,42"
+          Size="176,41.6"
           Id="Package\Drop and Create dimCustomer\Create dimCustomer"
           TopLeft="21.5,108.166666666667" />
         <NodeLayout
-          Size="208,42"
+          Size="208,41.6"
           Id="Package\Drop and Create dimCustomer\Create dimCustomerShipTo"
           TopLeft="5.50000000000003,313.5" />
         <NodeLayout
-          Size="168,42"
+          Size="168,41.6"
           Id="Package\Drop and Create dimCustomer\Drop dimCustomer"
           TopLeft="25.5,5.50000000000004" />
         <NodeLayout
-          Size="201,42"
+          Size="200.8,41.6"
           Id="Package\Drop and Create dimCustomer\Drop dimCustomerShipTo"
           TopLeft="9.1666666666667,210.833333333334" />
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\Drop and Create dimCustomer\truncate tblCustomerImport"
+          TopLeft="97.7142893538183,620.470594412728" />
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\Drop and Create dimCustomer\truncate tblCustomerShipToImport 1"
+          TopLeft="69.7142888769812,684.094120049394" />
         <EdgeLayout
           Id="Package\Drop and Create dimCustomer.PrecedenceConstraints[Constraint]"
           TopLeft="109.5,48.1666666666667">
@@ -8724,27 +8925,63 @@ FROM         dimCustomer</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Drop and Create dimCustomer.PrecedenceConstraints[Constraint 3]"
+          TopLeft="97.7142893538183,641.270594412728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76.7999995231629,42.8235256366663"
+              Start="0,0"
+              End="76.7999995231629,35.3235256366663">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="72.7999995231629,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="72.7999995231629,0"
+                    Point2="76.7999995231629,0"
+                    Point3="76.7999995231629,4" />
+                  <mssgle:LineSegment
+                    End="76.7999995231629,35.3235256366663" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="219,411"
-          Size="219,454"
+          PanelSize="392.8,780.8"
+          Size="392.8,824"
           Id="Package\Drop and Create dimCustomer"
-          TopLeft="115.833333333333,5.5" />
+          TopLeft="140.619047657972,5.5" />
         <NodeLayout
-          Size="374,42"
+          Size="153.6,41.6"
+          Id="Package\MERGE dimCust"
+          TopLeft="193.600002997262,4376.23529735222" />
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\Merge into DimCustomer"
+          TopLeft="153.814287855187,4312.28235387637" />
+        <NodeLayout
+          Size="374.4,41.6"
           Id="Package\Process CorpCustNoKey\export customer key and alternative to use for CorpCustKey Id"
           TopLeft="32.8333333333333,108.166666666667" />
         <NodeLayout
-          Size="214,42"
+          Size="214.4,41.6"
           Id="Package\Process CorpCustNoKey\Merge Corp Customer Name"
           TopLeft="113.5,313.5" />
         <NodeLayout
-          Size="430,42"
+          Size="430.4,41.6"
           Id="Package\Process CorpCustNoKey\merge customer no key to forcast since Leda forecast doesnt get reloaded"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="206,42"
+          Size="206.4,41.6"
           Id="Package\Process CorpCustNoKey\truncate tblCustomerTemp"
           TopLeft="117.5,5.50000000000004" />
         <EdgeLayout
@@ -8816,36 +9053,36 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="440,411"
-          Size="440,454"
+          PanelSize="440,411.2"
+          Size="440,454.4"
           Id="Package\Process CorpCustNoKey"
-          TopLeft="5.50000000000054,3911.5" />
+          TopLeft="24.7346938219432,4460.42773879094" />
         <NodeLayout
-          Size="268,42"
+          Size="268,41.6"
           Id="Package\Process Customer SegApp\Delete duplicates in tblCustomerSegApp"
           TopLeft="5.50000000000003,210.833333333333" />
         <NodeLayout
-          Size="254,42"
+          Size="254.4,41.6"
           Id="Package\Process Customer SegApp\Delete NULLs in  tblCustomerSegApp"
           TopLeft="12.3125000077611,107.625000009685" />
         <NodeLayout
-          Size="238,42"
+          Size="238.4,41.6"
           Id="Package\Process Customer SegApp\Merge form missing table (if any)"
           TopLeft="20.8333333333333,5.49999999999993" />
         <NodeLayout
-          Size="202,42"
+          Size="201.6,41.6"
           Id="Package\Process Customer SegApp\Merge into dimApplication"
           TopLeft="38.8333333333334,621.5" />
         <NodeLayout
-          Size="196,42"
+          Size="196,41.6"
           Id="Package\Process Customer SegApp\Merge into dimCustomer"
           TopLeft="41.5,313.5" />
         <NodeLayout
-          Size="182,42"
+          Size="182.4,41.6"
           Id="Package\Process Customer SegApp\Merge into dimMarket"
           TopLeft="48.1666666666667,416.166666666667" />
         <NodeLayout
-          Size="192,42"
+          Size="192,41.6"
           Id="Package\Process Customer SegApp\Merge into dimSegment"
           TopLeft="43.5000000000001,518.833333333333" />
         <EdgeLayout
@@ -8983,24 +9220,24 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="278,720"
-          Size="278,762"
+          PanelSize="278.4,720"
+          Size="278.4,761.6"
           Id="Package\Process Customer SegApp"
-          TopLeft="86.1666666666673,4939.5" />
+          TopLeft="110.952380991307,5373.85294726811" />
         <NodeLayout
-          Size="180,42"
+          Size="180,41.6"
           Id="Package\Process Customer Tax code\Mark Tax Other Filter"
           TopLeft="118.833333333333,210.833333333334" />
         <NodeLayout
-          Size="178,42"
+          Size="177.6,41.6"
           Id="Package\Process Customer Tax code\Mark Tax State Filter"
           TopLeft="120.166666666667,313.5" />
         <NodeLayout
-          Size="380,42"
+          Size="380,41.6"
           Id="Package\Process Customer Tax code\Merge Tax Code from dimCustomer into dimCustomerTaxCode1"
           TopLeft="18.8333333333333,5.50000000000004" />
         <NodeLayout
-          Size="406,42"
+          Size="406.4,41.6"
           Id="Package\Process Customer Tax code\Merge Tax Code Id from dimCustomerTaxCode1 to dimCustomer into"
           TopLeft="5.50000000000003,108.166666666667" />
         <EdgeLayout
@@ -9072,24 +9309,64 @@ FROM         dimCustomer</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="418,411"
-          Size="418,454"
+          PanelSize="417.6,411.2"
+          Size="417.6,454.4"
           Id="Package\Process Customer Tax code"
-          TopLeft="16.5000000000006,4425.5" />
+          TopLeft="41.2857143246399,4859.85294726811" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="226.083333333333,459.5">
+          TopLeft="337.019047657972,829.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,152"
+              EndConnector="-85.1999999999995,216.352947268106"
               Start="0,0"
-              End="0,144.5">
+              End="-85.1999999999995,208.852947268106">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,144.5" />
+                    End="0,104.176473634053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,104.176473634053"
+                    Point2="0,108.176473634053"
+                    Point3="-4,108.176473634053" />
+                  <mssgle:LineSegment
+                    End="-81.1999999999995,108.176473634053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-81.1999999999995,108.176473634053"
+                    Point2="-85.1999999999995,108.176473634053"
+                    Point3="-85.1999999999995,112.176473634053" />
+                  <mssgle:LineSegment
+                    End="-85.1999999999995,208.852947268106" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="250.152380991306,4297.71961393478">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.8619068638807,35.36273994159"
+              Start="0,0"
+              End="91.3619068638807,35.36273994159">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.36273994159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.36273994159"
+                    Point2="0,35.36273994159"
+                    Point3="4,35.36273994159" />
+                  <mssgle:LineSegment
+                    End="91.3619068638807,35.36273994159" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -9100,18 +9377,18 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="226.333333333334,1065.5">
+          TopLeft="251.119047657973,1574.65294726811">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,482"
+              EndConnector="0,407.2"
               Start="0,0"
-              End="0,474.5">
+              End="0,399.7">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,474.5" />
+                    End="0,399.7" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -9122,7 +9399,7 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="225.5,2926.16666666667">
+          TopLeft="250.285714324639,3360.51961393478">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -9144,7 +9421,7 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="225.5,2001.5">
+          TopLeft="250.285714324639,2435.85294726811">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -9166,18 +9443,18 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="225.5,3440.16666666667">
+          TopLeft="250.28571432464,3874.91961393478">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,59.5999999999995"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.0999999999995">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.0999999999995" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -9188,18 +9465,30 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="225.500000000001,4365.5">
+          TopLeft="24.7346938219432,4687.62773879094">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="16.5510205026966,399.425208477166"
               Start="0,0"
-              End="0,52.5">
+              End="9.05102050269664,399.425208477166">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,395.425208477166" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,395.425208477166"
+                    Point2="-22.5,399.425208477166"
+                    Point3="-18.5,399.425208477166" />
+                  <mssgle:LineSegment
+                    End="9.05102050269664,399.425208477166" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -9210,7 +9499,7 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="225.500000000001,4879.5">
+          TopLeft="250.28571432464,5313.85294726811">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -9232,18 +9521,58 @@ FROM         dimCustomer</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="225.500000000001,3851.5">
+          TopLeft="251.414287855187,4353.88235387637">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999995"
+              EndConnector="-57.8142848579246,43.1529434758486"
               Start="0,0"
-              End="0,52.4999999999995">
+              End="-50.3142848579246,43.1529434758486">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999995" />
+                    End="0,39.1529434758486" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.1529434758486"
+                    Point2="0,43.1529434758486"
+                    Point3="-4,43.1529434758486" />
+                  <mssgle:LineSegment
+                    End="-50.3142848579246,43.1529434758486" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="270.400002997262,4417.83529735222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-25.6653091753188,42.5924414387191"
+              Start="0,0"
+              End="-25.6653091753188,35.0924414387191">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.2962207193596" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.2962207193596"
+                    Point2="0,21.2962207193596"
+                    Point3="-4,21.2962207193596" />
+                  <mssgle:LineSegment
+                    End="-21.6653091753188,21.2962207193596" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.6653091753188,21.2962207193596"
+                    Point2="-25.6653091753188,21.2962207193596"
+                    Point3="-25.6653091753188,25.2962207193596" />
+                  <mssgle:LineSegment
+                    End="-25.6653091753188,35.0924414387191" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -9261,11 +9590,11 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\append BBR customers\get and append BBR customershipto\Destination - Query"
           TopLeft="5.50000000000001,108.166666666667" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\append BBR customers\get and append BBR customershipto\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <EdgeLayout
@@ -9322,11 +9651,11 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="151,43"
+          Size="151.2,43.2"
           Id="Package\append BBR customers\get and append BDB customers to dim customer\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="172,43"
+          Size="172,43.2"
           Id="Package\append BBR customers\get and append BDB customers to dim customer\Destination - Query"
           TopLeft="5.50000000000001,108.166666666667" />
         <EdgeLayout
@@ -9381,85 +9710,71 @@ FROM         dimCustomer</property>
     design-time-name="Package\append BET Customers\get and append bet customers to dim customer">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\append BET Customers\get and append bet customers to dim customer\Source - Query"
-          TopLeft="15,53" />
+          TopLeft="123.8,41.8" />
         <NodeLayout
-          Size="156,42"
+          Size="156,41.6"
           Id="Package\append BET Customers\get and append bet customers to dim customer\Data Conversion"
-          TopLeft="NaN,NaN" />
+          TopLeft="6.40000000000001,86.4" />
         <NodeLayout
-          Size="171,42"
+          Size="171.2,41.6"
           Id="Package\append BET Customers\get and append bet customers to dim customer\Destination - Query"
           TopLeft="0,156" />
         <EdgeLayout
           Id="Package\append BET Customers\get and append bet customers to dim customer.Paths[OLE DB Source Output]"
-          TopLeft="90,95">
+          TopLeft="123.8,62.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="NaN,NaN"
+              EndConnector="-39.4,23.8"
               Start="0,0"
-              End="NaN,NaN">
+              End="-39.4,16.3">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,NaN" />
+                    End="-35.4,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,NaN"
-                    Point2="0,NaN"
-                    Point3="-4,NaN" />
+                    Point1="-35.4,0"
+                    Point2="-39.4,0"
+                    Point3="-39.4,4" />
                   <mssgle:LineSegment
-                    End="NaN,NaN" />
-                  <mssgle:CubicBezierSegment
-                    Point1="NaN,NaN"
-                    Point2="NaN,NaN"
-                    Point3="NaN,NaN" />
-                  <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="-39.4,16.3" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\append BET Customers\get and append bet customers to dim customer.Paths[Data Conversion Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="85,128">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="NaN,NaN"
+              EndConnector="0,28"
               Start="0,0"
-              End="NaN,NaN">
+              End="0,20.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,NaN" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,NaN"
-                    Point2="0,NaN"
-                    Point3="-4,NaN" />
-                  <mssgle:LineSegment
-                    End="NaN,NaN" />
-                  <mssgle:CubicBezierSegment
-                    Point1="NaN,NaN"
-                    Point2="NaN,NaN"
-                    Point3="NaN,NaN" />
-                  <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="0,20.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -9492,15 +9807,15 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\append BET Customers\get and append betcustomershipto\Destination - Query"
           TopLeft="0,167.333333333333" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\append BET Customers\get and append betcustomershipto\Source - Query"
           TopLeft="1.33333333333333,0.666666666666668" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\append BET Customers\get and append betcustomershipto\Data Conversion"
           TopLeft="20.6666666666666,82.6666666666667" />
         <EdgeLayout
@@ -9603,7 +9918,7 @@ FROM         dimCustomer</property>
     design-time-name="Package\append BET Customers\Get BettcherDw customers">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="150,42"
           Id="Package\append BET Customers\Get BettcherDw customers\OLE DB Source"
@@ -9647,7 +9962,9 @@ FROM         dimCustomer</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -9681,7 +9998,9 @@ FROM         dimCustomer</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -9714,11 +10033,11 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\append BSW Customers\get and append BSW customers to dim customer\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query"
           TopLeft="5.50000000000001,108.166666666667" />
         <EdgeLayout
@@ -9748,21 +10067,42 @@ FROM         dimCustomer</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\append BSW Customers\get and append BSW customers to dim customer\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\append BSW Customers\get and append BSW customers to dim customer\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\append BSW Customers\get and append BSW customershipto">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\append BSW Customers\get and append BSW customershipto\Destination - Query"
           TopLeft="0.833333333333343,161.5" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\append BSW Customers\get and append BSW customershipto\Source - Query"
           TopLeft="16.1666666666667,10.1666666666667" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\append BSW Customers\get and append BSW customershipto\Data Conversion"
           TopLeft="53.3333333333333,80" />
         <EdgeLayout
@@ -9862,20 +10202,20 @@ FROM         dimCustomer</property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\append GAN Customers\get and append gan customers to dim customer">
+    design-time-name="Package\append GAN Customers\get and append gan customers to tblcustomer">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
-          Id="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query"
+          Size="150.4,41.6"
+          Id="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query"
           TopLeft="19,22" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query"
+          Size="171.2,41.6"
+          Id="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query"
           TopLeft="44,152" />
         <EdgeLayout
-          Id="Package\append GAN Customers\get and append gan customers to dim customer.Paths[OLE DB Source Output]"
+          Id="Package\append GAN Customers\get and append gan customers to tblcustomer.Paths[OLE DB Source Output]"
           TopLeft="94,64">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -9914,7 +10254,7 @@ FROM         dimCustomer</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\append GAN Customers\get and append gan customers to dim customer\Destination - Query">
+    design-time-name="Package\append GAN Customers\get and append gan customers to tblcustomer\Destination - Query">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -9927,7 +10267,7 @@ FROM         dimCustomer</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\append GAN Customers\get and append gan customers to dim customer\Source - Query">
+    design-time-name="Package\append GAN Customers\get and append gan customers to tblcustomer\Source - Query">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -9940,15 +10280,15 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,43"
+          Size="172,43.2"
           Id="Package\append GAN Customers\get and append gan customershipto\Destination - Query"
           TopLeft="26.7500000186265,142.133330791791" />
         <NodeLayout
-          Size="151,43"
+          Size="151.2,43.2"
           Id="Package\append GAN Customers\get and append gan customershipto\Source - Query"
           TopLeft="28,1.73333330233892" />
         <NodeLayout
-          Size="157,43"
+          Size="156.8,43.2"
           Id="Package\append GAN Customers\get and append gan customershipto\Data Conversion"
           TopLeft="35.9166665486992,62.3999988842011" />
         <EdgeLayout
@@ -10041,39 +10381,39 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,42.6666666666667"
-          Id="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query"
-          TopLeft="NaN,NaN" />
-        <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\append MED Customers\get and append MED customers to dim customer\Source - Query"
           TopLeft="14.9999997764826,50.6999990934134" />
+        <NodeLayout
+          Size="172,42.4"
+          Id="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query"
+          TopLeft="20.8,136" />
         <EdgeLayout
           Id="Package\append MED Customers\get and append MED customers to dim customer.Paths[OLE DB Source Output]"
-          TopLeft="90.3333331098159,93.36666576008">
+          TopLeft="90.1999997764826,93.0999990934134">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="NaN,NaN"
+              EndConnector="16.6000002235174,42.9000009065866"
               Start="0,0"
-              End="NaN,NaN">
+              End="16.6000002235174,35.4000009065866">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,NaN" />
+                    End="0,17.4500004532933" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,NaN"
-                    Point2="0,NaN"
-                    Point3="-4,NaN" />
+                    Point1="0,17.4500004532933"
+                    Point2="0,21.4500004532933"
+                    Point3="4,21.4500004532933" />
                   <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="12.6000002235174,21.4500004532933" />
                   <mssgle:CubicBezierSegment
-                    Point1="NaN,NaN"
-                    Point2="NaN,NaN"
-                    Point3="NaN,NaN" />
+                    Point1="12.6000002235174,21.4500004532933"
+                    Point2="16.6000002235174,21.4500004532933"
+                    Point3="16.6000002235174,25.4500004532933" />
                   <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="16.6000002235174,35.4000009065866" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -10087,21 +10427,42 @@ FROM         dimCustomer</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\append MED Customers\get and append MED customers to dim customer\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\append MED Customers\get and append MED customers to dim customer\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\append MED Customers\get and append MED customershipto">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\append MED Customers\get and append MED customershipto\Destination - Query"
           TopLeft="14.6666666666667,154.666666666667" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\append MED Customers\get and append MED customershipto\Source - Query"
           TopLeft="50,10" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\append MED Customers\get and append MED customershipto\Data Conversion"
           TopLeft="43.3333333333333,81.3333333333333" />
         <EdgeLayout
@@ -10194,11 +10555,11 @@ FROM         dimCustomer</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Process CorpCustNoKey\export customer key and alternative to use for CorpCustKey Id\Source - Query"
           TopLeft="83,41" />
         <NodeLayout
-          Size="171,42"
+          Size="171.2,41.6"
           Id="Package\Process CorpCustNoKey\export customer key and alternative to use for CorpCustKey Id\Destination - Query"
           TopLeft="35,102" />
         <EdgeLayout

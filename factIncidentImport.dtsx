@@ -1,0 +1,2388 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/22/2012 9:47:53 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRM01886B"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{46F42DEE-47DC-4687-BBE2-9F580EC113F5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="factIncidentImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="266"
+  DTS:VersionGUID="{2EBE097B-0083-4319-ADDB-67C91B2912F6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Bet_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E36AE03D-54ED-4BA2-A873-A9AEBAEE4687}"
+      DTS:ObjectName="Bet_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=BET_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FB58554E-F23A-4D56-9ABB-621BDC055E78}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCORPDW02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Application Name=SSIS-dimCustomerImport-{05449A6D-5C5C-4CA2-927E-94E42787D622}birm01815w.BettcherDw;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpMain]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D541C564-F331-4447-82C6-ED0303FD251D}"
+      DTS:ObjectName="CorpMain">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=CorpMain;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GAN_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FEC726CE-9BA2-43D0-B660-CD7FDA01F71F}"
+      DTS:ObjectName="GAN_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=GAN_App;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-dimCustomerImport-{C9A6A73A-15E8-497C-B0E2-B4BE13249D09}BIRM01815K.GAN_App;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="E:\data\ssis\SsisConfig\CorpMain.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{67D505E9-99D0-48C1-BF2F-80D78B9B3083}"
+      DTS:ObjectName="CorpMain" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connBett_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{21707A69-933A-4F3A-A0B3-D71EECF80C81}"
+      DTS:ObjectName="connBett_app" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connCorpDW&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{E1D50414-0F74-4FF9-A7ED-ED0BB7C589A5}"
+      DTS:ObjectName="connCorpDW" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CorpMain&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;connGan_app&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{20033E9E-F01C-44FD-B50D-8AF2D957FDD6}"
+      DTS:ObjectName="connGan_app" />
+  </DTS:Configurations>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{85131283-EA01-4F93-9066-C85A6D46DD35}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="temp">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Incident"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3D4BECA8-AEC7-4F09-9032-958DD922B746}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Incident">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Incident\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{3C796412-5622-407A-859D-8196DCCBD68A}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              autoAdjustBufferSize="true"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Incident\Data Flow Task\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[tblDzIncidentImportBase]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Incident\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CorpDw]"
+                      connectionManagerRefId="Package.ConnectionManagers[CorpDw]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentNum]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="IncidentNum"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentNum]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentNum]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentContact]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="IncidentContact"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentContact]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContact]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCustomerNum]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="IncidentCustomerNum"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerNum]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerNum]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentDesc]"
+                          cachedDataType="wstr"
+                          cachedLength="40"
+                          cachedName="IncidentDesc"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentDesc]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDesc]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentStatus]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="IncidentStatus"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentStatus]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentStatus]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentQty]"
+                          cachedDataType="numeric"
+                          cachedName="IncidentQty"
+                          cachedPrecision="23"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentQty]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentQty]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCreateYear]"
+                          cachedDataType="i4"
+                          cachedName="IncidentCreateYear"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateYear]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateYear]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCreateMth]"
+                          cachedDataType="i4"
+                          cachedName="IncidentCreateMth"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateMth]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateMth]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCreateDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="IncidentCreateDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentDueDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="IncidentDueDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentDueDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDueDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCloseDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="IncidentCloseDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCloseDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCloseDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCustomerName]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentCustomerName"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerName]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerName]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCustomerCity]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="IncidentCustomerCity"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerCity]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerCity]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCustomerState]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="IncidentCustomerState"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerState]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerState]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCustomerAddress]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="IncidentCustomerAddress"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerAddress]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerAddress]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCustomerCountry]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="IncidentCustomerCountry"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerCountry]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerCountry]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentItem]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="IncidentItem"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentItem]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentItem]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCreatedBy]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentCreatedBy"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreatedBy]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreatedBy]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentAssignedTo]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentAssignedTo"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentAssignedTo]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentAssignedTo]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentRowPointer]"
+                          cachedDataType="guid"
+                          cachedName="IncidentRowPointer"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentRowPointer]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentRowPointer]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentNoteExistsFlag]"
+                          cachedDataType="ui1"
+                          cachedName="IncidentNoteExistsFlag"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentNoteExistsFlag]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentNoteExistsFlag]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentCreateByEmail]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentCreateByEmail"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateByEmail]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateByEmail]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentAssignedToEmail]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentAssignedToEmail"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentAssignedToEmail]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentAssignedToEmail]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentSlsmanEmail]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentSlsmanEmail"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentSlsmanEmail]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentSlsmanEmail]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentSlsmanName]"
+                          cachedDataType="wstr"
+                          cachedLength="35"
+                          cachedName="IncidentSlsmanName"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentSlsmanName]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentSlsmanName]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentContactEmail]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="IncidentContactEmail"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentContactEmail]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContactEmail]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentContactPhone]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="IncidentContactPhone"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentContactPhone]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContactPhone]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncidentDaysOpen]"
+                          cachedDataType="i4"
+                          cachedName="IncidentDaysOpen"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentDaysOpen]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDaysOpen]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReasonIncidentNum]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="ReasonIncidentNum"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonIncidentNum]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonIncidentNum]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReasonCode]"
+                          cachedDataType="wstr"
+                          cachedLength="8"
+                          cachedName="ReasonCode"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonCode]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonCode]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReasonDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="40"
+                          cachedName="ReasonDescription"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonDescription]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonDescription]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReasonNotes]"
+                          cachedDataType="nText"
+                          cachedName="ReasonNotes"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonNotes]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonNotes]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ResolutionNotes]"
+                          cachedDataType="nText"
+                          cachedName="ResolutionNotes"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ResolutionNotes]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ResolutionNotes]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventIncidentNum]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="EventIncidentNum"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventIncidentNum]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventIncidentNum]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EventDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventActivity]"
+                          cachedDataType="nText"
+                          cachedName="EventActivity"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventActivity]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventActivity]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventCode]"
+                          cachedDataType="wstr"
+                          cachedLength="8"
+                          cachedName="EventCode"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventCode]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCode]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="40"
+                          cachedName="EventDescription"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventDescription]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDescription]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventFollowupDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EventFollowupDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventFollowupDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventFollowupDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventAssignedTo]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="EventAssignedTo"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventAssignedTo]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventAssignedTo]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRefLineSuf]"
+                          cachedDataType="i4"
+                          cachedName="EventRefLineSuf"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefLineSuf]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefLineSuf]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRefNum]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="EventRefNum"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefNum]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefNum]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRefRelease]"
+                          cachedDataType="i4"
+                          cachedName="EventRefRelease"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefRelease]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefRelease]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRefType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="7"
+                          cachedName="EventRefType"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefType]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefType]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NoteExistsFlag]"
+                          cachedDataType="ui1"
+                          cachedName="NoteExistsFlag"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoteExistsFlag]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NoteExistsFlag]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRecordDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EventRecordDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRecordDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRecordDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRowPointer]"
+                          cachedDataType="guid"
+                          cachedName="EventRowPointer"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRowPointer]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRowPointer]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventCreatedBy]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="EventCreatedBy"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventCreatedBy]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCreatedBy]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventUpdatedBy]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="EventUpdatedBy"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventUpdatedBy]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventUpdatedBy]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventCreateDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EventCreateDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventCreateDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCreateDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventQtyComplete]"
+                          cachedDataType="numeric"
+                          cachedName="EventQtyComplete"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventQtyComplete]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventQtyComplete]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventHrs]"
+                          cachedDataType="numeric"
+                          cachedName="EventHrs"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventHrs]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventHrs]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventFixOvHd]"
+                          cachedDataType="numeric"
+                          cachedName="EventFixOvHd"
+                          cachedPrecision="38"
+                          cachedScale="8"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventFixOvHd]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventFixOvHd]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRefStat]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="9"
+                          cachedName="EventRefStat"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefStat]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefStat]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventRefCompleteDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EventRefCompleteDate"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefCompleteDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefCompleteDate]" />
+                        <inputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventDaysOpen]"
+                          cachedDataType="i4"
+                          cachedName="EventDaysOpen"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventDaysOpen]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDaysOpen]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DivId]"
+                          dataType="i4"
+                          name="DivId" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="IncidentNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentContact]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentContact" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerNum]"
+                          dataType="wstr"
+                          length="7"
+                          name="IncidentCustomerNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="IncidentDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentStatus]"
+                          dataType="wstr"
+                          length="10"
+                          name="IncidentStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentQty]"
+                          dataType="numeric"
+                          name="IncidentQty"
+                          precision="23"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateYear]"
+                          dataType="i4"
+                          name="IncidentCreateYear" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateMth]"
+                          dataType="i4"
+                          name="IncidentCreateMth" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateDate]"
+                          dataType="dbTimeStamp"
+                          name="IncidentCreateDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentDueDate]"
+                          dataType="dbTimeStamp"
+                          name="IncidentDueDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCloseDate]"
+                          dataType="dbTimeStamp"
+                          name="IncidentCloseDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerName]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentCustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerCity]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentCustomerCity" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerState]"
+                          dataType="wstr"
+                          length="5"
+                          name="IncidentCustomerState" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerAddress]"
+                          dataType="wstr"
+                          length="50"
+                          name="IncidentCustomerAddress" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCustomerCountry]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentCustomerCountry" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentItem]"
+                          dataType="wstr"
+                          length="71"
+                          name="IncidentItem" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreatedBy]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentCreatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentAssignedTo]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentAssignedTo" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentRowPointer]"
+                          dataType="guid"
+                          name="IncidentRowPointer" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentNoteExistsFlag]"
+                          dataType="ui1"
+                          name="IncidentNoteExistsFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentCreateByEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentCreateByEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentAssignedToEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentAssignedToEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentSlsmanEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentSlsmanEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentSlsmanName]"
+                          dataType="wstr"
+                          length="35"
+                          name="IncidentSlsmanName" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentContactEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentContactEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentContactPhone]"
+                          dataType="wstr"
+                          length="25"
+                          name="IncidentContactPhone" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncidentDaysOpen]"
+                          dataType="i4"
+                          name="IncidentDaysOpen" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonIncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="ReasonIncidentNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonCode]"
+                          dataType="wstr"
+                          length="8"
+                          name="ReasonCode" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonDescription]"
+                          dataType="wstr"
+                          length="40"
+                          name="ReasonDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonNotes]"
+                          dataType="nText"
+                          name="ReasonNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ResolutionNotes]"
+                          dataType="nText"
+                          name="ResolutionNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventIncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="EventIncidentNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventDate]"
+                          dataType="dbTimeStamp"
+                          name="EventDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventActivity]"
+                          dataType="nText"
+                          name="EventActivity" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventCode]"
+                          dataType="wstr"
+                          length="8"
+                          name="EventCode" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventDescription]"
+                          dataType="wstr"
+                          length="40"
+                          name="EventDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventFollowupDate]"
+                          dataType="dbTimeStamp"
+                          name="EventFollowupDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventAssignedTo]"
+                          dataType="wstr"
+                          length="60"
+                          name="EventAssignedTo" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefLineSuf]"
+                          dataType="i4"
+                          name="EventRefLineSuf" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="EventRefNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefRelease]"
+                          dataType="i4"
+                          name="EventRefRelease" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="7"
+                          name="EventRefType" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoteExistsFlag]"
+                          dataType="ui1"
+                          name="NoteExistsFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRecordDate]"
+                          dataType="dbTimeStamp"
+                          name="EventRecordDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRowPointer]"
+                          dataType="guid"
+                          name="EventRowPointer" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventCreatedBy]"
+                          dataType="wstr"
+                          length="30"
+                          name="EventCreatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventUpdatedBy]"
+                          dataType="wstr"
+                          length="30"
+                          name="EventUpdatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventCreateDate]"
+                          dataType="dbTimeStamp"
+                          name="EventCreateDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventQtyComplete]"
+                          dataType="numeric"
+                          name="EventQtyComplete"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventHrs]"
+                          dataType="numeric"
+                          name="EventHrs"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventFixOvHd]"
+                          dataType="numeric"
+                          name="EventFixOvHd"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefStat]"
+                          codePage="1252"
+                          dataType="str"
+                          length="9"
+                          name="EventRefStat" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventRefCompleteDate]"
+                          dataType="dbTimeStamp"
+                          name="EventRefCompleteDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventDaysOpen]"
+                          dataType="i4"
+                          name="EventDaysOpen" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Incident\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Incident\Data Flow Task\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SET FMTONLY OFF;
+EXEC	 [dbo].[BI_Rpt_IncidentPivotSp]</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Incident\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Bet_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[Bet_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentNum]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentNum]"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentNum]"
+                          name="IncidentNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContact]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentContact]"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContact]"
+                          name="IncidentContact"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerNum]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerNum]"
+                          length="7"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerNum]"
+                          name="IncidentCustomerNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDesc]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentDesc]"
+                          length="40"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDesc]"
+                          name="IncidentDesc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentStatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentStatus]"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentStatus]"
+                          name="IncidentStatus"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentQty]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentQty]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentQty]"
+                          name="IncidentQty"
+                          precision="23"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateYear]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateYear]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateYear]"
+                          name="IncidentCreateYear"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateMth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateMth]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateMth]"
+                          name="IncidentCreateMth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateDate]"
+                          name="IncidentCreateDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDueDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentDueDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDueDate]"
+                          name="IncidentDueDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCloseDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCloseDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCloseDate]"
+                          name="IncidentCloseDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerName]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerName]"
+                          name="IncidentCustomerName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerCity]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerCity]"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerCity]"
+                          name="IncidentCustomerCity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerState]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerState]"
+                          length="5"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerState]"
+                          name="IncidentCustomerState"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerAddress]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerAddress]"
+                          length="50"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerAddress]"
+                          name="IncidentCustomerAddress"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerCountry]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerCountry]"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCustomerCountry]"
+                          name="IncidentCustomerCountry"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentItem]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentItem]"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentItem]"
+                          name="IncidentItem"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreatedBy]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreatedBy]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreatedBy]"
+                          name="IncidentCreatedBy"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentAssignedTo]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentAssignedTo]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentAssignedTo]"
+                          name="IncidentAssignedTo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentRowPointer]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentRowPointer]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentRowPointer]"
+                          name="IncidentRowPointer"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentNoteExistsFlag]"
+                          dataType="ui1"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentNoteExistsFlag]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentNoteExistsFlag]"
+                          name="IncidentNoteExistsFlag"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateByEmail]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateByEmail]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentCreateByEmail]"
+                          name="IncidentCreateByEmail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentAssignedToEmail]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentAssignedToEmail]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentAssignedToEmail]"
+                          name="IncidentAssignedToEmail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentSlsmanEmail]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentSlsmanEmail]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentSlsmanEmail]"
+                          name="IncidentSlsmanEmail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentSlsmanName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentSlsmanName]"
+                          length="35"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentSlsmanName]"
+                          name="IncidentSlsmanName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContactEmail]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentContactEmail]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContactEmail]"
+                          name="IncidentContactEmail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContactPhone]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentContactPhone]"
+                          length="25"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentContactPhone]"
+                          name="IncidentContactPhone"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDaysOpen]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentDaysOpen]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentDaysOpen]"
+                          name="IncidentDaysOpen"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonIncidentNum]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonIncidentNum]"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonIncidentNum]"
+                          name="ReasonIncidentNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                          length="8"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                          name="ReasonCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                          length="40"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                          name="ReasonDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonNotes]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonNotes]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReasonNotes]"
+                          name="ReasonNotes"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ResolutionNotes]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ResolutionNotes]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ResolutionNotes]"
+                          name="ResolutionNotes"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventIncidentNum]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventIncidentNum]"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventIncidentNum]"
+                          name="EventIncidentNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDate]"
+                          name="EventDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventActivity]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventActivity]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventActivity]"
+                          name="EventActivity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventCode]"
+                          length="8"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCode]"
+                          name="EventCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventDescription]"
+                          length="40"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDescription]"
+                          name="EventDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventFollowupDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventFollowupDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventFollowupDate]"
+                          name="EventFollowupDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventAssignedTo]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventAssignedTo]"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventAssignedTo]"
+                          name="EventAssignedTo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefLineSuf]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefLineSuf]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefLineSuf]"
+                          name="EventRefLineSuf"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefNum]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefNum]"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefNum]"
+                          name="EventRefNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefRelease]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefRelease]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefRelease]"
+                          name="EventRefRelease"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefType]"
+                          length="7"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefType]"
+                          name="EventRefType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NoteExistsFlag]"
+                          dataType="ui1"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NoteExistsFlag]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NoteExistsFlag]"
+                          name="NoteExistsFlag"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRecordDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRecordDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRecordDate]"
+                          name="EventRecordDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRowPointer]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRowPointer]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRowPointer]"
+                          name="EventRowPointer"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCreatedBy]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventCreatedBy]"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCreatedBy]"
+                          name="EventCreatedBy"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventUpdatedBy]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventUpdatedBy]"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventUpdatedBy]"
+                          name="EventUpdatedBy"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCreateDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventCreateDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventCreateDate]"
+                          name="EventCreateDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventQtyComplete]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventQtyComplete]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventQtyComplete]"
+                          name="EventQtyComplete"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventHrs]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventHrs]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventHrs]"
+                          name="EventHrs"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventFixOvHd]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventFixOvHd]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventFixOvHd]"
+                          name="EventFixOvHd"
+                          precision="38"
+                          scale="8"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefStat]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefStat]"
+                          length="9"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefStat]"
+                          name="EventRefStat"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefCompleteDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefCompleteDate]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventRefCompleteDate]"
+                          name="EventRefCompleteDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDaysOpen]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventDaysOpen]"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventDaysOpen]"
+                          name="EventDaysOpen"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentItemDesc]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentItemDesc]"
+                          length="71"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncidentItemDesc]"
+                          name="IncidentItemDesc"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="IncidentNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentContact]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentContact" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerNum]"
+                          dataType="wstr"
+                          length="7"
+                          name="IncidentCustomerNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentDesc]"
+                          dataType="wstr"
+                          length="40"
+                          name="IncidentDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentStatus]"
+                          dataType="wstr"
+                          length="10"
+                          name="IncidentStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentQty]"
+                          dataType="numeric"
+                          name="IncidentQty"
+                          precision="23"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateYear]"
+                          dataType="i4"
+                          name="IncidentCreateYear" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateMth]"
+                          dataType="i4"
+                          name="IncidentCreateMth" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateDate]"
+                          dataType="dbTimeStamp"
+                          name="IncidentCreateDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentDueDate]"
+                          dataType="dbTimeStamp"
+                          name="IncidentDueDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCloseDate]"
+                          dataType="dbTimeStamp"
+                          name="IncidentCloseDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerName]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentCustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerCity]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentCustomerCity" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerState]"
+                          dataType="wstr"
+                          length="5"
+                          name="IncidentCustomerState" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerAddress]"
+                          dataType="wstr"
+                          length="50"
+                          name="IncidentCustomerAddress" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCustomerCountry]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentCustomerCountry" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentItem]"
+                          dataType="wstr"
+                          length="30"
+                          name="IncidentItem" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreatedBy]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentCreatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentAssignedTo]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentAssignedTo" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentRowPointer]"
+                          dataType="guid"
+                          name="IncidentRowPointer" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentNoteExistsFlag]"
+                          dataType="ui1"
+                          name="IncidentNoteExistsFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentCreateByEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentCreateByEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentAssignedToEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentAssignedToEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentSlsmanEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentSlsmanEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentSlsmanName]"
+                          dataType="wstr"
+                          length="35"
+                          name="IncidentSlsmanName" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentContactEmail]"
+                          dataType="wstr"
+                          length="60"
+                          name="IncidentContactEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentContactPhone]"
+                          dataType="wstr"
+                          length="25"
+                          name="IncidentContactPhone" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentDaysOpen]"
+                          dataType="i4"
+                          name="IncidentDaysOpen" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonIncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="ReasonIncidentNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                          dataType="wstr"
+                          length="8"
+                          name="ReasonCode" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                          dataType="wstr"
+                          length="40"
+                          name="ReasonDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReasonNotes]"
+                          dataType="nText"
+                          name="ReasonNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ResolutionNotes]"
+                          dataType="nText"
+                          name="ResolutionNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventIncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="EventIncidentNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventDate]"
+                          dataType="dbTimeStamp"
+                          name="EventDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventActivity]"
+                          dataType="nText"
+                          name="EventActivity" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventCode]"
+                          dataType="wstr"
+                          length="8"
+                          name="EventCode" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventDescription]"
+                          dataType="wstr"
+                          length="40"
+                          name="EventDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventFollowupDate]"
+                          dataType="dbTimeStamp"
+                          name="EventFollowupDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventAssignedTo]"
+                          dataType="wstr"
+                          length="60"
+                          name="EventAssignedTo" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefLineSuf]"
+                          dataType="i4"
+                          name="EventRefLineSuf" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefNum]"
+                          dataType="wstr"
+                          length="10"
+                          name="EventRefNum" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefRelease]"
+                          dataType="i4"
+                          name="EventRefRelease" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="7"
+                          name="EventRefType" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NoteExistsFlag]"
+                          dataType="ui1"
+                          name="NoteExistsFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRecordDate]"
+                          dataType="dbTimeStamp"
+                          name="EventRecordDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRowPointer]"
+                          dataType="guid"
+                          name="EventRowPointer" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventCreatedBy]"
+                          dataType="wstr"
+                          length="30"
+                          name="EventCreatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventUpdatedBy]"
+                          dataType="wstr"
+                          length="30"
+                          name="EventUpdatedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventCreateDate]"
+                          dataType="dbTimeStamp"
+                          name="EventCreateDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventQtyComplete]"
+                          dataType="numeric"
+                          name="EventQtyComplete"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventHrs]"
+                          dataType="numeric"
+                          name="EventHrs"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventFixOvHd]"
+                          dataType="numeric"
+                          name="EventFixOvHd"
+                          precision="38"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefStat]"
+                          codePage="1252"
+                          dataType="str"
+                          length="9"
+                          name="EventRefStat" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventRefCompleteDate]"
+                          dataType="dbTimeStamp"
+                          name="EventRefCompleteDate" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventDaysOpen]"
+                          dataType="i4"
+                          name="EventDaysOpen" />
+                        <externalMetadataColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncidentItemDesc]"
+                          dataType="wstr"
+                          length="71"
+                          name="IncidentItemDesc" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentNum]"
+                          name="IncidentNum" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentContact]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentContact]"
+                          name="IncidentContact" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerNum]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerNum]"
+                          name="IncidentCustomerNum" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentDesc]"
+                          dataType="wstr"
+                          length="40"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentDesc]"
+                          name="IncidentDesc" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentStatus]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentStatus]"
+                          name="IncidentStatus" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentQty]"
+                          dataType="numeric"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentQty]"
+                          name="IncidentQty"
+                          precision="23"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateYear]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateYear]"
+                          name="IncidentCreateYear" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateMth]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateMth]"
+                          name="IncidentCreateMth" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateDate]"
+                          name="IncidentCreateDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentDueDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentDueDate]"
+                          name="IncidentDueDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCloseDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCloseDate]"
+                          name="IncidentCloseDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerName]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerName]"
+                          name="IncidentCustomerName" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerCity]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerCity]"
+                          name="IncidentCustomerCity" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerState]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerState]"
+                          name="IncidentCustomerState" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerAddress]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerAddress]"
+                          name="IncidentCustomerAddress" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerCountry]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCustomerCountry]"
+                          name="IncidentCustomerCountry" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentItem]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentItem]"
+                          name="IncidentItem" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentItemDesc]"
+                          dataType="wstr"
+                          length="71"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentItemDesc]"
+                          name="IncidentItemDesc" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreatedBy]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreatedBy]"
+                          name="IncidentCreatedBy" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentAssignedTo]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentAssignedTo]"
+                          name="IncidentAssignedTo" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentRowPointer]"
+                          dataType="guid"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentRowPointer]"
+                          name="IncidentRowPointer" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentNoteExistsFlag]"
+                          dataType="ui1"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentNoteExistsFlag]"
+                          name="IncidentNoteExistsFlag" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateByEmail]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentCreateByEmail]"
+                          name="IncidentCreateByEmail" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentAssignedToEmail]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentAssignedToEmail]"
+                          name="IncidentAssignedToEmail" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentSlsmanEmail]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentSlsmanEmail]"
+                          name="IncidentSlsmanEmail" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentSlsmanName]"
+                          dataType="wstr"
+                          length="35"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentSlsmanName]"
+                          name="IncidentSlsmanName" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentContactEmail]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentContactEmail]"
+                          name="IncidentContactEmail" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentContactPhone]"
+                          dataType="wstr"
+                          length="25"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentContactPhone]"
+                          name="IncidentContactPhone" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentDaysOpen]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncidentDaysOpen]"
+                          name="IncidentDaysOpen" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonIncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonIncidentNum]"
+                          name="ReasonIncidentNum" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                          dataType="wstr"
+                          length="8"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                          name="ReasonCode" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                          dataType="wstr"
+                          length="40"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                          name="ReasonDescription" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonNotes]"
+                          dataType="nText"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReasonNotes]"
+                          name="ReasonNotes" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ResolutionNotes]"
+                          dataType="nText"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ResolutionNotes]"
+                          name="ResolutionNotes" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventIncidentNum]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventIncidentNum]"
+                          name="EventIncidentNum" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventDate]"
+                          name="EventDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventActivity]"
+                          dataType="nText"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventActivity]"
+                          name="EventActivity" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventCode]"
+                          dataType="wstr"
+                          length="8"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventCode]"
+                          name="EventCode" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventDescription]"
+                          dataType="wstr"
+                          length="40"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventDescription]"
+                          name="EventDescription" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventFollowupDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventFollowupDate]"
+                          name="EventFollowupDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventAssignedTo]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventAssignedTo]"
+                          name="EventAssignedTo" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefLineSuf]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefLineSuf]"
+                          name="EventRefLineSuf" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefNum]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefNum]"
+                          name="EventRefNum" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefRelease]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefRelease]"
+                          name="EventRefRelease" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="7"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefType]"
+                          name="EventRefType" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NoteExistsFlag]"
+                          dataType="ui1"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NoteExistsFlag]"
+                          name="NoteExistsFlag" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRecordDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRecordDate]"
+                          name="EventRecordDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRowPointer]"
+                          dataType="guid"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRowPointer]"
+                          name="EventRowPointer" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventCreatedBy]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventCreatedBy]"
+                          name="EventCreatedBy" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventUpdatedBy]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventUpdatedBy]"
+                          name="EventUpdatedBy" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventCreateDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventCreateDate]"
+                          name="EventCreateDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventQtyComplete]"
+                          dataType="numeric"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventQtyComplete]"
+                          name="EventQtyComplete"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventHrs]"
+                          dataType="numeric"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventHrs]"
+                          name="EventHrs"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventFixOvHd]"
+                          dataType="numeric"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventFixOvHd]"
+                          name="EventFixOvHd"
+                          precision="38"
+                          scale="8" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefStat]"
+                          codePage="1252"
+                          dataType="str"
+                          length="9"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefStat]"
+                          name="EventRefStat" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefCompleteDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventRefCompleteDate]"
+                          name="EventRefCompleteDate" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventDaysOpen]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventDaysOpen]"
+                          name="EventDaysOpen" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Incident\Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\Incident\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Incident\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Incident\Delete tblDzIncidentImportBase"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{4B5D6427-3654-4224-8F83-6181D9CD47C8}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete tblDzIncidentImportBase"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FB58554E-F23A-4D56-9ABB-621BDC055E78}"
+              SQLTask:SqlStatementSource="truncate table [CorpDw].[dbo].[tblDzIncidentImportBase]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Incident\Execute SQL Task 1"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A833C2F7-6EE4-42D1-B2D5-1A81449CBCC2}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task 1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FB58554E-F23A-4D56-9ABB-621BDC055E78}"
+              SQLTask:SqlStatementSource=" &#xA;Update tblDzIncidentImportBase&#xA;Set DivId=1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Incident\MERGE factIncidents"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A2D0700F-BDBD-4ED2-BDA3-7B45F2AF93C9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="MERGE factIncidents"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{FB58554E-F23A-4D56-9ABB-621BDC055E78}"
+              SQLTask:SqlStatementSource="&#xA;BEGIN TRANSACTION;&#xA;&#xA;MERGE factIncidents AS t&#xA;    USING (&#xA;&#x9;SELECT    DISTINCT &#xA;                         tblDzIncidentImportBase.DivId, tblDzIncidentImportBase.IncidentNum, tblDzIncidentImportBase.IncidentCustomerNum, dimCustomer.CustNoKey, tblDzIncidentImportBase.IncidentCreateYear, &#xA;                         tblDzIncidentImportBase.IncidentDesc, tblDzIncidentImportBase.IncidentStatus, tblDzIncidentImportBase.IncidentAssignedTo, dimSalesTerritory.SalesTerritoryKey, tblDzIncidentImportBase.IncidentCreateDate, &#xA;                         dimItem.ProdCodeSlKey, dimItem.ItemFamilyCodeKey, tblDzIncidentImportBase.IncidentRowPointer, dimIncidentReasons.IncidentReasonKey, dimItem.ItemKey&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;,tblDzIncidentImportBase.IncidentCloseDate, tblDzIncidentImportBase.IncidentQty&#xA;&#xA;FROM            dimItem RIGHT OUTER JOIN&#xA;                         tblDzIncidentImportBase LEFT OUTER JOIN&#xA;                         dimIncidentReasons ON tblDzIncidentImportBase.ReasonCode = dimIncidentReasons.IncidentReasonKeyAlternative AND tblDzIncidentImportBase.DivId = dimIncidentReasons.SiteKey ON &#xA;                         dimItem.ItemKeyAlternative = tblDzIncidentImportBase.IncidentItem AND dimItem.SiteKey = tblDzIncidentImportBase.DivId LEFT OUTER JOIN&#xA;                         dimSalesTerritory RIGHT OUTER JOIN&#xA;                         dimCustomer ON dimSalesTerritory.SalesTerritoryKeyAlternative = dimCustomer.TerritoryNoAlternative AND dimSalesTerritory.SiteKey = dimCustomer.SiteKey AND &#xA;                         dimSalesTerritory.SalesTerritoryKeyAlternative = dimCustomer.TerritoryNoAlternative ON tblDzIncidentImportBase.DivId = dimCustomer.SiteKey AND &#xA;                         tblDzIncidentImportBase.IncidentCustomerNum = dimCustomer.CustNoAlternateKey&#xA;&#x9;&#xA;&#x9;) AS s&#xA;    ON (t.DivId=s.DivId &#xA;&#x9;AND t.IncidentRowPointer =s.IncidentRowPointer&#xA;&#x9;AND t.IncidentReasonKey =s.IncidentReasonKey&#xA;&#x9;) &#xA;&#xA;WHEN MATCHED THEN &#xA;     Update set &#xA;      &#xA;&#x9; t.IncidentNum=s.IncidentNum&#xA;&#x9;, t.IncidentCustomerNum=s.IncidentCustomerNum&#xA;&#x9;, t.CustKey=s.CustNoKey&#xA;&#x9;, t.IncidentCreateYear=s.IncidentCreateYear&#xA;&#x9;,t.IncidentDesc=s.IncidentDesc&#xA;&#x9;, t.IncidentStatus=s.IncidentStatus&#xA;&#x9;,t.IncidentAssignedTo=s.IncidentAssignedTo&#xA;&#x9;, t.ItemKey=s.ItemKey&#xA;&#x9;, t.SalesTerritoryKey=s.SalesTerritoryKey&#xA;&#x9;, t.IncidentCreateDate=s.IncidentCreateDate&#xA;&#x9;, t.ProdCodeSlKey=s.ProdCodeSlKey&#xA;&#x9;, t.ItemFamilyCodeKey=s.ItemFamilyCodeKey&#xA;&#x9;,t.IncidentCloseDate=s.IncidentCloseDate&#xA;&#x9;  ,t.IncidentReasonKey=s.IncidentReasonKey&#xA;&#x9;,t.IncidentQty=s.IncidentQty&#xA; WHEN NOT MATCHED THEN &#xA;     INSERT (&#xA;&#x9; DivId&#xA;&#x9; ,IncidentRowPointer&#xA;&#x9;, IncidentNum&#xA;&#x9;, IncidentCustomerNum&#xA;&#x9;, CustKey&#xA;&#x9;,IncidentCreateYear&#xA;&#x9;,IncidentDesc&#xA;&#x9;, IncidentStatus&#xA;&#x9;,IncidentAssignedTo&#xA;&#x9;, ItemKey&#xA;&#x9;, SalesTerritoryKey&#xA;&#x9;, IncidentCreateDate&#xA;&#x9;, ProdCodeSlKey&#xA;&#x9;, ItemFamilyCodeKey &#xA;&#x9;,IncidentReasonKey&#xA;&#x9;,IncidentCloseDate&#xA;&#x9;,IncidentQty&#xA;)&#xA;&#x9;&#xA;     VALUES (&#xA;&#x9; s.DivId&#xA;&#x9; ,s.IncidentRowPointer&#xA;&#x9;,s.IncidentNum&#xA;&#x9;, s.IncidentCustomerNum&#xA;&#x9;,s.CustNoKey&#xA;&#x9;,s.IncidentCreateYear&#xA;&#x9;,s.IncidentDesc&#xA;&#x9;,s.IncidentStatus&#xA;&#x9;,s.IncidentAssignedTo&#xA;&#x9;, s.ItemKey&#xA;&#x9;, s.SalesTerritoryKey&#xA;&#x9;, s.IncidentCreateDate&#xA;&#x9;,s.ProdCodeSlKey&#xA;&#x9;,s.ItemFamilyCodeKey&#xA;&#x9;,s.IncidentReasonKey&#xA;&#x9;,s.IncidentCloseDate&#xA;&#x9;,s.IncidentQty&#xA;&#x9;&#xA; );&#xA;&#xA;&#xA;&#xA;&#xA;COMMIT TRANSACTION;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Incident.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{161FD6BF-BF58-4239-A668-C6A30054E4A0}"
+          DTS:From="Package\Incident\Delete tblDzIncidentImportBase"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Incident\Data Flow Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Incident.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{C509E563-D9D5-47D5-B450-24CA3D8A724B}"
+          DTS:From="Package\Incident\Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Incident\Execute SQL Task 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Incident.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{FCB633C2-AE65-4F0C-BC03-0027DABB8D69}"
+          DTS:From="Package\Incident\Execute SQL Task 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Incident\MERGE factIncidents" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Incident\Data Flow Task"
+          TopLeft="44.5,107.5" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Incident\Delete tblDzIncidentImportBase"
+          TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Incident\Execute SQL Task 1"
+          TopLeft="38.5,209.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Incident\MERGE factIncidents"
+          TopLeft="43.1142872421109,276.047063816955" />
+        <EdgeLayout
+          Id="Package\Incident.PrecedenceConstraints[Constraint]"
+          TopLeft="120.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Incident.PrecedenceConstraints[Constraint 1]"
+          TopLeft="120.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Incident.PrecedenceConstraints[Constraint 2]"
+          TopLeft="120.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.6142872421109,24.547063816955"
+              Start="0,0"
+              End="10.6142872421109,17.047063816955">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.27353190847751" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.27353190847751"
+                    Point2="0,12.2735319084775"
+                    Point3="4,12.2735319084775" />
+                  <mssgle:LineSegment
+                    End="6.61428724211089,12.2735319084775" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.61428724211089,12.2735319084775"
+                    Point2="10.6142872421109,12.2735319084775"
+                    Point3="10.6142872421109,16.2735319084775" />
+                  <mssgle:LineSegment
+                    End="10.6142872421109,17.047063816955" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="343,373"
+          Size="343,416"
+          Id="Package\Incident"
+          TopLeft="37.5000000000001,52.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Incident\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Incident\Data Flow Task\OLE DB Source"
+          TopLeft="302,74" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Incident\Data Flow Task\OLE DB Destination"
+          TopLeft="284.666666666667,176" />
+        <EdgeLayout
+          Id="Package\Incident\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="374,116.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.3333333333333"
+              Start="0,0"
+              End="0,51.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Incident\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Incident\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

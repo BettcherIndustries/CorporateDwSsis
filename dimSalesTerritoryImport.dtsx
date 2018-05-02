@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimSalesTerritoryImport"
-  DTS:VersionBuild="147"
-  DTS:VersionGUID="{1B5755C8-2E92-4EBB-9437-9F82E25ECED1}">
+  DTS:VersionBuild="150"
+  DTS:VersionGUID="{6465280A-BF90-4C8A-96B3-2F4D71DA020B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -148,11 +148,38 @@
       DTS:DTSID="{AD28A847-42E0-49A8-BBE4-82B1D20BA558}"
       DTS:ObjectName="connMed_app" />
   </DTS:Configurations>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5C3AAE6D-6923-4FC7-A054-843ABE306D10}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DaysBack">
+      <DTS:VariableValue
+        DTS:DataType="3">180</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:LoggingOptions
     DTS:FilterKind="0"
     DTS:LoggingMode="1" />
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MERGE dimSalesTerritory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{08a3a192-3474-41ed-9f24-ddfe02c08fb9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MERGE dimSalesTerritory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7C7CB690-A234-432C-B7D7-8A25C7776428}"
+          SQLTask:SqlStatementSource="  BEGIN TRANSACTION;&#xA;&#xA;MERGE dimSalesTerritory AS target&#xA;    USING (SELECT DISTINCT &#xA;       [SiteKey] &#xA;      ,[SiteKeyAlternative]&#xA;      ,[SalesTerritoryDescription] &#xA;      ,[SalesTerritoryKeyAlternative] &#xA;FROM         tblSalesTerritoryImport) AS source&#xA;    ON ( target.SalesTerritoryKeyAlternative=source.SalesTerritoryKeyAlternative&#xA; AND &#xA; target.SiteKey=source.SiteKey)&#xA;   &#xA; WHEN MATCHED THEN &#xA;&#xA;     UPDATE SET &#xA; &#xA;      &#xA;      [SiteKeyAlternative]=source.[SiteKeyAlternative]&#xA;      ,[SalesTerritoryDescription]=source.[SalesTerritoryDescription]&#xA;  &#xA;&#xA;WHEN NOT MATCHED THEN &#xA;     INSERT ( &#xA;       [SiteKey] &#xA;      ,[SiteKeyAlternative]&#xA;      ,[SalesTerritoryDescription]&#xA;      ,[SalesTerritoryKeyAlternative]&#xA;)&#xA;     VALUES (&#xA;  &#xA;       source.[SiteKey] &#xA;      ,source.[SiteKeyAlternative]&#xA;      ,source.[SalesTerritoryDescription]&#xA;      ,source.[SalesTerritoryKeyAlternative]&#xA;);&#xA;&#xA;&#xA;COMMIT TRANSACTION;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Process BBR Territory"
       DTS:CreationName="STOCK:SEQUENCE"
@@ -329,7 +356,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimSalesTerritory]</property>
+                      name="OpenRowset">[dbo].[tblSalesTerritoryImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -338,7 +365,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -420,10 +447,6 @@
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\Process BBR Territory\get and append BBR c\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKey]"
-                          dataType="i4"
-                          name="SalesTerritoryKey" />
-                        <externalMetadataColumn
                           refId="Package\Process BBR Territory\get and append BBR c\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -438,6 +461,11 @@
                           dataType="wstr"
                           length="8"
                           name="SalesTerritoryKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BBR Territory\get and append BBR c\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesResponsible]"
+                          dataType="wstr"
+                          length="75"
+                          name="SalesResponsible" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -491,7 +519,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 6 AS SiteKey, 'BBR' AS SiteKeyAlternative,'0' as territory_code, 'BBR0-Brazil Customers' as Territory</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 6 AS SiteKey, 'BBR' AS SiteKeyAlternative,'0' as territory_code, 'BBR0-Brazil Customers' as Territory</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -782,7 +810,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimSalesTerritory]</property>
+                      name="OpenRowset">[dbo].[tblSalesTerritoryImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -791,7 +819,7 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -875,10 +903,6 @@
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\Process BET Territory\get and append bet geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKey]"
-                          dataType="i4"
-                          name="SalesTerritoryKey" />
-                        <externalMetadataColumn
                           refId="Package\Process BET Territory\get and append bet geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -886,13 +910,18 @@
                         <externalMetadataColumn
                           refId="Package\Process BET Territory\get and append bet geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryDescription]"
                           dataType="wstr"
-                          length="25"
+                          length="50"
                           name="SalesTerritoryDescription" />
                         <externalMetadataColumn
                           refId="Package\Process BET Territory\get and append bet geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKeyAlternative]"
                           dataType="wstr"
                           length="8"
                           name="SalesTerritoryKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BET Territory\get and append bet geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesResponsible]"
+                          dataType="wstr"
+                          length="75"
+                          name="SalesResponsible" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -946,8 +975,9 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 1 AS SiteKey, 'BET' AS SiteKeyAlternative, territory_code as territory_code, territory_code+'-'+territory as Territory
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 1 AS SiteKey, 'BET' AS SiteKeyAlternative, territory_code as territory_code, territory_code+'-'+territory as Territory
 FROM         territory_mst as territory
+where (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
@@ -969,7 +999,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{5C3AAE6D-6923-4FC7-A054-843ABE306D10};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1235,7 +1265,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimSalesTerritory]</property>
+                      name="OpenRowset">[dbo].[tblSalesTerritoryImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1244,7 +1274,7 @@ ORDER BY territory_code</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1328,10 +1358,6 @@ ORDER BY territory_code</property>
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\Process BSW Territory\get and append BSW geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKey]"
-                          dataType="i4"
-                          name="SalesTerritoryKey" />
-                        <externalMetadataColumn
                           refId="Package\Process BSW Territory\get and append BSW geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -1346,6 +1372,11 @@ ORDER BY territory_code</property>
                           dataType="wstr"
                           length="8"
                           name="SalesTerritoryKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process BSW Territory\get and append BSW geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesResponsible]"
+                          dataType="wstr"
+                          length="75"
+                          name="SalesResponsible" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1399,8 +1430,9 @@ ORDER BY territory_code</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 5 AS SiteKey, 'BSW' AS SiteKeyAlternative,territory_code as territory_code, 'BSW'+territory_code+'-'+territory as Territory
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 5 AS SiteKey, 'BSW' AS SiteKeyAlternative,territory_code as territory_code, 'BSW'+territory_code+'-'+territory as Territory
 FROM         territory_mst as territory
+where (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
@@ -1422,7 +1454,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{5C3AAE6D-6923-4FC7-A054-843ABE306D10};</property>
                   </properties>
                   <connections>
                     <connection
@@ -1716,7 +1748,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimSalesTerritory]</property>
+                      name="OpenRowset">[dbo].[tblSalesTerritoryImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1725,7 +1757,7 @@ ORDER BY territory_code</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1809,10 +1841,6 @@ ORDER BY territory_code</property>
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\Process GAN Territory\get and append gan geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKey]"
-                          dataType="i4"
-                          name="SalesTerritoryKey" />
-                        <externalMetadataColumn
                           refId="Package\Process GAN Territory\get and append gan geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -1827,6 +1855,11 @@ ORDER BY territory_code</property>
                           dataType="wstr"
                           length="8"
                           name="SalesTerritoryKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process GAN Territory\get and append gan geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesResponsible]"
+                          dataType="wstr"
+                          length="75"
+                          name="SalesResponsible" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1880,10 +1913,11 @@ ORDER BY territory_code</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
                       2 AS SiteKey, 'GAN' AS SiteKeyAlternative, ISNULL(customer.territory_code, 0) AS territory_code, ISNULL(customer.territory_code, 0) +'-'+ISNULL(territory.territory, 'GAN' + ISNULL(customer.territory_code, 0))  AS Territory, 'Sid Adkins' as SalesResponsible
 FROM         customer_mst as customer LEFT OUTER JOIN
                       territory_mst as territory ON customer.territory_code = territory.territory_code
+where (territory.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
@@ -1905,7 +1939,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{5C3AAE6D-6923-4FC7-A054-843ABE306D10};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2195,7 +2229,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[dimSalesTerritory]</property>
+                      name="OpenRowset">[dbo].[tblSalesTerritoryImport]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -2204,7 +2238,7 @@ ORDER BY territory_code</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2288,10 +2322,6 @@ ORDER BY territory_code</property>
                           dataType="i4"
                           name="SiteKey" />
                         <externalMetadataColumn
-                          refId="Package\Process MED Territory\get and append MED geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKey]"
-                          dataType="i4"
-                          name="SalesTerritoryKey" />
-                        <externalMetadataColumn
                           refId="Package\Process MED Territory\get and append MED geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SiteKeyAlternative]"
                           dataType="wstr"
                           length="8"
@@ -2299,13 +2329,18 @@ ORDER BY territory_code</property>
                         <externalMetadataColumn
                           refId="Package\Process MED Territory\get and append MED geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryDescription]"
                           dataType="wstr"
-                          length="25"
+                          length="50"
                           name="SalesTerritoryDescription" />
                         <externalMetadataColumn
                           refId="Package\Process MED Territory\get and append MED geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesTerritoryKeyAlternative]"
                           dataType="wstr"
                           length="8"
                           name="SalesTerritoryKeyAlternative" />
+                        <externalMetadataColumn
+                          refId="Package\Process MED Territory\get and append MED geographic\Destination - Query.Inputs[Destination Input].ExternalColumns[SalesResponsible]"
+                          dataType="wstr"
+                          length="75"
+                          name="SalesResponsible" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -2359,9 +2394,10 @@ ORDER BY territory_code</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 4 AS SiteKey, 'MED' AS SiteKeyAlternative, territory_code as territory_code, territory_code+'-'+territory as Territory
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 4 AS SiteKey, 'MED' AS SiteKeyAlternative, territory_code as territory_code, territory_code+'-'+territory as Territory
 FROM         territory_mst as territory
 Where territory_code &lt;&gt;0
+and (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
 ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
@@ -2383,7 +2419,7 @@ ORDER BY territory_code</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parameter0:Input",{5C3AAE6D-6923-4FC7-A054-843ABE306D10};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2542,6 +2578,7 @@ ORDER BY territory_code</property>
         <DTS:Executable
           DTS:refId="Package\Process Sales Territory\Create  dimSalesTerritory"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Disabled="True"
           DTS:DTSID="{20862095-5002-4478-BEF0-642E4569C7EA}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
@@ -2559,13 +2596,13 @@ ORDER BY territory_code</property>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Process Sales Territory\Drop dimSalesTerritory"
+          DTS:refId="Package\Process Sales Territory\Drop tblSalesTerritory"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:DTSID="{DEC28E6A-8C1C-46EB-A588-F2E798E3B337}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:FailPackageOnFailure="True"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Drop dimSalesTerritory"
+          DTS:ObjectName="Drop tblSalesTerritory"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
           DTS:ThreadHint="0">
           <DTS:Variables />
@@ -2574,7 +2611,7 @@ ORDER BY territory_code</property>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{7C7CB690-A234-432C-B7D7-8A25C7776428}"
-              SQLTask:SqlStatementSource="Drop TABLE [CorpDw].[dbo].[dimSalesTerritory] &#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="truncate TABLE [CorpDw].[dbo].[tblSalesTerritoryImport] &#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -2583,7 +2620,7 @@ ORDER BY territory_code</property>
           DTS:refId="Package\Process Sales Territory.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
           DTS:DTSID="{DBE6A8CE-93FD-4678-85C2-A353C23230D7}"
-          DTS:From="Package\Process Sales Territory\Drop dimSalesTerritory"
+          DTS:From="Package\Process Sales Territory\Drop tblSalesTerritory"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\Process Sales Territory\Create  dimSalesTerritory" />
@@ -2599,6 +2636,14 @@ ORDER BY territory_code</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Process GAN Territory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{477169B7-32EC-4A15-9A75-06891A718523}"
+      DTS:From="Package\Process BBR Territory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\MERGE dimSalesTerritory" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -2637,7 +2682,7 @@ ORDER BY territory_code</property>
 <!--If you manually edit this section and make a mistake, you can delete it. -->
 <!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
-  Version="sql12">
+  Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
@@ -2645,82 +2690,86 @@ ORDER BY territory_code</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="184,43"
+          Size="159.2,41.6"
+          Id="Package\MERGE dimSalesTerritory"
+          TopLeft="108.000001839229,1401.27059310002" />
+        <NodeLayout
+          Size="184,43.2"
           Id="Package\Process BBR Territory\get and append BBR c"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="245,103"
-          Size="245,146"
+          PanelSize="244.8,103.2"
+          Size="244.8,145.6"
           Id="Package\Process BBR Territory"
           TopLeft="79.583329514911,1192.50000152389" />
         <NodeLayout
-          Size="227,43"
+          Size="227.2,43.2"
           Id="Package\Process BET Territory\get and append bet geographic"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="237,103"
-          Size="237,146"
+          PanelSize="236.8,103.2"
+          Size="236.8,145.6"
           Id="Package\Process BET Territory"
           TopLeft="42,589.166666589181" />
         <NodeLayout
-          Size="235,43"
+          Size="235.2,43.2"
           Id="Package\Process BSW Territory\get and append BSW geographic"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="256,141"
+          PanelSize="256,140.8"
           Size="256,184"
           Id="Package\Process BSW Territory"
           TopLeft="18.333333581686,989.83332992395" />
         <NodeLayout
-          Size="229,43"
+          Size="228.8,43.2"
           Id="Package\Process GAN Territory\get and append gan geographic"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="241,103"
-          Size="241,146"
+          PanelSize="240.8,103.2"
+          Size="240.8,145.6"
           Id="Package\Process GAN Territory"
           TopLeft="30.3333333333333,399.166666589181" />
         <NodeLayout
-          Size="233,43"
+          Size="232.8,43.2"
           Id="Package\Process MED Territory\get and append MED geographic"
           TopLeft="5.5,5.50000000000004" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="245,103"
-          Size="245,146"
+          PanelSize="244.8,103.2"
+          Size="244.8,145.6"
           Id="Package\Process MED Territory"
           TopLeft="29.3333333333333,799.16666658918" />
         <NodeLayout
-          Size="199,43"
+          Size="199.2,43.2"
           Id="Package\Process Sales Territory\Create  dimSalesTerritory"
           TopLeft="5.50000000000001,108.166666666667" />
         <NodeLayout
-          Size="188,43"
-          Id="Package\Process Sales Territory\Drop dimSalesTerritory"
+          Size="181.6,41.6"
+          Id="Package\Process Sales Territory\Drop tblSalesTerritory"
           TopLeft="10.8333333333333,5.50000000000004" />
         <EdgeLayout
           Id="Package\Process Sales Territory.PrecedenceConstraints[Constraint]"
-          TopLeft="104.833333333333,48.1666666666667">
+          TopLeft="103.366666666667,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="0,61.066666666667"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="0,53.566666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,53.566666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2732,10 +2781,66 @@ ORDER BY territory_code</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="209,206"
-          Size="209,249"
+          PanelSize="208.8,206.4"
+          Size="208.8,249.6"
           Id="Package\Process Sales Territory"
           TopLeft="48.9999999999999,68.499999922514" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="152.166666666667,317.499999922514">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81.666666666667"
+              Start="0,0"
+              End="0,74.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="201.983329514911,1338.10000152389">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.383327675682,63.1705915761333"
+              Start="0,0"
+              End="-14.383327675682,55.6705915761333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5852957880667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.5852957880667"
+                    Point2="0,31.5852957880667"
+                    Point3="-4,31.5852957880667" />
+                  <mssgle:LineSegment
+                    End="-10.383327675682,31.5852957880667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.383327675682,31.5852957880667"
+                    Point2="-14.383327675682,31.5852957880667"
+                    Point3="-14.383327675682,35.5852957880667" />
+                  <mssgle:LineSegment
+                    End="-14.383327675682,55.6705915761333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="150.833333333333,545.166666589181">
@@ -2854,28 +2959,6 @@ ORDER BY territory_code</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="152.166666666667,317.499999922514">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,81.666666666667"
-              Start="0,0"
-              End="0,74.166666666667">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,74.166666666667" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2883,17 +2966,17 @@ ORDER BY territory_code</property>
     design-time-name="Package\Process BBR Territory\get and append BBR c">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\Process BBR Territory\get and append BBR c\Destination - Query"
           TopLeft="15.0833331905306,177.900000588894" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\Process BBR Territory\get and append BBR c\OLE DB Source"
           TopLeft="27.0833329297602,19.4999996513128" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\Process BBR Territory\get and append BBR c\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -2927,9 +3010,7 @@ ORDER BY territory_code</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2963,9 +3044,7 @@ ORDER BY territory_code</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2996,77 +3075,126 @@ ORDER BY territory_code</property>
     design-time-name="Package\Process BET Territory\get and append bet geographic">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="170.4,41.6"
           Id="Package\Process BET Territory\get and append bet geographic\Destination - Query"
           TopLeft="NaN,NaN" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="149.6,41.6"
           Id="Package\Process BET Territory\get and append bet geographic\Source - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="6.40000000000001,41.6" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="155.2,41.6"
           Id="Package\Process BET Territory\get and append bet geographic\Data Conversion"
-          TopLeft="NaN,NaN" />
+          TopLeft="0,100" />
         <EdgeLayout
           Id="Package\Process BET Territory\get and append bet geographic.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="156,62.4">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="-0.800000000000011,58.4"
               Start="0,0"
-              End="0,0">
+              End="6.69999999999999,58.4">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,4" />
+                  <mssgle:LineSegment
+                    End="22.5,54.4" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,54.4"
+                    Point2="22.5,58.4"
+                    Point3="18.5,58.4" />
+                  <mssgle:LineSegment
+                    End="6.69999999999999,58.4" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Process BET Territory\get and append bet geographic.Paths[Data Conversion Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="77.6,141.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="NaN,NaN"
               Start="0,0"
-              End="0,0">
+              End="NaN,NaN">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,NaN" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,NaN"
+                    Point2="0,NaN"
+                    Point3="-4,NaN" />
+                  <mssgle:LineSegment
+                    End="NaN,NaN" />
+                  <mssgle:CubicBezierSegment
+                    Point1="NaN,NaN"
+                    Point2="NaN,NaN"
+                    Point3="NaN,NaN" />
+                  <mssgle:LineSegment
+                    End="NaN,NaN" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BET Territory\get and append bet geographic\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BET Territory\get and append bet geographic\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Process BSW Territory\get and append BSW geographic">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,42.6666666666667"
+          Size="172,42.4"
           Id="Package\Process BSW Territory\get and append BSW geographic\Destination - Query"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="150.4,42.4"
           Id="Package\Process BSW Territory\get and append BSW geographic\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="157.333333333334,42.6666666666667"
+          Size="157.6,42.4"
           Id="Package\Process BSW Territory\get and append BSW geographic\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -3088,9 +3216,7 @@ ORDER BY territory_code</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3112,29 +3238,48 @@ ORDER BY territory_code</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BSW Territory\get and append BSW geographic\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process BSW Territory\get and append BSW geographic\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Process GAN Territory\get and append gan geographic">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172,43"
+          Size="172,43.2"
           Id="Package\Process GAN Territory\get and append gan geographic\Destination - Query"
           TopLeft="5.50000000000003,210.833333333334" />
         <NodeLayout
-          Size="151,43"
+          Size="151.2,43.2"
           Id="Package\Process GAN Territory\get and append gan geographic\Source - Query"
           TopLeft="16.1666666666667,5.50000000000004" />
         <NodeLayout
-          Size="157,43"
+          Size="156.8,43.2"
           Id="Package\Process GAN Territory\get and append gan geographic\Data Conversion"
           TopLeft="12.8333333333334,108.166666666667" />
         <EdgeLayout
@@ -3156,9 +3301,7 @@ ORDER BY territory_code</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3180,9 +3323,7 @@ ORDER BY territory_code</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3213,61 +3354,110 @@ ORDER BY territory_code</property>
     design-time-name="Package\Process MED Territory\get and append MED geographic">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="NaN,NaN"
+          Size="170.4,41.6"
           Id="Package\Process MED Territory\get and append MED geographic\Destination - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="0,176.8" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="149.6,41.6"
           Id="Package\Process MED Territory\get and append MED geographic\Source - Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="38.4,28.8" />
         <NodeLayout
-          Size="NaN,NaN"
+          Size="155.2,41.6"
           Id="Package\Process MED Territory\get and append MED geographic\Data Conversion"
-          TopLeft="NaN,NaN" />
+          TopLeft="49.6,54.4" />
         <EdgeLayout
           Id="Package\Process MED Territory\get and append MED geographic.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="38.4,49.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="11.2,25.6"
               Start="0,0"
-              End="0,0">
+              End="3.7,25.6">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,21.6" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,21.6"
+                    Point2="-22.5,25.6"
+                    Point3="-18.5,25.6" />
+                  <mssgle:LineSegment
+                    End="3.7,25.6" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Process MED Territory\get and append MED geographic.Paths[Data Conversion Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="127.2,96">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="{assembly:Null}"
+              EndConnector="-42,80.8"
               Start="0,0"
-              End="0,0">
+              End="-42,73.3">
               <mssgle:Curve.Segments>
-                <assembly:Null />
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.4" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.4"
+                    Point2="0,40.4"
+                    Point3="-4,40.4" />
+                  <mssgle:LineSegment
+                    End="-38,40.4" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-38,40.4"
+                    Point2="-42,40.4"
+                    Point3="-42,44.4" />
+                  <mssgle:LineSegment
+                    End="-42,73.3" />
+                </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED Territory\get and append MED geographic\Destination - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process MED Territory\get and append MED geographic\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

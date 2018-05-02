@@ -1,0 +1,1127 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2016 8:03:29 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BIRMCORPDW01"
+  DTS:CreatorName="BETLAN\administrator"
+  DTS:DTSID="{6E8C865E-776E-4F22-9493-17BBCD2951AC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="factFsConfigImport 1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="153"
+  DTS:VersionGUID="{3750F163-BE34-41D1-B5D6-3DCB8B8DB1E2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BIRMCSIDBS.MED_App]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A3B7C429-0E72-4EAB-BE20-C70A67A5705D}"
+      DTS:ObjectName="BIRMCSIDBS.MED_App">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;User ID=sa;Initial Catalog=MED_App;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACKPJECWoVE6EQvfLEPkqowAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA65MlyWYUFrMDXvLCskvWEAAAAAASAAACgAAAAEAAAAIacXZj472HMNI72X6C8lMwYAAAAOBWBpwxV87kukA/apUCtS7kAOemoRKa8FAAAAPr2WJmg8sYxC2MY8JcEbRV5cby5</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BIRMCSIDBS.ShopFloor]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{855E7F27-34FA-496B-B72E-2439652F208F}"
+      DTS:ObjectName="BIRMCSIDBS.ShopFloor">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BIRMCSIDBS;Initial Catalog=Shopfloor;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=16384;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CorpDw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{898F6D13-575E-46B6-861E-1E8ACB91013A}"
+      DTS:ObjectName="CorpDw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=birmcorpdw02;Initial Catalog=CorpDw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=16384;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{FABFA28D-4677-43DA-B991-13318A1BAE94}"
+      DTS:ObjectName="Parameter">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">2/10/2018 11:20:00 PM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{26FC47D3-01FD-4BA7-8120-5648E798CEAB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1F8B6CE9-B517-4F77-9FF9-CB8D34472A04}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="recordset">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\duplcates"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{7DA027FA-6648-42A2-BFD8-B0B955B614C3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="duplcates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:SqlStatementSource="&#xA;WITH CTE AS(&#xA; sELECT id,compid, RN = ROW_NUMBER()OVER(PARTITION BY compid ORDER BY compid)&#xA;FROM   BI_tblFsConfigBomImport&#xA;&#xA;)&#xA;&#xA;&#xA;delete from BI_tblFsConfigBomImport&#xA;where id in(&#xA;select id from cte &#xA;where rn&gt;1)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4EB21FF4-8387-492B-A35E-346EF8082B2B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A3B7C429-0E72-4EAB-BE20-C70A67A5705D}"
+          SQLTask:SqlStatementSource="SELECT        comp_id&#xA;FROM            fs_config_mst&#xA;WHERE        (ser_num IS NOT NULL) "
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::recordset" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{0267AC8F-2C00-46F8-A5E2-EF45189DCEFE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A3B7C429-0E72-4EAB-BE20-C70A67A5705D}"
+          SQLTask:SqlStatementSource="&#xA;&#xA;alter  PROCEDURE [dbo].[BI_SSSFSRpt_UnitConfigSp]&#xA;&#xA;@BegMfgWarExpire DateType=NULL&#xA;,@EndMfgWarExpire DateType=NULL&#xA;,@Customer&#x9;&#x9;NVARCHAR(MAX) =NULL&#xA;,@ParentItem&#x9;&#x9;&#x9;&#x9;NVARCHAR(MAX) =NULL&#xA;&#xA;AS&#xA;&#xA;   &#xA;--Added to support SL9 views&#xA;Declare   @BI_site_ref nvarchar(8)&#xA;&#xA;&#x9;&#x9;&#x9;-- grab site from parms table&#xA;&#x9;&#x9;&#x9;select @BI_site_ref=site &#xA;&#x9;&#x9;&#x9;from dbo.parms_mst&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;--set CONTEXT_INFO&#xA;&#x9;&#x9;&#x9;Exec dbo.SetSiteSp @BI_site_ref, NULL&#xA;&#xA;&#xA;--SELECT        DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0) AS FirstDayOfYear, DATEADD(mm, DATEDIFF(mm, 0, DATEADD(mm, - 1, GETDATE())), 0) AS FirstDayOfLastMth, DATEADD(Month, DATEDIFF(Month, 0, GETDATE()), 0) &#xA;--                         AS FirstDayOfMth, DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0) AS CurrentDate, DATEADD(ms, - 3, DATEADD(mm, DATEDIFF(mm, 0, GETDATE()), 0)) AS LastDayOfPrevMth, EOMONTH(GETDATE()) &#xA;--                         AS LastDayOfMth&#xA;   &#xA; SET @BegMfgWarExpire = ISNULL(@BegMfgWarExpire,  DATEADD(yyyy, - 3, DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0)) )&#xA;SET @EndMfgWarExpire =ISNULL(@EndMfgWarExpire, EOMONTH(GETDATE(), 12) )&#xA; &#xA;   &#xA; SET @Customer=isNULL(@Customer,(SELECT top(1)  ltrim(fs_unit_mst.cust_num) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;FROM        custaddr_mst INNER JOIN&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  fs_unit_mst ON custaddr_mst.cust_num = fs_unit_mst.cust_num AND custaddr_mst.cust_seq = fs_unit_mst.cust_seq AND custaddr_mst.site_ref = fs_unit_mst.site_ref LEFT OUTER JOIN&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  fs_config_mst AS fs_Config WITH (NOLOCK) INNER JOIN&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  fs_unit_warr_mst AS fs_unit_warr WITH (NOLOCK) ON fs_Config.comp_id = fs_unit_warr.comp_id ON fs_unit_mst.comp_id = fs_Config.comp_id&#xA;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHERE    fs_Config.parent_id=0 &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and isnull(fs_unit_warr.end_date,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0)) between @BegMfgWarExpire and @EndMfgWarExpire))&#xA; &#xA; SET @ParentItem=ISNULL(@ParentItem,'29383');&#xA;&#xA;&#xA;&#xA;&#xA;;&#xA;With Parent as &#xA;(&#xA;SELECT     &#xA;&#x9;fs_Config.comp_id AS CompId&#xA;&#x9;, cast(fs_Config.item AS VARCHAR (100)) AS Item&#xA;&#x9;, fs_Config.description AS ItemDescription&#xA;&#x9;, ltrim(fs_Config.ser_num) AS SerialNum&#xA;&#x9;,1 as Level&#xA;&#x9;&#xA;&#xA;&#x9;--, fs_unit_warr.warr_code AS MfgWarrantyCode&#xA;&#x9;--, fs_unit_warr.end_date AS MfgWarrantyEndDate&#xA;&#x9;--,fs_Config.install_date as InstallDate&#xA;&#x9;--,fs_unit_warr.start_date as StartDate&#xA;&#xA;&#x9;--,fs_Config.remove_date as RemoveDate &#xA;&#x9;, fs_Config.parent_id AS ParentId&#xA;&#x9;,cast(fs_Config.item AS VARCHAR (100))  as Sort&#xA;FROM            &#xA;&#x9;&#x9;&#x9;--fs_unit_warr_mst AS fs_unit_warr WITH (NOLOCK) RIGHT OUTER JOIN&#xA;                         fs_config_mst AS fs_Config WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9; LEFT OUTER JOIN                         fs_unit_mst ON fs_Config.comp_id = fs_unit_mst.comp_id ON fs_unit_warr.comp_id = fs_Config.comp_id&#xA;&#xA;WHERE    fs_Config.parent_id=0 &#xA;and fs_Config.ser_num is not null&#xA;and fs_Config.comp_id=50009&#xA;UNION ALL&#xA;SELECT fs_Config.comp_id AS CompId,&#xA;           CAST (REPLICATE('|---', Parent.Level) + fs_Config.item AS VARCHAR (100)),&#xA;            fs_Config.description AS ItemDescription,&#xA;&#x9;&#x9;&#x9; ltrim(fs_Config.ser_num) AS SerialNum,&#xA;&#x9;&#xA;            Parent.Level + 1,&#xA;            fs_Config.parent_id AS ParentID,&#xA;            CAST (Parent.Sort + '\' + fs_Config.item AS VARCHAR (100))&#xA;     FROM          fs_config_mst AS fs_Config inner join Parent&#xA;            on fs_Config.parent_id = parent.CompId&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#xA;         &#xA;    )&#xA;&#xA;  &#xA;  &#xA;  &#xA;  &#xA;  select * from parent&#xA;  &#xA;  ;&#xA;&#xA;--Child as &#xA;--(&#xA;--SELECT     fs_Config.comp_id AS CompId&#xA;--&#x9;,ISNULL(LTRIM(fs_unit_mst.cust_num), '00000') AS CustNum&#xA;--&#x9;, ISNULL(custaddr_mst.name, '-') AS Customer&#xA;--&#x9;, fs_Config.item AS Item&#xA;--&#x9;, fs_Config.description AS ItemDescription&#xA;--&#x9;, ltrim(fs_Config.ser_num) AS SerialNum&#xA;--&#x9;, fs_unit_warr.warr_code AS MfgWarrantyCode&#xA;--&#x9;, fs_unit_warr.end_date AS MfgWarrantyEndDate&#xA;--&#x9;,fs_Config.install_date as InstallDate&#xA;--&#x9;,fs_unit_warr.start_date as StartDate&#xA;--&#x9;,fs_Config.remove_date as RemoveDate &#xA;--&#x9;, fs_Config.parent_id AS ParentId&#xA;--FROM            fs_unit_warr_mst AS fs_unit_warr WITH (NOLOCK) RIGHT OUTER JOIN&#xA;--                         custaddr_mst RIGHT OUTER JOIN&#xA;--                         fs_config_mst AS fs_Config WITH (NOLOCK) LEFT OUTER JOIN&#xA;--                         fs_unit_mst ON fs_Config.comp_id = fs_unit_mst.comp_id ON custaddr_mst.cust_num = fs_unit_mst.cust_num AND custaddr_mst.cust_seq = fs_unit_mst.cust_seq ON fs_unit_warr.comp_id = fs_Config.comp_id&#xA;&#xA;--WHERE     fs_Config.parent_id&lt;&gt;0&#xA;--and fs_Config.ser_num is not null&#xA;----and isnull(fs_unit_warr.end_date,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0))  between @BegMfgWarExpire and @EndMfgWarExpire&#xA; &#xA; &#xA;&#xA;-- AND fs_Config.parent_id in&#xA;--&#x9;(&#xA;--&#x9;SELECT        fs_Config.comp_id&#xA;--&#x9;&#x9;&#x9;FROM            custaddr_mst RIGHT OUTER JOIN&#xA;--                         fs_config_mst AS fs_Config WITH (NOLOCK) LEFT OUTER JOIN&#xA;--                         fs_unit_mst ON fs_Config.comp_id = fs_unit_mst.comp_id ON custaddr_mst.cust_num = fs_unit_mst.cust_num AND custaddr_mst.cust_seq = fs_unit_mst.cust_seq&#xA;--&#x9;&#x9;&#x9;WHERE          (fs_Config.parent_id = 0) &#xA;--&#x9;&#x9;&#x9;&#x9;--&#x9;AND (fs_Config.ser_num IS NOT NULL) &#xA;--&#x9;&#x9;&#x9;&#x9;--and isnull(fs_unit_warr.end_date,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0))  between @BegMfgWarExpire and @EndMfgWarExpire&#xA;--&#x9;&#x9;&#x9;&#x9;--AND (ISNULL(LTRIM(custaddr_mst.cust_num), '00000')  in (&#xA;--&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9;SELECT     * FROM          dbo.BI_Split(@Customer, ',')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;--))&#xA;&#xA;--&#x9;)&#xA;--&#x9;),&#xA;&#xA;--Hiearchy as &#xA;--(&#xA;--Select &#xA;--Parent.CompId&#xA;--,Parent.CustNum&#xA;--,Parent.Customer&#xA;--,Parent.Item&#xA;--,Parent.ItemDescription&#xA;--,Parent.SerialNum&#xA;--,parent.MfgWarrantyCode&#xA;--,parent.MfgWarrantyEndDate&#xA;--,Parent.InstallDate&#xA;--,Parent.StartDate&#xA;--,Parent.RemoveDate &#xA;&#xA;--,Parent.ParentId&#xA;--,1 as LevelId&#xA;--From Parent&#xA;&#xA;--Union All&#xA;&#xA;--Select &#xA;--child.CompId&#xA;--,child.CustNum&#xA;--,Child.Customer&#xA;--,child.Item&#xA;--,child.ItemDescription&#xA;--,child.SerialNum&#xA;--,child.MfgWarrantyCode&#xA;--,child.MfgWarrantyEndDate&#xA;--,child.InstallDate&#xA;--,child.StartDate&#xA;--,child.RemoveDate &#xA;--,child.ParentId&#xA;--,Hiearchy.LevelId+1&#xA;--From Child&#xA;--inner join Hiearchy on&#xA;--child.ParentId=Hiearchy.CompId&#xA;--),&#xA;&#xA;----Extended Contract&#xA;--Contract as &#xA;--(&#xA;--&#x9;SELECT  distinct   ser_num as ExtSerialNum&#xA;--&#x9;&#x9;, contract as ExtContract&#xA;--&#x9;&#x9;, start_date as ExtStartDate&#xA;--&#x9;&#x9;, end_date as ExtEndDate &#xA;--&#x9;&#x9;, item as ExtItem&#xA;--&#x9;FROM        fs_cont_line_mst&#x9;&#xA;--)&#xA;&#xA;&#xA;----put them all together&#xA;--Select &#xA;--* from Hiearchy&#xA;--LEFT OUTER JOIN Contract ON Hiearchy.SerialNum = Contract.ExtSerialNum&#xA;&#xA;--Where &#xA;-- (CompId  in (SELECT     * FROM          dbo.BI_Split(@ParentItem, ',')))&#xA;--Or (ParentId  in (SELECT     * FROM          dbo.BI_Split(@ParentItem, ',')))&#xA;&#x9;&#xA;&#x9;&#xA;&#x9;&#xA;&#x9;&#xA;&#x9;&#xA;&#x9;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{FDCED769-278A-4C53-8C2A-187720EF66D9}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{9FD0F610-E77E-475A-BE51-A008FBBDE5CE}"
+        DTS:ObjectName="{9FD0F610-E77E-475A-BE51-A008FBBDE5CE}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::recordset" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{CE5A83EB-F7AC-488E-BA6A-448762E1CF42}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{898F6D13-575E-46B6-861E-1E8ACB91013A}"
+              SQLTask:SqlStatementSource="Delete FROM           tblFsConfigBomImport&#xA;WHERE        (CompId=?)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::Id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Process"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7B241781-B9AA-4E5D-B7AF-22ED73189A43}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Process"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              autoAdjustBufferSize="true"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Process\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Process\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Foreach Loop Container\Process\Data Conversion.Inputs[Data Conversion Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Process\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Process\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[BI_tblFsConfigBomImport]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Process\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BIRMCSIDBS.MED_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[BIRMCSIDBS.MED_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TopItem]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="TopItem"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TopItem]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopItem]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TopLot]"
+                          cachedDataType="wstr"
+                          cachedLength="15"
+                          cachedName="TopLot"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TopLot]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopLot]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TopSerial]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="TopSerial"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TopSerial]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopSerial]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompId]"
+                          cachedDataType="i4"
+                          cachedName="CompId"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompId]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompId]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Item]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Item"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Item]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Item]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ItemDescription"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescription]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDescription]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SerialNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="SerialNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SerialNumber]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[SerialNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InstallDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="InstallDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstallDate]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstallDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RemoveDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="RemoveDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RemoveDate]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[RemoveDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BomLevel]"
+                          cachedDataType="i4"
+                          cachedName="BomLevel"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BomLevel]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[BomLevel]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ParentId]"
+                          cachedDataType="i4"
+                          cachedName="ParentId"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ParentId]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ParentId]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemList]"
+                          cachedDataType="nText"
+                          cachedName="ItemList"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemList]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemList]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Lot]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Lot"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lot]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lot]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                          dataType="i4"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TopItem]"
+                          dataType="wstr"
+                          length="30"
+                          name="TopItem" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TopLot]"
+                          dataType="wstr"
+                          length="15"
+                          name="TopLot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TopSerial]"
+                          dataType="wstr"
+                          length="30"
+                          name="TopSerial" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompId]"
+                          dataType="i4"
+                          name="CompId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Item]"
+                          dataType="wstr"
+                          length="30"
+                          name="Item" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescription]"
+                          dataType="wstr"
+                          length="50"
+                          name="ItemDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SerialNumber]"
+                          dataType="wstr"
+                          length="30"
+                          name="SerialNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InstallDate]"
+                          dataType="dbTimeStamp"
+                          name="InstallDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RemoveDate]"
+                          dataType="dbTimeStamp"
+                          name="RemoveDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BomLevel]"
+                          dataType="i4"
+                          name="BomLevel" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ParentId]"
+                          dataType="i4"
+                          name="ParentId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemList]"
+                          dataType="nText"
+                          name="ItemList" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SessionId]"
+                          dataType="wstr"
+                          length="50"
+                          name="SessionId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lot]"
+                          dataType="wstr"
+                          length="15"
+                          name="Lot" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Process\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">DECLARE @RC int
+DECLARE @FromDate nvarchar(25)
+DECLARE @ThruDate  nvarchar(25)
+DECLARE @InDetail varchar(1)
+
+-- TODO: Set parameter values here.
+
+EXECUTE @RC = [dbo].[BI_SSSFSRpt_UnitConfigSp] 
+   @CompId=?
+
+ WITH RESULT SETS
+(
+     ( 
+   
+	[TopItem] [nvarchar](30) NULL,
+	[TopLot] [nvarchar](15) NULL,
+	[TopSerial] [nvarchar](30) NULL,
+	[CompId] [int] NULL,
+	[Item] [nvarchar](30) NULL,
+	[ItemDescription] [nvarchar](50) NULL,
+	[SerialNumber] [nvarchar](30) NULL,
+                [Lot] [nvarchar](30) NULL,
+	[InstallDate] [datetime] NULL,
+	[RemoveDate] [datetime] NULL,
+	[BomLevel] [int] NULL,
+	[ParentId] [int] NULL,
+	[ItemList] [nvarchar](max) NULL
+		)
+		
+
+
+
+)</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"@CompId:Input",{26FC47D3-01FD-4BA7-8120-5648E798CEAB};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Process\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BIRMCSIDBS.MED_App]"
+                      connectionManagerRefId="Package.ConnectionManagers[BIRMCSIDBS.MED_App]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopItem]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TopItem]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopItem]"
+                          name="TopItem"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopLot]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TopLot]"
+                          length="15"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopLot]"
+                          name="TopLot"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopSerial]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TopSerial]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[TopSerial]"
+                          name="TopSerial"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CompId]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompId]"
+                          name="CompId"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Item]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Item]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Item]"
+                          name="Item"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemDescription]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDescription]"
+                          name="ItemDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[SerialNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SerialNumber]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[SerialNumber]"
+                          name="SerialNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstallDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstallDate]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[InstallDate]"
+                          name="InstallDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[RemoveDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RemoveDate]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[RemoveDate]"
+                          name="RemoveDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[BomLevel]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BomLevel]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[BomLevel]"
+                          name="BomLevel"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ParentId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ParentId]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ParentId]"
+                          name="ParentId"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemList]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemList]"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemList]"
+                          name="ItemList"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lot]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Lot]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lot]"
+                          name="Lot"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TopItem]"
+                          dataType="wstr"
+                          length="30"
+                          name="TopItem" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TopLot]"
+                          dataType="wstr"
+                          length="15"
+                          name="TopLot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TopSerial]"
+                          dataType="wstr"
+                          length="30"
+                          name="TopSerial" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CompId]"
+                          dataType="i4"
+                          name="CompId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Item]"
+                          dataType="wstr"
+                          length="30"
+                          name="Item" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemDescription]"
+                          dataType="wstr"
+                          length="50"
+                          name="ItemDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SerialNumber]"
+                          dataType="wstr"
+                          length="30"
+                          name="SerialNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InstallDate]"
+                          dataType="dbTimeStamp"
+                          name="InstallDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RemoveDate]"
+                          dataType="dbTimeStamp"
+                          name="RemoveDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BomLevel]"
+                          dataType="i4"
+                          name="BomLevel" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ParentId]"
+                          dataType="i4"
+                          name="ParentId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemList]"
+                          dataType="nText"
+                          name="ItemList" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Lot]"
+                          dataType="wstr"
+                          length="30"
+                          name="Lot" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TopItem]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TopItem]"
+                          name="TopItem" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TopLot]"
+                          dataType="wstr"
+                          length="15"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TopLot]"
+                          name="TopLot" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TopSerial]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TopSerial]"
+                          name="TopSerial" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CompId]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CompId]"
+                          name="CompId" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Item]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Item]"
+                          name="Item" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemDescription]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemDescription]"
+                          name="ItemDescription" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SerialNumber]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SerialNumber]"
+                          name="SerialNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Lot]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Lot]"
+                          name="Lot" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstallDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InstallDate]"
+                          name="InstallDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RemoveDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RemoveDate]"
+                          name="RemoveDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BomLevel]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BomLevel]"
+                          name="BomLevel" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ParentId]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ParentId]"
+                          name="ParentId" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemList]"
+                          dataType="nText"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemList]"
+                          name="ItemList" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Process.Paths[Data Conversion Output]"
+                  endId="Package\Foreach Loop Container\Process\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Foreach Loop Container\Process\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Process.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Process\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Process\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{4229A752-8F57-44FA-AC56-DA60638CC842}"
+          DTS:From="Package\Foreach Loop Container\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Process" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{C5A3EDB3-FD7C-448B-840C-B05E92363D73}"
+          DTS:ObjectName="{C5A3EDB3-FD7C-448B-840C-B05E92363D73}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::Id" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FE89E18D-63BD-4E79-AE8F-7B41F1C7484E}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="123,42"
+          Id="Package\duplcates"
+          TopLeft="376.000006403242,58.1176478739016" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="106.5,5.5" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Execute SQL Task 1"
+          TopLeft="528,93" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Foreach Loop Container\Execute SQL Task"
+          TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="115,42"
+          Id="Package\Foreach Loop Container\Process"
+          TopLeft="29.5,107.5" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="87,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="174,205"
+          Size="174,248"
+          Id="Package\Foreach Loop Container"
+          TopLeft="103,102.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="189,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="v"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="35,40"
+          Id="53bfca74-f4e1-4079-be05-39e95b903626"
+          TopLeft="5.50000000000003,211.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Process">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Foreach Loop Container\Process\OLE DB Source"
+          TopLeft="45,114" />
+        <NodeLayout
+          Size="157,43"
+          Id="Package\Foreach Loop Container\Process\Data Conversion"
+          TopLeft="41.9166663996875,214.966664861242" />
+        <NodeLayout
+          Size="172,43"
+          Id="Package\Foreach Loop Container\Process\OLE DB Destination"
+          TopLeft="18.9166663996875,281.566663420002" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Process.Paths[OLE DB Source Output]"
+          TopLeft="120.208333199844,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.966664861242"
+              Start="0,0"
+              End="0,51.466664861242">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.466664861242" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Process.Paths[Data Conversion Output]"
+          TopLeft="120.416666399688,257.966664861242">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-15.5,23.59999855876"
+              Start="0,0"
+              End="-15.5,16.09999855876">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.79999927937999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.79999927937999"
+                    Point2="0,11.79999927938"
+                    Point3="-4,11.79999927938" />
+                  <mssgle:LineSegment
+                    End="-11.5,11.79999927938" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11.5,11.79999927938"
+                    Point2="-15.5,11.79999927938"
+                    Point3="-15.5,15.79999927938" />
+                  <mssgle:LineSegment
+                    End="-15.5,16.09999855876" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Process\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Process\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

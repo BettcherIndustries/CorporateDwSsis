@@ -9,12 +9,12 @@
   DTS:DTSID="{377A1745-266F-43D6-BF24-016B80571BCC}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LastModifiedProductVersion="14.0.0800.98"
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="factSyteForecastImport"
   DTS:VersionBuild="184"
-  DTS:VersionGUID="{35A21467-E01A-4208-B680-79F2C961FE86}">
+  DTS:VersionGUID="{1D533096-4313-4230-BE70-BE131C8D981C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -65,7 +65,7 @@
       DTS:ObjectName="sview_bettcher">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=birm01886b;Initial Catalog=sview_bettcher;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-factStrataViewImport-{DC3D8B07-EDA1-4813-B5A9-9A17E62FACCA}birm01886b.sview_bettcher;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=birmcorpdw01;Initial Catalog=sview_bettcher;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-factStrataViewImport-{DC3D8B07-EDA1-4813-B5A9-9A17E62FACCA}birm01886b.sview_bettcher;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -148,7 +148,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -335,7 +335,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DimTime.Year, factSyteForecast.DivisionKey, factSyteForecast.ForecastDateKey AS InvoiceDateKey, factSyteForecast.ProdCodeSlKey, 
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DimTime.Year, factSyteForecast.DivisionKey, factSyteForecast.ForecastDateKey AS InvoiceDateKey, factSyteForecast.ProdCodeSlKey, 
                       factSyteForecast.ItemFamilyCodeKey, factSyteForecast.ItemCommCodeKey, factSyteForecast.ItemKey, factSyteForecast.OrigQty
 FROM         factSyteForecast INNER JOIN
                       DimTime ON factSyteForecast.ForecastDateKey = DimTime.TimeKey
@@ -637,7 +637,7 @@ WHERE     (DimTime.Year = 2012) AND (factInvoiceSales.SiteKey = 1)</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -862,7 +862,7 @@ WHERE     (DimTime.Year = 2012) AND (factInvoiceSales.SiteKey = 1)</property>
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     DimTime.TimeKey AS ForecastDateKey, tblSyteForecastImport.DivisionKey, tblSyteForecastImport.DivisionKeyAlternative, dimItem.ItemKey, 
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     DimTime.TimeKey AS ForecastDateKey, tblSyteForecastImport.DivisionKey, tblSyteForecastImport.DivisionKeyAlternative, dimItem.ItemKey, 
                       tblSyteForecastImport.OrigQty, tblSyteForecastImport.AvailQty, dimItem.ItemFamilyCodeKey, dimItem.ItemCommCodeKey, dimItem.ItemPmtCodeKey, 
                       dimItem.ProdCodeSlKey
 FROM         tblSyteForecastImport INNER JOIN
@@ -1212,7 +1212,7 @@ FROM         tblSyteForecastImport INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1401,7 +1401,7 @@ FROM         tblSyteForecastImport INNER JOIN
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     RowPointer,
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     RowPointer,
  1 AS DivisionKey, 'BET' AS DivisionKeyAlternative, item, orig_qty, fcst_date, avail_qty
 FROM         forecast_mst</property>
                     <property
