@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimItemImport"
-  DTS:VersionBuild="429"
-  DTS:VersionGUID="{3D7CDA10-67AA-4319-BA08-F3B7803619F6}">
+  DTS:VersionBuild="430"
+  DTS:VersionGUID="{89FB1653-27EA-4FB6-89FC-CECD3CA8C019}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -4643,17 +4643,14 @@ FROM         item</property>
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     5 AS SiteKey, 'BSW' as SiteKeyAlternative, LTRIM(RTRIM(item.item)) AS ItemKeyAlternative, item.product_code AS ProdCodeKeyAlternative, ISNULL(item_lang.description, item.description) 
-                      AS ItemDescription, item.description AS GermanItemDescription, ISNULL(item.family_code, N'0000') AS ItemFamilyCodeKeyAlternative, ISNULL(item.comm_code, 0) 
-                      AS comm_code, item.p_m_t_code, LTRIM(RTRIM(item.item)) + '-' + ISNULL(item_lang.description, item.description) AS ItemNoDescription, LTRIM(RTRIM(item.item)) 
-                      + '-' + item.description AS GermanItemNoDescription, 
-                      CASE p_m_t_code WHEN 'P' THEN cur_mat_cost ELSE cur_matl_cost + cur_lbr_cost + cur_fovhd_cost + cur_vovhd_cost + cur_out_cost END AS CurCostTest, 
-                      item.cur_u_cost, item.unit_cost, CASE WHEN item.stat = 'O' THEN 'Z' ELSE ISNULL(item.plan_code, N'0000') END AS PlannerCodeKeyAlternative, item.order_min, ISNULL(item.abc_code, 
-                      N'A') AS abc_code
-
-FROM         item_mst as item LEFT OUTER JOIN
-                      item_lang_mst as item_lang ON item.item = item_lang.item
-WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        5 AS SiteKey, 'BSW' AS SiteKeyAlternative, LTRIM(RTRIM(item.item)) AS ItemKeyAlternative, item.product_code AS ProdCodeKeyAlternative, ISNULL(item_lang.description, item.description) AS ItemDescription, 
+                         item.description AS GermanItemDescription, ISNULL(item.family_code, N'0000') AS ItemFamilyCodeKeyAlternative, ISNULL(item.comm_code, 0) AS comm_code, item.p_m_t_code, LTRIM(RTRIM(item.item)) 
+                         + '-' + ISNULL(item_lang.description, item.description) AS ItemNoDescription, LTRIM(RTRIM(item.item)) + '-' + item.description AS GermanItemNoDescription, 
+                         CASE p_m_t_code WHEN 'P' THEN cur_mat_cost ELSE cur_matl_cost + cur_lbr_cost + cur_fovhd_cost + cur_vovhd_cost + cur_out_cost END AS CurCostTest, item.cur_u_cost, item.unit_cost, 
+                         CASE WHEN item.stat = 'O' THEN 'Z' ELSE ISNULL(item.plan_code, N'0000') END AS PlannerCodeKeyAlternative, item.order_min, ISNULL(item.abc_code, N'A') AS abc_code, item_lang.lang_code
+FROM            item_mst AS item LEFT OUTER JOIN
+                         item_lang_mst AS item_lang ON item.item = item_lang.item
+WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) AND (item_lang.lang_code = N'ENU')</property>
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
@@ -4865,6 +4862,16 @@ WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
                               lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[abc_code]"
                               name="abc_code"
                               truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[lang_code]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[lang_code]"
+                              length="3"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[lang_code]"
+                              name="lang_code"
+                              truncationRowDisposition="FailComponent" />
                           </outputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -4957,6 +4964,11 @@ WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
                               dataType="wstr"
                               length="1"
                               name="abc_code" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[lang_code]"
+                              dataType="wstr"
+                              length="3"
+                              name="lang_code" />
                           </externalMetadataColumns>
                         </output>
                         <output
@@ -5070,6 +5082,12 @@ WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
                               length="1"
                               lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[abc_code]"
                               name="abc_code" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[lang_code]"
+                              dataType="wstr"
+                              length="3"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[lang_code]"
+                              name="lang_code" />
                             <outputColumn
                               refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                               dataType="i4"
@@ -22855,13 +22873,13 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="179.2,41.6"
+          Size="179,42"
           Id="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1"
           TopLeft="0,66.4" />
         <NodeLayout
-          Size="158.4,41.6"
+          Size="158,42"
           Id="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1"
           TopLeft="NaN,NaN" />
         <EdgeLayout
@@ -22895,9 +22913,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
