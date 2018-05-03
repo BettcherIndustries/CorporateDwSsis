@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimItemImport"
-  DTS:VersionBuild="430"
-  DTS:VersionGUID="{89FB1653-27EA-4FB6-89FC-CECD3CA8C019}">
+  DTS:VersionBuild="431"
+  DTS:VersionGUID="{8D0DBD52-E4B2-40F6-B91C-B21BC6645BA8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2633,7 +2633,7 @@ FROM         item</property>
 
 FROM         item_mst as item LEFT OUTER JOIN
                       itemwhse_mst as itemwhse  ON item.item = itemwhse.item
-WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and itemwhse.whse='Main'</property>
+WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and itemwhse.whse='Main' and (matl_type NOT IN ('O', 'F', 'T'))</property>
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
@@ -7122,11 +7122,12 @@ FROM         item</property>
                               dataType="System.String"
                               description="The SQL command to be executed."
                               name="SqlCommand"
-                              UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT     2 AS SiteKey, 'GAN' AS SiteKeyAlternative, LTRIM(RTRIM(item)) AS ItemKeyAlternative, product_code AS ProdCodeKeyAlternative, description AS ItemDescription, ISNULL(family_code, '0000') AS ItemFamilyCodeKeyAlternative, ISNULL(comm_code, 0) AS comm_code, 
-                  p_m_t_code, LTRIM(RTRIM(item)) + '-' + description AS ItemNoDescription, CASE p_m_t_code WHEN 'P' THEN cur_mat_cost ELSE cur_matl_cost + cur_lbr_cost + cur_fovhd_cost + cur_vovhd_cost + cur_out_cost END AS CurCostTest, cur_u_cost, unit_cost, 
-                  CASE WHEN item.stat = 'O' THEN 'OBS' ELSE ISNULL(plan_code, '0000') END AS PlannerCodeKeyAlternative, order_min, ISNULL(abc_code, N'A') AS abc_code, RecordDate
-FROM        item_mst AS item
-WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
+                              UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        2 AS SiteKey, 'GAN' AS SiteKeyAlternative, LTRIM(RTRIM(item)) AS ItemKeyAlternative, product_code AS ProdCodeKeyAlternative, description AS ItemDescription, ISNULL(family_code, '0000') 
+                         AS ItemFamilyCodeKeyAlternative, ISNULL(comm_code, 0) AS comm_code, p_m_t_code, LTRIM(RTRIM(item)) + '-' + description AS ItemNoDescription, 
+                         CASE p_m_t_code WHEN 'P' THEN cur_mat_cost ELSE cur_matl_cost + cur_lbr_cost + cur_fovhd_cost + cur_vovhd_cost + cur_out_cost END AS CurCostTest, cur_u_cost, unit_cost, 
+                         CASE WHEN item.stat = 'O' THEN 'OBS' ELSE ISNULL(plan_code, '0000') END AS PlannerCodeKeyAlternative, order_min, ISNULL(abc_code, N'A') AS abc_code, RecordDate, stat, reason_code
+FROM            item_mst AS item
+WHERE        (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) AND (matl_type NOT IN ('O', 'F', 'T'))</property>
                             <property
                               dataType="System.String"
                               description="The variable that contains the SQL command to be executed."
@@ -7327,6 +7328,26 @@ WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pro
                                   lineageId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].Columns[RecordDate]"
                                   name="RecordDate"
                                   truncationRowDisposition="FailComponent" />
+                                <outputColumn
+                                  refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                                  length="1"
+                                  lineageId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                                  name="stat"
+                                  truncationRowDisposition="FailComponent" />
+                                <outputColumn
+                                  refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                                  dataType="wstr"
+                                  errorOrTruncationOperation="Conversion"
+                                  errorRowDisposition="FailComponent"
+                                  externalMetadataColumnId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                                  length="3"
+                                  lineageId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                                  name="reason_code"
+                                  truncationRowDisposition="FailComponent" />
                               </outputColumns>
                               <externalMetadataColumns
                                 isUsed="True">
@@ -7413,6 +7434,16 @@ WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pro
                                   refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[RecordDate]"
                                   dataType="dbTimeStamp"
                                   name="RecordDate" />
+                                <externalMetadataColumn
+                                  refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                                  dataType="wstr"
+                                  length="1"
+                                  name="stat" />
+                                <externalMetadataColumn
+                                  refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                                  dataType="wstr"
+                                  length="3"
+                                  name="reason_code" />
                               </externalMetadataColumns>
                             </output>
                             <output
@@ -7519,6 +7550,18 @@ WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pro
                                   dataType="dbTimeStamp"
                                   lineageId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[RecordDate]"
                                   name="RecordDate" />
+                                <outputColumn
+                                  refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                                  dataType="wstr"
+                                  length="1"
+                                  lineageId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                                  name="stat" />
+                                <outputColumn
+                                  refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                                  dataType="wstr"
+                                  length="3"
+                                  lineageId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                                  name="reason_code" />
                                 <outputColumn
                                   refId="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                                   dataType="i4"
@@ -9535,7 +9578,7 @@ FROM         item</property>
                       N'A') AS abc_code
 
 FROM         item_mst as item
-WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</property>
+WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and (matl_type NOT IN ('O', 'F', 'T'))</property>
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
@@ -22720,7 +22763,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process BET\Get BET items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="160,43"
           Id="Package\Process\Process BET\Get BET items\Source - Query 1"
@@ -22748,9 +22791,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23157,13 +23198,13 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="158.4,41.6"
+          Size="158,42"
           Id="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Source - Query 1"
           TopLeft="15.4285716913185,91.7647071693183" />
         <NodeLayout
-          Size="179.2,41.6"
+          Size="179,42"
           Id="Package\Process\Process GAN\Process GAN Items  merges into dimItemTemp\Get GAN items\Destination - Query 1"
           TopLeft="20.000000340598,167.011767048159" />
         <EdgeLayout
@@ -23197,9 +23238,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23430,13 +23469,13 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="160,42.4"
+          Size="160,42"
           Id="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1"
           TopLeft="0,56.7666656515996" />
         <NodeLayout
-          Size="180,42.4"
+          Size="180,42"
           Id="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1"
           TopLeft="NaN,NaN" />
         <EdgeLayout
@@ -23470,9 +23509,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
