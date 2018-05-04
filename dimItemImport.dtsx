@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="dimItemImport"
-  DTS:VersionBuild="431"
-  DTS:VersionGUID="{8D0DBD52-E4B2-40F6-B91C-B21BC6645BA8}">
+  DTS:VersionBuild="436"
+  DTS:VersionGUID="{A93A2A28-E895-4F69-82B4-A12804DB349C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -739,7 +739,7 @@ ORDER BY replace(KeyValue,'-BET','')</property>
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F407E98A-F733-49D9-B52D-1906AD86163B}"
-                  SQLTask:SqlStatementSource=" MERGE dimItem AS target&#xA;    USING (SELECT    DISTINCT &#xA;&#x9;sitekey,&#xA;&#x9;SiteKeyAlternative,&#xA;&#x9;ItemKeyAlternative, &#xA;&#x9;ProdCodeKeyAlternative, &#xA;&#x9;ItemDescription,&#xA;&#x9;ItemFamilyCodeKeyAlternative,&#xA;&#x9;ItemCommCodeKeyAlternative, &#xA;&#x9;ItemPmtCodeKeyAlternative, &#xA;&#x9;ItemNoDescription, &#xA;&#x9;CurCost,StdCost,&#xA;&#x9;PlannerCodeKeyAlternative,&#xA;&#x9;OrderMin, &#xA;&#x9;MainQoh,&#xA;&#x9;GermanItemDescription, &#xA;&#x9;GermanItemNoDescription,&#xA;&#x9;ItemAbcCodeKeyAlternative&#xA;&#x9;, MatlCost&#xA;&#x9;,LbrCost&#xA;&#x9;,FovhdCost&#xA;&#x9;,VovhdCost&#xA;&#x9;,OutCost&#xA;&#xA;&#xA;&#xA;&#x9;FROM         tblItemTemp) AS source&#xA;    ON ( target.ItemKeyAlternative = source.ItemKeyAlternative  AND target.sitekey=source.sitekey)&#xA;    WHEN MATCHED THEN &#xA;        UPDATE SET &#xA;&#x9;SiteKeyAlternative=source.SiteKeyAlternative&#xA;&#x9;,ItemDescription = source.ItemDescription,&#xA;  &#x9;ItemKeyAlternative = source.ItemKeyAlternative ,&#xA;   &#x9;ProdCodeKeyAlternative = source.ProdCodeKeyAlternative,&#xA;&#x9;ItemFamilyCodeKeyAlternative=source.ItemFamilyCodeKeyAlternative,&#xA;&#x9;ItemCommCodeKeyAlternative=source.ItemCommCodeKeyAlternative,&#xA;&#x9; ItemPmtCodeKeyAlternative=source.ItemPmtCodeKeyAlternative,&#xA;&#x9; ItemNoDescription=source. ItemNoDescription,&#xA;&#x9;Curcost=source.Curcost,&#xA;&#x9;StdCost=source.StdCost,&#xA;&#x9;PlannerCodeKeyAlternative=source.PlannerCodeKeyAlternative,&#xA;&#x9;OrderMin=source.OrderMin, &#xA;&#x9;MainQoh=source.MainQoh,&#xA;&#x9;GermanItemDescription=source.GermanItemDescription, &#xA;&#x9;GermanItemNoDescription=source.GermanItemNoDescription,&#xA;&#x9; ItemAbcCodeKeyAlternative=source.ItemAbcCodeKeyAlternative,&#xA;&#x9; MatlCost=source.MatlCost,&#xA;&#x9;LbrCost=source.LbrCost,&#xA;&#x9;FovhdCost=source.FovhdCost,&#xA;&#x9;VovhdCost=source.VovhdCost,&#xA;&#x9;OutCost=source.OutCost&#xA;&#xA;&#xA;&#xA; WHEN NOT MATCHED THEN &#xA;     INSERT (&#xA;&#x9;sitekey&#xA;&#x9;,SiteKeyAlternative&#xA;&#x9;,ItemDescription,&#xA;&#x9;ItemKeyAlternative,&#xA;&#x9;ProdCodeKeyAlternative,&#xA;&#x9;ItemFamilyCodeKeyAlternative,&#xA;&#x9;ItemCommCodeKeyAlternative,&#xA;&#x9;ItemPmtCodeKeyAlternative,&#xA;&#x9;ItemNoDescription,&#xA;&#x9;CurCost,StdCost,&#xA;&#x9;PlannerCodeKeyAlternative,&#xA;&#x9;OrderMin,&#xA;&#x9;MainQoh,&#xA;&#x9;GermanItemDescription,&#xA;&#x9;GermanItemNoDescription,&#xA;&#x9;ItemAbcCodeKeyAlternative,&#xA;&#x9;MatlCost,&#xA;&#x9;LbrCost,&#xA;&#x9;FovhdCost,&#xA;&#x9;VovhdCost,&#xA;&#x9;OutCost&#xA;&#xA;&#xA;)&#xA;     VALUES (&#xA;&#x9;source.sitekey,&#xA;&#x9;source.SiteKeyAlternative,&#xA;&#x9;source.ItemDescription,&#xA;&#x9;source.ItemKeyAlternative,&#xA;&#x9;source.ProdCodeKeyAlternative,&#xA;&#x9;source.ItemFamilyCodeKeyAlternative,&#xA;&#x9;source.ItemCommCodeKeyAlternative,&#xA;&#x9;source.ItemPmtCodeKeyAlternative,&#xA;&#x9;source.ItemNoDescription,&#xA;&#x9;source.Curcost,&#xA;&#x9;source.StdCost,&#xA;&#x9;source.PlannerCodeKeyAlternative,&#xA;&#x9;source.OrderMin, &#xA;&#x9;source.MainQoh,&#xA;&#x9;source.GermanItemDescription,&#xA;&#x9;source.GermanItemNoDescription,&#xA;&#x9;source.ItemAbcCodeKeyAlternative,&#xA;&#x9;source.MatlCost,&#xA;&#x9;source.LbrCost,&#xA;&#x9;source.FovhdCost,&#xA;&#x9;source.VovhdCost,&#xA;&#x9;source.OutCost&#xA;);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                  SQLTask:SqlStatementSource=" MERGE dimItem AS target&#xA;    USING (SELECT    DISTINCT &#xA;&#x9;sitekey,&#xA;&#x9;SiteKeyAlternative,&#xA;&#x9;ItemKeyAlternative, &#xA;&#x9;ProdCodeKeyAlternative, &#xA;&#x9;ItemDescription,&#xA;&#x9;ItemFamilyCodeKeyAlternative,&#xA;&#x9;ItemCommCodeKeyAlternative, &#xA;&#x9;ItemPmtCodeKeyAlternative, &#xA;&#x9;ItemNoDescription, &#xA;&#x9;CurCost,StdCost,&#xA;&#x9;PlannerCodeKeyAlternative,&#xA;&#x9;OrderMin, &#xA;&#x9;MainQoh,&#xA;&#x9;GermanItemDescription, &#xA;&#x9;GermanItemNoDescription,&#xA;&#x9;ItemAbcCodeKeyAlternative&#xA;&#x9;, MatlCost&#xA;&#x9;,LbrCost&#xA;&#x9;,FovhdCost&#xA;&#x9;,VovhdCost&#xA;&#x9;,OutCost&#xA;&#x9;,StatKeyAlternative&#x9;&#xA;&#x9;,ReasonCodeKeyAlternative&#xA;&#xA;&#xA;&#xA;&#x9;FROM         tblItemTemp) AS source&#xA;    ON ( target.ItemKeyAlternative = source.ItemKeyAlternative  AND target.sitekey=source.sitekey)&#xA;    WHEN MATCHED THEN &#xA;        UPDATE SET &#xA;&#x9;SiteKeyAlternative=source.SiteKeyAlternative&#xA;&#x9;,ItemDescription = source.ItemDescription,&#xA;  &#x9;ItemKeyAlternative = source.ItemKeyAlternative ,&#xA;   &#x9;ProdCodeKeyAlternative = source.ProdCodeKeyAlternative,&#xA;&#x9;ItemFamilyCodeKeyAlternative=source.ItemFamilyCodeKeyAlternative,&#xA;&#x9;ItemCommCodeKeyAlternative=source.ItemCommCodeKeyAlternative,&#xA;&#x9; ItemPmtCodeKeyAlternative=source.ItemPmtCodeKeyAlternative,&#xA;&#x9; ItemNoDescription=source. ItemNoDescription,&#xA;&#x9;Curcost=source.Curcost,&#xA;&#x9;StdCost=source.StdCost,&#xA;&#x9;PlannerCodeKeyAlternative=source.PlannerCodeKeyAlternative,&#xA;&#x9;OrderMin=source.OrderMin, &#xA;&#x9;MainQoh=source.MainQoh,&#xA;&#x9;GermanItemDescription=source.GermanItemDescription, &#xA;&#x9;GermanItemNoDescription=source.GermanItemNoDescription,&#xA;&#x9; ItemAbcCodeKeyAlternative=source.ItemAbcCodeKeyAlternative,&#xA;&#x9; MatlCost=source.MatlCost,&#xA;&#x9;LbrCost=source.LbrCost,&#xA;&#x9;FovhdCost=source.FovhdCost,&#xA;&#x9;VovhdCost=source.VovhdCost,&#xA;&#x9;OutCost=source.OutCost,&#xA;&#x9;StatKeyAlternative&#x9;=source.StatKeyAlternative,&#x9;&#xA;&#x9;ReasonCodeKeyAlternative=source.ReasonCodeKeyAlternative&#xA;&#xA;&#xA; WHEN NOT MATCHED THEN &#xA;     INSERT (&#xA;&#x9;sitekey&#xA;&#x9;,SiteKeyAlternative&#xA;&#x9;,ItemDescription,&#xA;&#x9;ItemKeyAlternative,&#xA;&#x9;ProdCodeKeyAlternative,&#xA;&#x9;ItemFamilyCodeKeyAlternative,&#xA;&#x9;ItemCommCodeKeyAlternative,&#xA;&#x9;ItemPmtCodeKeyAlternative,&#xA;&#x9;ItemNoDescription,&#xA;&#x9;CurCost,StdCost,&#xA;&#x9;PlannerCodeKeyAlternative,&#xA;&#x9;OrderMin,&#xA;&#x9;MainQoh,&#xA;&#x9;GermanItemDescription,&#xA;&#x9;GermanItemNoDescription,&#xA;&#x9;ItemAbcCodeKeyAlternative,&#xA;&#x9;MatlCost,&#xA;&#x9;LbrCost,&#xA;&#x9;FovhdCost,&#xA;&#x9;VovhdCost,&#xA;&#x9;OutCost,&#xA;&#x9;StatKeyAlternative,&#x9;&#xA;&#x9;ReasonCodeKeyAlternative&#xA;&#xA;)&#xA;     VALUES (&#xA;&#x9;source.sitekey,&#xA;&#x9;source.SiteKeyAlternative,&#xA;&#x9;source.ItemDescription,&#xA;&#x9;source.ItemKeyAlternative,&#xA;&#x9;source.ProdCodeKeyAlternative,&#xA;&#x9;source.ItemFamilyCodeKeyAlternative,&#xA;&#x9;source.ItemCommCodeKeyAlternative,&#xA;&#x9;source.ItemPmtCodeKeyAlternative,&#xA;&#x9;source.ItemNoDescription,&#xA;&#x9;source.Curcost,&#xA;&#x9;source.StdCost,&#xA;&#x9;source.PlannerCodeKeyAlternative,&#xA;&#x9;source.OrderMin, &#xA;&#x9;source.MainQoh,&#xA;&#x9;source.GermanItemDescription,&#xA;&#x9;source.GermanItemNoDescription,&#xA;&#x9;source.ItemAbcCodeKeyAlternative,&#xA;&#x9;source.MatlCost,&#xA;&#x9;source.LbrCost,&#xA;&#x9;source.FovhdCost,&#xA;&#x9;source.VovhdCost,&#xA;&#x9;source.OutCost,&#xA;&#x9;source.StatKeyAlternative,&#x9;&#xA;&#x9;source.ReasonCodeKeyAlternative&#xA;);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
               </DTS:ObjectData>
             </DTS:Executable>
             <DTS:Executable
@@ -2444,6 +2444,20 @@ FROM         item</property>
                               cachedScale="8"
                               externalMetadataColumnId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[OutCost]"
                               lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[out_cost]" />
+                            <inputColumn
+                              refId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].Columns[stat]"
+                              cachedDataType="wstr"
+                              cachedLength="1"
+                              cachedName="stat"
+                              externalMetadataColumnId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[StatKeyAlternative]"
+                              lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]" />
+                            <inputColumn
+                              refId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].Columns[reason_code]"
+                              cachedDataType="wstr"
+                              cachedLength="3"
+                              cachedName="reason_code"
+                              externalMetadataColumnId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ReasonCodeKeyAlternative]"
+                              lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]" />
                           </inputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -2566,6 +2580,16 @@ FROM         item</property>
                               name="OutCost"
                               precision="18"
                               scale="8" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[StatKeyAlternative]"
+                              dataType="wstr"
+                              length="10"
+                              name="StatKeyAlternative" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BET\Get BET items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ReasonCodeKeyAlternative]"
+                              dataType="wstr"
+                              length="10"
+                              name="ReasonCodeKeyAlternative" />
                           </externalMetadataColumns>
                         </input>
                       </inputs>
@@ -2620,20 +2644,16 @@ FROM         item</property>
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    distinct 1 AS SiteKey, 'BET' AS SiteKeyAlternative, LTRIM(RTRIM(item.item)) AS ItemKeyAlternative, item.product_code AS ProdCodeKeyAlternative, item.description AS ItemDescription, 
-                      ISNULL(item.family_code, N'0000') AS ItemFamilyCodeKeyAlternative, ISNULL(item.comm_code, 0) AS comm_code, item.p_m_t_code, LTRIM(RTRIM(item.item)) 
-                      + '-' + item.description AS ItemNoDescription, 
-                      CASE p_m_t_code WHEN 'P' THEN item.cur_mat_cost ELSE item.cur_matl_cost + item.cur_lbr_cost + item.cur_fovhd_cost + item.cur_vovhd_cost + item.cur_out_cost END
-                       AS CurCostTest, item.cur_u_cost, item.unit_cost,CASE WHEN item.stat = 'O' THEN 'OBS' ELSE ISNULL(item.plan_code, N'0000') END AS PlannerCodeKeyAlternative, item.order_min, ISNULL(item.comm_code, 0) 
-                      AS CommodityCodeKeyAlternative, ISNULL(itemwhse.qty_on_hand, 0) AS qty_on_hand, ISNULL(item.abc_code, 
-                      N'A') AS abc_code
-, item.matl_cost, 
-                      item.lbr_cost, item.fovhd_cost, item.vovhd_cost, item.out_cost
-
-
-FROM         item_mst as item LEFT OUTER JOIN
-                      itemwhse_mst as itemwhse  ON item.item = itemwhse.item
-WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and itemwhse.whse='Main' and (matl_type NOT IN ('O', 'F', 'T'))</property>
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT 
+                         1 AS SiteKey, 'BET' AS SiteKeyAlternative, LTRIM(RTRIM(item.item)) AS ItemKeyAlternative, item.product_code AS ProdCodeKeyAlternative, item.description AS ItemDescription, ISNULL(item.family_code, N'0000') 
+                         AS ItemFamilyCodeKeyAlternative, ISNULL(item.comm_code, 0) AS comm_code, item.p_m_t_code, LTRIM(RTRIM(item.item)) + '-' + item.description AS ItemNoDescription, 
+                         CASE p_m_t_code WHEN 'P' THEN item.cur_mat_cost ELSE item.cur_matl_cost + item.cur_lbr_cost + item.cur_fovhd_cost + item.cur_vovhd_cost + item.cur_out_cost END AS CurCostTest, item.cur_u_cost, 
+                         item.unit_cost, CASE WHEN item.stat = 'O' THEN 'OBS' ELSE ISNULL(item.plan_code, N'0000') END AS PlannerCodeKeyAlternative, item.order_min, ISNULL(item.comm_code, 0) 
+                         AS CommodityCodeKeyAlternative, ISNULL(itemwhse.qty_on_hand, 0) AS qty_on_hand, ISNULL(item.abc_code, N'A') AS abc_code, item.matl_cost, item.lbr_cost, item.fovhd_cost, item.vovhd_cost, item.out_cost, 
+                         item.reason_code, item.stat
+FROM            item_mst AS item LEFT OUTER JOIN
+                         itemwhse_mst AS itemwhse ON item.item = itemwhse.item
+WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) AND (itemwhse.whse = 'Main') AND (item.matl_type NOT IN ('O', 'F', 'T'))</property>
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
@@ -2901,6 +2921,26 @@ WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
                               precision="18"
                               scale="8"
                               truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                              length="3"
+                              lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                              name="reason_code"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                              length="1"
+                              lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                              name="stat"
+                              truncationRowDisposition="FailComponent" />
                           </outputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -3024,6 +3064,16 @@ WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
                               name="out_cost"
                               precision="20"
                               scale="8" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                              dataType="wstr"
+                              length="3"
+                              name="reason_code" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                              dataType="wstr"
+                              length="1"
+                              name="stat" />
                           </externalMetadataColumns>
                         </output>
                         <output
@@ -3173,6 +3223,18 @@ WHERE     (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)
                               name="out_cost"
                               precision="20"
                               scale="8" />
+                            <outputColumn
+                              refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                              dataType="wstr"
+                              length="3"
+                              lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                              name="reason_code" />
+                            <outputColumn
+                              refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                              dataType="wstr"
+                              length="1"
+                              lineageId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                              name="stat" />
                             <outputColumn
                               refId="Package\Process\Process BET\Get BET items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                               dataType="i4"
@@ -4467,6 +4529,20 @@ FROM         item</property>
                               cachedName="abc_code"
                               externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ItemAbcCodeKeyAlternative]"
                               lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[abc_code]" />
+                            <inputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].Columns[stat]"
+                              cachedDataType="wstr"
+                              cachedLength="1"
+                              cachedName="stat"
+                              externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[StatKeyAlternative]"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]" />
+                            <inputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].Columns[reason_code]"
+                              cachedDataType="wstr"
+                              cachedLength="3"
+                              cachedName="reason_code"
+                              externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ReasonCodeKeyAlternative]"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]" />
                           </inputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -4589,6 +4665,16 @@ FROM         item</property>
                               name="OutCost"
                               precision="18"
                               scale="8" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[StatKeyAlternative]"
+                              dataType="wstr"
+                              length="10"
+                              name="StatKeyAlternative" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ReasonCodeKeyAlternative]"
+                              dataType="wstr"
+                              length="10"
+                              name="ReasonCodeKeyAlternative" />
                           </externalMetadataColumns>
                         </input>
                       </inputs>
@@ -4647,10 +4733,11 @@ FROM         item</property>
                          item.description AS GermanItemDescription, ISNULL(item.family_code, N'0000') AS ItemFamilyCodeKeyAlternative, ISNULL(item.comm_code, 0) AS comm_code, item.p_m_t_code, LTRIM(RTRIM(item.item)) 
                          + '-' + ISNULL(item_lang.description, item.description) AS ItemNoDescription, LTRIM(RTRIM(item.item)) + '-' + item.description AS GermanItemNoDescription, 
                          CASE p_m_t_code WHEN 'P' THEN cur_mat_cost ELSE cur_matl_cost + cur_lbr_cost + cur_fovhd_cost + cur_vovhd_cost + cur_out_cost END AS CurCostTest, item.cur_u_cost, item.unit_cost, 
-                         CASE WHEN item.stat = 'O' THEN 'Z' ELSE ISNULL(item.plan_code, N'0000') END AS PlannerCodeKeyAlternative, item.order_min, ISNULL(item.abc_code, N'A') AS abc_code, item_lang.lang_code
+                         CASE WHEN item.stat = 'O' THEN 'Z' ELSE ISNULL(item.plan_code, N'0000') END AS PlannerCodeKeyAlternative, item.order_min, ISNULL(item.abc_code, N'A') AS abc_code, item_lang.lang_code, item.stat, 
+                         item.reason_code, item.matl_type
 FROM            item_mst AS item LEFT OUTER JOIN
                          item_lang_mst AS item_lang ON item.item = item_lang.item
-WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) AND (item_lang.lang_code = N'ENU')</property>
+WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) AND (item_lang.lang_code = N'ENU') AND (item.matl_type NOT IN ('T', 'O', 'F'))</property>
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
@@ -4872,6 +4959,36 @@ WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) -
                               lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[lang_code]"
                               name="lang_code"
                               truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                              length="1"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                              name="stat"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                              length="3"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                              name="reason_code"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[matl_type]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[matl_type]"
+                              length="1"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].Columns[matl_type]"
+                              name="matl_type"
+                              truncationRowDisposition="FailComponent" />
                           </outputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -4969,6 +5086,21 @@ WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) -
                               dataType="wstr"
                               length="3"
                               name="lang_code" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                              dataType="wstr"
+                              length="1"
+                              name="stat" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                              dataType="wstr"
+                              length="3"
+                              name="reason_code" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[matl_type]"
+                              dataType="wstr"
+                              length="1"
+                              name="matl_type" />
                           </externalMetadataColumns>
                         </output>
                         <output
@@ -5088,6 +5220,24 @@ WHERE        (item.RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) -
                               length="3"
                               lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[lang_code]"
                               name="lang_code" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                              dataType="wstr"
+                              length="1"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                              name="stat" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                              dataType="wstr"
+                              length="3"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                              name="reason_code" />
+                            <outputColumn
+                              refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[matl_type]"
+                              dataType="wstr"
+                              length="1"
+                              lineageId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[matl_type]"
+                              name="matl_type" />
                             <outputColumn
                               refId="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                               dataType="i4"
@@ -9396,6 +9546,20 @@ FROM         item</property>
                               cachedName="abc_code"
                               externalMetadataColumnId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ItemAbcCodeKeyAlternative]"
                               lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[abc_code]" />
+                            <inputColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].Columns[stat]"
+                              cachedDataType="wstr"
+                              cachedLength="1"
+                              cachedName="stat"
+                              externalMetadataColumnId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[StatKeyAlternative]"
+                              lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]" />
+                            <inputColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].Columns[reason_code]"
+                              cachedDataType="wstr"
+                              cachedLength="3"
+                              cachedName="reason_code"
+                              externalMetadataColumnId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ReasonCodeKeyAlternative]"
+                              lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]" />
                           </inputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -9518,6 +9682,16 @@ FROM         item</property>
                               name="OutCost"
                               precision="18"
                               scale="8" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[StatKeyAlternative]"
+                              dataType="wstr"
+                              length="10"
+                              name="StatKeyAlternative" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Destination - Query 1.Inputs[Destination Input].ExternalColumns[ReasonCodeKeyAlternative]"
+                              dataType="wstr"
+                              length="10"
+                              name="ReasonCodeKeyAlternative" />
                           </externalMetadataColumns>
                         </input>
                       </inputs>
@@ -9575,7 +9749,7 @@ FROM         item</property>
                           UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    4 AS SiteKey, 'MED' as SiteKeyAlternative,LTRIM(RTRIM(item)) AS ItemKeyAlternative, product_code AS ProdCodeKeyAlternative, description AS ItemDescription, ISNULL(family_code, '0000') 
                       AS ItemFamilyCodeKeyAlternative, ISNULL(comm_code, 0) AS comm_code, p_m_t_code, LTRIM(RTRIM(item)) + '-' + description AS ItemNoDescription, 
                       CASE p_m_t_code WHEN 'P' THEN cur_mat_cost ELSE cur_matl_cost + cur_lbr_cost + cur_fovhd_cost + cur_vovhd_cost + cur_out_cost END AS CurCostTest,cur_u_cost, unit_cost, CASE WHEN item.stat = 'O' THEN 'OBS' ELSE ISNULL(plan_code, '0000') END AS PlannerCodeKeyAlternative, order_min, ISNULL(item.abc_code, 
-                      N'A') AS abc_code
+                      N'A') AS abc_code,stat,reason_code
 
 FROM         item_mst as item
 WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and (matl_type NOT IN ('O', 'F', 'T'))</property>
@@ -9770,6 +9944,26 @@ WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and 
                               lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[abc_code]"
                               name="abc_code"
                               truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                              length="1"
+                              lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[stat]"
+                              name="stat"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                              length="3"
+                              lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].Columns[reason_code]"
+                              name="reason_code"
+                              truncationRowDisposition="FailComponent" />
                           </outputColumns>
                           <externalMetadataColumns
                             isUsed="True">
@@ -9852,6 +10046,16 @@ WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and 
                               dataType="wstr"
                               length="1"
                               name="abc_code" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[stat]"
+                              dataType="wstr"
+                              length="1"
+                              name="stat" />
+                            <externalMetadataColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Output].ExternalColumns[reason_code]"
+                              dataType="wstr"
+                              length="3"
+                              name="reason_code" />
                           </externalMetadataColumns>
                         </output>
                         <output
@@ -9953,6 +10157,18 @@ WHERE     (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?) and 
                               length="1"
                               lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[abc_code]"
                               name="abc_code" />
+                            <outputColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                              dataType="wstr"
+                              length="1"
+                              lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[stat]"
+                              name="stat" />
+                            <outputColumn
+                              refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                              dataType="wstr"
+                              length="3"
+                              lineageId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[reason_code]"
+                              name="reason_code" />
                             <outputColumn
                               refId="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                               dataType="i4"
@@ -11934,6 +12150,7 @@ WHERE     (itemwhse.whse = N'Main') AND (Item.item IN
               DTS:refId="Package\Process\Setup\Drop create TABLE tblItemTemp"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
               DTS:Description="Execute SQL Task"
+              DTS:Disabled="True"
               DTS:DTSID="{D621F8EF-1564-4893-8204-14FAE4D60911}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
@@ -11945,6 +12162,23 @@ WHERE     (itemwhse.whse = N'Main') AND (Item.item IN
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F407E98A-F733-49D9-B52D-1906AD86163B}"
                   SQLTask:SqlStatementSource="/****** Object:  Table [dbo].[tblItemTemp]    Script Date: 11/30/2017 8:02:48 AM ******/&#xA;DROP TABLE [dbo].[tblItemTemp]&#xA;GO&#xA;&#xA;/****** Object:  Table [dbo].[tblItemTemp]    Script Date: 11/30/2017 8:02:48 AM ******/&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[tblItemTemp](&#xA;&#x9;[SiteKey] [int] NULL,&#xA;&#x9;[SiteKeyAlternative] [varchar](3) NULL,&#xA;&#x9;[ItemKeyAlternative] [nvarchar](30) NULL,&#xA;&#x9;[ProdCodeKeyAlternative] [nvarchar](10) NULL,&#xA;&#x9;[ItemDescription] [nvarchar](40) NULL,&#xA;&#x9;[GermanItemDescription] [nvarchar](40) NULL,&#xA;&#x9;[ItemFamilyCodeKeyAlternative] [nvarchar](40) NULL,&#xA;&#x9;[ItemCommCodeKeyAlternative] [nvarchar](40) NULL,&#xA;&#x9;[ItemPmtCodeKeyAlternative] [nvarchar](10) NULL,&#xA;&#x9;[ItemNoDescription] [nvarchar](75) NULL,&#xA;&#x9;[GermanItemNoDescription] [nvarchar](75) NULL,&#xA;&#x9;[CurCost] [decimal](18, 8) NULL,&#xA;&#x9;[StdCost] [decimal](18, 8) NULL,&#xA;&#x9;[PlannerCodeKeyAlternative] [nvarchar](10) NULL,&#xA;&#x9;[OrderMin] [decimal](18, 8) NULL,&#xA;&#x9;[MainQoh] [decimal](18, 8) NULL,&#xA;&#x9;[ItemAbcCodeKeyAlternative] [nvarchar](1) NULL,&#xA;&#x9;[MatlCost] [decimal](18, 8) NULL,&#xA;&#x9;[LbrCost] [decimal](18, 8) NULL,&#xA;&#x9;[FovhdCost] [decimal](18, 8) NULL,&#xA;&#x9;[VovhdCost] [decimal](18, 8) NULL,&#xA;&#x9;[OutCost] [decimal](18, 8) NULL&#xA;) ON [PRIMARY]&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Process\Setup\truncate tblItemtemp"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{83873208-E457-4066-95DF-2E3394BA63A1}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="truncate tblItemtemp"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F407E98A-F733-49D9-B52D-1906AD86163B}"
+                  SQLTask:SqlStatementSource="truncate table tblItemtemp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
               </DTS:ObjectData>
             </DTS:Executable>
           </DTS:Executables>
@@ -21583,11 +21817,15 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Process\Setup\truncate tblItemtemp"
+          TopLeft="66,157" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230,190"
-          Size="230,232"
+          PanelSize="230,254"
+          Size="230,297"
           Id="Package\Process\Setup"
           TopLeft="312,5.5" />
         <NodeLayout
@@ -21681,30 +21919,30 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
           TopLeft="5.50000000000063,5159.5" />
         <EdgeLayout
           Id="Package\Process.PrecedenceConstraints[Constraint]"
-          TopLeft="427,237.5">
+          TopLeft="427,302.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-42,168"
+              EndConnector="-42,103"
               Start="0,0"
-              End="-42,160.5">
+              End="-42,95.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,80" />
+                    End="0,47.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,80"
-                    Point2="0,84"
-                    Point3="-4,84" />
+                    Point1="0,47.5"
+                    Point2="0,51.5"
+                    Point3="-4,51.5" />
                   <mssgle:LineSegment
-                    End="-38,84" />
+                    End="-38,51.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-38,84"
-                    Point2="-42,84"
-                    Point3="-42,88" />
+                    Point1="-38,51.5"
+                    Point2="-42,51.5"
+                    Point3="-42,55.5" />
                   <mssgle:LineSegment
-                    End="-42,160.5" />
+                    End="-42,95.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -22572,7 +22810,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Get Prodcode Audit\Get Prodcode audit-bet">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="150,42"
           Id="Package\Get Prodcode Audit\Get Prodcode audit-bet\OLE DB Source"
@@ -22612,7 +22850,9 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22763,7 +23003,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process BET\Get BET items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="160,43"
           Id="Package\Process\Process BET\Get BET items\Source - Query 1"
@@ -22791,7 +23031,9 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22914,15 +23156,15 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="179,42"
-          Id="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1"
-          TopLeft="0,66.4" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="158,42"
           Id="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Source - Query 1"
           TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items\Destination - Query 1"
+          TopLeft="0,66.4" />
         <EdgeLayout
           Id="Package\Process\Process BSW Items  merges into dimItemTemp 1\Get BSW items.Paths[OLE DB Source Output]"
           TopLeft="NaN,NaN">
@@ -22954,7 +23196,9 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23469,7 +23713,7 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
     design-time-name="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="160,42"
           Id="Package\Process\Process MED Items  merges into dimItemTemp\Get MED items\Source - Query 1"
@@ -23509,7 +23753,9 @@ where      (RecordDate &gt;= DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) - ?)</pr
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

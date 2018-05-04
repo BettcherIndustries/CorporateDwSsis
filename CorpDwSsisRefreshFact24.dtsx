@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="CorpDwSsisRefreshFact"
   DTS:PackageType="5"
-  DTS:VersionBuild="99"
-  DTS:VersionGUID="{2CE97FA8-198E-400C-A14D-C85B517A68A6}">
+  DTS:VersionBuild="100"
+  DTS:VersionGUID="{5C5756F4-705C-40D1-B69B-042B59629B40}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -33,7 +33,6 @@
       DTS:refId="Package\factDzInventoryEndBal"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{941322f2-2f99-4541-bb6d-6090d61c41f6}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
@@ -103,7 +102,6 @@
       DTS:refId="Package\factMatlTranImport"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{47B47EFD-4D60-4CCE-819B-3265D2074F0B}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
